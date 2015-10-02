@@ -29,6 +29,12 @@ chmod 777 -Rf storage/
 php artisan migrate
 ````
 
+### OR (ADVANCED DEVELOPER ONLY)
+If you have a good machine (4GB RAM > More)
+you can download a VM based development environtment with [Laravel / Homestead](http://laravel.com/docs/5.1/homestead)
+Using Virtual Box + [Vagrant](https://www.vagrantup.com)
+it contain all needed software, if configured properly, you only need to up the machine, deploy and then start code.
+
 ### Designer Guide
 
 1. We are using Foundation CSS for Frontend
