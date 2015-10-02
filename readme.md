@@ -17,16 +17,17 @@ To create an integration portal that can combine and deliver all different kind 
 3. Install Bower : npm install -g bower
 4. Git Clone this package
 5. Go to the packaged folder
-6. Run 
+
+6. Copy .env.example to .env
+7. Fill .env with the correct configuration
+8. Run 
 ```` shell
 composer install
 bower install
 npm install
 chmod 777 -Rf storage/
+php artisan migrate
 ````
-7. Copy .env.example to .env
-8. Fill .env with the correct configuration
-
 
 ### Designer Guide
 
