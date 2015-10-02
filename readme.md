@@ -18,10 +18,12 @@ To create an integration portal that can combine and deliver all different kind 
 4. Git Clone this package
 5. Go to the packaged folder
 6. Run 
-	> composer install
-	> bower install
-	> npm install
-	> chmod 777 -Rf storage/
+```` shell
+composer install
+bower install
+npm install
+chmod 777 -Rf storage/
+````
 7. Copy .env.example to .env
 8. Fill .env with the correct configuration
 
@@ -38,9 +40,10 @@ To create an integration portal that can combine and deliver all different kind 
 ### Reference
 1. bppt.bandung.go.id << version 1
 2. portal.dimassrio.me - portal.dimassrio.me/dashboard
-	> username : tester@dimassrio.me
-	> password : tester
-
+````
+username : tester@dimassrio.me
+password : tester
+````
 Frontend
 ![alt text][frontend]
 [frontend]: http://i.imgur.com/J0t0TCe.png "Frontend Image"
