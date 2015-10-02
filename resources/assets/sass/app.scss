@@ -1,0 +1,30 @@
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.footer-egor{
+	background-color: #4C4C4C;
+	min-height: 200px;
+}
+
+.footer-egor-copyright{
+	padding: 10px 0;
+	color: #FFFFFF;
+	background-color: #333;
+}
+
+.page-wrapper{
+	min-height: 600px;
+}
+
+.menu-wrapper{
+	li{
+		img{
+			display: block;
+			min-height: 100px;
+			min-width: 100px;
+		}
+		a{
+			display: block;
+		}
+	}
+	
+}

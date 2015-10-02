@@ -1,0 +1,17 @@
+{
+  "name": "egor",
+  "version": "0.0.0",
+  "authors": [
+    "Dimas Satrio <dimassrio@outlook.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap-sass": "boostrap-sass#~3.3.5",
+    "font-awesome": "fontawesome#~4.4.0",
+    "html5-boilerplate": "~5.2.0",
+    "AdminLTE": "adminlte#~2.3.0",
+    "normalize-strings": "normalize#~1.0.4",
+    "modernizr": "~3.0.0",
+    "foundation": "~5.5.2"
+  }
+}
