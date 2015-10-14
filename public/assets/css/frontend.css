@@ -1,4 +1,10 @@
 @charset "UTF-8";
+
+.img-holder{
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+}
 meta.foundation-version {
   font-family: "/5.5.2/"; }
 
@@ -59,7 +65,7 @@ body {
   font-size: 100%; }
 
 body {
-  background: #fff;
+  /*background-image: url("../img/frontpage/bg.jpg");*/
   color: #222;
   cursor: auto;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -69,6 +75,15 @@ body {
   margin: 0;
   padding: 0;
   position: relative; }
+
+/*body:before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  background: rgba(0,0,0,.5);
+}*/
 
 a:hover {
   cursor: pointer; }

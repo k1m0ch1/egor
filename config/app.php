@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://localhost/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -147,6 +147,8 @@ return [
 
 		Zizaco\Entrust\EntrustServiceProvider::class,
 
+		//Jasekz\Laradrop\LaradropServiceProvider::class,
+
 	],
 
 	/*
@@ -196,7 +198,8 @@ return [
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View'      => Illuminate\Support\Facades\View::class,
 
-		'Entrust'   => Zizaco\Entrust\EntrustFacade::class
+		'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+		//'Laradrop'  => Jasekz\Laradrop\LaradropFacade::class
 
 	],
 

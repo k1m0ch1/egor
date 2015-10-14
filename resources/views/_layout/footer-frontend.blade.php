@@ -1,20 +1,17 @@
-		<script type="text/javascript" src="assets/vendor/jquery/dist/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
-		<!-- <script src="{{asset('assets/js/main.js')}}"></script> -->
-		
+		<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+		<script src="{{ asset('assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/vendor/SmoothScrollWheel/dist/jquery.SmoothScrollWheel.min.js') }}"></script>
 		<script type="text/javascript">
-			$.get("{{route('menus.list.get')}}", function(data){
-				$("#menu-wrapper").html();
-				console.log(data.result.length);
-				for(var i=0;i<data.result.length;i++){
-					$("#menu-wrapper").append(data.result[i]);
-				}
-			});
+		  $(document).SmoothScrollWheel({
+			defaultSpeed: 500,
+			 defaultAnimationTime: 1000
+		  });
 		</script>
+		<script src="{{ asset('assets/js/dashboard.js') }}"></script>
 
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-		<!-- <script>
+	   <!--  <script>
 			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
 			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
 			e=o.createElement(i);r=o.getElementsByTagName(i)[0];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class PagesController extends Controller
 {
@@ -13,9 +14,11 @@ class PagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('frontend.index');
+    public function index(){
+        $result1 = DB::table('parent_frontpage')->get();
+        $siteTitle = DB::table('preference')->get();
+        $bah = $siteTitle[0]->title;
+        return view('frontend.index', compact('result1', 'bah'));
     }
 
     /**
@@ -85,6 +88,170 @@ class PagesController extends Controller
     }
 
     public function dashboard(){
-        
+        $css = $this->CSS('general');
+        $jH = $this->jS('general');
+        $title = 'Dashboard';
+        $rS = DB::table('preference')->get();
+        $rS = $rS[0]->grid;
+        $a=1;
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS'));
+    }
+
+    public function grid(Request $request){
+        $a=0;
+        $w=$request->input('w');
+        $h=$request->input('h');
+        $result1 = DB::table('frontpage')->orderBy('position', 'asc')->get();
+        $img = Array();
+        foreach($result1 as $rS){
+            $img[$a][0] = $rS->nama;
+            $img[$a][1] = $rS->position;
+            $img[$a][2] = $rS->redirect;
+            $img[$a][3] = $rS->image;
+            $img[$a][4] = $rS->id;
+            $a++;
+        }
+        $lenImg = sizeof($img);
+        $a=0;
+        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
+    }
+
+    public function formDashboard(Request $request){
+        $result1 = DB::table('frontpage')->where('id', $request->input('id'))->get();
+        foreach($result1 as $rS){
+            $nama = $rS->nama;
+            $redirect = $rS->redirect;
+            $image = $rS->image;
+        }
+        return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image'));
+    }
+
+    public function user(){
+        $title = 'Users';
+        $css = $this->CSS('users');
+        $jH = Array( asset('holder.js') );
+        $result = DB::table('users')->get();
+        $a=0;
+        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a'));
+    }
+
+    public function tes(){
+        $jH = Array( asset('holder.js') );
+        $css = $this->CSS('general');
+        $title = 'Tes';
+        return view('backend.tes', compact('css', 'jH', 'title'));
+    }
+
+    public function menu(){
+        $jH = Array( asset('holder.js') );
+        $css = $this->CSS('menu');
+        $title = 'Menu';
+        $result1 = DB::select('SELECT child_frontpage.name as "ch_name" FROM parent_frontpage
+                        INNER JOIN child_frontpage ON child_frontpage.id_parent = parent_frontpage.id');
+        $result2 = $users = DB::table('parent_frontpage')->get();
+        $a=1;
+        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a'));
+    }
+
+    public function preference(){
+        $jH = Array( asset('holder.js') );
+        $css = $this->CSS('menu');
+        $title = 'Menu';
+        $result1 = DB::select('SELECT child_frontpage.name as "ch_name" FROM parent_frontpage
+                        INNER JOIN child_frontpage ON child_frontpage.id_parent = parent_frontpage.id');
+        $a=1;
+        return view('backend.preference', compact('css', 'jH', 'title'));
+    }
+
+    public function CSS($mode){
+        $css = '';
+        switch($mode){
+            case 'general' :
+                $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
+                     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+                     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+                     asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                     asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
+                     asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
+                     asset('assets/vendor/AdminLTE/plugins/morris/morris.css'),
+                     asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css'),
+                     asset('assets/vendor/AdminLTE/plugins/datepicker/datepicker3.css'),
+                     asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
+                     asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
+                     asset('assets/css/backend.css'),
+                     "//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"
+                     );
+            break;
+            case 'users' :
+                $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
+                            'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+                            'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+                            asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.css'),
+                            asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                            asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'));
+            break;
+            case 'menu' :
+                $css = Array("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
+                             "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css",
+                             "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                             asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
+                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
+                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),);
+            break;
+            case 'gridster' :
+                $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
+                     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+                     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+                     asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                     asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
+                     asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
+                     asset('assets/vendor/AdminLTE/plugins/morris/morris.css'),
+                     asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css'),
+                     asset('assets/vendor/AdminLTE/plugins/datepicker/datepicker3.css'),
+                     asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
+                     asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
+                     asset('assets/css/backend.css'),
+                     asset('assets/vendor/gridster/dist/jquery.gridster.css'));
+            break;
+        }
+        return $css;
+    }
+
+    public function jS($mode){
+        $JS = '';
+        switch($mode){
+            case 'general': 
+            $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
+                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
+                        "https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js",
+                        //asset('assets/vendor/AdminLTE/plugins/morris/morris.min.js'),
+                        asset('assets/vendor/gridster/dist/jquery.gridster.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/sparkline/jquery.sparkline.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'),
+                        asset('assets/vendor/AdminLTE/plugins/knob/jquery.knob.js'),
+                        "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datepicker/bootstrap-datepicker.js'),
+                        asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
+                        asset('assets/js/dragAjah.js'),
+                        asset('assets/js/tambahan.js'),
+                        //asset('assets/vendor/AdminLTE/dist/js/pages/dashboard.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/demo.js'),
+                        asset('assets/js/dashboard.js'),
+                        asset('assets/vendor/foundation-5.5.3.custom/js/foundation.min.js'),
+                        asset('assets/js/general.js'),
+                        asset('holder.js'),
+                        asset('assets/vendor/jQuery-File-Upload/js/vendor/jquery.ui.widget.js'),
+                        asset('assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js'),
+                        asset('assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js'));
+            break;
+        }
+        return $JS;
     }
 }

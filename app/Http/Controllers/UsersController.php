@@ -89,10 +89,10 @@ class UsersController extends Controller
     }
 
     public function postLogin(Request $requests){
-        $username = $requests->input('username');
+        $name = $requests->input('username');
         $password = $requests->input('password');
 
-        if(\Auth::attempt(['username'=>$username, 'password'=>$password])){
+        if(\Auth::attempt(['name'=>$name, 'password'=>$password])){
             return redirect()->route('admin.dashboard.get');
         }else{
             return redirect()->route('users.login.get');

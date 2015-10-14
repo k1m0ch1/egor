@@ -1,0 +1,10 @@
+ul#menu-wrapper { 
+  list-style-type: none;
+}
+ul#menu-wrapper li { display: inline; float:left; margin-right: 10px; margin-bottom:10px ;}
+ul#menu-wrapper li a:hover { background: black; }
+
+.pindah{
+	width: 190px;
+	height: 190px;
+}
