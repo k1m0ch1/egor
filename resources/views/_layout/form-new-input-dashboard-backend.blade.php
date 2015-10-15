@@ -14,5 +14,6 @@
 	<label for="href">Image</label>
 	<input type='file' name='image' id='fileUpload' class="form-control"/>
 	<p class="help-block">Kosongkan jika tidak ingin merubah</p>
+	<input type='hidden' id='idnyah' value='xxx' />
 </div>
 <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
