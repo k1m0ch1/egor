@@ -15,6 +15,13 @@
     <script src="{{ asset('assets/vendor/AdminLTE/dist/js/demo.js') }}"></script>
     <!-- page script -->
     <script src="{{ asset('assets/js/general.js') }}"></script>
+    @if($title=="Users")
+      <script src="{{ asset('assets/js/user_js.js') }}"></script>
+    @endif
+    @if($title=="Preference")
+      <script src="{{ asset('assets/js/preference.js') }}"></script>
+      <script src="{{ asset('assets/js/image-picker.js') }}"></script>
+    @endif
     <script>
       $(function () {
         $("#example1").DataTable();

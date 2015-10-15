@@ -34,7 +34,7 @@ $(document).ready(function(){
             data: { idnyah: d, nama: a, redirect: b, image: c },
             dataType: 'html',
             success: function(data) {
-
+              dialog.dialog( "close" );
             }
          });
    }
@@ -57,7 +57,7 @@ $(document).ready(function(){
                        col.addEventListener('drop', handleDrop, false);
                        col.addEventListener('dragend', handleDragEnd, false);
                    });
-            $.getScript( "http://localhost/egor/public/assets/js/tesRecall.js" )
+            $.getScript( host + "assets/js/tesRecall.js" )
               .done(function( script, textStatus ) {
                 console.log( textStatus );
               })

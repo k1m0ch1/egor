@@ -10,20 +10,19 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="index.html"><span>COMPANY</span> NAME</a>
+							<a class="navbar-brand" href="{{ asset('') }}"><span>{{ $bah }}</span></a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li><a href="">PRODUCTS</a></li>
-								<li><a href="">SERVICES</a></li>
-								<li><a href="">ASSETS</a></li>
-								<li><a href="">CONTACT</a></li>
+								@foreach($result1 as $rS)
+					<li><a href="">{{ $rS->name }}</a></li>
+				@endforeach
 							</ul>
 							
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="login.html">SIGN IN</a></li>
+								<li><a href="{{ asset('') }}index.php/login">LOG IN</a></li>
 								
 							</ul>
 						</div><!-- /.navbar-collapse -->
@@ -38,10 +37,10 @@
 				 <div class="container">
 					 <div class="row">
 						 <div class="col-lg-8">
-							 <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h1>
-							 <p style="margin-top:80px;"><small>Vitae ipsa!</small></p>
+							 <h1>Silahkan Login Terlebih dahulu untuk mempunyai hak akses merubah portal ini</h1>
+							 <p style="margin-top:80px;"><small>@fowab</small></p>
 							 <hr>
-							 <div class="row main-url">
+							 <!-- <div class="row main-url">
 								 <div class="col-lg-3">
 									 <p><img src="{{ asset('assets/img/share.png') }}" alt="">Excepteur</p>
 								 </div>
@@ -54,7 +53,7 @@
 								 <div class="col-lg-3">
 									 <p><img src="{{ asset('assets/img/flame.png') }}" alt="">Tala</p>
 								 </div>
-							 </div>
+							 </div> -->
 						 </div>
 						 <div class="col-lg-4">
 							 <div class="form-group form-egor">

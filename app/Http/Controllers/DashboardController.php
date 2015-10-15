@@ -15,7 +15,7 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function editSave(Request $request){
-            DB::table('frontpage')->where('id', $request->input('idnyah'))->update(
+            DB::table('users')->where('id', $request->input('idnyah'))->update(
                 ['nama' => $request->input('nama'),
                  'redirect' => $request->input('redirect'),
                  'image' => $request->input('image')]);

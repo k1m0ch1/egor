@@ -28,7 +28,7 @@
               <div class="col-xs-12">
                 <div class="box">
                   <div class="box-header">
-                    Motha Fucka
+                    User Control Panel
                   </div>
                   <div class="box-body">
                   <table id="example1" class="table table-bordered table-hover">
@@ -47,7 +47,7 @@
                           <td>$permission Things</td>
                           <td>Last Login</td>
                           <td><div class="tools" align='center'>
-                                <a class="fa fa-edit"></a>&nbsp;
+                                <a class="fa fa-edit" id="editUser-{{ $rS->id }}"></a>&nbsp;
                                 <a class="fa fa-trash-o"></a>
                               </div></td>
                         </tr>
@@ -68,7 +68,14 @@
         <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
       </footer>
 
-      
+      <div id="dialog-form" title="Ubah User">     
+        <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+        {!! csrf_field() !!}
+          <fieldset id='formnyah'>
+
+          </fieldset>
+        </form>
+      </div>
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>

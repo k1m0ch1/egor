@@ -10,7 +10,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			  </button>
-			  <a class="navbar-brand" href="index.html"><span>{{ $bah }}</span></a>
+			  <a class="navbar-brand" href="{{ asset('') }}"><span>{{ $bah }}</span></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -22,7 +22,7 @@
 			  </ul>
 			  
 			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="login">LOG IN</a></li>
+				<li><a href="{{ asset('') }}index.php/login">LOG IN</a></li>
 				
 			  </ul>
 			</div><!-- /.navbar-collapse -->

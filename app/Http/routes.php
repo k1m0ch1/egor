@@ -21,8 +21,6 @@ Route::get('admin/tes', ['uses'=>'PagesController@tes', 'as'=>'admin.user.get', 
 Route::get('admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
 Route::get('admin/menu', ['uses'=>'PagesController@menu', 'as'=>'admin.menu.get', 'middleware'=>'auth']);
 Route::get('admin/preference', ['uses'=>'PagesController@preference', 'as'=>'admin.preference.get', 'middleware'=>'auth']);
-Route::post('admin/preference:title', ['uses'=>'PreferenceController@title', 'as'=>'title.preference.get', 'middleware'=>'auth']);
-Route::post('admin/preference:image', ['uses'=>'PreferenceController@image', 'as'=>'image.preference.get', 'middleware'=>'auth']);
 Route::get('admin/grid', ['uses'=>'PagesController@grid', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 
 Route::post('admin/grid:savePosition', ['uses'=>'GridController@savePosition', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
@@ -32,6 +30,14 @@ Route::post('admin/dashboard[edit:save]', ['uses'=>'DashboardController@editSave
 
 Route::post('admin/gambar[upload]', ['uses'=>'GambarController@upload', 'as'=>'gambar[upload]', 'middleware'=>'auth']);
 Route::get('admin/gambar', ['uses'=>'PagesController@indexGambar', 'as'=>'gambar[index]', 'middleware'=>'auth']);
+
+Route::post('admin/users[edit:save]', ['uses'=>'UsersController@editSave', 'as'=>'users[edit:save]', 'middleware'=>'auth']);
+Route::get('admin/users[edit:show]', ['uses'=>'UsersController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+
+Route::post('admin/preference:title[save]', ['uses'=>'PreferenceController@titleSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
+Route::post('admin/preference:image', ['uses'=>'PreferenceController@image', 'as'=>'image.preference.get', 'middleware'=>'auth']);
+Route::post('admin/preference:background[save]', ['uses'=>'PreferenceController@backgroundSave', 'as'=>'background.preference.get', 'middleware'=>'auth']);
+Route::post('admin/preference:logo[save]', ['uses'=>'PreferenceController@logoSave', 'as'=>'logo.preference.get', 'middleware'=>'auth']);
 
 Route::group(['prefix'=>'api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);

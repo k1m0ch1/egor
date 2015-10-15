@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -45,9 +46,30 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $result1 = DB::table('users')->where('id', $request->input('id'))->get();
+        foreach($result1 as $rS){
+            $name = $rS->name;
+            $email = $rS->email;
+            $idnyah = $rS->id;
+        }
+        return view('_layout.form-input-user-backend', compact('name','email', 'idnyah'));
+    }
+
+    public function editSave(Request $request)
+    {
+        if($request->input('password')==""){
+            DB::table('users')->where('id', $request->input('id'))->update(
+                    ['name' => $request->input('name'),
+                     'email' => $request->input('email')]);
+        }else{
+            DB::table('users')->where('id', $request->input('id'))->update(
+                    ['name' => $request->input('name'),
+                     'email' => $request->input('email'),
+                     'password'=> Hash::make($request->input('password'))]);
+        }
+        return 'success';
     }
 
     /**
@@ -85,7 +107,11 @@ class UsersController extends Controller
     }
 
     public function login(){
-        return view('frontend.login');
+        $result1 = DB::table('parent_frontpage')->get();
+        $siteTitle = DB::table('preference')->get();
+        $datanyah = DB::table('frontpage')->get();
+        $bah = $siteTitle[0]->title;
+        return view('frontend.login', compact('result1', 'bah', 'datanyah'));
     }
 
     public function postLogin(Request $requests){

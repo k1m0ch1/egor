@@ -1,6 +1,6 @@
 $(function(){
 
-    $("select").imagepicker()
+    $("select").imagepicker();
 
     var ul = $('#upload ul');
 

@@ -141,7 +141,7 @@ class PagesController extends Controller
     public function user(){
         $title = 'Users';
         $css = $this->CSS('users');
-        $jH = Array( asset('holder.js') );
+        $jH =  $this->jS('general');
         $result = DB::table('users')->get();
         $a=0;
         return view('backend.user', compact('css', 'jH', 'title', 'result', 'a'));
@@ -168,11 +168,13 @@ class PagesController extends Controller
     public function preference(){
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('menu');
-        $title = 'Menu';
+        $title = 'Preference';
         $result1 = DB::select('SELECT child_frontpage.name as "ch_name" FROM parent_frontpage
                         INNER JOIN child_frontpage ON child_frontpage.id_parent = parent_frontpage.id');
         $a=1;
-        return view('backend.preference', compact('css', 'jH', 'title'));
+        $result2 = DB::table('preference')->where('id', '1')->get();
+        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
+        return view('backend.preference', compact('css', 'jH', 'title','result2','files'));
     }
 
     public function CSS($mode){
@@ -199,6 +201,7 @@ class PagesController extends Controller
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
                             'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
                             'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+                            "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
                             asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.css'),
                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'));
@@ -210,7 +213,8 @@ class PagesController extends Controller
                              asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
-                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),);
+                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                             asset('assets/css/image-picker.css'));
             break;
             case 'gridster' :
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),

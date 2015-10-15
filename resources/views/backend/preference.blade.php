@@ -28,7 +28,7 @@
 	                <!-- Tabs within a box -->
 	                <ul class="nav nav-tabs pull-right">
 	                  <li class="active">
-	                  	<a href="#revenue-chart" data-toggle="tab">Website Image</a>
+	                  	<a href="#revenue-chart" data-toggle="tab">Website Logo</a>
 	                  </li>
 	                  <li>
 	                  	<a href="#sales-chart" data-toggle="tab">Website Title</a>
@@ -36,39 +36,65 @@
 	                  <li>
 	                  	<a href="#background-site" data-toggle="tab">Website Background</a>
 	                  </li>
-	                  <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+	                  <li class="pull-left header"><i class="fa fa-inbox"></i> Setting Portal</li>
 	                </ul>
 	                <div class="tab-content no-padding">
 	                  <!-- Morris chart - Sales -->
-	                  <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-	                  		<form action="{{route('image.preference.get')}}" method="POST" class="form-horizontal">
+	                  <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 1000px;">
+	                  		<form method="POST" class="form-horizontal" id="FormLogo">
 	                  			<div class="box-body">
 								 {!! csrf_field() !!}
 								  <div class="form-group" align='center'>
-				                      	<img align="center" data-src='holder.js/200x200' />
-				                        <input align='center' type="file" id="fileInput" class="form-control">
-				                      <p class="help-block">Disarankan menggunakan File gambar .jpg atau .png dengan resolusi 100 x 100</p>
+				                      	@if($files!=null)
+						                    <select class="image-picker show-html" id='logo'>
+						                      @for($a=0;$a<sizeOf($files);$a++)
+						                        <?php $filename = explode( '/', $files[$a]); ?>
+						                        <option data-img-src="{{ asset('assets/img/uploaded') }}/{{ $filename[10] }}" value="{{ $filename[10] }}">  {{ $filename[10] }}  </option>
+						                      @endfor
+						                    </select>
+					                    @endif
+				                  </div>
+				                  <div class="box-footer">
+				                    <button type="submit" class="btn btn-info pull-right" id="simpan">Simpan</button>
 				                  </div>
 								</div>
 							</form>
 	                  </div>
 	                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-	                  		<form action="{{route('title.preference.get')}}" method="POST" class="form-horizontal">
+	                  		<form method="POST" class="form-horizontal" id="FormTitle">
 	                  			<div class="box-body">
 								 {!! csrf_field() !!}
 								  <div class="form-group">
 				                      <label for="inputTitle" class="col-sm-2 control-label">Title Website</label>
 				                      <div class="col-sm-10">
-				                        <input type="email" class="form-control" id="inputTitle" placeholder="Title Website">
+				                        <input type="text" value="{{ $result2[0]->title }}" class="form-control" id="inputTitle" placeholder="Title Website">
 				                      </div>
 				                  </div>
 				                  <div class="box-footer">
-				                    <button type="submit" class="btn btn-info pull-right">Simpan</button>
+				                    <button type="submit" class="btn btn-info pull-right" id="simpanTitle">Simpan</button>
 				                  </div><!-- /.box-footer -->
 								</div>
 							</form>
 	                  </div>
-	                  <div class="chart tab-pane" id="background-site" style="position: relative; height: 300px;">
+	                  <div class="chart tab-pane" id="background-site" style="position: relative; height: 1000px;">
+	                  	<form method="POST" class="form-horizontal" id="FormBackground">
+	                  			<div class="box-body">
+								 {!! csrf_field() !!}
+								  <div class="form-group" align='center'>
+				                      	@if($files!=null)
+						                    <select class="image-picker show-html" id='background'>
+						                      @for($a=0;$a<sizeOf($files);$a++)
+						                        <?php $filename = explode( '/', $files[$a]); ?>
+						                        <option data-img-src="{{ asset('assets/img/uploaded') }}/{{ $filename[10] }}" value="{{ $filename[10] }}">  {{ $filename[10] }}  </option>
+						                      @endfor
+						                    </select>
+					                    @endif
+				                  </div>
+				                  <div class="box-footer">
+				                    <button type="submit" class="btn btn-info pull-right" id="simpanBackground">Simpan</button>
+				                  </div>
+								</div>
+							</form>
 	                  </div>
 	                </div>
 	              </div><!-- /.nav-tabs-custom -->
