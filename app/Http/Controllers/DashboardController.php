@@ -15,12 +15,12 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function editSave(Request $request){
-            DB::table('users')->where('id', $request->input('idnyah'))->update(
-                ['nama' => $request->input('nama'),
-                 'redirect' => $request->input('redirect'),
-                 'image' => $request->input('image')]);
+            // DB::table('users')->where('id', $request->input('idnyah'))->update(
+            //     ['nama' => $request->input('nama'),
+            //      'redirect' => $request->input('redirect'),
+            //      'image' => $request->input('image')]);
             //$fucka .= '' . $datanya[$a][1] . '' .$datanya[$a][0] . '<br/>';
 
-        return 'success';
+        return $request->input('idnyah');
     }
 }

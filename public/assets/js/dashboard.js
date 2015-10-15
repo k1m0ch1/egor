@@ -1,10 +1,20 @@
 $(document).ready(function(){
 
+    function makeid(){
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for( var i=0; i < 5; i++ )
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
+
     var host = 'http://' + $(location).attr('host') + '/egor/public/';
 
    dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 400,
+      height: 420,
       width: 500,
       modal: true,
       buttons: {
@@ -26,12 +36,22 @@ $(document).ready(function(){
    function simpan(){
       var a = $('#dialog-form form input#name').val();
       var b = $('#dialog-form form input#href').val();
-      var c = $('#dialog-form form select#image').val();
+      //var c = $('#dialog-form form select#image').val();
+      var c = $("input[type='radio'][name='target']:checked");
+      c = c.length>0?c.val():0;
+      var myFormData = new FormData();
       var d = $('#dialog-form form input#idnyah').val();
+      myFormData.append("image", $('#fileUpload').prop('files')[0]);
+      myFormData.append("idnyah", d);
+      myFormData.append("nama", a);
+      myFormData.append("redirect", b);
+      myFormData.append("mode", c);
       $.ajax({
             url: host + 'index.php/admin/dashboard[edit:save]',
             type: 'POST',
-            data: { idnyah: d, nama: a, redirect: b, image: c },
+            processData: false,
+            contentType: false,
+            data: myFormData,
             dataType: 'html',
             success: function(data) {
               dialog.dialog( "close" );

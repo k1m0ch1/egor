@@ -1,0 +1,58 @@
+$(document).ready(function(){
+
+    var host = 'http://' + $(location).attr('host') + '/egor/public/';
+
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 500,
+      modal: true,
+      buttons: {
+        "Simpan": simpan,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[0].reset();
+      }
+    });
+
+   form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      simpan();
+    });
+
+    $('[id^=editUser]').on('click', function(){
+    		var currentID = $(this).attr('id');
+    		currentID = currentID.split('-')[1];
+    		var idnyah = currentID;
+            dialog.dialog( "open" );
+            $.ajax({
+	            url: host + 'index.php/admin/users[edit:show]',
+	            type: 'GET',
+	            data: { id: idnyah },
+	            dataType: 'html',
+	            success: function(data) {
+	            	$('#formnyah').html(data);
+	            }
+	         });
+    });
+
+    function simpan(){
+    	var a = $('#dialog-form form input#name').val();
+	    var b = $('#dialog-form form input#email').val();
+	    var c = $('#dialog-form form input#password').val();
+	    var d = $('#dialog-form form input#idnyah').val();
+    	$.ajax({
+	            url: host + 'index.php/admin/users[edit:save]',
+	            type: 'POST',
+	            data: { id: d, name: a, email: b, password: c},
+	            dataType: 'html',
+	            success: function(data) {
+	            	
+	            }
+	         });
+    	dialog.dialog("close");    
+    }
+});
