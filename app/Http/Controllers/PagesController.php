@@ -284,6 +284,7 @@ class PagesController extends Controller
                         asset('assets/vendor/blueimp-file-upload/js/jquery.fileupload.js'),
                         asset('assets/js/jquery.knob.min.js'),
                         asset('assets/js/image-picker.js'),
+                        asset('assets/vendor/simpleUpload/simpleUpload.js'),
                         );
             break;
             case 'image':
@@ -311,7 +312,7 @@ class PagesController extends Controller
                         asset('assets/vendor/blueimp-file-upload/js/jquery.fileupload.js'),
                         asset('assets/js/jquery.knob.min.js'),
                         asset('assets/js/upload.js'),
-                        asset('assets/js/image-picker.js'),
+                        asset('assets/js/image-picker.js')
                         );
             break;
         }

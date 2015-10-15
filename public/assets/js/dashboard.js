@@ -46,14 +46,16 @@ $(document).ready(function(){
       myFormData.append("nama", a);
       myFormData.append("redirect", b);
       myFormData.append("mode", c);
+
       $.ajax({
             url: host + 'index.php/admin/dashboard[edit:save]',
             type: 'POST',
             processData: false,
             contentType: false,
             data: myFormData,
-            dataType: 'html',
+            dataType: 'json',
             success: function(data) {
+              $('#simpan').click();
               dialog.dialog( "close" );
             }
          });
@@ -78,6 +80,14 @@ $(document).ready(function(){
                        col.addEventListener('dragend', handleDragEnd, false);
                    });
             $.getScript( host + "assets/js/tesRecall.js" )
+              .done(function( script, textStatus ) {
+                console.log( textStatus );
+              })
+              .fail(function( jqxhr, settings, exception ) {
+                $( "div.log" ).text( "Triggered ajaxError handler." );
+            });
+
+            $.getScript( host + "holder.js" )
               .done(function( script, textStatus ) {
                 console.log( textStatus );
               })

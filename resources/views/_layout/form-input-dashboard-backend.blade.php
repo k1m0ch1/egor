@@ -16,4 +16,4 @@
 	<p class="help-block">Kosongkan jika tidak ingin merubah</p>
 	<input type='hidden' id='idnyah' value='{{ $id }}' />
 </div>
-<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+<input type="submit" tabindex="-1" style="position:absolute; top:-1000px" >
