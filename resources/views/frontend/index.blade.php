@@ -37,21 +37,14 @@
 	   <div class="container main-menu">
 		   
 		   <div class="row">
-			   <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-				   <a href="" class="image-button"><img src="{{ asset('assets/img/aplikasi-surat.png') }}" alt="">
-					<span>Aplikasi Surat</span>
+		   	   @foreach($datanyah as $rS)
+			   <div class="col-lg-4 col-md-4 col-sm-12 text-center" style="padding-bottom: 30px;">
+				   <a href="{{ $rS->redirect }}" class="image-button">
+				   <img style='width: 130px; height: 130px' src="{{ asset('assets/img/uploaded/') }}/{{ $rS->image }}" alt="">
+					<span>{{ $rS->nama }}</span>
 				   </a>
 			   </div>
-			   <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-				   <a href="" class="image-button"><img src="assets/img/perjalanan-dinas.png" alt="">
-				   <span>Perjalanan Dinas</span>
-				   </a>
-			   </div>
-			   <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-				   <a href="" class="image-button"><img src="assets/img/sistem-info-pegawai.png" alt="">
-					<span>Sistem Info Pegawai</span>
-				   </a>
-			   </div>
+			   @endforeach
 		   </div>
 	   </div>
 		<div class="divider"></div>

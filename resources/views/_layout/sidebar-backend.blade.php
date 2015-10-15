@@ -43,6 +43,12 @@
               </a>
             </li>
 
+            <li {{ $title=='Image'?'class="active treeview"':'' }}>
+              <a href='{{ asset("index.php/admin/gambar") }}'>
+                <i class="fa fa-file-image-o"></i> <span> Images</span>
+              </a>
+            </li>
+
             <li {{ $title=='Preference'?'class="active treeview"':'' }}>
               <a href='{{ asset("index.php/admin/preference") }}'>
                 <i class="fa fa-gear"></i> <span> Preference</span>

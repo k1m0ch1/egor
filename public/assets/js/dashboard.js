@@ -25,16 +25,17 @@ $(document).ready(function(){
    function simpan(){
       var a = $('#dialog-form form input#name').val();
       var b = $('#dialog-form form input#href').val();
-      var c = $('#dialog-form form input#image').val();
-      // $.ajax({
-      //       url: 'http://localhost/egor/public/index.php/admin/dashboard[edit:save]',
-      //       type: 'GET',
-      //       data: {  },
-      //       dataType: 'html',
-      //       success: function(data) {
-      //          $('#formnyah').html(data);
-      //       }
-      //    });
+      var c = $('#dialog-form form select#image').val();
+      var d = $('#dialog-form form input#idnyah').val();
+      $.ajax({
+            url: 'http://localhost/egor/public/index.php/admin/dashboard[edit:save]',
+            type: 'POST',
+            data: { idnyah: d, nama: a, redirect: b, image: c },
+            dataType: 'html',
+            success: function(data) {
+
+            }
+         });
    }
 
    $( window ).load(function() {

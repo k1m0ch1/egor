@@ -30,6 +30,8 @@ Route::get('admin/form:dashboard', ['uses'=>'PagesController@formDashboard', 'as
 
 Route::post('admin/dashboard[edit:save]', ['uses'=>'DashboardController@editSave', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 
+Route::post('admin/gambar[upload]', ['uses'=>'GambarController@upload', 'as'=>'gambar[upload]', 'middleware'=>'auth']);
+Route::get('admin/gambar', ['uses'=>'PagesController@indexGambar', 'as'=>'gambar[index]', 'middleware'=>'auth']);
 
 Route::group(['prefix'=>'api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);

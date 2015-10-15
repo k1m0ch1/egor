@@ -12,8 +12,23 @@ $(document).ready(function(){
 	         type: 'GET',
 	         data: { id: getID },
 	         dataType: 'html',
-	         success: function(data) {
-	            $('#formnyah').html(data);
+	         success: function(data){
+	         	$.ajax({
+		            url:"http://localhost/egor/public/assets/css/image-picker.css",
+		            dataType:"script",
+		            success:function(data){
+		                $("head").append("<style>" + data + "</style>");
+		                //loading complete code here
+		            }
+		        });
+	         	$('#formnyah').html(data);
+	         	$.getScript( "http://localhost/egor/public/assets/js/image-picker.js" )
+		              .done(function( script, textStatus ) {
+		                console.log( textStatus );
+		              })
+		              .fail(function( jqxhr, settings, exception ) {
+		                $( "div.log" ).text( "Triggered ajaxError handler." );
+		            });
 	         }
 	      });
     });

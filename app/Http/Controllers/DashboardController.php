@@ -15,9 +15,12 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function editSave(Request $request){
-        $fileyah = $request->file('image');
-        $nemfile = $fileyah->getClientOriginalName();
-        $fileyah->move('/var/www/html/egor/public/assets/img/uploaded/', $nemfile);
-        return 'lol';
+            DB::table('frontpage')->where('id', $request->input('idnyah'))->update(
+                ['nama' => $request->input('nama'),
+                 'redirect' => $request->input('redirect'),
+                 'image' => $request->input('image')]);
+            //$fucka .= '' . $datanya[$a][1] . '' .$datanya[$a][0] . '<br/>';
+
+        return 'success';
     }
 }

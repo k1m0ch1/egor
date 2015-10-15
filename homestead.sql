@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2015-10-14 10:02:46
+Date: 2015-10-15 12:04:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,11 +47,11 @@ CREATE TABLE `frontpage` (
 -- ----------------------------
 -- Records of frontpage
 -- ----------------------------
-INSERT INTO `frontpage` VALUES ('1', 'Lamb 1', '1', 'http://www.google.com/', '1.jpg');
-INSERT INTO `frontpage` VALUES ('2', 'Lamb 2', '2', 'http://www.google.com', '2.jpg');
-INSERT INTO `frontpage` VALUES ('3', 'Lamb 3', '3', 'http://www.apaaja.com', '3.jpg');
+INSERT INTO `frontpage` VALUES ('1', 'Aplikasi Surat', '1', 'http://www.google.com/', 'aplikasi-surat.png');
+INSERT INTO `frontpage` VALUES ('2', 'Lamb 2', '5', 'http://www.google.com', '2.jpg');
+INSERT INTO `frontpage` VALUES ('3', 'Sistem Informasi Pegawai', '3', 'http://www.apaaja.com', 'sistem-info-pegawai.png');
 INSERT INTO `frontpage` VALUES ('4', 'Lamb 4', '4', 'http://www.wow.com', '4.jpg');
-INSERT INTO `frontpage` VALUES ('5', 'Lamb 5', '5', 'http://www.aduh.com', '5.jpg');
+INSERT INTO `frontpage` VALUES ('5', 'Perjalanan Dinas', '2', 'http://www.aduh.com', 'perjalanan-dinas.png');
 INSERT INTO `frontpage` VALUES ('6', 'Lamb 6', '6', 'http://www.awaw.com', '6.jpg');
 
 -- ----------------------------
