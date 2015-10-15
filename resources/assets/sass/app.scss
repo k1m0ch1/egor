@@ -1,5 +1,10 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
+body{
+	font-family : "Quicksand", "Helvetica Neue", "Helvetica", sans-serif;
+}
+.top-bar-section ul li > a, button , button{
+	font-family : "Quicksand", "Helvetica Neue", "Helvetica", sans-serif;
+}
 .footer-egor{
 	background-color: #4C4C4C;
 	min-height: 200px;
@@ -27,4 +32,102 @@
 		}
 	}
 	
+}
+.main{
+	margin: 200px 0;
+	padding: 50px 0;
+	h1, h2, h3, h4, h5, p{
+		color: #FFF;
+	}
+}
+.main-url{
+	p{
+		img{
+			display:inline;
+			width:50px;
+			height:50px;
+		}
+	}
+}
+
+.form-egor{
+	p{
+		color:#333;
+		margin:0;
+	}
+	.form-header, .form-footer{
+		background-color:$navbar-inverse-color;
+		padding: 10px;
+	}
+	input{
+		border-radius:0;
+		margin:0;
+	}
+}
+.form-footer{
+	text-align:center;
+	button{
+		background:transparent;
+		border:0;
+		font-size:18px;
+		margin-bottom:0;
+		color:#333;
+	}
+}
+a.image-button{
+	text-align:center;
+	display:block;
+	img{
+		margin-bottom:30px;
+		width:150px;
+		height:150px;
+		border-radius:75px;
+	}
+	span{
+		display:block;
+		margin:0 auto;
+		width:60%;
+		min-height:50px;
+		font-size:20px;
+		background-color:#555;
+		color:$navbar-inverse-color;
+	}
+}
+
+body.index{
+	min-height:300px;
+	background: #000 url('../img/bg-header.jpg') no-repeat;
+	background-size: cover;
+}
+.main-menu{
+	margin-top: 100px;
+	margin-bottom:100px;
+}
+.divider{
+	background-color:rgba(0,0,0,0.4);
+	display:block;
+	min-height:100px;
+}
+.contain-to-grid{
+	border-bottom:5px #CCC solid;
+}
+.footer{
+	padding:50px 0 0 0;
+	background-color:#333;
+	border-top:$navbar-inverse-color 10px solid;
+	ul.url-wrapper{
+		padding-left:0;
+		a{
+			color: #AAA;
+		}
+	}
+	p{
+		color: #EEE;
+	}
+	h3,h4,h5, a{
+		color:$navbar-inverse-color;
+	}
+	.copyright{
+		margin-top:30px;
+	}
 }

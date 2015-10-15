@@ -9,7 +9,35 @@
 
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
 		<!-- Place favicon.ico in the root directory -->
-		<link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
 		<script src="{{ asset('assets/vendor/modernizr/modernizr.js') }}"></script>
 	</head>
+<body class="index">
+<div class="contain-to-grid">
+	<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+	<li class="name">
+	  <h1><a href="{{url('/')}}">{{$bah or 'Title'}}</a></h1>
+	</li>
+	 <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+	<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+	<!-- Right Nav Section -->
+	<ul class="right">
+	  <li ><a href="{{url('login')}}">SIGN IN</a></li>
+		</ul>
+	  </li>
+	</ul>
+
+	<!-- Left Nav Section -->
+	<ul class="left">
+		@foreach($result1 as $rS)
+			<li><a href="{{$rS->redirect}}">{{$rS->name or '-'}}</a></li>
+		@endforeach
+	</ul>
+  </section>
+</nav>
+</div>

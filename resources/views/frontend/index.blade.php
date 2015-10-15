@@ -1,63 +1,28 @@
 @include('_layout.header-frontend')
-<body class="index">
-<header class="navbar navbar-inverse navbar-egor">
-		  <div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			  </button>
-			  <a class="navbar-brand" href="{{ asset('') }}"><span>{{ $bah }}</span></a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			  <ul class="nav navbar-nav">
-			  	@foreach($result1 as $rS)
-					<li><a href="">{{ $rS->name }}</a></li>
-				@endforeach
-			  </ul>
-			  
-			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="{{ asset('') }}index.php/login">LOG IN</a></li>
-				
-			  </ul>
-			</div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-		</header>
 		<!--[if lt IE 8]>
 			<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
 		<div class="divider"></div>
-	   <div class="container main-menu">
-		   
-		   <div class="row">
-		   	   @foreach($datanyah as $rS)
-			   <div class="col-lg-4 col-md-4 col-sm-12 text-center" style="padding-bottom: 30px;">
-				   <a href="{{ $rS->redirect }}" class="image-button">
-				   <img style='width: 130px; height: 130px' src="{{ asset('assets/img/uploaded/') }}/{{ $rS->image }}" alt="">
-					<span>{{ $rS->nama }}</span>
-				   </a>
-			   </div>
-			   @endforeach
-		   </div>
-	   </div>
+		<div id="main-content">
+			<div class="main-menu">
+				<div class="row">
+					<div class="large-12 columns">
+						<ul class="small-block-grid-{{$menu_columns or '3'}}">
+							@foreach($datanyah as $menu)
+								<li>
+									<a href="{{$menu->redirect or '/'}}" class="image-button">
+									<img src="{{asset('assets/img/uploaded')}}/{{$menu->image}}" alt="">
+									<p><span>{{$menu->nama}}</span></p>
+								</a>
+								</li>
+							@endforeach
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="divider"></div>
-		
-	   <div class="footer">
-		   <div class="container">
-			   <div class="row copyright">
-				   <div class="col-lg-12">
-					   <p class="text-center">
-						   Copyright &copy; 2015 - <a href="">{{ $bah }}</a>
-					   </p>
-				   </div>
-			   </div>
-		   </div>
-	   </div>
-	   @include('_layout.footer-frontend')
+
+@include('_layout.footer-frontend')

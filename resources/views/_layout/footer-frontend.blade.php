@@ -1,3 +1,15 @@
+		<div class="footer">
+		   <div class="container">
+			   <div class="row copyright">
+				   <div class="col-lg-12">
+					   <p class="text-center">
+						   Copyright &copy; 2015 - <a href="{{url('/')}}">{{ $bah or 'Title' }}</a>
+					   </p>
+				   </div>
+			   </div>
+		   </div>
+	   </div>
+
 		<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
 		<script src="{{ asset('assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js') }}"></script>
