@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	var host = 'http://' + $(location).attr('host') + '/egor/public/';
+
 	$('[id^=editGrid]').on('click', function(e){
             dialog.dialog( "open" );
             var currentTD = $(this).parent();
@@ -8,13 +10,13 @@ $(document).ready(function(){
             currentID = currentID.split('-')[1];
             var getID = $('#idGambar' + currentID).val();
             $.ajax({
-	         url: 'http://localhost/egor/public/index.php/admin/form:dashboard',
+	         url: host + 'index.php/admin/form:dashboard',
 	         type: 'GET',
 	         data: { id: getID },
 	         dataType: 'html',
 	         success: function(data){
 	         	$.ajax({
-		            url:"http://localhost/egor/public/assets/css/image-picker.css",
+		            url: host + "assets/css/image-picker.css",
 		            dataType:"script",
 		            success:function(data){
 		                $("head").append("<style>" + data + "</style>");
@@ -22,7 +24,7 @@ $(document).ready(function(){
 		            }
 		        });
 	         	$('#formnyah').html(data);
-	         	$.getScript( "http://localhost/egor/public/assets/js/image-picker.js" )
+	         	$.getScript( host + "/assets/js/image-picker.js" )
 		              .done(function( script, textStatus ) {
 		                console.log( textStatus );
 		              })

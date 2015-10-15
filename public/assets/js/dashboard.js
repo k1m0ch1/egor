@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    var host = 'http://' + $(location).attr('host') + '/egor/public/';
 
    dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
@@ -28,7 +29,7 @@ $(document).ready(function(){
       var c = $('#dialog-form form select#image').val();
       var d = $('#dialog-form form input#idnyah').val();
       $.ajax({
-            url: 'http://localhost/egor/public/index.php/admin/dashboard[edit:save]',
+            url: host + 'index.php/admin/dashboard[edit:save]',
             type: 'POST',
             data: { idnyah: d, nama: a, redirect: b, image: c },
             dataType: 'html',
@@ -40,7 +41,7 @@ $(document).ready(function(){
 
    $( window ).load(function() {
       $.ajax({
-         url: 'http://localhost/egor/public/index.php/admin/grid',
+         url: host + 'index.php/admin/grid',
          type: 'GET',
          data: { 'w': 3, 'h': 3},
          dataType: 'html',
@@ -74,7 +75,7 @@ $(document).ready(function(){
       var w = dimension[0];
       var h = dimension[1];
       $.ajax({
-         url: 'http://localhost/egor/public/index.php/admin/grid',
+         url: host + 'index.php/admin/grid',
          type: 'GET',
          data: { 'w': w, 'h': h},
          dataType: 'html',
@@ -126,7 +127,7 @@ $(document).ready(function(){
          // }
 
          $.ajax({
-         url: 'http://localhost/egor/public/index.php/admin/grid:savePosition',
+         url: host + 'index.php/admin/grid:savePosition',
          type: 'POST',
          data: { dataWaw : iw, size: countRow },
          dataType: 'json',
