@@ -4,6 +4,10 @@ $(document).ready(function(){
 	$("[id^=editGrid]").hide();
 	$("[id^=childGrid]").hide();
 
+	$('[id^=childGrid]').on('click', function(e){
+		dialog_child.dialog( "open" );
+	});
+
 	$('[id^=editGrid]').on('click', function(e){
             dialog.dialog( "open" );
             var currentTD = $(this).parent();

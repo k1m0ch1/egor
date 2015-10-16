@@ -17,6 +17,24 @@ $(document).ready(function(){
       height: 420,
       width: 500,
       modal: true,
+      draggable: false,
+      buttons: {
+        "Simpan": simpan,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[0].reset();
+      }
+    });
+
+   dialog_child = $( "#child-form" ).dialog({
+      autoOpen: false,
+      height: 500,
+      width: 700,
+      modal: true,
+      draggable: false,
       buttons: {
         "Simpan": simpan,
         Cancel: function() {
