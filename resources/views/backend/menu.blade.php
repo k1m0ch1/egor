@@ -39,12 +39,22 @@
                     @foreach($result2 as $r2)
                       <tr>
                       <td>{{ $a++ }}</td>
-                      <td>{{ $r2->name }}</td>
+                      <td><label id="lblName-{{ $r2->id }}">{{ $r2->name }}</label>
+                          <input type='text' id='txtName-{{ $r2->id }}' value='{{ $r2->name }}' style="width: 150px; float: left;" size=1 class='form-control'/>
+                          <button class="btn btn-primary" id="simpanName-{{ $r2->id }}" style="margin-left: 3px;"><i class="fa fa-save"></i></button>
+                          <button class="btn btn-danger" id="cancelName-{{ $r2->id }}" style="margin-left: 1px;"><i class="fa fa-close"></i></button>
+                      </td>
                       <td>not yet</td>
-                      <td>{{ $r2->redirect }}</td>
+                      <td>
+                          <label id="lblHref-{{ $r2->id }}">{{ $r2->redirect }}</label>
+                          <input type='text' id='txtHref-{{ $r2->id }}' value='{{ $r2->redirect }}' style="width: 150px; float: left;" size=1 class='form-control'/>
+                          <button class="btn btn-primary" id="simpanHref-{{ $r2->id }}" style="margin-left: 3px;"><i class="fa fa-save"></i></button>
+                          <button class="btn btn-danger" id="cancelHref-{{ $r2->id }}" style="margin-left: 1px;"><i class="fa fa-close"></i></button>
+                      
+                      </td>
                       <td><div class="tools" align='center'>
-                      		  <a class="fa fa-external-link">&nbsp;</a>
-                              <a class="fa fa-edit"></a>&nbsp;
+                      		  <a class="fa fa-object-ungroup">&nbsp;</a>
+                              <a class="fa fa-edit" id='editMenu-{{$r2->id}}'></a>&nbsp;
                               <a class="fa fa-trash-o"></a>
                             </div></td>
                       </tr>
@@ -69,10 +79,6 @@
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
-
-    <div id="dialog-ajah" title="Create new user">
-    BANGSAT
-    </div>
 
     @include('_layout.footer-js-backend-user')
   </body>

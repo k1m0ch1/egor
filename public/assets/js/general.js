@@ -5,8 +5,4 @@ $(document).ready(function(){
       width: 350,
       modal: true
     });
-
-   $( "#tambah" ).button().on( "click", function() {
-      dialog.dialog( "open" );
-   });
 });

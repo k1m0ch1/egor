@@ -27,6 +27,9 @@
       <script src="{{ asset('assets/js/preference.js') }}"></script>
       <script src="{{ asset('assets/js/image-picker.js') }}"></script>
     @endif
+    @if($title=="Menu")
+      <script src="{{ asset('assets/js/menuOperation.js') }}"></script>
+    @endif
     <script>
       $(function () {
         $("#example1").DataTable();
