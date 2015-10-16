@@ -24,6 +24,8 @@ Route::get('admin/preference', ['uses'=>'PagesController@preference', 'as'=>'adm
 Route::get('admin/grid', ['uses'=>'PagesController@grid', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 Route::get('admin/form:child', ['uses'=>'PagesController@formChild', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 Route::get('admin/form:dashboard', ['uses'=>'PagesController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
+Route::get('admin/form:child[add]', ['uses'=>'PagesController@addNewChild', 'middleware'=>'auth']);
+Route::post('admin/form:child[add:save]', ['uses'=>'ChildController@saveNewChild', 'middleware'=>'auth']);
 
 Route::post('admin/grid:savePosition', ['uses'=>'GridController@savePosition', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 

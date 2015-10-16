@@ -1,5 +1,6 @@
 <div class="box-body no-padding">
-                  <table class="table" style="text-align: center;">
+<input type='hidden' id='parent_id' value="{{ $parent_id }}" />
+                  <table class="table" style="text-align: center;" id="child-Form-table">
                     <tr style="text-align: center;">
                       <th colspan=2><center>#</center></th>
                       <th align='center'>Nama</th>
@@ -15,6 +16,8 @@
                       </td>
                       <td>{{ $rS->nama }}</td>
                       <td>
+                        <input type='hidden' id='current_parent_id' value="{{ $rS->parent_id }}" />
+                        <input type='hidden' id='child_id' value="{{$rS->id}}" />
                         <a id='editChild-{{$rS->id}}-{{$rS->parent_id}}' class="fa fa-edit" ></a>
                         <a id='delChild-{{$rS->id}}-{{$rS->parent_id}}' class="fa fa-trash" ></a>
                       </td>

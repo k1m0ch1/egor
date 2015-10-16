@@ -19,6 +19,23 @@ $(document).ready(function(){
 	      });
 	});
 
+	$('[id^=editChild]').on('click', function(e){
+		console.log('bagsa');
+		dialog_new_child.dialog( "open" );
+		var currentID = $(this).attr('id');
+        currentID = currentID.split('-')[1];
+        var getID = $('#child_id').val();
+		$.ajax({
+	         url: host + 'admin/form:child',
+	         type: 'GET',
+	         data : { id: getID },
+	         dataType: 'html',
+	         success: function(data){
+	         	$('#add-form_child').html(data);
+	         }
+	      });
+	});
+
 	$('[id^=editGrid]').on('click', function(e){
             dialog.dialog( "open" );
             var currentTD = $(this).parent();
