@@ -126,47 +126,6 @@ class PagesController extends Controller
         return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
     }
 
-    public function formDashboard(Request $request){
-        if($request->input('id')!='x'){
-            $result1 = DB::table('parent_frontpage')->where('id', $request->input('id'))->get();
-            foreach($result1 as $rS){
-                $nama = $rS->nama;
-                $redirect = $rS->redirect;
-                $image = $rS->image;
-                $id = $rS->id;
-                $mode = $rS->mode;
-            }
-            $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
-            return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode'));
-        }else{
-            $parent_id = 'xxx';
-            return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
-        }
-    }
-
-    public function addNewChild(Request $request){
-        $parent_id = $request->input('parent_id');
-        return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
-    }
-
-    public function formChild(Request $request){
-        $datanya = DB::table('child_frontpage')->where('parent_id', $request->input('id'))->get();
-        $parent_id = $request->input('id');
-        return view('_layout.form-child-backend', compact('datanya', 'parent_id'));
-    }
-
-    public function formChild2(Request $request){
-        $datanya = DB::table('child_frontpage')->where('id', $request->input('id'))->get();
-        foreach($datanya as $rS){
-                $nama = $rS->nama;
-                $redirect = $rS->redirect;
-                $image = $rS->image;
-                $id = $rS->id;
-                $mode = $rS->mode;
-        }
-        return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode'));
-    }
-
     public function user(){
         $title = 'Users';
         $css = $this->CSS('users');

@@ -106,7 +106,7 @@ $(document).ready(function(){
       	var c = $("#add-child-form input[type='radio'][name='target']:checked");
       	var d = $('#add-child-form input#idnyah').val();
       	var e = $('#add-child-form input#parent_id').val();
-      	console.log(a);
+      	console.log(e);
       	c = c.length>0?c.val():0;
       	var myFormData2 = new FormData();
      	myFormData2.append("image", $('#fileUpload').prop('files')[0]);
@@ -127,15 +127,15 @@ $(document).ready(function(){
               console.log(e);
               dialog_new_child.dialog( "close" );
               $.ajax({
-		         url: host + 'admin/form:child',
-		         type: 'GET',
-		         data : { id: e },
-		         dataType: 'html',
-		         success: function(data){
-		         	$('#form-child').html(data);
-		         	dialog_child.dialog( "open" );
-		         }
-		      });
+      		         url: host + 'admin/form:child',
+      		         type: 'GET',
+      		         data : { id: e },
+      		         dataType: 'html',
+      		         success: function(data){
+      		         	$('#form-child').html(data);
+      		         	dialog_child.dialog( "open" );
+      		         }
+      		      });
             }
          });
    }

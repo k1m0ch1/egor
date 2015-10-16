@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use File;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -53,5 +54,28 @@ class DashboardController extends Controller
             }
 
         return "tes";
+    }
+
+        public function formDashboard(Request $request){
+            $parent_id = 'xxx';
+            if($request->input('id')!='x'){
+                $result1 = DB::table('parent_frontpage')->where('id', $request->input('id'))->get();
+                foreach($result1 as $rS){
+                    $nama = $rS->nama;
+                    $redirect = $rS->redirect;
+                    $image = $rS->image;
+                    $id = $rS->id;
+                    $mode = $rS->mode;
+                }
+                $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
+                return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode','parent_id'));
+            }else{
+                return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
+            }
+        }
+
+    public function delete(Request $request){
+        $del = DB::table('parent_frontpage')->where('id', $request->input('id'))->delete();
+        return $del==true?'success':'fail';
     }
 }

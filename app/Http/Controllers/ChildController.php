@@ -43,7 +43,6 @@ class ChildController extends Controller
                         ->update(
                         ['nama' => $request->input('nama'),
                          'redirect' => $request->input('redirect'),
-                         'image' => $image,
                          'mode' => $request->input('mode')]);
                 }else{
                     DB::table('child_frontpage')->insert(
@@ -55,5 +54,34 @@ class ChildController extends Controller
                 }
             }
         return "succes";
+    }
+
+    public function editSave(Request $request){
+        $datanya = DB::table('child_frontpage')->where('id', $request->input('id'))->get();
+        foreach($datanya as $rS){
+                $nama = $rS->nama;
+                $redirect = $rS->redirect;
+                $image = $rS->image;
+                $id = $rS->id;
+                $mode = $rS->mode;
+                $parent_id = $rS->parent_id;
+        }
+        return view('_layout.form-input-dashboard-backend', compact('parent_id','nama', 'redirect', 'image','files','id','mode'));
+    }
+
+    public function formChild(Request $request){
+        $datanya = DB::table('child_frontpage')->where('parent_id', $request->input('id'))->get();
+        $parent_id = $request->input('id');
+        return view('_layout.form-child-backend', compact('datanya', 'parent_id'));
+    }
+
+    public function addNewChild(Request $request){
+        $parent_id = $request->input('parent_id');
+        return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
+    }
+
+    public function delete(Request $request){
+        $del = DB::table('child_frontpage')->where('id', $request->input('id'))->delete();
+        return $del==true?'success':'fail';
     }
 }

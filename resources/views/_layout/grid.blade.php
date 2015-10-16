@@ -19,6 +19,7 @@
       <div id='minimenu' style="position: absolute">
         <button id='editGrid-{{ $a }}' class="fa fa-edit" style='float: right; padding-top: 5px;'></button>
         <button id='childGrid-{{ $a }}' class="fa fa-object-ungroup" style='float: right; padding-top: 5px; padding-right: 5px;'></button>
+        <button id='delGrid-{{ $a }}' class="fa fa-trash  " style='float: right; padding-top: 5px;'></button>
       </div>
       <input type='hidden' id='idGambar{{$a}}' value='{{ $img[$a][4] }}' />
     </td>
