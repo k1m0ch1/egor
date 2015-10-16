@@ -1,3 +1,8 @@
+    <script>
+      var dir_host = "{{ Config::get('app.url') }}/egor/public/";
+      var host = "{{ Config::get('app.url') }}/egor/public/index.php/";
+    </script>
+
     <script src="{{ asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

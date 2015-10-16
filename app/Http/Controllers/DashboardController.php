@@ -38,13 +38,13 @@ class DashboardController extends Controller
 
             if($hasil){
                 if($request->input('idnyah')!='xxx'){
-                    DB::table('frontpage')->where('id', $request->input('idnyah'))->update(
+                    DB::table('parent_frontpage')->where('id', $request->input('idnyah'))->update(
                         ['nama' => $request->input('nama'),
                          'redirect' => $request->input('redirect'),
                          'image' => $image,
                          'mode' => $request->input('mode')]);
                 }else{
-                    DB::table('frontpage')->insert(
+                    DB::table('parent_frontpage')->insert(
                        ['nama' => $request->input('nama'),
                          'redirect' => $request->input('redirect'),
                          'image' => $image,

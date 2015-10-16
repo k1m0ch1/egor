@@ -107,9 +107,9 @@ class UsersController extends Controller
     }
 
     public function login(){
-        $result1 = DB::table('parent_frontpage')->get();
+        $result1 = DB::table('parent_menu')->get();
         $siteTitle = DB::table('preference')->get();
-        $datanyah = DB::table('frontpage')->get();
+        $datanyah = DB::table('parent_frontpage')->get();
         $bah = $siteTitle[0]->title;
         return view('frontend.login', compact('result1', 'bah', 'datanyah'));
     }
