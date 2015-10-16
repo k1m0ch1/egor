@@ -22,9 +22,10 @@ Route::get('admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin
 Route::get('admin/menu', ['uses'=>'PagesController@menu', 'as'=>'admin.menu.get', 'middleware'=>'auth']);
 Route::get('admin/preference', ['uses'=>'PagesController@preference', 'as'=>'admin.preference.get', 'middleware'=>'auth']);
 Route::get('admin/grid', ['uses'=>'PagesController@grid', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
+Route::get('admin/form:child', ['uses'=>'PagesController@formChild', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
+Route::get('admin/form:dashboard', ['uses'=>'PagesController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 
 Route::post('admin/grid:savePosition', ['uses'=>'GridController@savePosition', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
-Route::get('admin/form:dashboard', ['uses'=>'PagesController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 
 Route::post('admin/dashboard[edit:save]', ['uses'=>'DashboardController@editSave', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 

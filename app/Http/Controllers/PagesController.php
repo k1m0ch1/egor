@@ -143,6 +143,11 @@ class PagesController extends Controller
         }
     }
 
+    public function formChild(Request $request){
+        $datanya = DB::table('child_frontpage')->where('parent_id', $request->input('id'))->get();
+        return view('_layout.form-child-backend', compact('datanya'));
+    }
+
     public function user(){
         $title = 'Users';
         $css = $this->CSS('users');
