@@ -5,6 +5,18 @@ $(document).ready(function(){
 
 	$('[id^=childGrid]').on('click', function(e){
 		dialog_child.dialog( "open" );
+		var currentID = $(this).attr('id');
+        currentID = currentID.split('-')[1];
+        var getID = $('#idGambar' + currentID).val();
+		$.ajax({
+	         url: host + 'admin/form:child',
+	         type: 'GET',
+	         data : { id: getID },
+	         dataType: 'html',
+	         success: function(data){
+	         	$('#form-child').html(data);
+	         }
+	      });
 	});
 
 	$('[id^=editGrid]').on('click', function(e){
