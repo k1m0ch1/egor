@@ -83,6 +83,15 @@
       </form>
     </div>
 
+    <div id="child-form" title="Pengaturan Child Dialog">     
+      <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
+      {!! csrf_field() !!}
+        <fieldset id='form-child'>
+          
+        </fieldset>
+      </form>
+    </div>
+
     @include('_layout.footer-js-backend');
   </body>
 </html>

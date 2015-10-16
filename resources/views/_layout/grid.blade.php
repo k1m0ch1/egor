@@ -10,11 +10,16 @@
       <?php $checkFile = get_headers(asset('assets/img/uploaded'. '/' . $img[$a][3] )); ?>
       @if ($checkFile[0] != 'HTTP/1.1 404 Not Found')
           <img class="img-thumbnail" src="{{ asset('assets/img/uploaded') }}/{{ $img[$a][3] }}" alt="" />
+      @elseif ($img[$a][3] == 'holder.js/180x180')
+          <img data-src="{{ $img[$a][3] }}" class="img-thumbnail" alt="" />
       @else
         <img id='gambar' class="img-thumbnail" src="{{ asset('assets/img') }}/addimage.png" alt="" />
       @endif
       <a href="{{ $img[$a][2] }}">{{ $img[$a][0] }} </a>
-      <a id='editGrid-{{ $a }}' class="fa fa-edit" style='float: right; padding-top: 5px;'></a>
+      <div id='minimenu' style="position: absolute">
+        <button id='editGrid-{{ $a }}' class="fa fa-edit" style='float: right; padding-top: 5px;'></button>
+        <button id='childGrid-{{ $a }}' class="fa fa-object-ungroup" style='float: right; padding-top: 5px; padding-right: 5px;'></button>
+      </div>
       <input type='hidden' id='idGambar{{$a}}' value='{{ $img[$a][4] }}' />
     </td>
       <?php $a++ ?>

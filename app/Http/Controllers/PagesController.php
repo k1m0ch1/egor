@@ -127,15 +127,20 @@ class PagesController extends Controller
     }
 
     public function formDashboard(Request $request){
-        $result1 = DB::table('frontpage')->where('id', $request->input('id'))->get();
-        foreach($result1 as $rS){
-            $nama = $rS->nama;
-            $redirect = $rS->redirect;
-            $image = $rS->image;
-            $id = $rS->id;
+        if($request->input('id')!='x'){
+            $result1 = DB::table('frontpage')->where('id', $request->input('id'))->get();
+            foreach($result1 as $rS){
+                $nama = $rS->nama;
+                $redirect = $rS->redirect;
+                $image = $rS->image;
+                $id = $rS->id;
+                $mode = $rS->mode;
+            }
+            $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
+            return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode'));
+        }else{
+            return view('_layout.form-new-input-dashboard-backend');
         }
-        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
-        return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id'));
     }
 
     public function user(){
@@ -274,11 +279,12 @@ class PagesController extends Controller
                         asset('assets/vendor/foundation-5.5.3.custom/js/foundation.min.js'),
                         asset('assets/js/general.js'),
                         asset('holder.js'),
-                        asset('assets/vendor/jQuery-File-Upload/js/vendor/jquery.ui.widget.js'),
-                        asset('assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js'),
-                        asset('assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js'),
+                        asset('assets/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js'),
+                        asset('assets/vendor/blueimp-file-upload/js/jquery.iframe-transport.js'),
+                        asset('assets/vendor/blueimp-file-upload/js/jquery.fileupload.js'),
                         asset('assets/js/jquery.knob.min.js'),
                         asset('assets/js/image-picker.js'),
+                        asset('assets/vendor/simpleUpload/simpleUpload.js'),
                         );
             break;
             case 'image':
@@ -301,12 +307,12 @@ class PagesController extends Controller
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
                         asset('assets/vendor/foundation-5.5.3.custom/js/foundation.min.js'),
                         asset('holder.js'),
-                        asset('assets/vendor/jQuery-File-Upload/js/vendor/jquery.ui.widget.js'),
-                        asset('assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js'),
-                        asset('assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js'),
+                        asset('assets/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js'),
+                        asset('assets/vendor/blueimp-file-upload/js/jquery.iframe-transport.js'),
+                        asset('assets/vendor/blueimp-file-upload/js/jquery.fileupload.js'),
                         asset('assets/js/jquery.knob.min.js'),
                         asset('assets/js/upload.js'),
-                        asset('assets/js/image-picker.js'),
+                        asset('assets/js/image-picker.js')
                         );
             break;
         }

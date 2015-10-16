@@ -1,6 +1,12 @@
 $(document).ready(function(){
 
 	var host = 'http://' + $(location).attr('host') + '/egor/public/';
+	$("[id^=editGrid]").hide();
+	$("[id^=childGrid]").hide();
+
+	$('[id^=childGrid]').on('click', function(e){
+		dialog_child.dialog( "open" );
+	});
 
 	$('[id^=editGrid]').on('click', function(e){
             dialog.dialog( "open" );
@@ -34,5 +40,24 @@ $(document).ready(function(){
 	         }
 	      });
     });
+
+	$(".pindah").hover(function(){
+               // Mouse-over, move and show 'minimenu'
+		 var parent = $(this).parents("#menu-wrapper tr td"); // "This" is the image, "galleryitem" is the container
+		 var parent_pos = parent.position; // Get X and Y position of container
+		 var minimenu = $("[id^=editGrid]");
+		 var minimenu2 = $("[id^=childGrid]");
+		 minimenu.css("position", "absolute");
+		 minimenu.css("left", 142+"px");
+		 minimenu.css("top", -192+"px");
+		 minimenu.show();
+		 minimenu2.css("position", "absolute");
+		 minimenu2.css("left", 107+"px");
+		 minimenu2.css("top", -192+"px");
+		 minimenu2.show();
+	 },function(){	                // Mouse out, hide menu
+		 $("[id^=editGrid]").hide();
+		 $("[id^=childGrid]").hide();
+	 });
 
 });

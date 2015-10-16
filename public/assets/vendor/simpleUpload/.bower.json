@@ -1,0 +1,14 @@
+{
+  "name": "simpleUpload",
+  "homepage": "https://github.com/rodrigowbazevedo/simpleUpload",
+  "_release": "8f6aafb576",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "8f6aafb576bf080ac6317bee6bb51833ca99df74"
+  },
+  "_source": "https://github.com/rodrigowbazevedo/simpleUpload.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/rodrigowbazevedo/simpleUpload.git",
+  "_direct": true
+}
