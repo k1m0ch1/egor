@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-    var host = 'http://' + $(location).attr('host') + '/egor/public/';
-
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 400,
@@ -29,7 +27,7 @@ $(document).ready(function(){
     		var idnyah = currentID;
             dialog.dialog( "open" );
             $.ajax({
-	            url: host + 'index.php/admin/users[edit:show]',
+	            url: host + 'admin/users[edit:show]',
 	            type: 'GET',
 	            data: { id: idnyah },
 	            dataType: 'html',
@@ -45,7 +43,7 @@ $(document).ready(function(){
 	    var c = $('#dialog-form form input#password').val();
 	    var d = $('#dialog-form form input#idnyah').val();
     	$.ajax({
-	            url: host + 'index.php/admin/users[edit:save]',
+	            url: host + 'admin/users[edit:save]',
 	            type: 'POST',
 	            data: { id: d, name: a, email: b, password: c},
 	            dataType: 'html',

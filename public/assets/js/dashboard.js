@@ -10,20 +10,22 @@ $(document).ready(function(){
       return text;
     }
 
-    var host = 'http://' + $(location).attr('host') + '/egor/public/';
-
    dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 420,
       width: 500,
       modal: true,
       draggable: false,
-      buttons: {
-        "Simpan": simpan,
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
+      buttons: [{
+                  id:"simpanData", text: "Simpan",
+                  click: function() {
+                      simpan();
+                  }}, 
+                {
+                  id:"btn-cancel", text: "Cancel",
+                  click: function() {
+                      $(this).dialog("close");
+                }}],
       close: function() {
         form[0].reset();
       }
@@ -35,12 +37,20 @@ $(document).ready(function(){
       width: 700,
       modal: true,
       draggable: false,
-      buttons: {
-        "Simpan": simpan,
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
+      buttons: [{
+                  id:"btn-addChild", text: "Tambah Child",
+                  click: function() {
+                      $(this).dialog("close");
+                }},{
+                  id:"simpanData", text: "Simpan",
+                  click: function() {
+                      simpan();
+                  }}, 
+                {
+                  id:"btn-cancel", text: "Cancel",
+                  click: function() {
+                      $(this).dialog("close");
+                }}],
       close: function() {
         form[0].reset();
       }
@@ -66,7 +76,7 @@ $(document).ready(function(){
       myFormData.append("mode", c);
 
       $.ajax({
-            url: host + 'index.php/admin/dashboard[edit:save]',
+            url: host + 'admin/dashboard[edit:save]',
             type: 'POST',
             processData: false,
             contentType: false,
@@ -81,7 +91,7 @@ $(document).ready(function(){
 
    $( window ).load(function() {
       $.ajax({
-         url: host + 'index.php/admin/grid',
+         url: host + 'admin/grid',
          type: 'GET',
          data: { 'w': 3, 'h': 3},
          dataType: 'html',
@@ -97,7 +107,7 @@ $(document).ready(function(){
                        col.addEventListener('drop', handleDrop, false);
                        col.addEventListener('dragend', handleDragEnd, false);
                    });
-            $.getScript( host + "assets/js/tesRecall.js" )
+            $.getScript( dir_host + "assets/js/tesRecall.js" )
               .done(function( script, textStatus ) {
                 console.log( textStatus );
               })
@@ -105,7 +115,7 @@ $(document).ready(function(){
                 $( "div.log" ).text( "Triggered ajaxError handler." );
             });
 
-            $.getScript( host + "holder.js" )
+            $.getScript( dir_host + "holder.js" )
               .done(function( script, textStatus ) {
                 console.log( textStatus );
               })
@@ -123,7 +133,7 @@ $(document).ready(function(){
       var w = dimension[0];
       var h = dimension[1];
       $.ajax({
-         url: host + 'index.php/admin/grid',
+         url: host + 'admin/grid',
          type: 'GET',
          data: { 'w': w, 'h': h},
          dataType: 'html',
@@ -139,6 +149,21 @@ $(document).ready(function(){
                        col.addEventListener('drop', handleDrop, false);
                        col.addEventListener('dragend', handleDragEnd, false);
                    });
+            $.getScript( dir_host + "holder.js" )
+              .done(function( script, textStatus ) {
+                console.log( textStatus );
+              })
+              .fail(function( jqxhr, settings, exception ) {
+                $( "div.log" ).text( "Triggered ajaxError handler." );
+            });
+
+            $.getScript( dir_host + "assets/js/tesRecall.js" )
+              .done(function( script, textStatus ) {
+                console.log( textStatus );
+              })
+              .fail(function( jqxhr, settings, exception ) {
+                $( "div.log" ).text( "Triggered ajaxError handler." );
+            });
          }
       });
    });
@@ -175,7 +200,7 @@ $(document).ready(function(){
          // }
 
          $.ajax({
-         url: host + 'index.php/admin/grid:savePosition',
+         url: host + 'admin/grid:savePosition',
          type: 'POST',
          data: { dataWaw : iw, size: countRow },
          dataType: 'json',

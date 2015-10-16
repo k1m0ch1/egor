@@ -2,7 +2,6 @@ $(document).ready(function(){
 
     $("select").imagepicker();
 
-    var host = 'http://' + $(location).attr('host') + '/egor/public/';
     var formTitle, formBackground, formLogo;
 
     formTitle = $( "#FormTitle" ).on( "submit", function( event ) {
@@ -23,7 +22,7 @@ $(document).ready(function(){
     function simpanTitle(){
         var title = $('#inputTitle').val();
         $.ajax({
-              url: host + 'index.php/admin/preference:title[save]',
+              url: host + 'admin/preference:title[save]',
               type: 'POST',
               data: { judul : title },
               dataType: 'html',
@@ -36,7 +35,7 @@ $(document).ready(function(){
     function simpanBackground(){
         var a=$("#background option:selected" ).text();
         $.ajax({
-              url: host + 'index.php/admin/preference:background[save]',
+              url: host + 'admin/preference:background[save]',
               type: 'POST',
               data: { namaFile : a },
               dataType: 'html',
@@ -49,7 +48,7 @@ $(document).ready(function(){
     function simpanLogo(){
         var a=$("#logo option:selected" ).text();
         $.ajax({
-              url: host + 'index.php/admin/preference:logo[save]',
+              url: host + 'admin/preference:logo[save]',
               type: 'POST',
               data: { namaFile : a },
               dataType: 'html',

@@ -16,9 +16,9 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $result1 = DB::table('parent_frontpage')->get();
+        $result1 = DB::table('parent_menu')->get();
         $siteTitle = DB::table('preference')->get();
-        $datanyah = DB::table('frontpage')->get();
+        $datanyah = DB::table('parent_frontpage')->get();
         $bah = $siteTitle[0]->title;
         return view('frontend.index', compact('result1', 'bah', 'datanyah'));
     }
@@ -111,7 +111,7 @@ class PagesController extends Controller
         $a=0;
         $w=$request->input('w');
         $h=$request->input('h');
-        $result1 = DB::table('frontpage')->orderBy('position', 'asc')->get();
+        $result1 = DB::table('parent_frontpage')->orderBy('position', 'asc')->get();
         $img = Array();
         foreach($result1 as $rS){
             $img[$a][0] = $rS->nama;
@@ -128,7 +128,7 @@ class PagesController extends Controller
 
     public function formDashboard(Request $request){
         if($request->input('id')!='x'){
-            $result1 = DB::table('frontpage')->where('id', $request->input('id'))->get();
+            $result1 = DB::table('parent_frontpage')->where('id', $request->input('id'))->get();
             foreach($result1 as $rS){
                 $nama = $rS->nama;
                 $redirect = $rS->redirect;
@@ -163,9 +163,9 @@ class PagesController extends Controller
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('menu');
         $title = 'Menu';
-        $result1 = DB::select('SELECT child_frontpage.name as "ch_name" FROM parent_frontpage
-                        INNER JOIN child_frontpage ON child_frontpage.id_parent = parent_frontpage.id');
-        $result2 = $users = DB::table('parent_frontpage')->get();
+        $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
+                        INNER JOIN child_menu ON child_menu.id_parent = parent_menu.id');
+        $result2 = $users = DB::table('parent_menu')->get();
         $a=1;
         return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a'));
     }
@@ -174,8 +174,8 @@ class PagesController extends Controller
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('menu');
         $title = 'Preference';
-        $result1 = DB::select('SELECT child_frontpage.name as "ch_name" FROM parent_frontpage
-                        INNER JOIN child_frontpage ON child_frontpage.id_parent = parent_frontpage.id');
+        $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
+                        INNER JOIN child_menu ON child_menu.id_parent = parent_menu.id');
         $a=1;
         $result2 = DB::table('preference')->where('id', '1')->get();
         $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');

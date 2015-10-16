@@ -19,7 +19,7 @@ class GridController extends Controller
     	$jumlahData = $request->input('size');
 
     	for($a=0;$a<$jumlahData;$a++){
-    		DB::table('frontpage')->where('id', $datanya[$a][1])->update(['position' => $datanya[$a][0]]);
+    		DB::table('parent_frontpage')->where('id', $datanya[$a][1])->update(['position' => $datanya[$a][0]]);
     		//$fucka .= '' . $datanya[$a][1] . '' .$datanya[$a][0] . '<br/>';
     	}
 
