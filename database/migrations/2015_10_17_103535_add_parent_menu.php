@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TabelParentPreference extends Migration
+class AddParentMenu extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,10 @@ class TabelParentPreference extends Migration
      */
     public function up()
     {
-        Schema::table('preference', function (Blueprint $table) {
-            //
+        Schema::table('parent_menu', function (Blueprint $table) {
+            $table->increments('id', 3);
+            $table->string('name', 100);
+            $table->text('redirect');
         });
     }
 
@@ -24,8 +26,6 @@ class TabelParentPreference extends Migration
      */
     public function down()
     {
-        Schema::table('preference', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('parent_menu');
     }
 }

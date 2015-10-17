@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TabelParentFrontpage extends Migration
+class AddChildMenu extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,11 @@ class TabelParentFrontpage extends Migration
      */
     public function up()
     {
-        Schema::table('parent_frontpage', function (Blueprint $table) {
-            //
+        Schema::table('child_menu', function (Blueprint $table) {
+            $table->increments('id', 3);
+            $table->integer('parent_id', 3);
+            $table->string('name', 200);
+            $table->text('redirect');
         });
     }
 
@@ -24,8 +27,6 @@ class TabelParentFrontpage extends Migration
      */
     public function down()
     {
-        Schema::table('parent_frontpage', function (Blueprint $table) {
-            //
-        });
+       Schema::drop('child_menu');
     }
 }

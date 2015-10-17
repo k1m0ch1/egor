@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TabelChildFrontpage extends Migration
+class AddParentFrontpage extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class TabelChildFrontpage extends Migration
      */
     public function up()
     {
-        Schema::table('child_frontpage', function (Blueprint $table) {
+        Schema::table('parent_frontpage', function (Blueprint $table) {
             $table->increments('id', 3);
-            $table->integer('parent_id', 3);
-            $table->string('nama', 200);
+            $table->string('nama', 100);
+            $table->integer('position', 2);
             $table->text('redirect');
             $table->text('image');
             $table->enum('mode', ['_blank','_self'])->('_blank');
@@ -29,6 +29,6 @@ class TabelChildFrontpage extends Migration
      */
     public function down()
     {
-        Schema::drop('child_frontpage');
+        Schema::drop('parent_frontpage');
     }
 }
