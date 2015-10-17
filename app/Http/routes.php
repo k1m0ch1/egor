@@ -53,5 +53,6 @@ Route::post('admin/preference:logo[save]', ['uses'=>'PreferenceController@logoSa
 Route::group(['prefix'=>'api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);
 	Route::get('/setting/list', 'SettingsController@index');
+	Route::get('/grid/size', 'GridController@getGridSize');
 
 });

@@ -148,8 +148,11 @@ $(document).ready(function(){
       c = c.length>0?c.val():0;
       var myFormData = new FormData();
       var d = $('#dialog-form form input#idnyah').val();
-      myFormData.append("image", $('#fileUpload').prop('files')[0]);
-      myFormData.append("idnyah", d);
+      if($('#fileUpload').prop('files').length > 0){
+        myFormData.append("image", $('#fileUpload').prop('files')[0]);
+      }
+
+      myFormData.append("id", d);
       myFormData.append("nama", a);
       myFormData.append("redirect", b);
       myFormData.append("mode", c);
@@ -162,7 +165,10 @@ $(document).ready(function(){
             data: myFormData,
             dataType: 'json',
             success: function(data) {
-              $('#simpan').click();
+              console.log(location.protocol+'//'+location.hostname+'/assets/img/uploaded/'+data.result.image);
+              console.log(d);
+              $("#img-thumbnail-"+d).attr('src', location.protocol+'//'+location.hostname+'/assets/img/uploaded/'+data.result.image);
+              console.log($("#img-thumbnail-"+d));
               dialog.dialog( "close" );
             }
          });

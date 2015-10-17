@@ -9,11 +9,11 @@
 			<div class="main-menu">
 				<div class="row">
 					<div class="large-12 columns">
-						<ul class="small-block-grid-{{$menu_columns or '3'}}">
+						<ul class="small-block-grid-{{$h or '3'}}">
 							@foreach($datanyah as $menu)
 								<li>
 									<a href="{{$menu->redirect or '/'}}" class="image-button">
-									<img src="{{asset('assets/img/uploaded')}}/{{$menu->image}}" alt="">
+									<img src="{{asset('assets/img/uploaded')}}/{{$menu->image}}" data-src="holder.js/150x150" alt="">
 									<p><span>{{$menu->nama}}</span></p>
 								</a>
 								</li>

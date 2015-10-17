@@ -7,75 +7,88 @@ use File;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\ParentFrontpage;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editSave(Request $request){
-            
-            $allowed = array('png', 'jpg', 'gif');
-            $hasil = false;
-            $image = 'holder.js/180x180';
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function editSave(Request $request){
+			$allowed = array('png', 'jpg', 'gif');
+			$hasil = false;
+			$image = 'holder.js/180x180';
 
-            if(isset($_FILES['image']) && $_FILES['image']['error'] == 0){
+			$results = new \StdClass;
+			$validator = \Validator::make($request->all(), 
+				[
+					'id' => 'required|integer'
+				]
+			);
+			$destination = 'assets/img/uploaded/';
+			if($validator->passes()){
+				$result = ParentFrontpage::find($request->input('id'));
+				$result->nama = $request->input('nama');
+				$result->mode = $request->input('mode');
+				$result->redirect = $request->input('redirect');
 
-                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+				if($request->hasFile('image')){
+					if($request->file('image')->isValid()){
+						
+						$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('image')->guessExtension();
+						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.'/'.$filename);
 
-                if(!in_array(strtolower($extension), $allowed)){
-                    $hasil = false;
-                }
+						$result->image = $filename;
+					}
+				}
 
-                if(move_uploaded_file($_FILES['image']['tmp_name'], '/var/www/html/egor/public/assets/img/uploaded/' . '/' .$_FILES['image']['name'])){
-                    $hasil = true;
-                    $image = $_FILES['image']['name'];
-                }
-            }else if($request->input('nama')!=''){
-                $hasil = true;
-            }
+				$result->save();
+				$results->info = 'menu frontpage update';
+				$results->status = 1;
+			}else{
+				$result = new ParentFrontpage;
+				$result->nama = $request->input('nama' , 'Menu Baru');
+				$result->mode = $request->input('mode' , '_blank');
+				$result->redirect = $request->input('redirect', 'http://www.google.com');
+				if($request->hasFile('image')){
+					if($request->file('image')->isValid()){
+						$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('image')->guessExtension();
+						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.'/'.$filename);
 
-            if($hasil){
-                if($request->input('idnyah')!='xxx'){
-                    DB::table('parent_frontpage')->where('id', $request->input('idnyah'))->update(
-                        ['nama' => $request->input('nama'),
-                         'redirect' => $request->input('redirect'),
-                         'image' => $image,
-                         'mode' => $request->input('mode')]);
-                }else{
-                    DB::table('parent_frontpage')->insert(
-                       ['nama' => $request->input('nama'),
-                         'redirect' => $request->input('redirect'),
-                         'image' => $image,
-                         'mode' => $request->input('mode')]);
-                }
-            }
+						$result->image = $filename;
+					}
+				}
+				$result->save();
+				$results->info = 'menu frontpage create';
+				$results->status = 1;
+			}
+			$results->result = $result;
 
-        return "tes";
-    }
+		return response()->json($results);
+	}
 
-        public function formDashboard(Request $request){
-            $parent_id = 'xxx';
-            if($request->input('id')!='x'){
-                $result1 = DB::table('parent_frontpage')->where('id', $request->input('id'))->get();
-                foreach($result1 as $rS){
-                    $nama = $rS->nama;
-                    $redirect = $rS->redirect;
-                    $image = $rS->image;
-                    $id = $rS->id;
-                    $mode = $rS->mode;
-                }
-                $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
-                return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode','parent_id'));
-            }else{
-                return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
-            }
-        }
+		public function formDashboard(Request $request){
+			$parent_id = 'xxx';
+			if($request->input('id')!='x'){
+				$result1 = DB::table('parent_frontpage')->where('id', $request->input('id'))->get();
+				foreach($result1 as $rS){
+					$nama = $rS->nama;
+					$redirect = $rS->redirect;
+					$image = $rS->image;
+					$id = $rS->id;
+					$mode = $rS->mode;
+				}
+				$files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
+				return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode','parent_id'));
+			}else{
+				return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
+			}
+		}
 
-    public function delete(Request $request){
-        $del = DB::table('parent_frontpage')->where('id', $request->input('id'))->delete();
-        return $del==true?'success':'fail';
-    }
+	public function delete(Request $request){
+		$del = DB::table('parent_frontpage')->where('id', $request->input('id'))->delete();
+		return $del==true?'success':'fail';
+	}
 }

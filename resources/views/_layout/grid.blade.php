@@ -23,7 +23,6 @@
         </div>
         <input type='hidden' id='idGambar{{$a}}' value='{{ $img[$a][4] }}' />
         <?php $a++ ?>
-    </td>
   @endfor
   </tr>
 @endfor
