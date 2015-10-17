@@ -63,9 +63,17 @@ class MenusController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id)
-	{
-		//
+	public function editSave(Request $request){
+		return (DB::table('parent_menu')->where('id', $request->input('id'))
+                        ->update(
+                        ['name' => $request->input('name'),
+                         'redirect' => $request->input('redirect')]))==true?"success":"fail";;
+
+	}
+
+	public function select2(Request $request){
+		$hasil = DB::table('parent_menu')->where('id', $request->input('id'))->get();
+		return json_encode($hasil);
 	}
 
 	/**

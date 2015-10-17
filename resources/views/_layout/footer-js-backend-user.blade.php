@@ -29,6 +29,7 @@
     @endif
     @if($title=="Menu")
       <script src="{{ asset('assets/js/menuOperation.js') }}"></script>
+      <script src="{{ asset('assets/js/menuEvent.js') }}"></script>
     @endif
     <script>
       $(function () {
