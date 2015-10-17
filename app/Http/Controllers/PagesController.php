@@ -25,16 +25,15 @@ class PagesController extends Controller
         // Atur Grid Menu
         $h = Setting::where('name', 'grid_height')->get();
         if(count($h)>0){
-            $h = $h->first()->value;
-            
+            $h = $h->first()->value;  
         }else{
             $h = 3;
         }
 
         $w = Setting::where('name', 'grid_width')->get();
-        if(count($h)>0){
-           $w =$w->first()->value;
-            
+
+        if( count($w) > 0 ){
+           $w = $w->first()->value;    
         }else{
            $w = 3;
         }
