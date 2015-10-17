@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2015-10-15 12:04:51
+Date: 2015-10-16 14:07:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,25 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `child_frontpage`;
 CREATE TABLE `child_frontpage` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(3) NOT NULL,
+  `nama` varchar(200) NOT NULL,
+  `redirect` text,
+  `image` text,
+  `mode` enum('_self','_blank') DEFAULT '_blank',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of child_frontpage
+-- ----------------------------
+INSERT INTO `child_frontpage` VALUES ('1', '1', 'Aplikasi Surat Menyurat', 'suratmennyurat.com', '1.jpg', '_blank');
+
+-- ----------------------------
+-- Table structure for `child_menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `child_menu`;
+CREATE TABLE `child_menu` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `id_parent` int(3) NOT NULL,
   `name` varchar(200) NOT NULL,
   `redirect` text NOT NULL,
@@ -28,31 +47,8 @@ CREATE TABLE `child_frontpage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of child_frontpage
+-- Records of child_menu
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `frontpage`
--- ----------------------------
-DROP TABLE IF EXISTS `frontpage`;
-CREATE TABLE `frontpage` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(100) NOT NULL,
-  `position` int(2) NOT NULL,
-  `redirect` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of frontpage
--- ----------------------------
-INSERT INTO `frontpage` VALUES ('1', 'Aplikasi Surat', '1', 'http://www.google.com/', 'aplikasi-surat.png');
-INSERT INTO `frontpage` VALUES ('2', 'Lamb 2', '5', 'http://www.google.com', '2.jpg');
-INSERT INTO `frontpage` VALUES ('3', 'Sistem Informasi Pegawai', '3', 'http://www.apaaja.com', 'sistem-info-pegawai.png');
-INSERT INTO `frontpage` VALUES ('4', 'Lamb 4', '4', 'http://www.wow.com', '4.jpg');
-INSERT INTO `frontpage` VALUES ('5', 'Perjalanan Dinas', '2', 'http://www.aduh.com', 'perjalanan-dinas.png');
-INSERT INTO `frontpage` VALUES ('6', 'Lamb 6', '6', 'http://www.awaw.com', '6.jpg');
 
 -- ----------------------------
 -- Table structure for `migrations`
@@ -77,18 +73,44 @@ INSERT INTO `migrations` VALUES ('2015_09_24_204259_create_setting', '1');
 DROP TABLE IF EXISTS `parent_frontpage`;
 CREATE TABLE `parent_frontpage` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(100) NOT NULL,
+  `position` int(2) NOT NULL DEFAULT '0',
+  `redirect` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `mode` enum('_blank','_self') NOT NULL DEFAULT '_blank',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of parent_frontpage
+-- ----------------------------
+INSERT INTO `parent_frontpage` VALUES ('1', 'Aplikasi Surat', '5', 'http://www.google.com/', 'aplikasi-surat.png', '_blank');
+INSERT INTO `parent_frontpage` VALUES ('2', 'Lamb 1', '1', 'http://www.google.com', '1.jpg', '_blank');
+INSERT INTO `parent_frontpage` VALUES ('3', 'Sistem Informasi Pegawai', '3', 'http://www.apaaja.com', 'sistem-info-pegawai.png', '_blank');
+INSERT INTO `parent_frontpage` VALUES ('4', 'Lamb 4', '9', 'http://www.wow.com', '4.jpg', '_blank');
+INSERT INTO `parent_frontpage` VALUES ('5', 'Perjalanan Dinas', '6', 'http://www.aduh.com', 'perjalanan-dinas.png', '_blank');
+INSERT INTO `parent_frontpage` VALUES ('6', 'Lamb 6', '7', 'http://www.awaw.com', '6.jpg', '_blank');
+INSERT INTO `parent_frontpage` VALUES ('7', 'qwe', '2', 'ewq', 'tele.png', '_blank');
+INSERT INTO `parent_frontpage` VALUES ('9', 'Aplikasi Perumahan', '0', 'rumah.com', 'holder.js/180x180', '_blank');
+
+-- ----------------------------
+-- Table structure for `parent_menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_menu`;
+CREATE TABLE `parent_menu` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `redirect` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of parent_frontpage
+-- Records of parent_menu
 -- ----------------------------
-INSERT INTO `parent_frontpage` VALUES ('1', 'PRODUCT', '');
-INSERT INTO `parent_frontpage` VALUES ('2', 'SERVICES', '');
-INSERT INTO `parent_frontpage` VALUES ('3', 'ASSETS', '');
-INSERT INTO `parent_frontpage` VALUES ('4', 'CONTACT', '');
+INSERT INTO `parent_menu` VALUES ('1', 'PRODUCT', '');
+INSERT INTO `parent_menu` VALUES ('2', 'SERVICES', '');
+INSERT INTO `parent_menu` VALUES ('3', 'ASSETS', '');
+INSERT INTO `parent_menu` VALUES ('4', 'CONTACT', '');
 
 -- ----------------------------
 -- Table structure for `password_resets`
@@ -152,13 +174,14 @@ CREATE TABLE `preference` (
   `logo` text,
   `footer` text,
   `grid` varchar(3) DEFAULT NULL,
+  `background` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of preference
 -- ----------------------------
-INSERT INTO `preference` VALUES ('1', 'Website.com', 'a', 'a', '3x3');
+INSERT INTO `preference` VALUES ('1', 'Nama Website', '  sistem-info-pegawai.png  ', 'a', '3x3', null);
 
 -- ----------------------------
 -- Table structure for `role_user`

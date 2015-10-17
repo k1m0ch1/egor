@@ -92,6 +92,15 @@
       </form>
     </div>
 
+    <div id="add-child-form" title="Ubah Gambar">     
+      <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
+      {!! csrf_field() !!}
+        <fieldset id='add-form_child'>
+          
+        </fieldset>
+      </form>
+    </div>
+
     @include('_layout.footer-js-backend');
   </body>
 </html>
