@@ -15,14 +15,23 @@ class GridController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function savePosition(Request $request){
-    	$datanya = $request->input('dataWaw');
+        $datanya = json_decode($request->input('dataWaw'));
     	$jumlahData = $request->input('size');
+        $debug = Array();
+
+        DB::listen(
+                    function ($sql) {
+                        echo $sql . "<br/>";
+                    }
+                );  
 
     	for($a=0;$a<$jumlahData;$a++){
     		DB::table('parent_frontpage')->where('id', $datanya[$a][1])->update(['position' => $datanya[$a][0]]);
     		//$fucka .= '' . $datanya[$a][1] . '' .$datanya[$a][0] . '<br/>';
-    	}
+        }
 
-    	return 'nice ass';
+        //$debug = "" . print_r(json_decode($datanya));
+
+    	return "damn";
     }
 }

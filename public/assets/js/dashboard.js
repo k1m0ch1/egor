@@ -112,19 +112,19 @@ $(document).ready(function(){
             aw = $('#idGambar' + xx).parent();
             ew = $('tr td').index(aw)+1;
             uw = $('#idGambar' + xx).val();
-            iw[xx] = new Array(uw, ew);
+            iw[xx] = new Array(ew, uw);
          }
-
-         // for(xx=0;xx<countRow;xx++){
-         //    console.log(iw[xx][0]);
-         //    console.log(iw[xx][1]);
-         // }
+          var grid = JSON.stringify(iw);
+          // console.log(grid);
+          // for(xx=0;xx<countRow;xx++){
+          //    console.log("ID = " + iw[xx][0] + "| TD = " + iw[xx][1]);
+          // }
 
          $.ajax({
          url: host + 'admin/grid:savePosition',
          type: 'POST',
-         data: { dataWaw : iw, size: countRow },
-         dataType: 'json',
+         data: { dataWaw : grid, size: countRow },
+         dataType: 'html',
          success: function(data) {
             
          }
