@@ -43,6 +43,7 @@ Route::get('admin/users[edit:show]', ['uses'=>'UsersController@show', 'as'=>'use
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
+Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
 
 Route::post('admin/preference:title[save]', ['uses'=>'PreferenceController@titleSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:image', ['uses'=>'PreferenceController@image', 'as'=>'image.preference.get', 'middleware'=>'auth']);

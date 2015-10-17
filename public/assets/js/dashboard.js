@@ -104,6 +104,40 @@ $(document).ready(function(){
 				}
 		});
 
+// <<<<<<< HEAD
+//     $('#simpan').click(function(){
+//          //var dimension=$("#grid-dashboard option:selected" ).text();
+//          // dimension = dimension.split('x');
+//          // var total = dimension[0] * dimension[1];
+//          var countRow = $("table").find("tr td").length;         
+//          var aw = '';
+//          var iw = new Array(new Array());
+//          var ew = '';
+//          var uw = '';
+//          var ow = [];
+//          for(xx=0;xx<countRow;xx++){
+//             aw = $('#idGambar' + xx).parent();
+//             ew = $('tr td').index(aw)+1;
+//             uw = $('#idGambar' + xx).val();
+//             iw[xx] = new Array(ew, uw);
+//          }
+//           var grid = JSON.stringify(iw);
+//           // console.log(grid);
+//           // for(xx=0;xx<countRow;xx++){
+//           //    console.log("ID = " + iw[xx][0] + "| TD = " + iw[xx][1]);
+//           // }
+
+//          $.ajax({
+//          url: host + 'admin/grid:savePosition',
+//          type: 'POST',
+//          data: { dataWaw : grid, size: countRow },
+//          dataType: 'html',
+//          success: function(data) {
+            
+//          }
+//       });
+//     });
+// =======
 		$('#simpan').click(function(){
 				 //var dimension=$("#grid-dashboard option:selected" ).text();
 				 // dimension = dimension.split('x');
