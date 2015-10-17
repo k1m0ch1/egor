@@ -76,6 +76,12 @@ class MenusController extends Controller
 		return json_encode($hasil);
 	}
 
+	public function createMenu(Request $request){
+		$hasil = DB::table('parent_menu')->insert(['name'=> $request->input('name'),
+			'redirect'=> $request->input('redirect')]);
+		return $hasil==true?"success":"fail";
+	}
+
 	/**
 	 * Update the specified resource in storage.
 	 *

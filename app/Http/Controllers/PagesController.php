@@ -147,7 +147,7 @@ class PagesController extends Controller
         $css = $this->CSS('menu');
         $title = 'Menu';
         $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
-                        INNER JOIN child_menu ON child_menu.id_parent = parent_menu.id');
+                        INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $result2 = $users = DB::table('parent_menu')->get();
         $a=1;
         return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a'));
@@ -158,7 +158,7 @@ class PagesController extends Controller
         $css = $this->CSS('menu');
         $title = 'Preference';
         $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
-                        INNER JOIN child_menu ON child_menu.id_parent = parent_menu.id');
+                        INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $a=1;
         $result2 = DB::table('preference')->where('id', '1')->get();
         $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
