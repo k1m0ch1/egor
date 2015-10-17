@@ -11,7 +11,6 @@
 		<!-- Place favicon.ico in the root directory -->
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
-		<script src="{{ asset('assets/vendor/modernizr/modernizr.js') }}"></script>
 	</head>
 <body class="index">
 <div class="contain-to-grid">

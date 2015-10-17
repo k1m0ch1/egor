@@ -1,0 +1,36 @@
+{
+  "name": "SmoothScrollWheel",
+  "version": "1.0.0",
+  "homepage": "https://github.com/nntgwww/jquery.SmoothScrollWheel",
+  "authors": [
+    "giang.nguyen.dev@gmail.com"
+  ],
+  "description": "Tired to get your website become smooth when user scrolling? jquery.SmoothScrollWheel is a lightweight plugin help your website smooth scroll wheel across browers.",
+  "main": "dist/jquery.SmoothScrollWheel.js",
+  "keywords": [
+    "smooth scroll",
+    "scroll wheel"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    ".idea"
+  ],
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "7ea0a45e7536de1302954061d937ec3f90efabff"
+  },
+  "_source": "git://github.com/nntgwww/jquery.SmoothScrollWheel.git",
+  "_target": "~1.0.0",
+  "_originalSource": "SmoothScrollWheel",
+  "_direct": true
+}

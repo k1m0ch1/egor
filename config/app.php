@@ -146,7 +146,7 @@ return [
 		App\Providers\RouteServiceProvider::class,
 
 		Zizaco\Entrust\EntrustServiceProvider::class,
-
+		Intervention\Image\ImageServiceProvider::class,
 		//Jasekz\Laradrop\LaradropServiceProvider::class,
 
 	],
@@ -199,6 +199,7 @@ return [
 		'View'      => Illuminate\Support\Facades\View::class,
 
 		'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+		'Image' => Intervention\Image\Facades\Image::class,
 		//'Laradrop'  => Jasekz\Laradrop\LaradropFacade::class
 
 	],

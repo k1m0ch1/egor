@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use File;
 use App\Models\Setting;
+use App\Models\ParentFrontpage;
 
 class PagesController extends Controller
 {
@@ -19,19 +20,18 @@ class PagesController extends Controller
     public function index(){
         $result1 = DB::table('parent_menu')->get();
         $siteTitle = DB::table('preference')->get();
-        $datanyah = DB::table('parent_frontpage')->get();
+        $datanyah = ParentFrontpage::orderBy('position')->get();
         $bah = $siteTitle[0]->title;
-        
+        // Atur Grid Menu
         $h = Setting::where('name', 'grid_height')->get();
-
         if(count($h)>0){
             $h = $h->first()->value;
             
         }else{
             $h = 3;
         }
-        $w = Setting::where('name', 'grid_width')->get();
 
+        $w = Setting::where('name', 'grid_width')->get();
         if(count($h)>0){
            $w =$w->first()->value;
             
@@ -112,10 +112,28 @@ class PagesController extends Controller
         $jH = $this->jS('general');
         
         $title = 'Dashboard';
-        $rS = DB::table('preference')->get();
-        $rS = $rS[0]->grid;
-        $a=1;        
-        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS'));
+        $a=1;
+
+        // Atur Grid Menu
+        $h = Setting::where('name', 'grid_height')->get();
+        if(count($h)>0){
+            $h = $h->first()->value;
+            
+        }else{
+            $h = 3;
+        }
+
+        $w = Setting::where('name', 'grid_width')->get();
+        if(count($h)>0){
+           $w =$w->first()->value;
+            
+        }else{
+           $w = 3;
+        }
+
+        $rS = $w.'x'.$h;
+
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w'));
     }
 
     public function indexGambar(){
