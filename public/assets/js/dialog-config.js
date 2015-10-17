@@ -165,10 +165,7 @@ $(document).ready(function(){
             data: myFormData,
             dataType: 'json',
             success: function(data) {
-              console.log(location.protocol+'//'+location.hostname+'/assets/img/uploaded/'+data.result.image);
-              console.log(d);
               $("#img-thumbnail-"+d).attr('src', location.protocol+'//'+location.hostname+'/assets/img/uploaded/'+data.result.image);
-              console.log($("#img-thumbnail-"+d));
               dialog.dialog( "close" );
             }
          });

@@ -36,7 +36,6 @@ $(document).ready(function(){
 									 });
 						$.getScript( dir_host + "assets/js/tesRecall.js" )
 							.done(function( script, textStatus ) {
-								console.log( textStatus );
 							})
 							.fail(function( jqxhr, settings, exception ) {
 								$( "div.log" ).text( "Triggered ajaxError handler." );
@@ -44,7 +43,6 @@ $(document).ready(function(){
 
 						$.getScript( dir_host + "holder.js" )
 							.done(function( script, textStatus ) {
-								console.log( textStatus );
 							})
 							.fail(function( jqxhr, settings, exception ) {
 								$( "div.log" ).text( "Triggered ajaxError handler." );
