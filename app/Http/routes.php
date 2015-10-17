@@ -41,6 +41,9 @@ Route::get('admin/gambar', ['uses'=>'PagesController@indexGambar', 'as'=>'gambar
 Route::post('admin/users[edit:save]', ['uses'=>'UsersController@editSave', 'as'=>'users[edit:save]', 'middleware'=>'auth']);
 Route::get('admin/users[edit:show]', ['uses'=>'UsersController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 
+Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
+Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
+
 Route::post('admin/preference:title[save]', ['uses'=>'PreferenceController@titleSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:image', ['uses'=>'PreferenceController@image', 'as'=>'image.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:background[save]', ['uses'=>'PreferenceController@backgroundSave', 'as'=>'background.preference.get', 'middleware'=>'auth']);
