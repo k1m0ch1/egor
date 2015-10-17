@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use File;
+use App\Models\Setting;
 
 class PagesController extends Controller
 {
@@ -20,7 +21,24 @@ class PagesController extends Controller
         $siteTitle = DB::table('preference')->get();
         $datanyah = DB::table('parent_frontpage')->get();
         $bah = $siteTitle[0]->title;
-        return view('frontend.index', compact('result1', 'bah', 'datanyah'));
+        
+        $h = Setting::where('name', 'grid_height')->get();
+
+        if(count($h)>0){
+            $h = $h->first()->value;
+            
+        }else{
+            $h = 3;
+        }
+        $w = Setting::where('name', 'grid_width')->get();
+
+        if(count($h)>0){
+           $w =$w->first()->value;
+            
+        }else{
+           $w = 3;
+        }
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w'));
     }
 
     /**
@@ -92,6 +110,7 @@ class PagesController extends Controller
     public function dashboard(){
         $css = $this->CSS('general');
         $jH = $this->jS('general');
+        
         $title = 'Dashboard';
         $rS = DB::table('preference')->get();
         $rS = $rS[0]->grid;
@@ -123,6 +142,30 @@ class PagesController extends Controller
         }
         $lenImg = sizeof($img);
         $a=0;
+
+        $result = Setting::where('name', 'grid_height')->get();
+
+        if(count($result)>0){
+            $result->first()->value = $h;
+            $result->first()->save();
+        }else{
+            $result = new Setting;
+            $result->name = 'grid_height';
+            $result->value = $h;
+            $result->save();
+        }
+
+        $result = Setting::where('name', 'grid_width')->get();
+        if(count($result)>0){
+            $result->first()->value = $w;
+            $result->first()->save();
+        }else{
+            $result = new Setting;
+            $result->name = 'grid_width';
+            $result->value = $w;
+            $result->save();
+        }
+
         return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
     }
 

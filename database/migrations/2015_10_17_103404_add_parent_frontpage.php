@@ -18,7 +18,7 @@ class AddParentFrontpage extends Migration
             $table->integer('position', 2);
             $table->text('redirect');
             $table->text('image');
-            $table->enum('mode', ['_blank','_self'])->('_blank');
+            $table->enum('mode', ['_blank','_self'])->default('_blank');
         });
     }
 

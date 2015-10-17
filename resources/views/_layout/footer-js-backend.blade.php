@@ -1,6 +1,6 @@
     <script>
-      var dir_host = "{{ Config::get('app.url') }}/egor/public/";
-      var host = "{{ Config::get('app.url') }}/egor/public/index.php/";
+      var dir_host = "{{ Config::get('app.url') }}";
+      var host = "{{ Config::get('app.url') }}";
     </script>
 
     @foreach($jH as $jsHeader)
