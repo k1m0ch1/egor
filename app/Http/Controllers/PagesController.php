@@ -123,7 +123,7 @@ class PagesController extends Controller
         }
 
         $w = Setting::where('name', 'grid_width')->get();
-        if(count($h)>0){
+        if(count($w)>0){
            $w =$w->first()->value;
             
         }else{
