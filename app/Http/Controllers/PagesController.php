@@ -23,10 +23,11 @@ class PagesController extends Controller
         $result1 = DB::table('parent_menu')->get();
         $siteTitle = Setting::where('name', 'title')->get();
         if( count($siteTitle) > 0){
-            $bah = Setting::UPLOAD_PATH . '/' .$siteTitle->first()->value;
+            $bah = $siteTitle->first()->value;
         }else{
             $bah = 'Website';
         }
+
         $datanyah = ParentFrontpage::orderBy('position')->get();
         // Atur Grid Menu
         $h = Setting::where('name', 'grid_height')->get();
@@ -52,11 +53,11 @@ class PagesController extends Controller
 
         $footer = Setting::where('name', 'background')->get();
         if( count($footer) > 0){
-            $footer = Setting::UPLOAD_PATH . '/' .$footer->first()->value;
+            $footer = $footer->first()->value;
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
         }
-
+        
         return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer'));
     }
 

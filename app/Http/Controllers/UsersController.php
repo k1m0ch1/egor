@@ -113,7 +113,7 @@ class UsersController extends Controller
         $datanyah = DB::table('parent_frontpage')->get();
         $siteTitle = Setting::where('name', 'title')->get();
         if( count($siteTitle) > 0){
-            $bah = Setting::UPLOAD_PATH . '/' .$siteTitle->first()->value;
+            $bah = $siteTitle->first()->value;
         }else{
             $bah = 'Website';
         }
