@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    //
+    public function getRules(){
+        $results = array();
+        $results = [
+            'name' => 'required'
+        ];
+        return $results;
+    }
 }

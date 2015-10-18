@@ -29,13 +29,13 @@ class UsersSeeder extends Seeder
         $user_2->department = 'Management Administrator';
         $user_2->save();
 
-        $role_1 = new Role:
+        $role_1 = new Role;
         $role_1->name = 'tech';
         $role_1->display_name = 'tech';
         $role_1->description = 'Technical Administration';
         $role_1->save();
 
-        $role_2 = new Role:
+        $role_2 = new Role;
         $role_2->name = 'admin';
         $role_2->display_name = 'admin';
         $role_2->description = 'Management Administration';

@@ -39,4 +39,14 @@ class User extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
 
     const UPLOAD_PATH = 'uploads/avatar';
+
+    public function getRules(){
+        $results = array();
+        $results = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmation'
+        ];
+        return $results;
+    }
 }   
