@@ -47,7 +47,7 @@ class GridController extends Controller
 		$data = $request->input('dataWaw');
 
 		$jumlahData = $request->input('size');
-		$results = array();
+		$table = array();
 
 		foreach($data as $d){
 			$result = ParentFrontpage::find($d[0]);
@@ -56,9 +56,14 @@ class GridController extends Controller
 			}
 			$result->position = $d[1];
 			$result->save();
-			array_push($results, $result);
+			array_push($table, $result);
 		}
 
+		$results = new \StdClass;
+		$results->success = 1;
+		$results->info = 'grid position store';
+		$results->message = ' Proses perpindahan grid sukses. ';
+		$results->result = $table;
 		return response()->json($results);
 	}
 

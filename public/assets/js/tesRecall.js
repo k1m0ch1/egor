@@ -107,7 +107,6 @@ $(document).ready(function(){
 		            dataType:"script",
 		            success:function(data){
 		                $("head").append("<style>" + data + "</style>");
-		                //loading complete code here
 		            }
 		        });
 	         	$('#formnyah').html(data);

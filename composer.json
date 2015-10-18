@@ -32,7 +32,12 @@
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
-            "php artisan optimize"
+            "php artisan optimize",
+            "chmod 777 -Rf storage/",
+            "mkdir public/uploads",
+            "mkdir public/uploads/avatar",
+            "mkdir public/uploads/menu",
+            "cp .env.example .env"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"

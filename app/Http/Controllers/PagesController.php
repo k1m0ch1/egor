@@ -9,6 +9,8 @@ use DB;
 use File;
 use App\Models\Setting;
 use App\Models\ParentFrontpage;
+use App\Models\User;
+use App\Models\Role;
 
 class PagesController extends Controller
 {
@@ -31,13 +33,20 @@ class PagesController extends Controller
         }
 
         $w = Setting::where('name', 'grid_width')->get();
-
         if( count($w) > 0 ){
            $w = $w->first()->value;    
         }else{
            $w = 3;
         }
-        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w'));
+
+        $bg = Setting::where('name', 'background')->get();
+        if( count($bg) > 0){
+            $bg = Setting::UPLOAD_PATH . '/' .$bg->first()->value;
+        }else{
+            $bg = 'assets/img/bg.jpg';
+        }
+
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg'));
     }
 
     /**
@@ -107,6 +116,7 @@ class PagesController extends Controller
     }
 
     public function dashboard(){
+        $breadcrumb = array(array('Home', 0), array('Dashboard', 1));
         $css = $this->CSS('general');
         $jH = $this->jS('general');
         
@@ -132,7 +142,7 @@ class PagesController extends Controller
 
         $rS = $w.'x'.$h;
 
-        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w'));
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb'));
     }
 
     public function indexGambar(){
@@ -168,6 +178,13 @@ class PagesController extends Controller
         $lenImg = sizeof($img);
         $a=0;
 
+        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
+    }
+
+    public function setGrid(Request $request){
+        $w=$request->input('w');
+        $h=$request->input('h');
+
         $result = Setting::where('name', 'grid_height')->get();
 
         if(count($result)>0){
@@ -191,16 +208,34 @@ class PagesController extends Controller
             $result->save();
         }
 
-        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
+        $results = new \StdClass;
+        $results->info = "grid size set";
+        $results->message = "Ukuran grid telah berhasil diubah.";
+        $results->success = 1;
+        $results->result = [$w, $h];
+        return response()->json($results);
     }
 
     public function user(){
         $title = 'Users';
+        $breadcrumb = array(array('Home', 0), array('User', 0), array('Users', 1));
+
         $css = $this->CSS('users');
         $jH =  $this->jS('general');
-        $result = DB::table('users')->get();
+        $result = User::all();
         $a=0;
-        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a'));
+        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb'));
+    }
+
+     public function role(){
+        $title = 'Role';
+        $breadcrumb = array(array('Home', 0), array('User', 0), array('Roles', 1));
+
+        $css = $this->CSS('users');
+        $jH =  $this->jS('general');
+        $result = Role::all();
+        $a=0;
+        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb'));
     }
 
     public function tes(){
@@ -331,7 +366,7 @@ class PagesController extends Controller
                         //asset('assets/vendor/AdminLTE/dist/js/pages/dashboard.js'),
                         asset('assets/vendor/AdminLTE/dist/js/demo.js'),
                         asset('assets/js/dashboard.js'),
-                        asset('assets/vendor/foundation-5.5.3.custom/js/foundation.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
                         asset('assets/js/general.js'),
                         asset('holder.js'),
                         asset('assets/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js'),
@@ -360,7 +395,7 @@ class PagesController extends Controller
                         asset('assets/vendor/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
-                        asset('assets/vendor/foundation-5.5.3.custom/js/foundation.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
                         asset('holder.js'),
                         asset('assets/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js'),
                         asset('assets/vendor/blueimp-file-upload/js/jquery.iframe-transport.js'),

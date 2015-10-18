@@ -63,6 +63,7 @@ class DashboardController extends Controller
 				$result->save();
 				$results->info = 'menu frontpage create';
 				$results->status = 1;
+				$results->message = 'Proses Pengubahan Menu Sukss!';
 			}
 			$results->result = $result;
 

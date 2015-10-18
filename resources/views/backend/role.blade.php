@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            User
+            Role
             <small>Control panel</small>
           </h1>
           @if(isset($breadcrumb))
@@ -39,15 +39,14 @@
               <div class="col-xs-12">
                 <div class="box">
                   <div class="box-header">
-                    <p>User Management Control Level</p>
+                    <p>Roles Management Control Level</p>
                   </div>
                   <div class="box-body">
                   <table id="example1" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Role</th>
-                        <th>Email</th>
+                        <th>Display Name</th>
                         <th>Operation</th>
                       </tr>
                     </thead>
@@ -55,8 +54,7 @@
                       @foreach($result as $rS)
                         <tr>
                           <td>{{ $rS->name }}</td>
-                          <td>{{$rS->roles}}</td>
-                          <td>{{$rS->email}}</td>
+                          <td>{{$rS->display_name}}</td>
                           <td><div class="tools" align='center'>
                                 <a class="fa fa-edit" id="editUser-{{ $rS->id }}"></a>&nbsp;
                                 <a class="fa fa-trash-o"></a>

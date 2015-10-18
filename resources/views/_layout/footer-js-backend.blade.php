@@ -1,5 +1,5 @@
 <script>
- var host = "{{ Config::get('app.url') }}/index.php/";
+ var host = "{{ Config::get('app.url') }}";
  var dir_host = "{{ Config::get('app.url') }}";
 </script>
 
