@@ -27,7 +27,7 @@ $(document).ready(function(){
     		var idnyah = currentID;
             dialog.dialog( "open" );
             $.ajax({
-	            url: host + 'admin/users[edit:show]',
+	            url:  'admin/users[edit:show]',
 	            type: 'GET',
 	            data: { id: idnyah },
 	            dataType: 'html',
@@ -43,7 +43,7 @@ $(document).ready(function(){
 	    var c = $('#dialog-form form input#password').val();
 	    var d = $('#dialog-form form input#idnyah').val();
     	$.ajax({
-	            url: host + 'admin/users[edit:save]',
+	            url:  'admin/users[edit:save]',
 	            type: 'POST',
 	            data: { id: d, name: a, email: b, password: c},
 	            dataType: 'html',

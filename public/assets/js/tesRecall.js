@@ -10,13 +10,13 @@ $(document).ready(function(){
         currentID = currentID.split('-')[1];
         var getID = $('#idGambar' + currentID).val();
 		$.ajax({
-	         url: host + 'admin/form:child',
+	         url:  host + 'admin/form:child',
 	         type: 'GET',
 	         data : { id: getID },
 	         dataType: 'html',
 	         success: function(data){
 	         	$('#form-child').html(data);
-	         	$.getScript( dir_host + "assets/js/tesRecall.js" )
+	         	$.getScript(  dir_host + "assets/js/tesRecall.js" )
 	              .done(function( script, textStatus ) {
 	                console.log( textStatus );
 	              })
@@ -33,7 +33,7 @@ $(document).ready(function(){
         currentID = currentID.split('-')[1];
         var getID = $('#child_id').val();
 		$.ajax({
-	         url: host + 'admin/form:child[edit]',
+	         url:  host + 'admin/form:child[edit]',
 	         type: 'GET',
 	         data : { id: currentID },
 	         dataType: 'html',
@@ -50,14 +50,14 @@ $(document).ready(function(){
 		        currentID = currentID.split('-')[1];
 		        var getID = $('#child_id').val();
 				$.ajax({
-			         url: host + 'admin/form:child[delete]',
+			         url:  host + 'admin/form:child[delete]',
 			         type: 'GET',
 			         data : { id: currentID },
 			         dataType: 'html',
 			         success: function(data){
 			         	var currentID = $(this).attr('id').split('-')[1];
 			         	$.ajax({
-					         url: host + 'admin/form:child',
+					         url:  host + 'admin/form:child',
 					         type: 'GET',
 					         data : { id: currentID },
 					         dataType: 'html',
@@ -78,7 +78,7 @@ $(document).ready(function(){
 				var currentID = $(this).attr('id');
 		        currentID = currentID.split('-')[1];
 				$.ajax({
-			         url: host + 'admin/dashboard[delete]',
+			         url:  host + 'admin/dashboard[delete]',
 			         type: 'GET',
 			         data : { id: currentID },
 			         dataType: 'html',
@@ -97,13 +97,13 @@ $(document).ready(function(){
             currentID = currentID.split('-')[1];
             var getID = $('#idGambar' + currentID).val();
             $.ajax({
-	         url: host + 'admin/form:dashboard',
+	         url:  host + 'admin/form:dashboard',
 	         type: 'GET',
 	         data: { id: getID },
 	         dataType: 'html',
 	         success: function(data){
 	         	$.ajax({
-		            url: dir_host + "assets/css/image-picker.css",
+		            url:  host + "assets/css/image-picker.css",
 		            dataType:"script",
 		            success:function(data){
 		                $("head").append("<style>" + data + "</style>");
@@ -111,7 +111,7 @@ $(document).ready(function(){
 		            }
 		        });
 	         	$('#formnyah').html(data);
-	         	$.getScript( dir_host + "/assets/js/image-picker.js" )
+	         	$.getScript(  dir_host + "/assets/js/image-picker.js" )
 		              .done(function( script, textStatus ) {
 		                console.log( textStatus );
 		              })

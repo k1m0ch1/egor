@@ -43,16 +43,16 @@ Route::get('admin/users[edit:show]', ['uses'=>'UsersController@show', 'as'=>'use
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
-Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
+Route::post('admin/menu[add:save]', ['uses'=>'MenusController@addSave', 'middleware'=>'auth']);
+Route::get('admin/menu:child', ['uses'=>'MenusController@getChild', 'middleware'=>'auth']);
 
 Route::post('admin/preference:title[save]', ['uses'=>'PreferenceController@titleSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:image', ['uses'=>'PreferenceController@image', 'as'=>'image.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:background[save]', ['uses'=>'PreferenceController@backgroundSave', 'as'=>'background.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:logo[save]', ['uses'=>'PreferenceController@logoSave', 'as'=>'logo.preference.get', 'middleware'=>'auth']);
 
-Route::group(['prefix'=>'api/v1'], function(){
+Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);
 	Route::get('/setting/list', 'SettingsController@index');
-	Route::get('/grid/size', 'GridController@getGridSize');
-
+	Route::get('/grid/size', ['uses'=>'GridController@getGridSize']);
 });

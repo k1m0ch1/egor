@@ -13,12 +13,12 @@ $(document).ready(function(){
 		// Loading grid size
 	 $( window ).load(function() {
 	 		
-	 		$.get(host + 'api/v1/grid/size').done(function(data){
+	 		$.get( host + 'api/v1/grid/size').done(function(data){
 	 			width = data.w;
 	 			height = data.h;
 
 	 			$.ajax({
-				 url: host + 'admin/grid',
+				 url:  host + 'admin/grid',
 				 type: 'GET',
 				 data: { 'w': width, 'h': height},
 				 dataType: 'html',
@@ -34,7 +34,7 @@ $(document).ready(function(){
 											 col.addEventListener('drop', handleDrop, false);
 											 col.addEventListener('dragend', handleDragEnd, false);
 									 });
-						$.getScript( dir_host + "assets/js/tesRecall.js" )
+						$.getScript(  dir_host + "assets/js/tesRecall.js" )
 							.done(function( script, textStatus ) {
 								console.log( textStatus );
 							})
@@ -42,7 +42,7 @@ $(document).ready(function(){
 								$( "div.log" ).text( "Triggered ajaxError handler." );
 						});
 
-						$.getScript( dir_host + "holder.js" )
+						$.getScript( dir_host +  "holder.js" )
 							.done(function( script, textStatus ) {
 								console.log( textStatus );
 							})
@@ -62,7 +62,7 @@ $(document).ready(function(){
 			var w = dimension[0];
 			var h = dimension[1];
 			$.ajax({
-				 url: host + 'admin/grid',
+				 url:  host + 'admin/grid',
 				 type: 'GET',
 				 data: { 'w': w, 'h': h},
 				 dataType: 'html',
@@ -78,7 +78,7 @@ $(document).ready(function(){
 											 col.addEventListener('drop', handleDrop, false);
 											 col.addEventListener('dragend', handleDragEnd, false);
 									 });
-						$.getScript( dir_host + "holder.js" )
+						$.getScript(  dir_host + "holder.js" )
 							.done(function( script, textStatus ) {
 								console.log( textStatus );
 							})
@@ -86,7 +86,7 @@ $(document).ready(function(){
 								$( "div.log" ).text( "Triggered ajaxError handler." );
 						});
 
-						$.getScript( dir_host + "assets/js/tesRecall.js" )
+						$.getScript(  dir_host + "assets/js/tesRecall.js" )
 							.done(function( script, textStatus ) {
 								console.log( textStatus );
 							})
@@ -130,7 +130,7 @@ $(document).ready(function(){
 //           // }
 
 //          $.ajax({
-//          url: host + 'admin/grid:savePosition',
+//          url:  'admin/grid:savePosition',
 //          type: 'POST',
 //          data: { dataWaw : grid, size: countRow },
 //          dataType: 'html',
@@ -171,7 +171,7 @@ $(document).ready(function(){
 				 // }
 
 				 $.ajax({
-				 url: host + 'admin/grid:savePosition',
+				 url:  host + 'admin/grid:savePosition',
 				 type: 'POST',
 				 data: { dataWaw : changes, size: countRow },
 				 dataType: 'json',

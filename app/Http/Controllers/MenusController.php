@@ -76,10 +76,23 @@ class MenusController extends Controller
 		return json_encode($hasil);
 	}
 
-	public function createMenu(Request $request){
+	public function addSave(Request $request){
 		$hasil = DB::table('parent_menu')->insert(['name'=> $request->input('name'),
 			'redirect'=> $request->input('redirect')]);
 		return $hasil==true?"success":"fail";
+	}
+
+	public function selectWhere(Request $request){
+		$hasil = DB::table('parent_menu')->where('name', $request->input('name'))
+				->where('redirect', $request->input('redirect'))
+				->get();
+		return json_encode($hasil);
+	}
+
+	public function getChild(Request $request){
+		$hasil = DB::table('child_menu')->where('parent_id', $request->input('id'))->get();
+		$parent_id = $request->input('id');
+		return view('_layout.dialog-child-menu-backend', compact('hasil', 'parent_id'));
 	}
 
 	/**

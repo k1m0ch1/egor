@@ -53,7 +53,7 @@
                       
                       </td>
                       <td><div class="tools" align='center'>
-                      		  <a class="fa fa-object-ungroup">&nbsp;</a>
+                      		  <a class="fa fa-object-ungroup" id='childMenu-{{$r2->id}}'>&nbsp;</a>
                               <a class="fa fa-edit" id='editMenu-{{$r2->id}}'></a>&nbsp;
                               <a class="fa fa-trash-o"></a>
                             </div></td>
@@ -67,6 +67,16 @@
 
         </section><!-- /.content -->
          </div><!-- /.content-wrapper -->
+
+      <div id="child-form" title="Pengaturan Child Dialog">     
+      <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
+      {!! csrf_field() !!}
+        <fieldset id='form-child'>
+          
+        </fieldset>
+      </form>
+    </div>
+    
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.3.0

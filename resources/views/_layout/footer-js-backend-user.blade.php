@@ -1,8 +1,7 @@
-    <script>
-      var dir_host = "{{ Config::get('app.url') }}/egor/public/";
-      var host = "{{ Config::get('app.url') }}/egor/public/index.php/";
-    </script>
-
+<script>
+ var host = "{{ Config::get('app.url') }}/index.php/";
+ var dir_host = "{{ Config::get('app.url') }}";
+</script>
     <script src="{{ asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
@@ -16,8 +15,6 @@
     <script src="{{ asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/vendor/AdminLTE/dist/js/app.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('assets/vendor/AdminLTE/dist/js/demo.js') }}"></script>
     <!-- page script -->
     <script src="{{ asset('assets/js/general.js') }}"></script>
     @if($title=="Users")
