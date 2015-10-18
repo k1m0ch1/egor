@@ -11,11 +11,11 @@ class RoleController extends Controller
 {
     public function form(Request $request){
         $as = $request->input('as');
-        $rS = new \StdClass();
-        $rS->id = "xxx";
-        $rS->name = "";
-        $rS->display_name = "";
-        $rS->description = "";
+        $rS[0] = new \StdClass();
+        $rS[0]->id = "xxx";
+        $rS[0]->name = "";
+        $rS[0]->display_name = "";
+        $rS[0]->description = "";
         if($as!="add"){
             $rS = DB::table('roles')->where('id', $request->input('id'))->get();
         }
@@ -31,7 +31,7 @@ class RoleController extends Controller
         if($as=="edit"){
             $hasil = DB::table('roles')->where('id', $request->input('id'))->update($dataSave);
         }else{
-            $hasil = DB::table('roes')->insert($dataSave);
+            $hasil = DB::table('roles')->insert($dataSave);
         }
 
         return $hasil==true?"success save":"fail save";
