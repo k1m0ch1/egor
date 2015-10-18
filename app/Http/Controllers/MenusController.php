@@ -95,6 +95,22 @@ class MenusController extends Controller
 		return view('_layout.dialog-child-menu-backend', compact('hasil', 'parent_id'));
 	}
 
+	public function newChild(Request $request){
+		$parent_id = $request->input('id');
+		return view('_layout.form-new-input-menu-backend', compact('parent_id'));
+	}
+
+	public function saveNewChild(Request $request){
+		$hasil = DB::table('child_menu')
+				 ->insert([
+				 		'parent_id' => $request->input('parent_id'),
+				 		'name' => $request->input('name'),
+				 		'redirect' => $request->input('redirect')
+				 	]);
+		
+		return $hasil==true?"success":"fail";
+	}
+
 	/**
 	 * Update the specified resource in storage.
 	 *

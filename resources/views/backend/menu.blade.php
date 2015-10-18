@@ -76,6 +76,15 @@
         </fieldset>
       </form>
     </div>
+
+    <div id="add_child-form" title="Tambah Child">     
+      <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
+      {!! csrf_field() !!}
+        <fieldset id='add_form-child'>
+          
+        </fieldset>
+      </form>
+    </div>
     
       <footer class="main-footer">
         <div class="pull-right hidden-xs">

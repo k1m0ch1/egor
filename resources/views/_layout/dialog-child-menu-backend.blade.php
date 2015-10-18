@@ -13,15 +13,10 @@
                       <td>{{ ++$a }}.</td>
                       <td>
                         <label id="lblName-{{ $rS->id }}">{{ $rS->name }}</label>
-                        <input type='text' id='txtName-{{ $rS->id }}' value='{{ $rS->name }}' style="width: 150px; float: left;" size=1 class='form-control'/>
-                        <button class="btn btn-primary" id="simpanName-{{ $rS->id }}" style="margin-left: 3px;"><i class="fa fa-save"></i></button>
-                        <button class="btn btn-danger" id="cancelName-{{ $rS->id }}" style="margin-left: 1px;"><i class="fa fa-close"></i></button>
+                        
                       </td>
                       <td>
                           <label id="lblHref-{{ $rS->id }}">{{ $rS->redirect }}</label>
-                          <input type='text' id='txtHref-{{ $rS->id }}' value='{{ $rS->redirect }}' style="width: 150px; float: left;" size=1 class='form-control'/>
-                          <button class="btn btn-primary" id="simpanHref-{{ $rS->id }}" style="margin-left: 3px;"><i class="fa fa-save"></i></button>
-                          <button class="btn btn-danger" id="cancelHref-{{ $rS->id }}" style="margin-left: 1px;"><i class="fa fa-close"></i></button>
                       </td>
                       <td>
                         <input type='hidden' id='current_parent_id' value="{{ $rS->parent_id }}" />
