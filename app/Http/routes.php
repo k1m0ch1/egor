@@ -22,6 +22,8 @@ Route::get('admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin
 Route::get('admin/menu', ['uses'=>'PagesController@menu', 'as'=>'admin.menu.get', 'middleware'=>'auth']);
 Route::get('admin/preference', ['uses'=>'PagesController@preference', 'as'=>'admin.preference.get', 'middleware'=>'auth']);
 Route::get('admin/grid', ['uses'=>'PagesController@grid', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
+Route::post('admin/filesList', ['uses'=>'PagesController@fileList', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
+
 
 Route::get('admin/form:child', ['uses'=>'ChildController@formChild', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 Route::get('admin/form:child[add]', ['uses'=>'ChildController@addNewChild', 'middleware'=>'auth']);
@@ -36,6 +38,11 @@ Route::post('admin/dashboard[edit:save]', ['uses'=>'DashboardController@editSave
 Route::get('admin/dashboard[delete]', ['uses'=>'DashboardController@delete', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 
 Route::post('admin/gambar[upload]', ['uses'=>'GambarController@upload', 'as'=>'gambar[upload]', 'middleware'=>'auth']);
+Route::post('admin/gambar[Bg:upload]', ['uses'=>'GambarController@bgUpload', 'as'=>'gambar[Bg:upload]', 'middleware'=>'auth']);
+Route::post('admin/gambar[Logo:upload]', ['uses'=>'GambarController@logoUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
+Route::post('admin/gambar[Logo:save]', ['uses'=>'GambarController@logoSave', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
+Route::post('admin/gambar[Bg:save]', ['uses'=>'GambarController@BgSave', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
+Route::post('admin/gambar[BG:upload]', ['uses'=>'GambarController@BgUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::get('admin/gambar', ['uses'=>'PagesController@indexGambar', 'as'=>'gambar[index]', 'middleware'=>'auth']);
 
 Route::post('admin/users[edit:save]', ['uses'=>'UsersController@editSave', 'as'=>'users[edit:save]', 'middleware'=>'auth']);
@@ -51,10 +58,11 @@ Route::post('admin/menu:child[add:save]', ['uses'=>'MenusController@saveNewChild
 Route::get('admin/menu:child[del]', ['uses'=>'MenusController@delChild', 'middleware'=>'auth']);
 Route::get('admin/menu:child[edit]', ['uses'=>'MenusController@editChild', 'middleware'=>'auth']);
 
-Route::post('admin/preference:title[save]', ['uses'=>'PreferenceController@titleSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
+Route::post('admin/preference:title[save]', ['uses'=>'PreferenceController@preferenceSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:image', ['uses'=>'PreferenceController@image', 'as'=>'image.preference.get', 'middleware'=>'auth']);
-Route::post('admin/preference:background[save]', ['uses'=>'PreferenceController@backgroundSave', 'as'=>'background.preference.get', 'middleware'=>'auth']);
-Route::post('admin/preference:logo[save]', ['uses'=>'PreferenceController@logoSave', 'as'=>'logo.preference.get', 'middleware'=>'auth']);
+Route::post('admin/preference:background[save]', ['uses'=>'PreferenceController@preferenceSave', 'as'=>'background.preference.get', 'middleware'=>'auth']);
+Route::post('admin/preference:logo[save]', ['uses'=>'PreferenceController@preferenceSave', 'as'=>'logo.preference.get', 'middleware'=>'auth']);
+Route::post('admin/preference:footer[save]', ['uses'=>'PreferenceController@preferenceSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 
 Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);

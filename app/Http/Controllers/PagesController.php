@@ -143,6 +143,14 @@ class PagesController extends Controller
         return view('backend.gambar', compact('css', 'jH', 'title','files'));
     }
 
+    public function fileList(Request $request){
+        $dirSys = public_path() . '/' . $request->input('dir');
+        $dir = $request->input('dir');
+        $files = File::files($dirSys);
+        $idSelector = $request->input('idSelector');
+        return view('_layout.file-list', compact('files', 'dir', 'idSelector'));
+    }
+
     public function grid(Request $request){
         $a=0;
         $w=$request->input('w');
@@ -208,21 +216,23 @@ class PagesController extends Controller
         $title = 'Menu';
         $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
                         INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
-        $result2 = $users = DB::table('parent_menu')->get();
+        $result2 = DB::table('parent_menu')->get();
         $a=1;
         return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a'));
     }
 
     public function preference(){
-        $jH = Array( asset('holder.js') );
-        $css = $this->CSS('menu');
+        $css = $this->CSS('style-upload');
+        $jH = $this->jS('image');
         $title = 'Preference';
         $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
                         INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $a=1;
-        $result2 = DB::table('preference')->where('id', '1')->get();
-        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/menu/');
-        return view('backend.preference', compact('css', 'jH', 'title','result2','files'));
+        $result2 = count(Setting::where('name', 'Title')->get())>0?Setting::where('name', 'Title')->get()->first()->value:"";
+        $result3 = count(Setting::where('name', 'Footer')->get())>0?Setting::where('name', 'Footer')->get()->first()->value:"";
+        $filesLogo = File::files('/var/www/html/egor/public/assets/img/uploaded/logo/');
+        $filesBg = File::files('/var/www/html/egor/public/assets/img/uploaded/background/');
+        return view('backend.preference', compact('css', 'jH', 'title','result2','result3','filesLogo','filesBg'));
     }
 
     public function CSS($mode){
@@ -287,6 +297,8 @@ class PagesController extends Controller
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
                              asset('assets/css/style-upload.css'),
+                             asset('assets/css/another-style-upload.css'),
+                             asset('assets/css/another-another-style-upload.css'),
                              asset('assets/css/image-picker.css'));
             break;
         }
@@ -355,7 +367,9 @@ class PagesController extends Controller
                         asset('assets/vendor/blueimp-file-upload/js/jquery.fileupload.js'),
                         asset('assets/js/jquery.knob.min.js'),
                         asset('assets/js/upload.js'),
-                        asset('assets/js/image-picker.js')
+                        asset('assets/js/image-picker.js'),
+                        asset('assets/js/preferenceEvent.js'),
+                        asset('assets/js/preference.js'),
                         );
             break;
         }

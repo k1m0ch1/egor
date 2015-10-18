@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use DB;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -19,10 +20,21 @@ class PreferenceController extends Controller
 
     }
 
-    public function titleSave(Request $request){
-    	DB::table('preference')->where('id', '1')->update(['title' => $request->input('judul')]);
-
-    	return 'success';
+    public function preferenceSave(Request $request){
+        $name = $request->input('name');
+        $value = $request->input('value');
+        $result = Setting::where('name', $name)->get();
+        $trigger = count($result)>0?true:false;
+        if($trigger){
+            echo "WTF";
+            $result = $result->first();
+            $result->value = $value;
+        }else{
+            $result = new Setting;
+            $result->name = $name;
+            $result->value = $value;
+            $result->save();
+        }
     }
 
     public function backgroundSave(Request $request){

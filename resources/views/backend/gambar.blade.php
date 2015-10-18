@@ -33,22 +33,19 @@
                 <div class="box-body">
 						<div class="row">
 							<div class="large-12 columns" >
-                <div class='box-header'>
-                  <div class='form-group'>
-                    <form id="upload" method="post" action="gambar[upload]" enctype="multipart/form-data">
-						      {!! csrf_field() !!}
-            <div id="drop">
-							Drop Here or
-							<a>Browse</a>
-							<input type="file" name="upl" multiple />
-						</div>
-						<ul>
-							<!-- The file uploads will be shown here -->
-						</ul>
-					</form>
-                  </div>
                 </div>
                  <div class='box-body'>
+                    <form id="upload" method="post" action="gambar[upload]" enctype="multipart/form-data">
+                      {!! csrf_field() !!}
+                      <div id="drop">
+                        Drop Here or
+                        <a>Browse</a>
+                        <input type="file" name="upl" multiple />
+                      </div>
+                    <ul>
+                      <!-- The file uploads will be shown here -->
+                    </ul>
+                  </form>
                     @if($files!=null)
                     <select class="image-picker show-html">
                       @for($a=0;$a<sizeOf($files);$a++)

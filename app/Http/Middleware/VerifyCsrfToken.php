@@ -20,6 +20,11 @@ class VerifyCsrfToken extends BaseVerifier
                             'admin/form:child[add:save]',
                             'admin/menu[edit:save]',
                             'admin/menu[add:save]',
-                            'admin/menu:child[add:save]'
+                            'admin/menu:child[add:save]',
+                            'admin/filesList',
+                            'admin/preference:logo[save]',
+                            'admin/preference:background[save]',
+                            'admin/preference:title[save]',
+                            'admin/preference:footer[save]'
     ];
 }

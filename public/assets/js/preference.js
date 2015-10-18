@@ -2,59 +2,44 @@ $(document).ready(function(){
 
     $("select").imagepicker();
 
-    var formTitle, formBackground, formLogo;
-
-    formTitle = $( "#FormTitle" ).on( "submit", function( event ) {
-      event.preventDefault();
-      simpanTitle();
-    });
-
-    formBackground = $( "#FormBackground" ).on( "submit", function( event ) {
-      event.preventDefault();
-      simpanBackground();
-    });
-
-    formLogo = $( "#FormLogo" ).on( "submit", function( event ) {
-      event.preventDefault();
-      simpanLogo();
-    });
-
-    function simpanTitle(){
-        var title = $('#inputTitle').val();
-        $.ajax({
-              url:  'admin/preference:title[save]',
+    $( window ).load(function() {
+      var dirBG = 'assets/img/uploaded/background/';
+      var selectorBG = 'selector-BG';
+      var selectorLogo = 'selector-Logo';
+      var dirMenu = 'assets/img/uploaded/menu/';
+      var dirLogo = 'assets/img/uploaded/logo/';
+      $.ajax({
+              url:  host + 'admin/filesList',
               type: 'POST',
-              data: { judul : title },
+              data: { dir : dirBG, idSelector: selectorBG },
               dataType: 'html',
               success: function(data) {
-                
+                $('#FileBG').html(data);
+                $.getScript(  dir_host + "assets/js/image-picker.js" )
+                  .done(function( script, textStatus ) {
+                  })
+                  .fail(function( jqxhr, settings, exception ) {
+                    $( "div.log" ).text( "Triggered ajaxError handler." );
+                });
+                $("#" + selectorBG).imagepicker();
               }
-           });
-    }
-
-    function simpanBackground(){
-        var a=$("#background option:selected" ).text();
-        $.ajax({
-              url:  'admin/preference:background[save]',
+      });
+      $.ajax({
+              url:  host + 'admin/filesList',
               type: 'POST',
-              data: { namaFile : a },
+              data: { dir : dirLogo, idSelector: selectorLogo },
               dataType: 'html',
               success: function(data) {
-                
+                $('#FileLogo').html(data);
+                $.getScript(  dir_host + "assets/js/image-picker.js" )
+                  .done(function( script, textStatus ) {
+                  })
+                  .fail(function( jqxhr, settings, exception ) {
+                    $( "div.log" ).text( "Triggered ajaxError handler." );
+                });
+                $("#" + selectorLogo).imagepicker();
               }
-           });
-    }
+      });
 
-    function simpanLogo(){
-        var a=$("#logo option:selected" ).text();
-        $.ajax({
-              url:  'admin/preference:logo[save]',
-              type: 'POST',
-              data: { namaFile : a },
-              dataType: 'html',
-              success: function(data) {
-                
-              }
-           });
-    }
+    });
 });
