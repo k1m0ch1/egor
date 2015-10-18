@@ -52,7 +52,7 @@
 									<a>Browse</a>
 									<input type="file" name="upl-Logo" multiple />
 								</div>
-								<ul>
+								<ul id='ulLogo'>
 									<!-- The file uploads will be shown here -->
 								</ul>
 							</form>
@@ -92,7 +92,7 @@
 										<a>Browse</a>
 										<input type="file" name="upl-Bg" multiple />
 									</div>
-									<ul>
+									<ul id='ulBg'>
 										<!-- The file uploads will be shown here -->
 									</ul>
 								</form>

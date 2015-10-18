@@ -28,7 +28,7 @@ class ChildController extends Controller
                     $hasil = false;
                 }
 
-                if(move_uploaded_file($_FILES['image']['tmp_name'], '/var/www/html/egor/public/assets/img/uploaded/menu/' . '/' .$_FILES['image']['name'])){
+                if(move_uploaded_file($_FILES['image']['tmp_name'], public_path() . '/uploads/menu/' .$_FILES['image']['name'])){
                     $hasil = true;
                     $image = $_FILES['image']['name'];
                 }

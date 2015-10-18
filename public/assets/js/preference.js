@@ -3,11 +3,11 @@ $(document).ready(function(){
     $("select").imagepicker();
 
     $( window ).load(function() {
-      var dirBG = 'assets/img/uploaded/background/';
+      var dirBG = '/uploads/background/';
       var selectorBG = 'selector-BG';
       var selectorLogo = 'selector-Logo';
-      var dirMenu = 'assets/img/uploaded/menu/';
-      var dirLogo = 'assets/img/uploaded/logo/';
+      var dirMenu = '/uploads/menu/';
+      var dirLogo = '/uploads/logo/';
       $.ajax({
               url:  host + 'admin/filesList',
               type: 'POST',

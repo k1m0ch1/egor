@@ -39,9 +39,9 @@ class PagesController extends Controller
            $w = 3;
         }
 
-        $bg = Setting::where('name', 'background')->get();
+        $bg = Setting::where('name', 'Background')->get();
         if( count($bg) > 0){
-            $bg = Setting::UPLOAD_PATH . '/' .$bg->first()->value;
+            $bg = asset('/uploads/background/') . '/' .$bg->first()->value;
         }else{
             $bg = 'assets/img/bg.jpg';
         }
@@ -149,7 +149,7 @@ class PagesController extends Controller
         $css = $this->CSS('style-upload');
         $jH = $this->jS('image');
         $title = 'Dashboard';
-        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/menu/');
+        $files = File::files(public_path(). '/uploads/menu/');
         return view('backend.gambar', compact('css', 'jH', 'title','files'));
     }
 
@@ -265,8 +265,8 @@ class PagesController extends Controller
         $a=1;
         $result2 = count(Setting::where('name', 'Title')->get())>0?Setting::where('name', 'Title')->get()->first()->value:"";
         $result3 = count(Setting::where('name', 'Footer')->get())>0?Setting::where('name', 'Footer')->get()->first()->value:"";
-        $filesLogo = File::files('/var/www/html/egor/public/assets/img/uploaded/logo/');
-        $filesBg = File::files('/var/www/html/egor/public/assets/img/uploaded/background/');
+        $filesLogo = File::files(public_path(). '/uploads/logo/');
+        $filesBg = File::files(public_path(). '/uploads/background/');
         return view('backend.preference', compact('css', 'jH', 'title','result2','result3','filesLogo','filesBg'));
     }
 

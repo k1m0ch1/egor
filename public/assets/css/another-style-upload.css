@@ -99,6 +99,7 @@
     top: 15px;
     left: 32px;
     position: absolute;
+    width: 3%!important;
 }
 
 #uploadBg ul li span{

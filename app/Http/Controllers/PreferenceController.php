@@ -26,9 +26,9 @@ class PreferenceController extends Controller
         $result = Setting::where('name', $name)->get();
         $trigger = count($result)>0?true:false;
         if($trigger){
-            echo "WTF";
             $result = $result->first();
             $result->value = $value;
+            $result->save();
         }else{
             $result = new Setting;
             $result->name = $name;
