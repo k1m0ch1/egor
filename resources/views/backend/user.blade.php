@@ -51,18 +51,8 @@
                         <th>Operation</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      @foreach($result as $rS)
-                        <tr>
-                          <td>{{$rS->name }}</td>
-                          <td>{{$rS->roles}}</td>
-                          <td>{{$rS->email}}</td>
-                          <td><div class="tools" align='center'>
-                                <a class="fa fa-edit" id="editUser-{{ $rS->id }}"></a>&nbsp;
-                                <a class="fa fa-trash-o"></a>
-                              </div></td>
-                        </tr>
-                      @endforeach
+                    <tbody id="tbody-user">
+                      
                     </tbody>
                   </table>
                 </div>
@@ -92,6 +82,6 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    @include('_layout.footer-js-backend-user')
+    @include('_layout.footer-js-backend')
   </body>
 </html>

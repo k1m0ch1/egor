@@ -48,11 +48,11 @@
                   </form>
                     @if($files!=null)
                     <select class="image-picker show-html">
-                      @foreach($files as $key => $f)
+                      <!-- @foreach($files as $key => $f)
                         <?php $filename = explode( '/', $f); ?>
                         {{var_dump($filename)}}
-                        <option data-img-src="{{ asset('assets/img/uploaded/menu/') }}/" value="">    </option>
-                      @endforeach
+                        <option data-img-src="{{ asset('assets/img/uploads/menu/') }}/" value="">    </option>
+                      @endforeach -->
                       @for($a=0;$a<sizeOf($files);$a++)
                         <?php $filename = explode( '/', $files[$a]); ?>
                         <?php $size = count($filename)-1 ?>

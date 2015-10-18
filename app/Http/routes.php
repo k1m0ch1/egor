@@ -49,8 +49,11 @@ Route::post('admin/gambar[Bg:save]', ['uses'=>'GambarController@BgSave', 'as'=>'
 Route::post('admin/gambar[BG:upload]', ['uses'=>'GambarController@BgUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::get('admin/gambar', ['uses'=>'PagesController@indexGambar', 'as'=>'gambar[index]', 'middleware'=>'auth']);
 
-Route::post('admin/users[edit:save]', ['uses'=>'UsersController@editSave', 'as'=>'users[edit:save]', 'middleware'=>'auth']);
+Route::post('admin/users[edit:save]', ['uses'=>'UsersController@save', 'as'=>'users[edit:save]', 'middleware'=>'auth']);
 Route::get('admin/users[edit:show]', ['uses'=>'UsersController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/users[show]', ['uses'=>'UsersController@showAll', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/users[add:show]', ['uses'=>'UsersController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/users[delete]', ['uses'=>'UsersController@delete', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 
 Route::get('admin/roles[edit:show]', ['uses'=>'RoleController@form', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 Route::post('admin/roles[edit:save]', ['uses'=>'RoleController@save', 'as'=>'users[edit:show]', 'middleware'=>'auth']);

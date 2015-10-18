@@ -109,7 +109,7 @@ $(document).ready(function(){
       	console.log(e);
       	c = c.length>0?c.val():0;
       	var myFormData2 = new FormData();
-     	myFormData2.append("image", $('#fileUpload').prop('files')[0]);
+     	  myFormData2.append("image", $('#fileUpload').prop('files')[0]);
       	myFormData2.append("nama", a);
       	myFormData2.append("redirect", b);
       	myFormData2.append("mode", c);
