@@ -65,4 +65,11 @@ class RoleController extends Controller
         $result = DB::table('roles')->get();
         return view('_layout.tabel-roles', compact('result'));
     }
+
+    public function del(Request $request){
+        $result= DB::table('roles')
+                    ->where('id', $request->input('id'))
+                    ->delete();
+        return $result==true?"succes del":"fail del";
+    }
 }
