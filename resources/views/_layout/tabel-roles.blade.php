@@ -4,7 +4,7 @@
                           <td>{{$rS->display_name}}</td>
                           <td><div class="tools" align='center'>
                                 <a class="fa fa-edit" id="editRule-{{ $rS->id }}"></a>&nbsp;
-                                <a class="fa fa-trash-o"></a>
+                                <a class="fa fa-trash-o" id="delRule-{{ $rS->id }}"></a>
                               </div></td>
                         </tr>
 @endforeach

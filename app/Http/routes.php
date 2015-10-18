@@ -56,6 +56,7 @@ Route::get('admin/roles[edit:show]', ['uses'=>'RoleController@form', 'as'=>'user
 Route::post('admin/roles[edit:save]', ['uses'=>'RoleController@save', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/roles[show]', ['uses'=>'RoleController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/roles[add:show]', ['uses'=>'RoleController@form', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[del]', ['uses'=>'RoleController@del', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
