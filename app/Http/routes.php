@@ -29,8 +29,6 @@ Route::post('admin/filesList/{id}', ['uses'=>'PagesController@fileList', 'as'=>'
 
 Route::get('admin/setGrid', ['uses'=>'PagesController@setGrid', 'as'=>'admin.grid.set', 'middleware'=>'auth']);
 
-
-
 Route::get('admin/form:child', ['uses'=>'ChildController@formChild', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 Route::get('admin/form:child[add]', ['uses'=>'ChildController@addNewChild', 'middleware'=>'auth']);
 Route::post('admin/form:child[add:save]', ['uses'=>'ChildController@saveNewChild', 'middleware'=>'auth']);
@@ -53,6 +51,10 @@ Route::get('admin/gambar', ['uses'=>'PagesController@indexGambar', 'as'=>'gambar
 
 Route::post('admin/users[edit:save]', ['uses'=>'UsersController@editSave', 'as'=>'users[edit:save]', 'middleware'=>'auth']);
 Route::get('admin/users[edit:show]', ['uses'=>'UsersController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+
+Route::get('admin/roles[edit:show]', ['uses'=>'RoleController@form', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+Route::post('admin/roles[edit:save]', ['uses'=>'RoleController@save', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[show]', ['uses'=>'RoleController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);

@@ -53,7 +53,11 @@
                         {{var_dump($filename)}}
                         <option data-img-src="{{ asset('assets/img/uploaded/menu/') }}/" value="">    </option>
                       @endforeach
-                      
+                      @for($a=0;$a<sizeOf($files);$a++)
+                        <?php $filename = explode( '/', $files[$a]); ?>
+                        <?php $size = count($filename)-1 ?>
+                        <option data-img-src="{{ asset('/uploads/menu/') }}/{{ $filename[$size] }}" value="{{ $filename[$size] }}">  {{ $filename[$size] }}  </option>
+                      @endfor
                     </select>
                     @endif
                 </div>

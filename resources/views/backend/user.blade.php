@@ -54,7 +54,7 @@
                     <tbody>
                       @foreach($result as $rS)
                         <tr>
-                          <td>{{ $rS->name }}</td>
+                          <td>{{$rS->name }}</td>
                           <td>{{$rS->roles}}</td>
                           <td>{{$rS->email}}</td>
                           <td><div class="tools" align='center'>
