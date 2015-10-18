@@ -124,7 +124,7 @@ class UsersController extends Controller
         $name = $requests->input('username');
         $password = $requests->input('password');
 
-        if(\Auth::attempt(['name'=>$name, 'password'=>$password])){
+        if(\Auth::attempt(['email'=>$name, 'password'=>$password])){
             return redirect()->route('admin.dashboard.get');
         }else{
             return redirect()->route('users.login.get');
