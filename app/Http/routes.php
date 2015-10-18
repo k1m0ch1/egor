@@ -17,11 +17,15 @@ Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
 Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.post']);
 
 Route::get('admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
+Route::get('admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']);
+
 Route::get('admin/tes', ['uses'=>'PagesController@tes', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
 Route::get('admin/menu', ['uses'=>'PagesController@menu', 'as'=>'admin.menu.get', 'middleware'=>'auth']);
 Route::get('admin/preference', ['uses'=>'PagesController@preference', 'as'=>'admin.preference.get', 'middleware'=>'auth']);
 Route::get('admin/grid', ['uses'=>'PagesController@grid', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
+Route::get('admin/setGrid', ['uses'=>'PagesController@setGrid', 'as'=>'admin.grid.set', 'middleware'=>'auth']);
+
 
 Route::get('admin/form:child', ['uses'=>'ChildController@formChild', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 Route::get('admin/form:child[add]', ['uses'=>'ChildController@addNewChild', 'middleware'=>'auth']);

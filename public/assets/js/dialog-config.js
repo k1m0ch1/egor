@@ -165,6 +165,12 @@ $(document).ready(function(){
             data: myFormData,
             dataType: 'json',
             success: function(data) {
+                        $("#message-body").hide();
+              var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.message);
+              var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+              $("#message-body").html(el);
+              $("#message-body").fadeIn('slow');
+
               $("#img-thumbnail-"+d).attr('src', location.protocol+'//'+location.hostname+'/assets/img/uploaded/menu/'+data.result.image);
               dialog.dialog( "close" );
             }

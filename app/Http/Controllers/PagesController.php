@@ -107,6 +107,7 @@ class PagesController extends Controller
     }
 
     public function dashboard(){
+        $breadcrumb = array(array('Home', 0), array('Dashboard', 1));
         $css = $this->CSS('general');
         $jH = $this->jS('general');
         
@@ -132,7 +133,7 @@ class PagesController extends Controller
 
         $rS = $w.'x'.$h;
 
-        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w'));
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb'));
     }
 
     public function indexGambar(){
@@ -160,6 +161,13 @@ class PagesController extends Controller
         $lenImg = sizeof($img);
         $a=0;
 
+        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
+    }
+
+    public function setGrid(Request $request){
+        $w=$request->input('w');
+        $h=$request->input('h');
+
         $result = Setting::where('name', 'grid_height')->get();
 
         if(count($result)>0){
@@ -183,7 +191,12 @@ class PagesController extends Controller
             $result->save();
         }
 
-        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
+        $results = new \StdClass;
+        $results->info = "grid size set";
+        $results->message = "Ukuran grid telah berhasil diubah.";
+        $results->success = 1;
+        $results->result = [$w, $h];
+        return response()->json($results);
     }
 
     public function user(){
@@ -319,7 +332,7 @@ class PagesController extends Controller
                         //asset('assets/vendor/AdminLTE/dist/js/pages/dashboard.js'),
                         asset('assets/vendor/AdminLTE/dist/js/demo.js'),
                         asset('assets/js/dashboard.js'),
-                        asset('assets/vendor/foundation-5.5.3.custom/js/foundation.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
                         asset('assets/js/general.js'),
                         asset('holder.js'),
                         asset('assets/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js'),
@@ -348,7 +361,7 @@ class PagesController extends Controller
                         asset('assets/vendor/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
-                        asset('assets/vendor/foundation-5.5.3.custom/js/foundation.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
                         asset('holder.js'),
                         asset('assets/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js'),
                         asset('assets/vendor/blueimp-file-upload/js/jquery.iframe-transport.js'),

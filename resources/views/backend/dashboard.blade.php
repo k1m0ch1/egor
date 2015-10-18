@@ -1,6 +1,5 @@
 @include('_layout.header-backend')
 <div class="wrapper">
-
       @include('_layout.sidebar-backend')
 
       <!-- Content Wrapper. Contains page content -->
@@ -11,10 +10,21 @@
             Dashboard
             <small>Control panel</small>
           </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-          </ol>
+          @if(isset($breadcrumb))
+            <ol class="breadcrumb">
+              @foreach($breadcrumb as $key => $b)
+                @if($key == 0)
+                  <li><a href="#"><i class="fa fa-dashboard"></i> {{$b[0]}}</a></li>
+                @else
+                  @if($b[1] == 1)
+                    <li class="active">{{$b[0]}}</li>
+                  @else
+                    <li>{{$b[0]}}</li>
+                  @endif
+                @endif
+              @endforeach
+            </ol>
+          @endif
         </section>
 
         <!-- Main content -->
@@ -27,15 +37,20 @@
               <!-- TO DO List -->
               <div class="box box-info">
               	<div class="box-header">
-                  <i class="fa fa-envelope"></i>
-                  <h3 class="box-title">Ubah Dashboard</h3>
+                  <i class="fa fa-dashboard"></i>
+                  <h3 class="box-title">Dashboard Menu Management System</h3>
                 </div>
                 <div class="box-body">
+                
+                <div id="message-body">
+                  
+                </div>
 						<div class="row">
-							<div class="large-12 columns" >
+							<div class="col-lg-12 columns" >
                 <div class='box-header'>
                   <div class='form-group'>
-                    <label for='grid-dashboard'>Grid Mode </label>
+                    <h4>Ukuran Grid Menu</h4>
+
                     <select id='grid-dashboard'>
                       <option value='3x2' {{ $rS=='3x2'?'selected':'' }}>3x2</option>
                       <option value='3x3' {{ $rS=='3x3'?'selected':'' }}>3x3</option>
@@ -44,15 +59,21 @@
                       <option value='4x3' {{ $rS=='4x3'?'selected':'' }}>4x3</option>
                       <option value='4x4' {{ $rS=='4x4'?'selected':'' }}>4x4</option>
                     </select>
-                    <button type='submit' id='simpan'>Simpan Pengaturan</button>
                   </div>
                 </div>
-                 <div class='box-body'>
+                <hr/>
+							</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 columns">
+                <div class='box-body'>
+                    <h4>Pengaturan Posisi Menu</h4>
+                    <button type='submit' class="btn btn-success" id='simpan'><i class="fa fa-save"></i> Simpan Pengaturan</button>
                     <table border=0 id="menu-wrapper" align='center'>
-      									
+                        
                     </table>
                 </div>
-							</div>
+              </div>
 						</div>
                 </div>
                 <div class="box-footer clearfix no-border"></div>

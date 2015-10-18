@@ -3,13 +3,22 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
-          <div class="user-panel">
+          <div class="user-panel" style="min-height: 75px;">
             <div class="pull-left image">
+              @if(\Auth::check())
+              <img data-src="holder.js/90x60" class="img-circle" src="{{asset('uploads')}}/{{\Auth::user()->avatar}}" alt="">
+              @else
               <img data-src="holder.js/90x60" class="img-circle" alt="User Image">
+              @endif
             </div>
             <div class="pull-left info">
-              <p>Name User</p>
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              @if(\Auth::check())
+                <p>{{\Auth::user()->name}}</p>
+                <a href="{{url('/logout')}}"> <i class="fa fa-circle text-sucess"></i> Online</a>
+              @else
+                <p>Name User</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              @endif
             </div>
           </div>
           <!-- search form -->
@@ -35,6 +44,18 @@
                 <a href='{{ asset("index.php/admin/user") }}'>
                 <i class="fa fa-users" href="user"></i> <span> Users</span>
                 </a>
+                <ul class="treeview-menu">
+                  <li>
+                    <a href='{{ asset("index.php/admin/user") }}'>
+                    <i class="fa fa-circle" href="user"></i> <span> User</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ asset('index.php/admin/role') }}">
+                      <i class="fa fa-circle"></i> <span> Roles</span>
+                    </a>
+                  </li>
+                </ul>
             </li>
               
             <li {{ $title=='Menu'?'class="active treeview"':'' }}>
