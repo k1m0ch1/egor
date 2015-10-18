@@ -12,10 +12,11 @@
 
 		<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-		<script src="{{ asset('assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('assets/vendor/foundation/js/foundation.min.js') }}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/holderjs/holder.min.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('assets/vendor/SmoothScrollWheel/dist/jquery.SmoothScrollWheel.min.js') }}"></script>
 		<script type="text/javascript">
+			$(document).foundation();
 		  $(document).SmoothScrollWheel({
 			defaultSpeed: 500,
 			 defaultAnimationTime: 1000

@@ -8,8 +8,8 @@
 		<div id="main-content">
 			<div class="main-menu">
 				<div class="row">
-					<div class="large-12 columns">
-						<ul class="small-block-grid-{{$h or '3'}}">
+					<div class="large-12 medium-12 small-12 columns">
+						<ul class="small-block-grid-1 medium-block-grid-{{$h or '3'}}">
 							@foreach($datanyah as $menu)
 								<li>
 									<a href="{{$menu->redirect or '/'}}" class="image-button">
