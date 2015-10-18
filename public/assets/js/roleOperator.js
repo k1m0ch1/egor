@@ -21,15 +21,16 @@ $(document).ready(function(){
       simpan();
     });
 
-    $('[id^=editUser]').on('click', function(){
+    $('[id^=editRule]').on('click', function(){
+        alert('wtf');
     		var currentID = $(this).attr('id');
     		currentID = currentID.split('-')[1];
     		var idnyah = currentID;
             dialog.dialog( "open" );
             $.ajax({
-	            url:  host + 'admin/users[edit:show]',
+	            url:  host + 'admin/roles[edit:show]',
 	            type: 'GET',
-	            data: { id: idnyah },
+	            data: { id: id, as: "edit" },
 	            dataType: 'html',
 	            success: function(data) {
 	            	$('#formnyah').html(data);

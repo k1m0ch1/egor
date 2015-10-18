@@ -56,7 +56,7 @@
                           <td>{{ $rS->name }}</td>
                           <td>{{$rS->display_name}}</td>
                           <td><div class="tools" align='center'>
-                                <a class="fa fa-edit" id="editUser-{{ $rS->id }}"></a>&nbsp;
+                                <a class="fa fa-edit" id="editRule-{{ $rS->id }}"></a>&nbsp;
                                 <a class="fa fa-trash-o"></a>
                               </div></td>
                         </tr>
@@ -90,6 +90,6 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    @include('_layout.footer-js-backend-user')
+    @include('_layout.footer-js-backend')
   </body>
 </html>

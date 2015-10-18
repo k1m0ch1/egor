@@ -232,7 +232,7 @@ class PagesController extends Controller
         $breadcrumb = array(array('Home', 0), array('User', 0), array('Roles', 1));
 
         $css = $this->CSS('users');
-        $jH =  $this->jS('general');
+        $jH =  $this->jS('roles');
         $result = Role::all();
         $a=0;
         return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb'));
@@ -405,6 +405,21 @@ class PagesController extends Controller
                         asset('assets/js/image-picker.js'),
                         asset('assets/js/preferenceEvent.js'),
                         asset('assets/js/preference.js'),
+                        );
+            break;
+            case "roles":
+                $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
+                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js'),
+                        asset('holder.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
+                        asset('assets/js/roleOperator.js')
                         );
             break;
         }

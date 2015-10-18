@@ -22,7 +22,7 @@ class PreferenceController extends Controller
 
     public function preferenceSave(Request $request){
         $name = $request->input('name');
-        $value = $request->input('value');
+        $value = str_replace(' ','',$request->input('value'));
         $result = Setting::where('name', $name)->get();
         $trigger = count($result)>0?true:false;
         if($trigger){
