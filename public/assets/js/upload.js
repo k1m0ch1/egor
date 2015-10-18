@@ -76,6 +76,8 @@ $(function(){
 
             if(progress == 100){
                 data.context.removeClass('working');
+                location.reload();
+
             }
         },
 
@@ -135,7 +137,10 @@ $(function(){
             data.context.find('input').val(progress).change();
 
             if(progress == 100){
+                
                 data.context.removeClass('working');
+                location.reload();
+                
             }
         },
 

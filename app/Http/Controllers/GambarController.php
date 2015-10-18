@@ -37,41 +37,61 @@ class GambarController extends Controller
 
     public function BgUpload(Request $request){
         $allowed = array('png', 'jpg', 'gif');
-        $hasil = '{"status":"error"}';
+        $results = new \StdClass;
 
-        if(isset($_FILES['upl-Bg']) && $_FILES['upl-Bg']['error'] == 0){
+        $results->info = 'background upload';
+        $results->status = 0;
+        $results->message = 'Data Upload cant be completed.';
 
-            $extension = pathinfo($_FILES['upl-Bg']['name'], PATHINFO_EXTENSION);
 
-            if(!in_array(strtolower($extension), $allowed)){
-                $hasil = '{"status":"error"}';
-            }
-
-            if(move_uploaded_file($_FILES['upl-Bg']['tmp_name'], public_path() . '/uploads/background/' . '/' .$_FILES['upl-Bg']['name'])){
-                $hasil = '{"status":"success"}';
+        if($request->hasFile('upl-Bg')){
+            if($request->file('upl-Bg')->isValid()){
+                $filename = 'bg-'.date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('upl-Bg')->guessExtension();
+                $destination = Setting::BG_UPLOAD_PATH;
+                $result = \Image::make($request->file('upl-Bg'))->fit(1920, 1080)->save($destination.$filename);
+                $results->message = 'Data Upload has been completed.';
+                $results->status = 1;
+                $results->result = $filename;
             }
         }
 
-        return $hasil;
+        return response()->json($results);
     }
 
     public function LogoUpload(Request $request){
         $allowed = array('png', 'jpg', 'gif');
-        $hasil = '{"status":"error"}';
+        $results = new \StdClass;
 
-        if(isset($_FILES['upl-Logo']) && $_FILES['upl-Logo']['error'] == 0){
+        $results->info = 'logo upload';
+        $results->status = 0;
+        $results->message = 'Data Upload cant be completed.';
 
-            $extension = pathinfo($_FILES['upl-Logo']['name'], PATHINFO_EXTENSION);
-
-            if(!in_array(strtolower($extension), $allowed)){
-                $hasil = '{"status":"error"}';
-            }
-
-            if(move_uploaded_file($_FILES['upl-Logo']['tmp_name'], public_path() . '/uploads/logo/' . $_FILES['upl-Logo']['name'])){
-                $hasil = '{"status":"success"}';
+         if($request->hasFile('upl-Logo')){
+            if($request->file('upl-Logo')->isValid()){
+                $filename = 'bg-'.date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('upl-Logo')->guessExtension();
+                $destination = Setting::LOGO_UPLOAD_PATH;
+                $result = \Image::make($request->file('upl-Logo'))->fit(1920, 1080)->save($destination.$filename);
+                $results->message = 'Data Upload has been completed.';
+                $results->status = 1;
+                $results->result = $filename;
             }
         }
 
-        return $hasil;
+        return response()->json($results);
+    }
+
+    public function uploadPath($id){
+        $results = new \StdClass;
+        $results->success = 1;
+        $results->info = 'upload path get';
+
+        if($id == 'background'){
+            $results->result = Setting::BG_UPLOAD_PATH;
+        }elseif($id == 'logo'){
+            $results->result = Setting::LOGO_UPLOAD_PATH;
+        }
+        
+
+        return response()->json($results);
     }
 }

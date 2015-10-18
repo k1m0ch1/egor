@@ -167,12 +167,20 @@ class PagesController extends Controller
         return view('backend.gambar', compact('css', 'jH', 'title','files'));
     }
 
-    public function fileList(Request $request){
+    public function fileList($id, Request $request){
         $dirSys = public_path() . '/' . $request->input('dir');
         $dir = $request->input('dir');
         $files = File::files($dirSys);
+
+        $settings = \App\Models\Setting::where('name', $id)->get();
+        if(count($settings)>0){
+            $settings = $settings->first()->value;
+        }else{
+            $settings = 'nodata';
+        }
+
         $idSelector = $request->input('idSelector');
-        return view('_layout.file-list', compact('files', 'dir', 'idSelector'));
+        return view('_layout.file-list', compact('files', 'dir', 'idSelector', 'settings'));
     }
 
     public function grid(Request $request){
@@ -277,10 +285,13 @@ class PagesController extends Controller
         $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
                         INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $a=1;
-        $result2 = count(Setting::where('name', 'Title')->get())>0?Setting::where('name', 'Title')->get()->first()->value:"";
-        $result3 = count(Setting::where('name', 'Footer')->get())>0?Setting::where('name', 'Footer')->get()->first()->value:"";
-        $filesLogo = File::files(public_path(). '/uploads/logo/');
-        $filesBg = File::files(public_path(). '/uploads/background/');
+        
+        $result2 = count(Setting::where('name', 'title')->get())>0?Setting::where('name', 'title')->get()->first()->value:"";
+        $result3 = count(Setting::where('name', 'footer')->get())>0?Setting::where('name', 'footer')->get()->first()->value:"";
+        
+        $filesLogo = File::files(public_path().'/'.\App\Models\Setting::LOGO_UPLOAD_PATH);
+        $filesBg = File::files(public_path().'/'. \App\Models\Setting::BG_UPLOAD_PATH);
+
         return view('backend.preference', compact('css', 'jH', 'title','result2','result3','filesLogo','filesBg'));
     }
 

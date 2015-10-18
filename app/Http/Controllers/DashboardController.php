@@ -27,7 +27,7 @@ class DashboardController extends Controller
 					'id' => 'required|integer'
 				]
 			);
-			$destination = '/uploads/menu/';
+			$destination = ParentFrontpage::UPLOAD_PATH;
 			if($validator->passes()){
 				$result = ParentFrontpage::find($request->input('id'));
 				$result->nama = $request->input('nama');
@@ -38,7 +38,7 @@ class DashboardController extends Controller
 					if($request->file('image')->isValid()){
 						
 						$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('image')->guessExtension();
-						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.'/'.$filename);
+						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.$filename);
 
 						$result->image = $filename;
 					}
@@ -55,7 +55,7 @@ class DashboardController extends Controller
 				if($request->hasFile('image')){
 					if($request->file('image')->isValid()){
 						$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('image')->guessExtension();
-						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.'/'.$filename);
+						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.$filename);
 
 						$result->image = $filename;
 					}

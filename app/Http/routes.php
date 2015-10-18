@@ -25,7 +25,7 @@ Route::get('admin/menu', ['uses'=>'PagesController@menu', 'as'=>'admin.menu.get'
 Route::get('admin/preference', ['uses'=>'PagesController@preference', 'as'=>'admin.preference.get', 'middleware'=>'auth']);
 Route::get('admin/grid', ['uses'=>'PagesController@grid', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 
-Route::post('admin/filesList', ['uses'=>'PagesController@fileList', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
+Route::post('admin/filesList/{id}', ['uses'=>'PagesController@fileList', 'as'=>'admin.grid.get', 'middleware'=>'auth']);
 
 Route::get('admin/setGrid', ['uses'=>'PagesController@setGrid', 'as'=>'admin.grid.set', 'middleware'=>'auth']);
 
@@ -74,4 +74,5 @@ Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);
 	Route::get('/setting/list', 'SettingsController@index');
 	Route::get('/grid/size', ['uses'=>'GridController@getGridSize']);
+	Route::get('/path/uploads/{id}', ['uses'=>'GambarController@uploadPath']);
 });
