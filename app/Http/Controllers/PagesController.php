@@ -164,7 +164,16 @@ class PagesController extends Controller
         $jH = $this->jS('image');
         $title = 'Dashboard';
         $files = File::files(public_path(). '/uploads/menu/');
-        return view('backend.gambar', compact('css', 'jH', 'title','files'));
+
+         $footer = Setting::where('name', 'footer')->get();
+        if(count($footer)>0){
+           $footer =$footer->first()->value;
+        }else{
+           $footer = '(c) Ordent '.date('Y');
+        }
+
+
+        return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer'));
     }
 
     public function fileList($id, Request $request){
@@ -246,18 +255,31 @@ class PagesController extends Controller
         $jH =  $this->jS('general');
         $result = User::all();
         $a=0;
-        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb'));
+
+         $footer = Setting::where('name', 'footer')->get();
+        if(count($footer)>0){
+           $footer =$footer->first()->value;
+        }else{
+           $footer = '(c) Ordent '.date('Y');
+        }
+
+        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
     }
 
      public function role(){
         $title = 'Role';
         $breadcrumb = array(array('Home', 0), array('User', 0), array('Roles', 1));
-
         $css = $this->CSS('users');
         $jH =  $this->jS('roles');
         $result = Role::all();
         $a=0;
-        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb'));
+         $footer = Setting::where('name', 'footer')->get();
+        if(count($footer)>0){
+           $footer =$footer->first()->value;
+        }else{
+           $footer = '(c) Ordent '.date('Y');
+        }
+        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
     }
 
     public function tes(){
@@ -275,7 +297,15 @@ class PagesController extends Controller
                         INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $result2 = DB::table('parent_menu')->get();
         $a=1;
-        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a'));
+
+         $footer = Setting::where('name', 'footer')->get();
+        if(count($footer)>0){
+           $footer =$footer->first()->value;
+        }else{
+           $footer = '(c) Ordent '.date('Y');
+        }
+
+        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer'));
     }
 
     public function preference(){
@@ -292,7 +322,14 @@ class PagesController extends Controller
         $filesLogo = File::files(public_path().'/'.\App\Models\Setting::LOGO_UPLOAD_PATH);
         $filesBg = File::files(public_path().'/'. \App\Models\Setting::BG_UPLOAD_PATH);
 
-        return view('backend.preference', compact('css', 'jH', 'title','result2','result3','filesLogo','filesBg'));
+         $footer = Setting::where('name', 'footer')->get();
+        if(count($footer)>0){
+           $footer =$footer->first()->value;
+        }else{
+           $footer = '(c) Ordent '.date('Y');
+        }
+
+        return view('backend.preference', compact('css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer'));
     }
 
     public function CSS($mode){
