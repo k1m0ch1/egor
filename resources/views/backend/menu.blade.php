@@ -32,7 +32,7 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Parent</th>
-                      <th>Child</th>
+                      
                       <th>Redirect to</th>
                       <th style="width: 40px">Operation</th>
                     </tr>
@@ -44,7 +44,7 @@
                           <button class="btn btn-primary" id="simpanName-{{ $r2->id }}" style="margin-left: 3px;"><i class="fa fa-save"></i></button>
                           <button class="btn btn-danger" id="cancelName-{{ $r2->id }}" style="margin-left: 1px;"><i class="fa fa-close"></i></button>
                       </td>
-                      <td>not yet</td>
+                      
                       <td>
                           <label id="lblHref-{{ $r2->id }}">{{ $r2->redirect }}</label>
                           <input type='text' id='txtHref-{{ $r2->id }}' value='{{ $r2->redirect }}' style="width: 150px; float: left;" size=1 class='form-control'/>

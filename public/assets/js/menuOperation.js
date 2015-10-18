@@ -93,7 +93,7 @@ $(document).ready(function(){
 		var str2 = '<td>not yet</td>';
 		var str3 = '<td><label id="lblHref-New"></label><input type="text" id="txtHref-New" class="form-control"/></td>';
 		var str4 = '<td style="width: 100px;"><button class="btn btn-primary" id="simpan-New" style="margin-left: 3px;"><i class="fa fa-save"></i></button><button class="btn btn-danger" id="cancel-New" style="margin-left: 1px;"><i class="fa fa-close"></i></button></td></tr>';
-		$(str1 + str2 + str3 + str4).appendTo('table > tbody ');
+		$(str1 + /*str2 +*/ str3 + str4).appendTo('table > tbody ');
 		$('#lblHref-New').hide();
 		$('#lblName-New').hide();
 		

@@ -12,7 +12,6 @@ $(document).ready(function(){
 		}
 		// Loading grid size
 	 $( window ).load(function() {
-	 		
 	 		$.get( host + 'api/v1/grid/size').done(function(data){
 	 			width = data.w;
 	 			height = data.h;
@@ -149,6 +148,7 @@ $(document).ready(function(){
 				 	var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
 				 	$("#message-body").html(el);
 				 	$("#message-body").fadeIn('slow');
+				 	location.reload();
 				 }
 			});
 		});

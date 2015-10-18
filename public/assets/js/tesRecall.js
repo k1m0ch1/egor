@@ -83,7 +83,7 @@ $(document).ready(function(){
 			         data : { id: currentID },
 			         dataType: 'html',
 			         success: function(data){
-			         	//location.reload();
+			         	location.reload();
 			         }
 			      });
 		}
@@ -137,7 +137,7 @@ $(document).ready(function(){
 		 minimenu2.css("top", -192+"px");
 		 minimenu2.show();
 		 minimenu3.css("position", "absolute");
-		 minimenu3.css("left", 78+"px");
+		 minimenu3.css("left", 107+"px");
 		 minimenu3.css("top", -192+"px");
 		 minimenu3.show();
 	 },function(){	                // Mouse out, hide menu
