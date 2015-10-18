@@ -21,7 +21,12 @@ class PagesController extends Controller
      */
     public function index(){
         $result1 = DB::table('parent_menu')->get();
-        $siteTitle = DB::table('preference')->get();
+        $siteTitle = Setting::where('name', 'title')->get();
+        if( count($siteTitle) > 0){
+            $siteTitle = Setting::UPLOAD_PATH . '/' .$siteTitle->first()->value;
+        }else{
+            $siteTitle = 'Website';
+        }
         $datanyah = ParentFrontpage::orderBy('position')->get();
         $bah = $siteTitle[0]->title;
         // Atur Grid Menu
