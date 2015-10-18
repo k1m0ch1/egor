@@ -56,7 +56,7 @@ $(document).ready(function(){
       var as = id=="xxx"?"add":"edit";
       var name = $('input#name').val();
       var displayname = $('input#displayName').val();
-      var description = $('input#description').text();
+      var description = $('textare#description').text();
       $.ajax({
            url:  host + 'admin/roles[edit:save]',
            type: 'POST',
