@@ -46,7 +46,14 @@ class PagesController extends Controller
             $bg = 'assets/img/bg.jpg';
         }
 
-        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg'));
+        $footer = Setting::where('name', 'background')->get();
+        if( count($footer) > 0){
+            $footer = Setting::UPLOAD_PATH . '/' .$footer->first()->value;
+        }else{
+            $footer = '(c) 2015, Ordent, All Right Reserved.';
+        }
+
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer'));
     }
 
     /**
@@ -140,9 +147,16 @@ class PagesController extends Controller
            $w = 3;
         }
 
+        $footer = Setting::where('name', 'footer')->get();
+        if(count($footer)>0){
+           $footer =$footer->first()->value;
+        }else{
+           $footer = '(c) Ordent '.date('Y');
+        }
+
         $rS = $w.'x'.$h;
 
-        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb'));
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer'));
     }
 
     public function indexGambar(){

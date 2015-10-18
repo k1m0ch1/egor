@@ -3,7 +3,7 @@
 			   <div class="row copyright">
 				   <div class="col-lg-12">
 					   <p class="text-center">
-						   Copyright &copy; 2015 - <a href="{{url('/')}}">{{ $bah or 'Title' }}</a>
+						   {{$footer or '-'}} - <a href="{{url('/')}}">{{ $bah or 'Title' }}</a>
 					   </p>
 				   </div>
 			   </div>

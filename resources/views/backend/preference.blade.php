@@ -24,6 +24,9 @@
               <div class="col-xs-12">
                 <div class="box">
                 <div class="box-body">
+                <div id="message-body">
+						
+					</div>
                   <div class="nav-tabs-custom">
 	                <!-- Tabs within a box -->
 	                <ul class="nav nav-tabs pull-right">
@@ -127,7 +130,6 @@
 	                  </div>
 	                </div>
 	              </div><!-- /.nav-tabs-custom -->
-
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             <!-- right col (We are only adding the ID to make the widgets sortable)-->

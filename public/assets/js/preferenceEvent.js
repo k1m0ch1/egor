@@ -32,10 +32,14 @@ $(document).ready(function(){
 		$.ajax({
               url:  host + 'admin/preference:logo[save]',
               type: 'POST',
-              data: { name: "Logo", value : fileName },
-              dataType: 'html',
+              data: { name: "logo", value : fileName },
+              dataType: 'json',
               success: function(data) {
-                
+                $("#message-body").hide();
+                var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.message);
+                var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+                $("#message-body").html(el);
+                $("#message-body").fadeIn('slow');
               }
      	 });
 	}
@@ -45,10 +49,14 @@ $(document).ready(function(){
 		$.ajax({
               url:  host + 'admin/preference:background[save]',
               type: 'POST',
-              data: { name: "Background" ,value : fileName },
-              dataType: 'html',
+              data: { name: "background" ,value : fileName },
+              dataType: 'json',
               success: function(data) {
-                
+                $("#message-body").hide();
+                var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.message);
+                var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+                $("#message-body").html(el);
+                $("#message-body").fadeIn('slow');
               }
      	 });
 	}
@@ -58,10 +66,14 @@ $(document).ready(function(){
         $.ajax({
               url:  host + 'admin/preference:title[save]',
               type: 'POST',
-              data: { name: "Title", value : title },
-              dataType: 'html',
+              data: { name: "title", value : title },
+              dataType: 'json',
               success: function(data) {
-                
+                $("#message-body").hide();
+                var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.message);
+                var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+                $("#message-body").html(el);
+                $("#message-body").fadeIn('slow');
               }
            });
     }
@@ -71,10 +83,15 @@ $(document).ready(function(){
         $.ajax({
               url:  host + 'admin/preference:footer[save]',
               type: 'POST',
-              data: { name : "Footer", value : text },
-              dataType: 'html',
+              data: { name : "footer", value : text },
+              dataType: 'json',
               success: function(data) {
                 
+                $("#message-body").hide();
+                var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.message);
+                var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+                $("#message-body").html(el);
+                $("#message-body").fadeIn('slow');
               }
            });
     }

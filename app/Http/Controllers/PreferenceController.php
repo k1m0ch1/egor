@@ -23,18 +23,29 @@ class PreferenceController extends Controller
     public function preferenceSave(Request $request){
         $name = $request->input('name');
         $value = $request->input('value');
+       
         $result = Setting::where('name', $name)->get();
+
         $trigger = count($result)>0?true:false;
+
         if($trigger){
-            echo "WTF";
             $result = $result->first();
             $result->value = $value;
+            $result->save();
         }else{
             $result = new Setting;
             $result->name = $name;
             $result->value = $value;
             $result->save();
         }
+
+        $results = new \StdClass;
+        $results->info = $name.' preference save';
+        $results->status = 1;
+        $results->message = ucwords($name).' has been successfuly updated';
+        $results->result = $result;
+
+        return response()->json($results);
     }
 
     public function backgroundSave(Request $request){
@@ -49,7 +60,30 @@ class PreferenceController extends Controller
     }
 
     public function title(){
-    	$rS = DB::table('preference')->where('id', '1')->get();
-    	return $rS->title;
+    	$name = $request->input('name');
+        $value = $request->input('value');
+       
+        $result = Setting::where('name', $name)->get();
+
+        $trigger = count($result)>0?true:false;
+
+        if($trigger){
+            $result = $result->first();
+            $result->value = $value;
+            $result->save();
+        }else{
+            $result = new Setting;
+            $result->name = $name;
+            $result->value = $value;
+            $result->save();
+        }
+
+        $results = new \StdClass;
+        $results->info = 'title preference save';
+        $results->status = 1;
+        $results->message = 'Title has been successfuly updated';
+        $results->result = $result;
+
+        return response()->json($results);
     }
 }
