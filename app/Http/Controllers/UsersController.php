@@ -108,9 +108,14 @@ class UsersController extends Controller
 
     public function login(){
         $result1 = DB::table('parent_menu')->get();
-        $siteTitle = DB::table('preference')->get();
+        
         $datanyah = DB::table('parent_frontpage')->get();
-        $bah = $siteTitle[0]->title;
+        $siteTitle = Setting::where('name', 'title')->get();
+        if( count($siteTitle) > 0){
+            $bah = Setting::UPLOAD_PATH . '/' .$siteTitle->first()->value;
+        }else{
+            $bah = 'Website';
+        }
         return view('frontend.login', compact('result1', 'bah', 'datanyah'));
     }
 
