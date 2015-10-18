@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSetting extends Migration
+class ChildFrontpage extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,13 @@ class CreateSetting extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('child_frontpage', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('value');
+            $table->string('nama');
+            $table->integer('position');
+            $table->string('redirect');
+            $table->string('image');
+            $table->string('mode');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateSetting extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::drop('child_frontpage');
     }
 }
