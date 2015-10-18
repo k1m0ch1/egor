@@ -139,7 +139,7 @@ class PagesController extends Controller
         $css = $this->CSS('style-upload');
         $jH = $this->jS('image');
         $title = 'Dashboard';
-        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
+        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/menu/');
         return view('backend.gambar', compact('css', 'jH', 'title','files'));
     }
 
@@ -221,7 +221,7 @@ class PagesController extends Controller
                         INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $a=1;
         $result2 = DB::table('preference')->where('id', '1')->get();
-        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/');
+        $files = File::files('/var/www/html/egor/public/assets/img/uploaded/menu/');
         return view('backend.preference', compact('css', 'jH', 'title','result2','files'));
     }
 

@@ -7,9 +7,9 @@
         <?php $img[$a][1] = isset($img[$a][1])?$img[$a][1]:'x'; ?>
         <?php $img[$a][2] = isset($img[$a][2])?$img[$a][2]:'#'; ?>
         <?php $img[$a][4] = isset($img[$a][4])?$img[$a][4]:'x'; ?>
-        <?php $checkFile = get_headers(asset('assets/img/uploaded'. '/' . $img[$a][3] )); ?>
+        <?php $checkFile = get_headers(asset('assets/img/uploaded'. '/menu/' . $img[$a][3] )); ?>
         @if ($checkFile[0] != 'HTTP/1.1 404 Not Found')
-            <img class="img-thumbnail" src="{{ asset('assets/img/uploaded') }}/{{ $img[$a][3] }}" alt="" />
+            <img class="img-thumbnail" src="{{ asset('assets/img/uploaded/menu/') }}/{{ $img[$a][3] }}" alt="" />
         @elseif ($img[$a][3] == 'holder.js/180x180')
             <img data-src="{{ $img[$a][3] }}" class="img-thumbnail" alt="" />
         @else

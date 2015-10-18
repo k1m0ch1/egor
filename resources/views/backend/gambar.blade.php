@@ -53,7 +53,7 @@
                     <select class="image-picker show-html">
                       @for($a=0;$a<sizeOf($files);$a++)
                         <?php $filename = explode( '/', $files[$a]); ?>
-                        <option data-img-src="{{ asset('assets/img/uploaded') }}/{{ $filename[10] }}" value="{{ $filename[10] }}">  {{ $filename[10] }}  </option>
+                        <option data-img-src="{{ asset('assets/img/uploaded/menu/') }}/{{ $filename[11] }}" value="{{ $filename[11] }}">  {{ $filename[11] }}  </option>
                       @endfor
                     </select>
                     @endif

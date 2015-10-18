@@ -26,7 +26,7 @@ class GambarController extends Controller
                 $hasil = '{"status":"error"}';
             }
 
-            if(move_uploaded_file($_FILES['upl']['tmp_name'], '/var/www/html/egor/public/assets/img/uploaded/' . '/' .$_FILES['upl']['name'])){
+            if(move_uploaded_file($_FILES['upl']['tmp_name'], '/var/www/html/egor/public/assets/img/uploaded/menu/' . '/' .$_FILES['upl']['name'])){
                 $hasil = '{"status":"success"}';
             }
         }
