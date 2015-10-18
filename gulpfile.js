@@ -7,7 +7,7 @@ var gulp = require('gulp');
 	sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('frontend', function(){
-	return gulp.src('resources/assets/sass/styles.scss')
+	return gulp.src('resources/assets/sass/frontend.scss')
 	.pipe(sourcemaps.init())
 	.pipe(sass())
 	.pipe(sourcemaps.write())
@@ -19,7 +19,7 @@ gulp.task('frontend', function(){
 gulp.task('servef', ['frontend'], function() {
 
 	browserSync.init({
-		proxy: "http://localhost/egor/public/"
+		proxy: "http://egor.app"
 	});
 
 	gulp.watch("resources/assets/sass/*.scss", ['frontend']);
@@ -30,7 +30,7 @@ gulp.task('servef', ['frontend'], function() {
 gulp.task('serveb', ['backend'], function() {
 
 	browserSync.init({
-		proxy: "http://localhost/egor/public/"
+		proxy: "http://egor.app"
 	});
 
 	gulp.watch("resources/assets/sass/*.scss", ['backend']);

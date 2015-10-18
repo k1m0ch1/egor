@@ -6,7 +6,7 @@
           <div class="user-panel" style="min-height: 75px;">
             <div class="pull-left image">
               @if(\Auth::check())
-              <img data-src="holder.js/90x60" class="img-circle" src="{{asset(\Auth::user()->avatar_path)}}/{{\Auth::user()->avatar}}" alt="">
+              <img data-src="holder.js/90x60" class="img-circle" src="{{asset(\App\Models\User::UPLOAD_PATH)}}/{{\Auth::user()->avatar}}" alt="">
               @else
               <img data-src="holder.js/90x60" class="img-circle" alt="User Image">
               @endif

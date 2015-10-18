@@ -33,13 +33,20 @@ class PagesController extends Controller
         }
 
         $w = Setting::where('name', 'grid_width')->get();
-
         if( count($w) > 0 ){
            $w = $w->first()->value;    
         }else{
            $w = 3;
         }
-        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w'));
+
+        $bg = Setting::where('name', 'background')->get();
+        if( count($bg) > 0){
+            $bg = Setting::UPLOAD_PATH . '/' .$bg->first()->value;
+        }else{
+            $bg = 'assets/img/bg.jpg';
+        }
+
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg'));
     }
 
     /**

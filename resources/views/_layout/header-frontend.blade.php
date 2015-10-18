@@ -12,8 +12,8 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
 	</head>
-@if(isset($background))
-<body class="index" style="background-image: {{$background}}">
+@if(isset($bg))
+<body class="index" style="background-image: url('{{$bg}}');">
 @else
 <body class="index">
 @endif
