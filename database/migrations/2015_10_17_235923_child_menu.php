@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddChildMenu extends Migration
+class ChildMenu extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class AddChildMenu extends Migration
      */
     public function up()
     {
-        Schema::table('child_menu', function (Blueprint $table) {
-            $table->increments('id', 3);
-            $table->integer('parent_id', 3);
-            $table->string('name', 200);
+        Schema::create('child_menu', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
             $table->text('redirect');
+            $table->integer('parent_id');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class AddChildMenu extends Migration
      */
     public function down()
     {
-       Schema::drop('child_menu');
+        Schema::drop('child_menu');
     }
 }
