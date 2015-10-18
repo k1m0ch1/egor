@@ -47,6 +47,8 @@ Route::post('admin/menu[add:save]', ['uses'=>'MenusController@addSave', 'middlew
 Route::get('admin/menu:child', ['uses'=>'MenusController@getChild', 'middleware'=>'auth']);
 Route::get('admin/menu:child[add]', ['uses'=>'MenusController@newChild', 'middleware'=>'auth']);
 Route::post('admin/menu:child[add:save]', ['uses'=>'MenusController@saveNewChild', 'middleware'=>'auth']);
+Route::get('admin/menu:child[del]', ['uses'=>'MenusController@delChild', 'middleware'=>'auth']);
+Route::get('admin/menu:child[edit]', ['uses'=>'MenusController@editChild', 'middleware'=>'auth']);
 
 Route::post('admin/preference:title[save]', ['uses'=>'PreferenceController@titleSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:image', ['uses'=>'PreferenceController@image', 'as'=>'image.preference.get', 'middleware'=>'auth']);

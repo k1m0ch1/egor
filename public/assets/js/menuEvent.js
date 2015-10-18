@@ -72,22 +72,21 @@ $(document).ready(function(){
 		var a = $('#add_child-form input#name').val();
 		var b = $('#add_child-form input#href').val();
 		var c = $('#add_child-form input#parent_id').val();
+		var d = $('#add_child-form input#idnyah').val();
 		$.ajax({
 	         url:  host + 'admin/menu:child[add:save]',
 	         type: 'POST',
-	         data : { name:a, redirect:b, parent_id: c},
+	         data : { name:a, redirect:b, parent_id: c, id: d},
 	         dataType: 'html',
 	         success: function(data){
 	         	dialog_add_child.dialog("close");
-	         	dialog_child.dialog("close");
 	         	$.ajax({
-		         url:  host + 'admin/menu:child[add]',
+		         url:  host + 'admin/menu:child',
 		         type: 'GET',
 		         data : { id: $('#parent_id').val() },
 		         dataType: 'html',
 		         success: function(data){
-		         	$('#add_form-child').html(data);
-		         	dialog_child.dialog("open");
+		         	$('#form-child').html(data);
 		         	$.getScript(  dir_host + "assets/js/menuEvent.js" )
 		              .done(function( script, textStatus ) {
 		                console.log( textStatus );
@@ -103,6 +102,58 @@ $(document).ready(function(){
 
 	$('#cancel-New').on('click', function(){
 		$('table tr:last-child').remove();
+	});
+
+	$('[id^=delChild').on('click', function(){
+		var aw = confirm("Yakin Hapus Data ?");
+		if(aw){
+			var currentID = $(this).attr('id').split('-');		    
+			$.ajax({
+			    url:  host + 'admin/menu:child[del]',
+			    type: 'GET',
+			    data: {parent_id:currentID[2], id:currentID[1]},
+			    dataType: 'html',
+			    success: function(data){
+			    	$.ajax({
+			         url:  host + 'admin/menu:child',
+			         type: 'GET',
+			         data : { id: $('#parent_id').val() },
+			         dataType: 'html',
+			         success: function(data){
+			         	$('#form-child').html(data);
+			         	$.getScript(  dir_host + "assets/js/menuEvent.js" )
+			              .done(function( script, textStatus ) {
+			                console.log( textStatus );
+			              })
+			              .fail(function( jqxhr, settings, exception ) {
+			                $( "div.log" ).text( "Triggered ajaxError handler." );
+			            });
+			         }
+			      });
+			    }
+			});
+		}
+	});
+
+	$('[id^=editChild').on('click', function(){
+			var currentID = $(this).attr('id').split('-');
+			dialog_add_child.dialog("open");		    
+			$.ajax({
+			    url:  host + 'admin/menu:child[edit]',
+			    type: 'GET',
+			    data: {parent_id:currentID[2], id:currentID[1]},
+			    dataType: 'html',
+			    success: function(data){
+			    	$('#add_form-child').html(data);
+			    	$.getScript(  dir_host + "assets/js/menuEvent.js" )
+			              .done(function( script, textStatus ) {
+			                console.log( textStatus );
+			              })
+			              .fail(function( jqxhr, settings, exception ) {
+			                $( "div.log" ).text( "Triggered ajaxError handler." );
+			            });
+			    }
+			});
 	});
 
 	$('[id^=simpanName]').on('click', function(){
