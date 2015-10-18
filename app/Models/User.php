@@ -15,8 +15,8 @@ class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
-
+    use Authenticatable, CanResetPassword;
+    use EntrustUserTrait;
     /**
      * The database table used by the model.
      *
@@ -37,4 +37,6 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-}
+
+    public $avatar_path = 'uploads/avatar';
+}   

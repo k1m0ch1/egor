@@ -9,6 +9,8 @@ use DB;
 use File;
 use App\Models\Setting;
 use App\Models\ParentFrontpage;
+use App\Models\User;
+use App\Models\Role;
 
 class PagesController extends Controller
 {
@@ -201,11 +203,24 @@ class PagesController extends Controller
 
     public function user(){
         $title = 'Users';
+        $breadcrumb = array(array('Home', 0), array('User', 0), array('Users', 1));
+
         $css = $this->CSS('users');
         $jH =  $this->jS('general');
-        $result = DB::table('users')->get();
+        $result = User::all();
         $a=0;
-        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a'));
+        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb'));
+    }
+
+     public function role(){
+        $title = 'Role';
+        $breadcrumb = array(array('Home', 0), array('User', 0), array('Roles', 1));
+
+        $css = $this->CSS('users');
+        $jH =  $this->jS('general');
+        $result = Role::all();
+        $a=0;
+        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb'));
     }
 
     public function tes(){
