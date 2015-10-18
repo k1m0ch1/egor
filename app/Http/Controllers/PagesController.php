@@ -416,8 +416,6 @@ class PagesController extends Controller
                         asset('assets/vendor/foundation/js/foundation.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js'),
                         asset('holder.js'),
-                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
-                        asset('assets/vendor/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
                         asset('assets/js/roleOperator.js')
                         );

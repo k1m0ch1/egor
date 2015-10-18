@@ -1,36 +1,88 @@
 $(document).ready(function(){
 
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+    });
+
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 410,
+      height: 420,
       width: 500,
       modal: true,
-      buttons: {
-        "Simpan": simpan,
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
-      close: function() {
-        form[0].reset();
-      }
+      draggable: false,
+      buttons: [{
+                  id:"btn-simpan", text: "Simpan",
+                  click: function() {
+                      simpanRoles();
+                }},
+                {
+                  id:"btn-cancel", text: "Cancel",
+                  click: function() {
+                      $(':input','#child-form')
+                         .not(':button, :submit, :reset, :hidden')
+                         .val('')
+                         .removeAttr('checked')
+                         .removeAttr('selected');
+                      $(this).dialog("close");
+                }}]
     });
 
    form = dialog.find( "form" ).on( "submit", function( event ) {
       event.preventDefault();
-      simpan();
+      simpanRoles();
     });
 
+   $( window ).load(function() {
+      $.ajax({
+          url:  host + 'admin/roles[show]',
+          type: 'GET',
+          dataType: 'html',
+          success: function(data){
+            $('#tbody-roles').html(data);
+         }
+      }); 
+   });
+
+   function simpanRoles(){
+      var id = $('input#id').val();
+      var name = $('input#name').val();
+      var displayname = $('input#displayName').val();
+      var description = $('input#description').val();
+      $.ajax({
+           url:  host + 'admin/roles[edit:save]',
+           type: 'POST',
+           data : { id: id, as : "edit", name : name, displayname:displayname, description:description},
+           dataType: 'html',
+           success: function(data){
+              dialog.dialog("close");
+              $.ajax({
+                 url:  host + 'admin/roles[edit:save]',
+                 type: 'POST',
+                 data : { id: id, as : "edit", name : name, displayname:displayname, description:description},
+                 dataType: 'html',
+                 success: function(data){
+                    dialog.dialog("close");
+                 }
+              });  
+           }
+        });   
+   }
+
     $('[id^=editRule]').on('click', function(){
-        alert('wtf');
     		var currentID = $(this).attr('id');
     		currentID = currentID.split('-')[1];
     		var idnyah = currentID;
-            dialog.dialog( "open" );
+            dialog.dialog("open");
             $.ajax({
 	            url:  host + 'admin/roles[edit:show]',
 	            type: 'GET',
-	            data: { id: id, as: "edit" },
+	            data: { id: currentID, as: "edit" },
 	            dataType: 'html',
 	            success: function(data) {
 	            	$('#formnyah').html(data);

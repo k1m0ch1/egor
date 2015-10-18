@@ -26,6 +26,7 @@ class VerifyCsrfToken extends BaseVerifier
                             'admin/preference:logo[save]',
                             'admin/preference:background[save]',
                             'admin/preference:title[save]',
-                            'admin/preference:footer[save]'
+                            'admin/preference:footer[save]',
+                            'admin/roles[edit:save]'
     ];
 }
