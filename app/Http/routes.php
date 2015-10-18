@@ -43,6 +43,7 @@ Route::get('admin/users[edit:show]', ['uses'=>'UsersController@show', 'as'=>'use
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
+Route::get('admin/menu[del]', ['uses'=>'MenusController@delParent', 'middleware'=>'auth']);
 Route::post('admin/menu[add:save]', ['uses'=>'MenusController@addSave', 'middleware'=>'auth']);
 Route::get('admin/menu:child', ['uses'=>'MenusController@getChild', 'middleware'=>'auth']);
 Route::get('admin/menu:child[add]', ['uses'=>'MenusController@newChild', 'middleware'=>'auth']);

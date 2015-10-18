@@ -67,6 +67,24 @@ $(document).ready(function(){
 	      });
 	});
 
+	$('[id^=delMenu]').on('click', function(){
+		var konfirm = confirm("Yakin Hapus Data ?");
+		if(konfirm){
+			var currentID = $(this).attr('id').split('-')[1];
+			$.ajax({
+		         url:  host + 'admin/menu[del]',
+		         type: 'GET',
+		         data : { id: currentID },
+		         dataType: 'html',
+		         success: function(data){
+		         	if(data=="success delParent"){
+		         		location.reload();
+		         	}
+		         }
+		      });
+	 	}
+	});
+
 	$('#tambah').on('click', function(){
 		//$('<tr><td>Stuff</td></tr>').insertBefore('table > tbody > tr:nth-child(2)').next();
 		var num = parseInt($('table tr:last-child').children('td:first').text());

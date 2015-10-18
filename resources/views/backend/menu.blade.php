@@ -55,7 +55,7 @@
                       <td><div class="tools" align='center'>
                       		  <a class="fa fa-object-ungroup" id='childMenu-{{$r2->id}}'>&nbsp;</a>
                               <a class="fa fa-edit" id='editMenu-{{$r2->id}}'></a>&nbsp;
-                              <a class="fa fa-trash-o"></a>
+                              <a class="fa fa-trash-o" id='delMenu-{{$r2->id}}'></a>
                             </div></td>
                       </tr>
                     @endforeach

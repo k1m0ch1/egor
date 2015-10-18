@@ -109,11 +109,9 @@ class MenusController extends Controller
 	}
 
 	public function delParent(Request $request){
-		$parent_id = $request->input('parent_id');
-		$child_id = $request->input('id');
-		$hasil = DB::table('child_menu')->where('parent_id', $parent_id)
-					->where('id', $child_id)->delete();
-		return $hasil==true?"success delChild":"fail delChild";
+		$id = $request->input('id');
+		$hasil = DB::table('parent_menu')->where('id', $id)->delete();
+		return $hasil==true?"success delParent":"fail delParent";
 	}
 
 	public function editChild(Request $request){
