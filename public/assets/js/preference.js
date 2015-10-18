@@ -22,7 +22,7 @@ $(document).ready(function(){
     function simpanTitle(){
         var title = $('#inputTitle').val();
         $.ajax({
-              url: host + 'admin/preference:title[save]',
+              url:  'admin/preference:title[save]',
               type: 'POST',
               data: { judul : title },
               dataType: 'html',
@@ -35,7 +35,7 @@ $(document).ready(function(){
     function simpanBackground(){
         var a=$("#background option:selected" ).text();
         $.ajax({
-              url: host + 'admin/preference:background[save]',
+              url:  'admin/preference:background[save]',
               type: 'POST',
               data: { namaFile : a },
               dataType: 'html',
@@ -48,7 +48,7 @@ $(document).ready(function(){
     function simpanLogo(){
         var a=$("#logo option:selected" ).text();
         $.ajax({
-              url: host + 'admin/preference:logo[save]',
+              url:  'admin/preference:logo[save]',
               type: 'POST',
               data: { namaFile : a },
               dataType: 'html',

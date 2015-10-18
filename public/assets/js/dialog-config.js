@@ -165,7 +165,7 @@ $(document).ready(function(){
             data: myFormData,
             dataType: 'json',
             success: function(data) {
-              $("#img-thumbnail-"+d).attr('src', location.protocol+'//'+location.hostname+'/assets/img/uploaded/'+data.result.image);
+              $("#img-thumbnail-"+d).attr('src', location.protocol+'//'+location.hostname+'/assets/img/uploaded/menu/'+data.result.image);
               dialog.dialog( "close" );
             }
          });

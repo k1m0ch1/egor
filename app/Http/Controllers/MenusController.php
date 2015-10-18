@@ -76,10 +76,88 @@ class MenusController extends Controller
 		return json_encode($hasil);
 	}
 
-	public function createMenu(Request $request){
+	public function addSave(Request $request){
 		$hasil = DB::table('parent_menu')->insert(['name'=> $request->input('name'),
 			'redirect'=> $request->input('redirect')]);
 		return $hasil==true?"success":"fail";
+	}
+
+	public function selectWhere(Request $request){
+		$hasil = DB::table('parent_menu')->where('name', $request->input('name'))
+				->where('redirect', $request->input('redirect'))
+				->get();
+		return json_encode($hasil);
+	}
+
+	public function getChild(Request $request){
+		$hasil = DB::table('child_menu')->where('parent_id', $request->input('id'))->get();
+		$parent_id = $request->input('id');
+		return view('_layout.dialog-child-menu-backend', compact('hasil', 'parent_id'));
+	}
+
+	public function newChild(Request $request){
+		$parent_id = $request->input('id');
+		return view('_layout.form-new-input-menu-backend', compact('parent_id'));
+	}
+
+	public function delChild(Request $request){
+		$parent_id = $request->input('parent_id');
+		$child_id = $request->input('id');
+		$hasil = DB::table('child_menu')->where('parent_id', $parent_id)
+					->where('id', $child_id)->delete();
+		return $hasil==true?"success delChild":"fail delChild";
+	}
+
+	public function delParent(Request $request){
+		$id = $request->input('id');
+		$hasil = DB::table('parent_menu')->where('id', $id)->delete();
+		return $hasil==true?"success delParent":"fail delParent";
+	}
+
+	public function editChild(Request $request){
+		$parent_id = $request->input('parent_id');
+		$id = $request->input('id');
+		$hasil = DB::table('child_menu')->where('parent_id', $parent_id)
+					->where('id', $id)->get();
+		foreach($hasil as $rS){
+			$name = $rS->name;
+ 			$redirect = $rS->redirect;
+		}
+		return view('_layout.form-input-menu-backend', compact('parent_id', 'id','name','redirect'));
+	}
+
+	public function editChildSave(Request $request){
+		return (DB::table('child_menu')->where('id', $request->input('id'))
+						->where('parent_id', $request->input('parent_id'))
+						->update(
+                        ['name' => $request->input('name'),
+                         'redirect' => $request->input('redirect')]))==true?
+						"success editChildSave":"fail editChildSave";
+
+	}
+
+	public function saveNewChild(Request $request){
+		$id = $request->input('id');
+		$parent_id = $request->input('parent_id');
+		$hasil ='';
+		if($id=='xxx'){
+			$hasil = DB::table('child_menu')
+					 ->insert([
+					 		'parent_id' => $request->input('parent_id'),
+					 		'name' => $request->input('name'),
+					 		'redirect' => $request->input('redirect')
+					 	]);
+		}else{
+			$hasil = DB::table('child_menu')
+					 ->where('parent_id', $parent_id)
+					 ->where('id', $id)
+					 ->update([
+					 		'name' => $request->input('name'),
+					 		'redirect' => $request->input('redirect')
+					 	]);
+		}
+		
+		return $hasil==true?"success saveNewChild":"fail saveNewChild";
 	}
 
 	/**
