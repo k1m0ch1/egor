@@ -62,14 +62,13 @@ $(document).ready(function(){
            success: function(data){
               dialog.dialog("close");
               $.ajax({
-                 url:  host + 'admin/roles[edit:save]',
-                 type: 'POST',
-                 data : { id: id, as : "edit", name : name, displayname:displayname, description:description},
-                 dataType: 'html',
-                 success: function(data){
-                    dialog.dialog("close");
+                  url:  host + 'admin/roles[show]',
+                  type: 'GET',
+                  dataType: 'html',
+                  success: function(data){
+                    $('#tbody-roles').html(data);
                  }
-              });  
+              }); 
            }
         });   
    }
