@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Role;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -49,28 +51,74 @@ class UsersController extends Controller
      */
     public function show(Request $request)
     {
-        $result1 = DB::table('users')->where('id', $request->input('id'))->get();
-        foreach($result1 as $rS){
-            $name = $rS->name;
-            $email = $rS->email;
-            $idnyah = $rS->id;
+        $hasil = '';
+        $name = "";
+        $email = "";
+        $phone = "";
+        $department = "";
+        $idnyah = "xxx";
+        $resultRole = Role::All();
+        if($request->input('as')!="add"){
+            $result1 = DB::table('users')->where('id', $request->input('id'))->get();
+            foreach($result1 as $rS){
+                $name = $rS->name;
+                $email = $rS->email;
+                $idnyah = $rS->id;
+                $phone = $rS->phone;
+                $department = $rS->department;
+            }
         }
-        return view('_layout.form-input-user-backend', compact('name','email', 'idnyah'));
+        return view('_layout.form-input-user-backend', compact('phone','department','name','email', 'idnyah','resultRole'));
     }
 
-    public function editSave(Request $request)
-    {
-        if($request->input('password')==""){
-            DB::table('users')->where('id', $request->input('id'))->update(
-                    ['name' => $request->input('name'),
-                     'email' => $request->input('email')]);
-        }else{
-            DB::table('users')->where('id', $request->input('id'))->update(
-                    ['name' => $request->input('name'),
-                     'email' => $request->input('email'),
-                     'password'=> Hash::make($request->input('password'))]);
-        }
-        return 'success';
+    public function showAll(){
+        $result = User::All();
+        return view('_layout.tabel-user', compact('result'));
+    }
+
+    public function delete(Request $request){
+        $rS = User::find($request->input('id'))->delete();
+        return "success";
+    }
+
+    public function save(Request $request){
+
+        $allowed = array('png', 'jpg', 'gif');
+        $hasil = false;
+        $avatar = 'holder.js/180x180';
+
+        if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] == 0){
+            $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+
+                if(!in_array(strtolower($extension), $allowed)){
+                    $hasil = false;
+                }
+
+                if(move_uploaded_file($_FILES['avatar']['tmp_name'], public_path() . '/uploads/avatar/' .$_FILES['avatar']['name'])){
+                    $hasil = true;
+                    $avatar = $_FILES['avatar']['name'];
+                }
+            }else if($request->input('name')!=''){
+                $hasil = true;
+            }
+
+            if($hasil){
+                $as = $request->input('as');
+                $rS = User::find($request->input('id'));
+                $rS = $rS==null?new User:$rS;
+                $rS->name = $request->input('name');
+                $rS->email = $request->input('email');
+                $rS->phone = $request->input('phone');
+                $rS->department = $request->input('department');
+                $rS->avatar = $avatar;
+                if($as=="add"){ $rS->password = \Hash::make($request->input('password')); };
+                echo var_dump($request->input('password'));
+                $rS->save();
+                $rsRole = Role::find($request->input('roles'));
+                $rsUser = User::find($rS->id)->attachRole($rsRole);
+            }
+
+        return "success";
     }
 
     /**
