@@ -24,12 +24,25 @@ class DashboardController extends Controller
 			$results = new \StdClass;
 			$validator = \Validator::make($request->all(), 
 				[
-					'id' => 'required|integer'
+					'nama' => 'required',
+					'mode' => 'required',
+					'image' => 'required|image'
 				]
 			);
 			$destination = ParentFrontpage::UPLOAD_PATH;
+
 			if($validator->passes()){
-				$result = ParentFrontpage::find($request->input('id'));
+				
+				if($request->has('id')){
+					$result = ParentFrontpage::find($request->input('id'));
+					$results->info = 'menu frontpage update';
+					$results->status = 1;
+				}else{
+					$result = new ParentFrontpage;
+					$results->info = 'menu frontpage create';
+					$results->status = 1;
+				}
+				$results->message = 'Proses Pengubahan Menu Sukses!';
 				$result->nama = $request->input('nama');
 				$result->mode = $request->input('mode');
 				$result->redirect = $request->input('redirect');
@@ -45,27 +58,12 @@ class DashboardController extends Controller
 				}
 
 				$result->save();
-				$results->info = 'menu frontpage update';
-				$results->status = 1;
+				
 			}else{
-				$result = new ParentFrontpage;
-				$result->nama = $request->input('nama' , 'Menu Baru');
-				$result->mode = $request->input('mode' , '_blank');
-				$result->redirect = $request->input('redirect', 'http://www.google.com');
-				if($request->hasFile('image')){
-					if($request->file('image')->isValid()){
-						$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('image')->guessExtension();
-						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.$filename);
-
-						$result->image = $filename;
-					}
-				}
-				$result->save();
-				$results->info = 'menu frontpage create';
-				$results->status = 1;
-				$results->message = 'Proses Pengubahan Menu Sukses!';
+				$results->info = 'menu frontpage';
+				$results->status = 0;
+				$results->message = 'Proses Pengubahan Menu Gagal!';
 			}
-			$results->result = $result;
 
 		return response()->json($results);
 	}
