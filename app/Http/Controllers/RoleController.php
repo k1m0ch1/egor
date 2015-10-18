@@ -31,19 +31,19 @@ class RoleController extends Controller
         $validator = \Validator::make($request->all(), $role->getRules());
         $results = new \StdClass;
 
-        if($validator->passes){
+        if($validator->passes()){
             if($request->has('id')){
-                $role = Role::find($id);
-                $role->name = $request->name;
-                $role->display_name = $request->display_name;
-                $role->description = $request->description;
+                $role = Role::find($request->input('id'));
+                $role->name = $request->input('name');
+                $role->display_name = $request->input('displayname');
+                $role->description = $request->input('description');
                 $role->save();
                 $results->info = 'role create';
             }else{
                 $role = new Role;
-                $role->name = $request->name;
-                $role->display_name = $request->display_name;
-                $role->description = $request->description;
+                $role->name = $request->input('name');
+                $role->display_name = $request->input('displayname');
+                $role->description = $request->input('description');
                 $role->save();
                 $results->info = 'role edit';
             }
