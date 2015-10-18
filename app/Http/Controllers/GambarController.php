@@ -27,7 +27,7 @@ class GambarController extends Controller
                 $hasil = '{"status":"error"}';
             }
 
-            if(move_uploaded_file($_FILES['upl']['tmp_name'], '/var/www/html/egor/public/assets/img/uploaded/menu/' . '/' .$_FILES['upl']['name'])){
+            if(move_uploaded_file($_FILES['upl']['tmp_name'], public_path() . '/uploads/menu/' . '/' .$_FILES['upl']['name'])){
                 $hasil = '{"status":"success"}';
             }
         }
@@ -47,7 +47,7 @@ class GambarController extends Controller
                 $hasil = '{"status":"error"}';
             }
 
-            if(move_uploaded_file($_FILES['upl-Bg']['tmp_name'], '/var/www/html/egor/public/assets/img/uploaded/background/' . '/' .$_FILES['upl-Bg']['name'])){
+            if(move_uploaded_file($_FILES['upl-Bg']['tmp_name'], public_path() . '/uploads/background/' . '/' .$_FILES['upl-Bg']['name'])){
                 $hasil = '{"status":"success"}';
             }
         }
@@ -67,7 +67,7 @@ class GambarController extends Controller
                 $hasil = '{"status":"error"}';
             }
 
-            if(move_uploaded_file($_FILES['upl-Logo']['tmp_name'], '/var/www/html/egor/public/assets/img/uploaded/logo/' . '/' .$_FILES['upl-Logo']['name'])){
+            if(move_uploaded_file($_FILES['upl-Logo']['tmp_name'], public_path() . '/uploads/logo/' . $_FILES['upl-Logo']['name'])){
                 $hasil = '{"status":"success"}';
             }
         }

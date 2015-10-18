@@ -27,7 +27,7 @@ class DashboardController extends Controller
 					'id' => 'required|integer'
 				]
 			);
-			$destination = 'assets/img/uploaded/menu/';
+			$destination = '/uploads/menu/';
 			if($validator->passes()){
 				$result = ParentFrontpage::find($request->input('id'));
 				$result->nama = $request->input('nama');
@@ -81,7 +81,7 @@ class DashboardController extends Controller
 					$id = $rS->id;
 					$mode = $rS->mode;
 				}
-				$files = File::files('/var/www/html/egor/public/assets/img/uploaded/menu/');
+				$files = File::files(public_path() . '/uploads/menu/');
 				return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode','parent_id'));
 			}else{
 				return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
