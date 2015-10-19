@@ -170,9 +170,9 @@ $(document).ready(function(){
               var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
               $("#message-body").html(el);
               $("#message-body").fadeIn('slow');
-
               $("#img-thumbnail-"+d).attr('src', location.protocol+'//'+location.hostname+'/assets/img/uploaded/menu/'+data.result.image);
               dialog.dialog( "close" );
+              location.reload();
             }
          });
    }

@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
 			if($validator->passes()){
 				
-				if($request->has('id')){
+				if($request->has('id') && $request->input('id') != 'xxx'){
 					$result = ParentFrontpage::find($request->input('id'));
 					$results->info = 'menu frontpage update';
 					$results->status = 1;
@@ -43,6 +43,7 @@ class DashboardController extends Controller
 					$results->status = 1;
 				}
 				$results->message = 'Proses Pengubahan Menu Sukses!';
+
 				$result->nama = $request->input('nama');
 				$result->mode = $request->input('mode');
 				$result->redirect = $request->input('redirect');
@@ -64,6 +65,7 @@ class DashboardController extends Controller
 				$results->status = 0;
 				$results->message = 'Proses Pengubahan Menu Gagal!';
 			}
+			$results->result = $result;
 
 		return response()->json($results);
 	}
