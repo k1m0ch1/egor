@@ -44,14 +44,14 @@ class PagesController extends Controller
            $w = 3;
         }
 
-        $bg = Setting::where('name', 'Background')->get();
+        $bg = Setting::where('name', 'background')->get();
         if( count($bg) > 0){
             $bg = asset('/uploads/background/') . '/' .$bg->first()->value;
         }else{
             $bg = 'assets/img/bg.jpg';
         }
 
-        $footer = Setting::where('name', 'background')->get();
+        $footer = Setting::where('name', 'footer')->get();
         if( count($footer) > 0){
             $footer = $footer->first()->value;
         }else{
