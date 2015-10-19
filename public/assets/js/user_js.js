@@ -87,7 +87,6 @@ $(document).ready(function(){
     });
 
     function simpan(){
-      if($('#dialog-form form input#password').val()==$('#dialog-form form input#Upassword').val()){
     	var a = $('#dialog-form form input#name').val();
 	    var b = $('#dialog-form form input#email').val();
 	    var d = $('#dialog-form form input#idnyah').val();
@@ -95,13 +94,18 @@ $(document).ready(function(){
       var f = d=="xxx"?$('#dialog-form form input#password').val():"";
       var g = $('#dialog-form form input#phone').val();
       var h = $('#dialog-form form input#department').val();
+      var i = $('#dialog-form form input#Upassword').val();
+
       var fd = new FormData();
       fd.append("name", a);
       fd.append("email", b);
       fd.append("avatar", $('#fileUpload').prop('files')[0]);
-      fd.append("id", d);
+      if(d != 'xxx'){
+        fd.append("id", d);
+      }
       fd.append("roles", e);
       fd.append("password", f);
+      fd.append("password_confirmation", i);
       fd.append("as", "add");
       fd.append("phone", g);
       fd.append("department", h);
@@ -118,6 +122,7 @@ $(document).ready(function(){
                     type: 'GET',
                     dataType: 'html',
                     success: function(data){
+                      console.log(data);
                       $('#tbody-user').html(data);
                       $.getScript(  dir_host + "assets/js/user_js_event.js" )
                       .done(function( script, textStatus ) {
@@ -130,9 +135,6 @@ $(document).ready(function(){
 	            }
 	         });
     	dialog.dialog("close");
-      }else{
-        alert("Tolong input kembali password dan ulang passwordnya sama");
-      } 
     }
 
     $('#tambah').on('click', function(){

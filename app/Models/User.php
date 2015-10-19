@@ -45,7 +45,8 @@ class User extends Model implements AuthenticatableContract,
         $results = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmation'
+            'password' => 'required|min:8|confirmed',
+            'roles' => 'required'
         ];
         return $results;
     }

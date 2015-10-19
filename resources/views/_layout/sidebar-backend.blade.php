@@ -35,23 +35,23 @@
           <ul class="sidebar-menu">
             <li class="header" {{ $title=='Dashboard'?'class="active treeview"':'' }}>MAIN NAVIGATION</li>
             <li>
-              <a href='{{ asset("index.php/admin/dashboard") }}'>
+              <a href='{{ asset("admin/dashboard") }}'>
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
             </li>
 
             <li {{ $title=='Users'?'class="active treeview"':'' }} >
-                <a href='{{ asset("index.php/admin/user") }}'>
+                <a href='{{ asset("admin/user") }}'>
                 <i class="fa fa-users" href="user"></i> <span> Users</span>
                 </a>
                 <ul class="treeview-menu">
                   <li>
-                    <a href='{{ asset("index.php/admin/user") }}'>
+                    <a href='{{ asset("admin/user") }}'>
                     <i class="fa fa-circle" href="user"></i> <span> User</span>
                     </a>
                   </li>
                   <li>
-                    <a href="{{ asset('index.php/admin/role') }}">
+                    <a href="{{ asset('admin/role') }}">
                       <i class="fa fa-circle"></i> <span> Roles</span>
                     </a>
                   </li>
@@ -59,19 +59,19 @@
             </li>
               
             <li {{ $title=='Menu'?'class="active treeview"':'' }}>
-              <a href='{{ asset("index.php/admin/menu") }}'>
+              <a href='{{ asset("admin/menu") }}'>
                 <i class="fa fa-th"></i> <span> Menu</span>
               </a>
             </li>
 
             <li {{ $title=='Image'?'class="active treeview"':'' }}>
-              <a href='{{ asset("index.php/admin/gambar") }}'>
+              <a href='{{ asset("admin/gambar") }}'>
                 <i class="fa fa-file-image-o"></i> <span> Images</span>
               </a>
             </li>
 
             <li {{ $title=='Preference'?'class="active treeview"':'' }}>
-              <a href='{{ asset("index.php/admin/preference") }}'>
+              <a href='{{ asset("admin/preference") }}'>
                 <i class="fa fa-gear"></i> <span> Preference</span>
               </a>
             </li>
