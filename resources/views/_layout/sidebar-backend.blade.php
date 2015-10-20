@@ -55,9 +55,14 @@
                       <i class="fa fa-circle"></i> <span> Roles</span>
                     </a>
                   </li>
+                  <li>
+                    <a href="{{ asset('admin/permission') }}">
+                      <i class="fa fa-circle"></i> <span> Permission</span>
+                    </a>
+                  </li>
                 </ul>
             </li>
-              
+
             <li {{ $title=='Menu'?'class="active treeview"':'' }}>
               <a href='{{ asset("admin/menu") }}'>
                 <i class="fa fa-th"></i> <span> Menu</span>

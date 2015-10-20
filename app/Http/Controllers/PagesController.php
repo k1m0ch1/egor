@@ -11,6 +11,7 @@ use App\Models\Setting;
 use App\Models\ParentFrontpage;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Permission;
 
 class PagesController extends Controller
 {
@@ -32,14 +33,14 @@ class PagesController extends Controller
         // Atur Grid Menu
         $h = Setting::where('name', 'grid_height')->get();
         if(count($h)>0){
-            $h = $h->first()->value;  
+            $h = $h->first()->value;
         }else{
             $h = 3;
         }
 
         $w = Setting::where('name', 'grid_width')->get();
         if( count($w) > 0 ){
-           $w = $w->first()->value;    
+           $w = $w->first()->value;
         }else{
            $w = 3;
         }
@@ -57,7 +58,7 @@ class PagesController extends Controller
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
         }
-        
+
         return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer'));
     }
 
@@ -131,7 +132,7 @@ class PagesController extends Controller
         $breadcrumb = array(array('Home', 0), array('Dashboard', 1));
         $css = $this->CSS('general');
         $jH = $this->jS('general');
-        
+
         $title = 'Dashboard';
         $a=1;
 
@@ -139,7 +140,7 @@ class PagesController extends Controller
         $h = Setting::where('name', 'grid_height')->get();
         if(count($h)>0){
             $h = $h->first()->value;
-            
+
         }else{
             $h = 3;
         }
@@ -147,7 +148,7 @@ class PagesController extends Controller
         $w = Setting::where('name', 'grid_width')->get();
         if(count($w)>0){
            $w =$w->first()->value;
-            
+
         }else{
            $w = 3;
         }
@@ -287,6 +288,22 @@ class PagesController extends Controller
         return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
     }
 
+   public function permission(){
+      $title = 'Permission';
+      $breadcrumb = array(array('Home', 0), array('User', 0), array('Roles', 0), array('Permissions', 1));
+      $css = $this->CSS('users');
+      $jH =  $this->jS('permission');
+      $result = Permission::all();
+      $a=0;
+       $footer = Setting::where('name', 'footer')->get();
+      if(count($footer)>0){
+         $footer =$footer->first()->value;
+      }else{
+         $footer = '(c) Ordent '.date('Y');
+      }
+      return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
+  }
+
     public function tes(){
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('general');
@@ -320,10 +337,10 @@ class PagesController extends Controller
         $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
                         INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $a=1;
-        
+
         $result2 = count(Setting::where('name', 'title')->get())>0?Setting::where('name', 'title')->get()->first()->value:"";
         $result3 = count(Setting::where('name', 'footer')->get())>0?Setting::where('name', 'footer')->get()->first()->value:"";
-        
+
         $filesLogo = File::files(public_path().'/'.\App\Models\Setting::LOGO_UPLOAD_PATH);
         $filesBg = File::files(public_path().'/'. \App\Models\Setting::BG_UPLOAD_PATH);
 
@@ -334,7 +351,7 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        return view('backend.preference', compact('css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer'));
+        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer'));
     }
 
     public function CSS($mode){
@@ -410,7 +427,7 @@ class PagesController extends Controller
     public function jS($mode){
         $JS = '';
         switch($mode){
-            case 'general': 
+            case 'general':
             $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
                         "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
@@ -486,6 +503,21 @@ class PagesController extends Controller
                         asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
                         //asset('assets/js/roleEvent.js'),
                         asset('assets/js/roleOperator.js')
+                        );
+            break;
+
+            case "permission":
+                $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
+                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js'),
+                        asset('holder.js'),
+                        asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
+                        //asset('assets/js/roleEvent.js'),
+                        asset('assets/js/permissionOperator.js')
                         );
             break;
 
