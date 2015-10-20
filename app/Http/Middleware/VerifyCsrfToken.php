@@ -11,8 +11,8 @@ class VerifyCsrfToken extends BaseVerifier
      *
      * @var array
      */
-    protected $except = [ 	'admin/grid:savePosition', 
-    						'admin/dashboard[edit:save]', 
+    protected $except = [ 	'admin/grid:savePosition',
+    						'admin/dashboard[edit:save]',
     						'admin/users[edit:save]',
     						'admin/preference:title[save]',
     						'admin/preference:preference[save]',
@@ -28,6 +28,7 @@ class VerifyCsrfToken extends BaseVerifier
                             'admin/preference:background[save]',
                             'admin/preference:title[save]',
                             'admin/preference:footer[save]',
-                            'admin/roles[edit:save]'
+                            'admin/roles[edit:save]',
+                            'admin/permission[edit:save]'
     ];
 }

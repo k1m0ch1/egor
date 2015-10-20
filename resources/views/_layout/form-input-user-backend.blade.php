@@ -20,10 +20,12 @@
 		<input type="radio" id="roles" name="roles" value="{{$rS->id}}" > {{$rS->name}}<br/>
 	@endforeach
 
-	<label for="image">Password</label>
+@if($idnyah=='xxx')
+	<label for="password">Password</label>
 	<input type="password" name="password" id="password" class="form-control"><br/>
-	<label for="image">Ulangi Password</label>
+	<label for="Upassword">Ulangi Password</label>
 	<input type="password" name="Upassword" id="Upassword" class="form-control"><br/>
+@endif
 	<input type='hidden' id='idnyah' value='{{ $idnyah }}' />
 </div>
 <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
