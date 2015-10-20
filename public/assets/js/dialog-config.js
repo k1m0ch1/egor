@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 620,
+      height: 420,
       width: 700,
       modal: true,
       draggable: false,
