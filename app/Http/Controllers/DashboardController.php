@@ -26,7 +26,6 @@ class DashboardController extends Controller
 				[
 					'nama' => 'required',
 					'mode' => 'required',
-					'image' => 'required|image'
 				]
 			);
 			$destination = ParentFrontpage::UPLOAD_PATH;

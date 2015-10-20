@@ -158,8 +158,8 @@ $(document).ready(function(){
       myFormData.append("nama", a);
       myFormData.append("redirect", b);
       myFormData.append("mode", c);
-			myFormData.append("publicKey", e);
-      myFormData.append("privateKey", f);
+			myFormData.append("puKey", e);
+      myFormData.append("prKey", f);
 
       $.ajax({
             url: host + 'admin/dashboard[edit:save]',
@@ -174,9 +174,40 @@ $(document).ready(function(){
               var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
               $("#message-body").html(el);
               $("#message-body").fadeIn('slow');
-              $("#img-thumbnail-"+d).attr('src', location.protocol+'//'+location.hostname+'/assets/img/uploaded/menu/'+data.result.image);
               dialog.dialog( "close" );
-              location.reload();
+							$.ajax({
+								 url:  host + 'admin/grid',
+								 type: 'GET',
+								 data: { 'w': w, 'h': h},
+								 dataType: 'html',
+								 success: function(data) {
+									$('#menu-wrapper').html("");
+										$('#menu-wrapper').html(data);
+										var cols = document.querySelectorAll('#menu-wrapper .pindah');
+													 [].forEach.call(cols, function (col) {
+															 col.addEventListener('dragstart', handleDragStart, false);
+															 col.addEventListener('dragenter', handleDragEnter, false)
+															 col.addEventListener('dragover', handleDragOver, false);
+															 col.addEventListener('dragleave', handleDragLeave, false);
+															 col.addEventListener('drop', handleDrop, false);
+															 col.addEventListener('dragend', handleDragEnd, false);
+													 });
+										$.getScript(  dir_host + "holder.js" )
+											.done(function( script, textStatus ) {
+											})
+											.fail(function( jqxhr, settings, exception ) {
+												$( "div.log" ).text( "Triggered ajaxError handler." );
+										});
+
+										$.getScript(  dir_host + "assets/js/tesRecall.js" )
+											.done(function( script, textStatus ) {
+											})
+											.fail(function( jqxhr, settings, exception ) {
+												$( "div.log" ).text( "Triggered ajaxError handler." );
+										});
+
+								 }
+							});
             }
          });
    }
