@@ -18,6 +18,7 @@ Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.po
 
 Route::get('admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']);
+Route::get('admin/permission', ['uses'=>'PagesController@permission', 'as'=>'admin.permission.get', 'middleware'=>'auth']);
 
 Route::get('admin/tes', ['uses'=>'PagesController@tes', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
@@ -55,11 +56,17 @@ Route::get('admin/users[show]', ['uses'=>'UsersController@showAll', 'as'=>'users
 Route::get('admin/users[add:show]', ['uses'=>'UsersController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/users[delete]', ['uses'=>'UsersController@delete', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
 
-Route::get('admin/roles[edit:show]', ['uses'=>'RoleController@form', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
-Route::post('admin/roles[edit:save]', ['uses'=>'RoleController@save', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
-Route::get('admin/roles[show]', ['uses'=>'RoleController@show', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
-Route::get('admin/roles[add:show]', ['uses'=>'RoleController@form', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
-Route::get('admin/roles[del]', ['uses'=>'RoleController@del', 'as'=>'users[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[edit:show]', ['uses'=>'RoleController@form', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
+Route::post('admin/roles[edit:save]', ['uses'=>'RoleController@save', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[show]', ['uses'=>'RoleController@show', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[add:show]', ['uses'=>'RoleController@form', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[del]', ['uses'=>'RoleController@del', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
+
+Route::get('admin/permission[edit:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::post('admin/permission[edit:save]', ['uses'=>'PermissionController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[show]', ['uses'=>'PermissionController@show', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[add:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[del]', ['uses'=>'PermissionController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
