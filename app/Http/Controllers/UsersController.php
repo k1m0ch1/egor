@@ -70,12 +70,12 @@ class UsersController extends Controller
 				$nip = $rS->nip;
 			}
 		}
-		return view('_layout.form-input-user-backend', compact('nip', 'phone','department','name','email', 'idnyah','resultRole'));
+		return view('_layout.form.form-input-user-backend', compact('nip', 'phone','department','name','email', 'idnyah','resultRole'));
 	}
 
 	public function showAll(){
 		$result = User::All();
-		return view('_layout.tabel-user', compact('result'));
+		return view('_layout.tabel.tabel-user', compact('result'));
 	}
 
 	public function delete(Request $request){

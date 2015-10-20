@@ -24,7 +24,7 @@ class PermissionController extends Controller
         if($as!="add"){
             $rS = DB::table('permissions')->where('id', $request->input('id'))->get();
         }
-        return view('_layout.form-permission-backend', compact('rS', 'as'));
+        return view('_layout.form.form-permission-backend', compact('rS', 'as'));
     }
 
     public function save(Request $request){
@@ -69,7 +69,7 @@ class PermissionController extends Controller
 
     public function show(){
         $result = DB::table('permissions')->get();
-        return view('_layout.tabel-permission', compact('result'));
+        return view('_layout.tabel.tabel-permission', compact('result'));
     }
     public function showPermission(Request $request){
         $result = DB::table('permissions')->get();

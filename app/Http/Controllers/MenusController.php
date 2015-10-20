@@ -92,12 +92,12 @@ class MenusController extends Controller
 	public function getChild(Request $request){
 		$hasil = DB::table('child_menu')->where('parent_id', $request->input('id'))->get();
 		$parent_id = $request->input('id');
-		return view('_layout.dialog-child-menu-backend', compact('hasil', 'parent_id'));
+		return view('_layout.dialog.dialog-child-menu-backend', compact('hasil', 'parent_id'));
 	}
 
 	public function newChild(Request $request){
 		$parent_id = $request->input('id');
-		return view('_layout.form-new-input-menu-backend', compact('parent_id'));
+		return view('_layout.form.form-new-input-menu-backend', compact('parent_id'));
 	}
 
 	public function delChild(Request $request){
@@ -123,7 +123,7 @@ class MenusController extends Controller
 			$name = $rS->name;
  			$redirect = $rS->redirect;
 		}
-		return view('_layout.form-input-menu-backend', compact('parent_id', 'id','name','redirect'));
+		return view('_layout.form.form-input-menu-backend', compact('parent_id', 'id','name','redirect'));
 	}
 
 	public function editChildSave(Request $request){
@@ -156,7 +156,7 @@ class MenusController extends Controller
 					 		'redirect' => $request->input('redirect')
 					 	]);
 		}
-		
+
 		return $hasil==true?"success saveNewChild":"fail saveNewChild";
 	}
 

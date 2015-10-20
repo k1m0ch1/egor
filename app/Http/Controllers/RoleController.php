@@ -24,7 +24,7 @@ class RoleController extends Controller
         if($as!="add"){
             $rS = DB::table('roles')->where('id', $request->input('id'))->get();
         }
-        return view('_layout.form-role-backend', compact('rS', 'as', 'rS2'));
+        return view('_layout.form.form-role-backend', compact('rS', 'as', 'rS2'));
     }
 
     public function save(Request $request){
@@ -65,7 +65,7 @@ class RoleController extends Controller
 
     public function show(){
         $result = DB::table('roles')->get();
-        return view('_layout.tabel-roles', compact('result'));
+        return view('_layout.tabel.tabel-roles', compact('result'));
     }
 
     public function del(Request $request){
