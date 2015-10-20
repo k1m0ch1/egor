@@ -12,8 +12,8 @@ $(document).ready(function(){
 
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 430,
-      width: 500,
+      height: 320,
+      width: 700,
       modal: true,
       draggable: false,
       buttons: [{
@@ -57,11 +57,13 @@ $(document).ready(function(){
       var name = $('input#name').val();
       var displayname = $('input#displayName').val();
       var description = $('textarea#description').val();
+			var action = $('select#action').val();
+			var access = $('select#access').val();
       console.log(description);
       $.ajax({
            url:  host + 'admin/permission[edit:save]',
            type: 'POST',
-           data : { id: id, as : as, name : name, displayname:displayname, description:description},
+           data : { id: id, as : as, name : name, displayname:displayname, description:description, action: action, access:access},
            dataType: 'html',
            success: function(data){
               dialog.dialog("close");

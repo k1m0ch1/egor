@@ -16,6 +16,13 @@ class DashboardController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
+
+	public function showApp(Request $request){
+			$hasil = DB::table('parent_frontpage')->get();
+			$access = $request->input('access');
+			return view('_layout.select-action-role', compact('hasil', 'access'));
+	}
+
 	public function editSave(Request $request){
 			$allowed = array('png', 'jpg', 'gif');
 			$hasil = false;

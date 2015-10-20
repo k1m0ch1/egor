@@ -18,11 +18,12 @@ class RoleController extends Controller
         $rS[0]->name = "";
         $rS[0]->display_name = "";
         $rS[0]->description = "";
+        $rS2 = DB::table('permissions')->get();
 
         if($as!="add"){
             $rS = DB::table('roles')->where('id', $request->input('id'))->get();
         }
-        return view('_layout.form-role-backend', compact('rS', 'as'));
+        return view('_layout.form-role-backend', compact('rS', 'as', 'rS2'));
     }
 
     public function save(Request $request){
@@ -57,7 +58,7 @@ class RoleController extends Controller
             }
             $results->result = $result;
         }
-        
+
         return response()->json($results);
     }
 
