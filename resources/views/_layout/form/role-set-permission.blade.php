@@ -1,6 +1,6 @@
 <div id="form-group">
-  <label for="permission">Permission</label>
-  <select id="permission" name="permission" class='form-control'>
+  <label for="permission_id">Permission</label>
+  <select id="permission_id" name="permission_id" class='form-control'>
     @foreach($result as $rS)
     <option value="{{ $rS->id }}">{{ $rS->display_name }}</option>
     @endforeach
@@ -16,7 +16,7 @@
     </select>
   </div>
 </div>
-
+<input type='hidden' id='role_id' value="{{ $role_id }}" />
 <input type="submit" tabindex="-1" style="position:absolute; top:-1000px" id='simpanData'>
 <script>
 $(document).ready(function(){

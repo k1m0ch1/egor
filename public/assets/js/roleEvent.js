@@ -145,6 +145,7 @@ $(document).ready(function(){
 		$.ajax({
 			url:  host + 'admin/permission[show2]',
 			type: 'GET',
+			data : {role_id: $('#role_id').val()},
 			dataType: 'html',
 			success: function(data) {
 				$('#form-setPermission').html(data);
@@ -153,12 +154,17 @@ $(document).ready(function(){
 	}
 
 	function saveSetPermission(){
+		var role_id = $('#role_id').val();
+		var permission_id = $('select#permission_id option:selected').val();
+		var access = $('select#access option:selected').val();
+		var action = $('select#action option:selected').val();
 		$.ajax({
-			url:  host + 'admin/permission[set:savve]',
+			url:  host + 'admin/roles[set:permission]',
 			type: 'POST',
+			data: {role_id: role_id, permission_id: permission_id, access: access, action: action},
 			dataType: 'html',
 			success: function(data) {
-				$('#form-setPermission').html(data);
+
 			}
 		});
 	}

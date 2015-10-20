@@ -71,9 +71,10 @@ class PermissionController extends Controller
         $result = DB::table('permissions')->get();
         return view('_layout.tabel-permission', compact('result'));
     }
-    public function showPermission(){
+    public function showPermission(Request $request){
         $result = DB::table('permissions')->get();
-        return view('_layout.form.role-set-permission', compact('result'));
+        $role_id = $request->input('role_id');
+        return view('_layout.form.role-set-permission', compact('result', 'role_id'));
     }
 
     public function del(Request $request){

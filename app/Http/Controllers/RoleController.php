@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -87,5 +88,20 @@ class RoleController extends Controller
                   ->get();
         echo print_r($result);
         return view('_layout.tabel.roles-permission', compact('result'));
+    }
+
+    public function setPermission(Request $request){
+        $role_id = $request->input('role_id');
+        $permission_id = $request->input('permission_id');
+        $access = $request->input('access');
+        $action = $request->input('action');
+
+        $result = DB::table('permission_role')->insert([
+              'role_id' => $role_id,
+              'permission_id' => $permission_id,
+              'action' => $action,
+              'access' => $access
+          ]);
+        return "success";
     }
 }
