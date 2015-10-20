@@ -165,6 +165,8 @@ class PagesController extends Controller
         return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer'));
     }
 
+
+
     public function indexGambar(){
         $css = $this->CSS('style-upload');
         $jH = $this->jS('image');

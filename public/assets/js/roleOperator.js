@@ -13,7 +13,7 @@ $(document).ready(function(){
               $( "div.log" ).text( "Triggered ajaxError handler." );
             });
          }
-      }); 
+      });
    });
 
    $('[id^=editRule]').on('click', function(){
@@ -57,7 +57,7 @@ $(document).ready(function(){
                                   $( "div.log" ).text( "Triggered ajaxError handler." );
                                 });
                             }
-                          }); 
+                          });
                       }
                    });
       }

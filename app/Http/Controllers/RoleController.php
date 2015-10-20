@@ -73,4 +73,19 @@ class RoleController extends Controller
                     ->delete();
         return $result==true?"succes del":"fail del";
     }
+
+    public function showPermission(Request $request){
+        $result = DB::table('permission_role')
+                  ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                  ->join('parent_frontpage', 'parent_frontpage.id', '=', 'permission_role.action')
+                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                           'roles.display_name as role_dn', 'permissions.name as per_name',
+                           'permissions.display_name as per_dn', 'permission_role.action as action',
+                           'permission_role.access as access', "parent_frontpage.nama as menu_nama")
+                  ->where('permission_role.role_id', $request->input('id'))
+                  ->get();
+        echo print_r($result);
+        return view('_layout.tabel.roles-permission', compact('result'));
+    }
 }

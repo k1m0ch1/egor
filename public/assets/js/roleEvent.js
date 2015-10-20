@@ -13,7 +13,7 @@ $(document).ready(function(){
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 430,
-      width: 800,
+      width: 500,
       modal: true,
       draggable: false,
       buttons: [{
@@ -33,9 +33,66 @@ $(document).ready(function(){
                 }}]
     });
 
+		dialogPermission = $( "#dialog-form-permission" ).dialog({
+      autoOpen: false,
+      height: 430,
+      width: 700,
+      modal: true,
+      draggable: false,
+      buttons: [{
+                  id:"btn-simpan", text: "Tambah",
+                  click: function() {
+                      setPermission();
+                }},
+                {
+                  id:"btn-cancel", text: "Cancel",
+                  click: function() {
+                      $(':input','#child-form')
+                         .not(':button, :submit, :reset, :hidden')
+                         .val('')
+                         .removeAttr('checked')
+                         .removeAttr('selected');
+                      $(this).dialog("close");
+                }}]
+    });
+
+		dialogSetPermission = $( "#dialog-form-setPermission" ).dialog({
+      autoOpen: false,
+      height: 330,
+      width: 500,
+      modal: true,
+      draggable: false,
+      buttons: [{
+                  id:"btn-simpan", text: "Simpan",
+                  click: function() {
+										saveSetPermission();
+                }},
+                {
+                  id:"btn-cancel", text: "Cancel",
+                  click: function() {
+                      $(':input','#child-form')
+                         .not(':button, :submit, :reset, :hidden')
+                         .val('')
+                         .removeAttr('checked')
+                         .removeAttr('selected');
+                      $(this).dialog("close");
+                }}]
+    });
+
+
    form = dialog.find( "form" ).on( "submit", function( event ) {
       event.preventDefault();
       simpanRoles();
+    });
+
+		formPermission = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      setPermission();
+    });
+
+		formSetPermission = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      saveSetPermission();
     });
 
    $('#tambah').on('click', function(){
@@ -83,6 +140,29 @@ $(document).ready(function(){
         });
    }
 
+	function setPermission(){
+		dialogSetPermission.dialog("open");
+		$.ajax({
+			url:  host + 'admin/permission[show2]',
+			type: 'GET',
+			dataType: 'html',
+			success: function(data) {
+				$('#form-setPermission').html(data);
+			}
+		});
+	}
+
+	function saveSetPermission(){
+		$.ajax({
+			url:  host + 'admin/permission[set:savve]',
+			type: 'POST',
+			dataType: 'html',
+			success: function(data) {
+				$('#form-setPermission').html(data);
+			}
+		});
+	}
+
    $('[id^=editRule]').on('click', function(){
                 var currentID = $(this).attr('id');
                 currentID = currentID.split('-')[1];
@@ -129,4 +209,20 @@ $(document).ready(function(){
                    });
         }
     });
+
+		$('[id^=editPermission]').on('click', function(){
+				var currentID = $(this).attr('id');
+				currentID = currentID.split('-')[1];
+				dialogPermission.dialog("open");
+				$.ajax({
+					url:  host + 'admin/roles[permission:show]',
+					type: 'GET',
+					data: { id: currentID },
+					dataType: 'html',
+					success: function(data) {
+						$('#tbody-permission-roles').html(data);
+					}
+			});
+		});
+
 });

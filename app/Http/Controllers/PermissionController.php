@@ -37,7 +37,7 @@ class PermissionController extends Controller
             if($request->input('id')!="xxx"){
                 $permission = Permission::find($request->input('id'));
                 $permission->name = $request->input('name');
-                $permission->display_name = $request->input('displayname');
+                $permission->display_name = $request->input('accessaction');
                 $permission->description = $request->input('description');
                 $permission->access = $request->input('access');
                 $permission->action = $request->input('action');
@@ -46,7 +46,7 @@ class PermissionController extends Controller
             }else{
                 $permission = new Permission;
                 $permission->name = $request->input('name');
-                $permission->display_name = $request->input('displayname');
+                $permission->display_name = $request->input('accessaction');
                 $permission->description = $request->input('description');
                 $permission->access = $request->input('access');
                 $permission->action = $request->input('action');
@@ -70,6 +70,10 @@ class PermissionController extends Controller
     public function show(){
         $result = DB::table('permissions')->get();
         return view('_layout.tabel-permission', compact('result'));
+    }
+    public function showPermission(){
+        $result = DB::table('permissions')->get();
+        return view('_layout.form.role-set-permission', compact('result'));
     }
 
     public function del(Request $request){
