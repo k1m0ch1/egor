@@ -175,39 +175,44 @@ $(document).ready(function(){
               $("#message-body").html(el);
               $("#message-body").fadeIn('slow');
               dialog.dialog( "close" );
-							$.ajax({
-								 url:  host + 'admin/grid',
-								 type: 'GET',
-								 data: { 'w': w, 'h': h},
-								 dataType: 'html',
-								 success: function(data) {
+							$.get( host + 'api/v1/grid/size').done(function(data){
+				 			width = data.w;
+				 			height = data.h;
+
+				 			$.ajax({
+							 url:  host + 'admin/grid',
+							 type: 'GET',
+							 data: { 'w': width, 'h': height},
+							 dataType: 'html',
+							 success: function(data) {
 									$('#menu-wrapper').html("");
-										$('#menu-wrapper').html(data);
-										var cols = document.querySelectorAll('#menu-wrapper .pindah');
-													 [].forEach.call(cols, function (col) {
-															 col.addEventListener('dragstart', handleDragStart, false);
-															 col.addEventListener('dragenter', handleDragEnter, false)
-															 col.addEventListener('dragover', handleDragOver, false);
-															 col.addEventListener('dragleave', handleDragLeave, false);
-															 col.addEventListener('drop', handleDrop, false);
-															 col.addEventListener('dragend', handleDragEnd, false);
-													 });
-										$.getScript(  dir_host + "holder.js" )
-											.done(function( script, textStatus ) {
-											})
-											.fail(function( jqxhr, settings, exception ) {
-												$( "div.log" ).text( "Triggered ajaxError handler." );
-										});
+									$('#menu-wrapper').html(data);
+									var cols = document.querySelectorAll('#menu-wrapper .pindah');
+												 [].forEach.call(cols, function (col) {
+														 col.addEventListener('dragstart', handleDragStart, false);
+														 col.addEventListener('dragenter', handleDragEnter, false)
+														 col.addEventListener('dragover', handleDragOver, false);
+														 col.addEventListener('dragleave', handleDragLeave, false);
+														 col.addEventListener('drop', handleDrop, false);
+														 col.addEventListener('dragend', handleDragEnd, false);
+												 });
+									$.getScript(  dir_host + "assets/js/tesRecall.js" )
+										.done(function( script, textStatus ) {
+										})
+										.fail(function( jqxhr, settings, exception ) {
+											$( "div.log" ).text( "Triggered ajaxError handler." );
+									});
 
-										$.getScript(  dir_host + "assets/js/tesRecall.js" )
-											.done(function( script, textStatus ) {
-											})
-											.fail(function( jqxhr, settings, exception ) {
-												$( "div.log" ).text( "Triggered ajaxError handler." );
-										});
+									$.getScript( dir_host +  "holder.js" )
+										.done(function( script, textStatus ) {
+										})
+										.fail(function( jqxhr, settings, exception ) {
+											$( "div.log" ).text( "Triggered ajaxError handler." );
+									});
+							 }
+						});
 
-								 }
-							});
+				 		});
             }
          });
    }
