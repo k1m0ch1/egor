@@ -351,7 +351,7 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        return view('backend.preference', compact('css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer'));
+        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer'));
     }
 
     public function CSS($mode){

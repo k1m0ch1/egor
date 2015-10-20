@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 420,
+      height: 520,
       width: 500,
       modal: true,
       draggable: false,
@@ -10,7 +10,7 @@ $(document).ready(function(){
                   id:"simpanData", text: "Simpan",
                   click: function() {
                       simpan();
-                  }}, 
+                  }},
                 {
                   id:"btn-cancel", text: "Cancel",
                   click: function() {
@@ -56,7 +56,7 @@ $(document).ready(function(){
                   id:"simpan-child", text: "Simpan",
                   click: function() {
                       simpanNewChild();
-                  }}, 
+                  }},
                 {
                   id:"btn-cancel", text: "Cancel",
                   click: function() {
@@ -114,7 +114,7 @@ $(document).ready(function(){
       	myFormData2.append("redirect", b);
       	myFormData2.append("mode", c);
       	myFormData2.append("idnyah", d);
-      	myFormData2.append("parent_id", e);	
+      	myFormData2.append("parent_id", e);
    		$.ajax({
             url: host + 'admin/form:child[add:save]',
             type: 'POST',
@@ -143,6 +143,8 @@ $(document).ready(function(){
    function simpan(){
       var a = $('#dialog-form form input#name').val();
       var b = $('#dialog-form form input#href').val();
+			var e = $('#dialog-form form input#puKey').val();
+			var f = $('#dialog-form form input#prKey').val();
       //var c = $('#dialog-form form select#image').val();
       var c = $("input[type='radio'][name='target']:checked");
       c = c.length>0?c.val():0;
@@ -156,6 +158,8 @@ $(document).ready(function(){
       myFormData.append("nama", a);
       myFormData.append("redirect", b);
       myFormData.append("mode", c);
+			myFormData.append("publicKey", e);
+      myFormData.append("privateKey", f);
 
       $.ajax({
             url: host + 'admin/dashboard[edit:save]',
