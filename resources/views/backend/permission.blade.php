@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Role
+            Permission
             <small>Control panel</small>
           </h1>
           @if(isset($breadcrumb))

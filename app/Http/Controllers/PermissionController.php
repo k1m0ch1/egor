@@ -32,7 +32,7 @@ class PermissionController extends Controller
         $results = new \StdClass;
 
         if($validator->passes()){
-            if($request->has('id')){
+            if($request->input('id')!="xxx"){
                 $permission = Permission::find($request->input('id'));
                 $permission->name = $request->input('name');
                 $permission->display_name = $request->input('displayname');

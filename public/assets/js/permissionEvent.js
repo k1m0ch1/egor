@@ -99,7 +99,7 @@ $(document).ready(function(){
                    });
     });
 
-    $('[id^=delPermission]').on('click', function(){
+    $('[id^=deletePermission]').on('click', function(){
     	var konfirm = confirm("Yakin Hapus Data?");
       	if(konfirm){
                 var currentID = $(this).attr('id');
