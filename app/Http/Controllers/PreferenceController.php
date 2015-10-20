@@ -20,6 +20,11 @@ class PreferenceController extends Controller
 
     }
 
+    public function store(Request $request){
+        
+        return redirect()->to('http://egor.app/admin/preference');
+    }
+
     public function preferenceSave(Request $request){
         $name = $request->input('name');
         $value = $request->input('value');
