@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -23,7 +24,7 @@ class RoleController extends Controller
         if($as!="add"){
             $rS = DB::table('roles')->where('id', $request->input('id'))->get();
         }
-        return view('_layout.form-role-backend', compact('rS', 'as', 'rS2'));
+        return view('_layout.form.form-role-backend', compact('rS', 'as', 'rS2'));
     }
 
     public function save(Request $request){
@@ -64,7 +65,7 @@ class RoleController extends Controller
 
     public function show(){
         $result = DB::table('roles')->get();
-        return view('_layout.tabel-roles', compact('result'));
+        return view('_layout.tabel.tabel-roles', compact('result'));
     }
 
     public function del(Request $request){
@@ -72,5 +73,35 @@ class RoleController extends Controller
                     ->where('id', $request->input('id'))
                     ->delete();
         return $result==true?"succes del":"fail del";
+    }
+
+    public function showPermission(Request $request){
+        $result = DB::table('permission_role')
+                  ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                  ->join('parent_frontpage', 'parent_frontpage.id', '=', 'permission_role.action')
+                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                           'roles.display_name as role_dn', 'permissions.name as per_name',
+                           'permissions.display_name as per_dn', 'permission_role.action as action',
+                           'permission_role.access as access', "parent_frontpage.nama as menu_nama")
+                  ->where('permission_role.role_id', $request->input('id'))
+                  ->get();
+        echo print_r($result);
+        return view('_layout.tabel.roles-permission', compact('result'));
+    }
+
+    public function setPermission(Request $request){
+        $role_id = $request->input('role_id');
+        $permission_id = $request->input('permission_id');
+        $access = $request->input('access');
+        $action = $request->input('action');
+
+        $result = DB::table('permission_role')->insert([
+              'role_id' => $role_id,
+              'permission_id' => $permission_id,
+              'action' => $action,
+              'access' => $access
+          ]);
+        return "success";
     }
 }

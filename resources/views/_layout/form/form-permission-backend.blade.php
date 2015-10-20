@@ -2,14 +2,12 @@
 	<div class="form-group">
 		<label for="name" style="padding-top: 10px;">Name</label>
 		<input type="text" name="name" id="name" value="{{ $rS[0]->name }}" class="form-control">
-		<label for="displayName" style="padding-top: 10px;" style="padding-top: 3px;">Display Name</label>
-		<input type="text" name="displayName" id="displayName" value="{{ $rS[0]->display_name}}" class="form-control">
 		<label for="access" style="padding-top: 10px;">Rules</label>
-			<select name="access" id="access">
+			<select name="access" id="access" class='form-control'>
 					<option value="true" {{ $rS[0]->access=="true"?"selected":"" }}>Dapat</option>
 					<option value="false" {{ $rS[0]->access=="false"?"selected":"" }}>Tidak Dapat</option>
 			</select>
-			<select name="action" id="action">
+			<select name="action" id="action" class='form-control'>
 					<option value="show" {{ $rS[0]->action=="show"?"selected":"" }}>Melihat</option>
 					<option value="add" {{ $rS[0]->action=="add"?"selected":"" }}>Menambah</option>
 					<option value="edit" {{ $rS[0]->action=="edit"?"selected":"" }}>Merubah</option>

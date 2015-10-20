@@ -97,9 +97,9 @@ class DashboardController extends Controller
 					$prKey = $rS->privateKey;
 				}
 				$files = File::files(public_path() . '/uploads/menu/');
-				return view('_layout.form-input-dashboard-backend', compact('puKey','prKey','nama', 'redirect', 'image','files','id','mode','parent_id'));
+				return view('_layout.form.form-input-dashboard-backend', compact('puKey','prKey','nama', 'redirect', 'image','files','id','mode','parent_id'));
 			}else{
-				return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
+				return view('_layout.form.form-new-input-dashboard-backend', compact('parent_id'));
 			}
 		}
 

@@ -55,15 +55,18 @@ $(document).ready(function(){
       var id = $('input#id').val();
       var as = id=="xxx"?"add":"edit";
       var name = $('input#name').val();
-      var displayname = $('input#displayName').val();
-      var description = $('textarea#description').val();
-			var action = $('select#action').val();
-			var access = $('select#access').val();
+      var displayname = $('input#displayName').text();
+      var description = $('textarea#description').text();
+			var action = $('select#action option:selected').val();
+			var access = $('select#access option:selected').val();
+			var accessaction =$('select#access option:selected').text() + ' ' + $('select#action option:selected').text();
       console.log(description);
       $.ajax({
            url:  host + 'admin/permission[edit:save]',
            type: 'POST',
-           data : { id: id, as : as, name : name, displayname:displayname, description:description, action: action, access:access},
+           data : { id: id, as : as, name : name, displayname:displayname,
+										description:description, accessaction: accessaction,
+										action:action, access:access},
            dataType: 'html',
            success: function(data){
               dialog.dialog("close");

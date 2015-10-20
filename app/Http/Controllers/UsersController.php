@@ -75,7 +75,7 @@ class UsersController extends Controller
 
 	public function showAll(){
 		$result = User::All();
-		return view('_layout.tabel-user', compact('result'));
+		return view('_layout.tabel.tabel-user', compact('result'));
 	}
 
 	public function delete(Request $request){
