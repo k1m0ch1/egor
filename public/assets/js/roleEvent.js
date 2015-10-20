@@ -13,7 +13,7 @@ $(document).ready(function(){
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 430,
-      width: 500,
+      width: 800,
       modal: true,
       draggable: false,
       buttons: [{
@@ -78,7 +78,7 @@ $(document).ready(function(){
 						$( "div.log" ).text( "Triggered ajaxError handler." );
 					});
                  }
-              }); 
+              });
            }
         });
    }
@@ -124,7 +124,7 @@ $(document).ready(function(){
 									$( "div.log" ).text( "Triggered ajaxError handler." );
 								});
 			                 }
-			              }); 
+			              });
                       }
                    });
         }
