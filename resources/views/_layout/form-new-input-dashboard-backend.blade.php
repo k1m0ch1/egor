@@ -10,6 +10,16 @@
 	<input type="radio" name="target" value="_blank"> Tab Baru
 	<input type="radio" name="target" value="_self"> Dihalaman itu sendiri
 </div>
+
+<div class="form-group">
+	<label for="href">Public Key</label>
+	<input type="text" name="puKey" id="puKey" value="" class="form-control">
+</div>
+<div class="form-group">
+	<label for="href">Private Key</label>
+	<input type="text" name="prKey" id="prKey" value="" class="form-control">
+</div>
+
 <div class="form-group">
 	<label for="href">Image</label>
 	<input type='file' name='image' id='fileUpload' class="form-control"/>

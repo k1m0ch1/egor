@@ -55,6 +55,7 @@ class UsersController extends Controller
 		$name = "";
 		$email = "";
 		$phone = "";
+		$nip = "";
 		$department = "";
 		$idnyah = "xxx";
 		$resultRole = Role::All();
@@ -66,9 +67,10 @@ class UsersController extends Controller
 				$idnyah = $rS->id;
 				$phone = $rS->phone;
 				$department = $rS->department;
+				$nip = $rS->nip;
 			}
 		}
-		return view('_layout.form-input-user-backend', compact('phone','department','name','email', 'idnyah','resultRole'));
+		return view('_layout.form-input-user-backend', compact('nip', 'phone','department','name','email', 'idnyah','resultRole'));
 	}
 
 	public function showAll(){
@@ -119,6 +121,7 @@ class UsersController extends Controller
 				$user->name = $request->input('name');
 				$user->email = $request->input('email');
 				$user->phone = $request->input('phone');
+				$user->phone = $request->input('nip');
 				$user->department = $request->input('department');
 				$user->avatar = $filename;
 				$user->save();
@@ -209,7 +212,7 @@ class UsersController extends Controller
 
 	public function login(){
 		$result1 = DB::table('parent_menu')->get();
-		
+
 		$datanyah = DB::table('parent_frontpage')->get();
 		$siteTitle = Setting::where('name', 'title')->get();
 		if( count($siteTitle) > 0){

@@ -41,9 +41,9 @@
                   <h3 class="box-title">Dashboard Menu Management System</h3>
                 </div>
                 <div class="box-body">
-                
+
                 <div id="message-body">
-                  
+
                 </div>
 						<div class="row">
 							<div class="col-lg-12 columns" >
@@ -70,7 +70,7 @@
                     <h4>Pengaturan Posisi Menu</h4>
                     <button type='submit' class="btn btn-success" id='simpan'><i class="fa fa-save"></i> Simpan Pengaturan</button>
                     <table border=0 id="menu-wrapper" align='center'>
-                        
+
                     </table>
                 </div>
               </div>
@@ -90,29 +90,29 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    <div id="dialog-form" title="Ubah Gambar">     
+    <div id="dialog-form" title="Ubah Menu">
       <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
       {!! csrf_field() !!}
         <fieldset id='formnyah'>
-          
+
         </fieldset>
       </form>
     </div>
 
-    <div id="child-form" title="Pengaturan Child Dialog">     
+    <div id="child-form" title="Pengaturan Child Dialog">
       <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
       {!! csrf_field() !!}
         <fieldset id='form-child'>
-          
+
         </fieldset>
       </form>
     </div>
 
-    <div id="add-child-form" title="Ubah Gambar">     
+    <div id="add-child-form" title="Ubah Menu Child">
       <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
       {!! csrf_field() !!}
         <fieldset id='add-form_child'>
-          
+
         </fieldset>
       </form>
     </div>

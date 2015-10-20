@@ -22,17 +22,18 @@ class DashboardController extends Controller
 			$image = 'holder.js/180x180';
 
 			$results = new \StdClass;
-			$validator = \Validator::make($request->all(), 
+			$validator = \Validator::make($request->all(),
 				[
 					'nama' => 'required',
 					'mode' => 'required',
-					'image' => 'required|image'
 				]
 			);
 			$destination = ParentFrontpage::UPLOAD_PATH;
 
+			$result = '';
+
 			if($validator->passes()){
-				
+
 				if($request->has('id') && $request->input('id') != 'xxx'){
 					$result = ParentFrontpage::find($request->input('id'));
 					$results->info = 'menu frontpage update';
@@ -47,10 +48,12 @@ class DashboardController extends Controller
 				$result->nama = $request->input('nama');
 				$result->mode = $request->input('mode');
 				$result->redirect = $request->input('redirect');
+				$result->publicKey = $request->input('puKey');
+				$result->privateKey = $request->input('prKey');
 
 				if($request->hasFile('image')){
 					if($request->file('image')->isValid()){
-						
+
 						$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('image')->guessExtension();
 						$img = \Image::make($request->file('image'))->fit(180, 180)->save($destination.$filename);
 
@@ -59,7 +62,7 @@ class DashboardController extends Controller
 				}
 
 				$result->save();
-				
+
 			}else{
 				$results->info = 'menu frontpage';
 				$results->status = 0;
@@ -80,9 +83,11 @@ class DashboardController extends Controller
 					$image = $rS->image;
 					$id = $rS->id;
 					$mode = $rS->mode;
+					$puKey = $rS->publicKey;
+					$prKey = $rS->privateKey;
 				}
 				$files = File::files(public_path() . '/uploads/menu/');
-				return view('_layout.form-input-dashboard-backend', compact('nama', 'redirect', 'image','files','id','mode','parent_id'));
+				return view('_layout.form-input-dashboard-backend', compact('puKey','prKey','nama', 'redirect', 'image','files','id','mode','parent_id'));
 			}else{
 				return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
 			}

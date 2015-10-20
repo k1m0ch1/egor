@@ -25,7 +25,7 @@
                 <div class="box">
                 <div class="box-body">
                 <div id="message-body">
-						
+
 					</div>
                   <div class="nav-tabs-custom">
 	                <!-- Tabs within a box -->
@@ -62,11 +62,11 @@
 	                  		<form method="POST" class="form-horizontal" id="FormLogo">
 								 {!! csrf_field() !!}
 								  <div class="form-group" align='center' id="FileLogo">
-				                      	
+
 				                  </div>
 				                  <div class="box-footer">
 				                    <button type="submit" class="btn btn-info pull-right" id="simpan">Simpan</button>
-				                  </div>								
+				                  </div>
 							</form>
 							</div>
 	                  </div>
@@ -102,31 +102,31 @@
 								<form method="POST" class="form-horizontal" id="FormBackground">
 										{!! csrf_field() !!}
 									  <div class="form-group" align='center' id='FileBG'>
-					                      	
+
 					                  </div>
 					                  <div class="box-footer">
 					                    <button type="submit" class="btn btn-info pull-right" id="simpanBackground">Simpan</button>
-					                  </div>								
+					                  </div>
 								</form>
 							</div>
 	                  </div>
 	                  <div class="chart tab-pane" id="footer-site" style="position: relative; height: 1000px;">
-	                  		<div class="box-body">								
-								<form method="POST" class="form-horizontal" id="FormFooter">
-										{!! csrf_field() !!}
-									  <div class="form-group" align='center'>
-					                      	<div class="form-group">
-							                      <label for="inputFooter" class="col-sm-2 control-label">Footer Website</label>
-							                      <div class="col-sm-10">
-							                        <input type="text" value="{{ $result3 }}" class="form-control" id="inputFooter" placeholder="Footer Website">
-							                      </div>
-							                  </div>
-					                  </div>
-					                  <div class="box-footer">
-					                    <button type="submit" class="btn btn-info pull-right" id="simpanBackground">Simpan</button>
-					                  </div>								
-								</form>
-							</div>
+	                  		<div class="box-body">
+      								<form method="POST" class="form-horizontal" id="FormFooter">
+      										{!! csrf_field() !!}
+      									  <div class="form-group" align='center'>
+      					                      	<div class="form-group">
+      							                      <label for="inputFooter" class="col-sm-2 control-label">Footer Website</label>
+      							                      <div class="col-sm-10">
+      							                        <input type="text" value="{{ $result3 }}" class="form-control" id="inputFooter" placeholder="Footer Website">
+      							                      </div>
+      							                  </div>
+      					                  </div>
+      					                  <div class="box-footer">
+      					                    <button type="submit" class="btn btn-info pull-right" id="simpanBackground">Simpan</button>
+      					                  </div>
+      								</form>
+      							</div>
 	                  </div>
 	                </div>
 	              </div><!-- /.nav-tabs-custom -->
@@ -138,7 +138,7 @@
         </section><!-- /.content -->
          </div><!-- /.content-wrapper -->
            @include('_layout.main-footer')
-           
+
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
