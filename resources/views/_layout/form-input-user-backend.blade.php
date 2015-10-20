@@ -1,4 +1,7 @@
 <div class="form-group">
+	<label for="nip">NIP</label><br/>
+	<input type="text" name="nip" id="nip" value="{{ $nip }}" class="form-control"><br/>
+
 	<label for="name">Name</label><br/>
 	<input type="text" name="name" id="name" value="{{ $name }}" class="form-control"><br/>
 
