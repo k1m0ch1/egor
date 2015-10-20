@@ -63,7 +63,7 @@
       </div><!-- /.content-wrapper -->
       @include('_layout.main-footer')
 
-      <div id="dialog-form" title="Ubah Permission">
+      <div id="dialog-form" title="Permission">
         <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
         {!! csrf_field() !!}
           <fieldset id='formnyah'>

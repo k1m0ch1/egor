@@ -42,6 +42,7 @@ Route::post('admin/grid:savePosition', ['uses'=>'GridController@savePosition', '
 Route::get('admin/form:dashboard', ['uses'=>'DashboardController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 Route::post('admin/dashboard[edit:save]', ['uses'=>'DashboardController@editSave', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 Route::get('admin/dashboard[delete]', ['uses'=>'DashboardController@delete', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
+Route::get('admin/dashboard[show:app]', ['uses'=>'DashboardController@showApp', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 
 Route::post('admin/gambar[upload]', ['uses'=>'GambarController@upload', 'as'=>'gambar[upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[Bg:upload]', ['uses'=>'GambarController@bgUpload', 'as'=>'gambar[Bg:upload]', 'middleware'=>'auth']);
