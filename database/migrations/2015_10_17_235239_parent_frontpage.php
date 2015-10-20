@@ -19,9 +19,6 @@ class ParentFrontpage extends Migration
             $table->string('redirect');
             $table->string('image');
             $table->string('mode');
-            $table->text('query');
-            $table->text('private');
-            $table->text('public');
             $table->timestamps();
 
         });
