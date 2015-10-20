@@ -20,7 +20,7 @@ class DashboardController extends Controller
 			$allowed = array('png', 'jpg', 'gif');
 			$hasil = false;
 			$image = 'holder.js/180x180';
-
+			
 			$results = new \StdClass;
 			$validator = \Validator::make($request->all(),
 				[
@@ -33,7 +33,6 @@ class DashboardController extends Controller
 			$result = '';
 
 			if($validator->passes()){
-
 				if($request->has('id') && $request->input('id') != 'xxx'){
 					$result = ParentFrontpage::find($request->input('id'));
 					$results->info = 'menu frontpage update';
@@ -48,8 +47,12 @@ class DashboardController extends Controller
 				$result->nama = $request->input('nama');
 				$result->mode = $request->input('mode');
 				$result->redirect = $request->input('redirect');
-				$result->publicKey = $request->input('puKey');
-				$result->privateKey = $request->input('prKey');
+				$result->public_key = $request->input('puKey');
+				$result->private_key = $request->input('prKey');
+				$result->query = $request->input('query');
+				$result->db_host = $request->input('dbhost');
+				$result->db_user = $request->input('dbuser');
+				$result->db_pass = $request->input('dbpass');
 
 				if($request->hasFile('image')){
 					if($request->file('image')->isValid()){

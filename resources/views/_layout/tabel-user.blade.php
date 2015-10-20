@@ -6,6 +6,7 @@
 				{{$role->name}}
 			@endforeach
 		</td>
+		<td>{{$rS->jabatan}}</td>
 		<td>{{$rS->email}}</td>
 		<td>
 			<div class="tools" align='center'>

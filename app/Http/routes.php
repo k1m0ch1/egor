@@ -15,6 +15,7 @@ Route::get('/', 'PagesController@index');
 
 Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
 Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.post']);
+Route::get('logout', ['uses'=>'UsersController@logout', 'as'=>'users.logout.get']);
 
 Route::get('admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']);

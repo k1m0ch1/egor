@@ -148,6 +148,10 @@ $(document).ready(function(){
       var b = $('#dialog-form form input#href').val();
 			var e = $('#dialog-form form input#puKey').val();
 			var f = $('#dialog-form form input#prKey').val();
+      var inp_query = $('#dialog-form form input#query').val();
+      var inp_dbhost = $('#dialog-form form input#dbhost').val();
+      var inp_dbuser = $('#dialog-form form input#dbuser').val();
+      var inp_dbpass = $('#dialog-form form input#dbpass').val();
       //var c = $('#dialog-form form select#image').val();
       var c = $("input[type='radio'][name='target']:checked");
       c = c.length>0?c.val():0;
@@ -163,6 +167,11 @@ $(document).ready(function(){
       myFormData.append("mode", c);
 			myFormData.append("puKey", e);
       myFormData.append("prKey", f);
+      myFormData.append("query", inp_query);
+      myFormData.append("dbhost", inp_dbhost);
+      myFormData.append("dbuser", inp_dbuser);
+      myFormData.append("dbpass", inp_dbpass);
+
 
       $.ajax({
             url: host + 'admin/dashboard[edit:save]',
