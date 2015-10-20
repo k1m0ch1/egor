@@ -2,9 +2,29 @@ $(document).ready(function(){
 
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 600,
-      width: 500,
+      height: 420,
+      width: 700,
       modal: true,
+      draggable: false,
+			resizable: false,
+      buttons: {
+        "Simpan": simpan,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[0].reset();
+      }
+    });
+
+    dialogAdd = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 540,
+      width: 700,
+      modal: true,
+      draggable: false,
+			resizable: false,
       buttons: {
         "Simpan": simpan,
         Cancel: function() {
@@ -35,7 +55,7 @@ $(document).ready(function(){
               $( "div.log" ).text( "Triggered ajaxError handler." );
             });
          }
-      }); 
+      });
    });
 
     $('[id^=editUser]').on('click', function(){
@@ -80,7 +100,7 @@ $(document).ready(function(){
                         $( "div.log" ).text( "Triggered ajaxError handler." );
                       });
                    }
-                }); 
+                });
               }
            });
         }
@@ -131,14 +151,14 @@ $(document).ready(function(){
                         $( "div.log" ).text( "Triggered ajaxError handler." );
                       });
                    }
-                }); 
+                });
 	            }
 	         });
     	dialog.dialog("close");
     }
 
     $('#tambah').on('click', function(){
-        dialog.dialog("open");
+        dialogAdd.dialog("open");
             $.ajax({
               url:  host + 'admin/users[add:show]',
               type: 'GET',

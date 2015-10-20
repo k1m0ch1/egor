@@ -2,10 +2,11 @@ $(document).ready(function(){
 
 	dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 520,
-      width: 500,
+      height: 620,
+      width: 700,
       modal: true,
       draggable: false,
+			resizable: false,
       buttons: [{
                   id:"simpanData", text: "Simpan",
                   click: function() {
@@ -29,6 +30,7 @@ $(document).ready(function(){
       width: 700,
       modal: true,
       draggable: false,
+			resizable: false,
       buttons: [{
                   id:"btn-addChild", text: "Tambah Child",
                   click: function() {
@@ -52,6 +54,7 @@ $(document).ready(function(){
       width: 500,
       modal: true,
       draggable: false,
+			resizable: false,
       buttons: [{
                   id:"simpan-child", text: "Simpan",
                   click: function() {
