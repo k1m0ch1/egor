@@ -18,7 +18,7 @@ class UsersSeeder extends Seeder
         $user_1->email = 'tech@ordent.co';
         $user_1->password = \Hash::make('tech1234');
         $user_1->phone = '082214250262';
-        $user_1->department = 'Technical Administrator';
+        $user_1->jabatan = 'Technical Administrator';
         $user_1->save();
 
         $user_2 = new User;
@@ -26,7 +26,7 @@ class UsersSeeder extends Seeder
         $user_2->email = 'admin@ordent.co';
         $user_2->password = \Hash::make('admin1234');
         $user_2->phone = '082214250262';
-        $user_2->department = 'Management Administrator';
+        $user_2->jabatan = 'Management Administrator';
         $user_2->save();
 
         $role_1 = new Role;
