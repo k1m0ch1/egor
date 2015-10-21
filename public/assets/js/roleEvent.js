@@ -114,7 +114,7 @@ $(document).ready(function(){
       var name = $('input#name').val();
       var displayname = $('input#displayName').val();
       var description = $('textarea#description').val();
-      console.log(description);
+      console.log(name);
       $.ajax({
            url:  host + 'admin/roles[edit:save]',
            type: 'POST',
@@ -164,7 +164,16 @@ $(document).ready(function(){
 			data: {role_id: role_id, permission_id: permission_id, access: access, action: action},
 			dataType: 'html',
 			success: function(data) {
-
+				dialogSetPermission.dialog('close');
+				$.ajax({
+					url:  host + 'admin/roles[permission:show]',
+					type: 'GET',
+					data : {id: role_id},
+					dataType: 'html',
+					success: function(data) {
+						$('#tbody-permission-roles').html(data);
+					}
+				});
 			}
 		});
 	}

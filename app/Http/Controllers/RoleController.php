@@ -34,7 +34,7 @@ class RoleController extends Controller
         $results = new \StdClass;
 
         if($validator->passes()){
-            if($request->has('id')){
+            if($request->input('id')!='xxx'){
                 $role = Role::find($request->input('id'));
                 $role->name = $request->input('name');
                 $role->display_name = $request->input('displayname');
@@ -86,8 +86,17 @@ class RoleController extends Controller
                            'permission_role.access as access', "parent_frontpage.nama as menu_nama")
                   ->where('permission_role.role_id', $request->input('id'))
                   ->get();
-        echo print_r($result);
-        return view('_layout.tabel.roles-permission', compact('result'));
+        $role_id = $request->input('id');
+        return view('_layout.tabel.roles-permission', compact('result','role_id'));
+    }
+
+    public function delSetPermission(Request $request){
+      $result = DB::table('permission_role')
+                ->where('permission_id', $request->input('pID'))
+                ->where('role_id', $request->input('rID'))
+                ->where('action', $request->input('actionID'))
+                ->delete();
+      return $result==true?"success delSetPermission":"fail delSetPermission";
     }
 
     public function setPermission(Request $request){

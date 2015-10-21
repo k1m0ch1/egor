@@ -16,7 +16,7 @@
     </select>
   </div>
 </div>
-<input type='hidden' id='role_id' value="{{ $role_id }}" />
+<input type='hidden' id='role_id' name='role_id' value="{{ $role_id }}" />
 <input type="submit" tabindex="-1" style="position:absolute; top:-1000px" id='simpanData'>
 <script>
 $(document).ready(function(){

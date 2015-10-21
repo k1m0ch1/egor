@@ -64,6 +64,7 @@ Route::get('admin/roles[add:show]', ['uses'=>'RoleController@form', 'as'=>'roles
 Route::get('admin/roles[del]', ['uses'=>'RoleController@del', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/roles[permission:show]', ['uses'=>'RoleController@showPermission', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
 Route::post('admin/roles[set:permission]', ['uses'=>'RoleController@setPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[permission:delete]', ['uses'=>'RoleController@delSetPermission', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
 
 Route::get('admin/permission[edit:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::post('admin/permission[edit:save]', ['uses'=>'PermissionController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
