@@ -227,7 +227,13 @@ class UsersController extends Controller
 		}else{
 			$title = 'Login Page';
 		}
-		return view('frontend.login', compact('result1', 'title', 'datanyah'));
+		$bg = Setting::where('name', 'background')->get();
+        if( count($bg) > 0){
+            $bg = asset('/uploads/background/') . '/' .$bg->first()->value;
+        }else{
+            $bg = 'assets/img/bg.jpg';
+        }
+		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg'));
 	}
 
 	public function postLogin(Request $requests){
