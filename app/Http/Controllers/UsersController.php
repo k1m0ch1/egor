@@ -233,6 +233,18 @@ class UsersController extends Controller
         }else{
             $bg = 'assets/img/bg.jpg';
         }
+        $siteTitle = Setting::where('name', 'title')->get();
+        if( count($siteTitle) > 0){
+            $bah = $siteTitle->first()->value;
+        }else{
+            $bah = 'Website';
+        }
+        $footer = Setting::where('name', 'footer')->get();
+        if( count($footer) > 0){
+            $footer = $footer->first()->value;
+        }else{
+            $footer = '(c) 2015, Ordent, All Right Reserved.';
+        }
 		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg'));
 	}
 
