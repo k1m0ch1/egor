@@ -245,7 +245,7 @@ class UsersController extends Controller
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
         }
-		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg'));
+		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer'));
 	}
 
 	public function postLogin(Request $requests){

@@ -2,20 +2,18 @@
 	<div class="divider main">
 		<div class="row">
 			<div class="large-8 medium-8 small-12 columns">
-				<h1>Halaman Login</h1>
+				<h2>PORTAL LOGIN SINGLE SIGN ON 
+				KEMENTRIAN ESDM</h2>
 				<hr/>
 				<div class="row main-url large-collapse">
 					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/share.png') }}" alt="">Excepteur</p>
+						<p><img src="{{ asset('assets/img/share.png') }}" alt="">Secure</p>
 					</div>
 					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/windcatcher.png') }}" alt="">Somos Libre</p>
+						<p><img src="{{ asset('assets/img/windcatcher.png') }}" alt="">Reliable</p>
 					</div>
 					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/flag.png') }}" alt="">Anno Domini</p>
-					</div>
-					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/flame.png') }}" alt="">Tala</p>
+						<p><img src="{{ asset('assets/img/flag.png') }}" alt="">Transparent</p>
 					</div>
 				</div>
 			</div>
