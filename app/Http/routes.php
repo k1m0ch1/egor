@@ -23,6 +23,7 @@ Route::get('logout', function(){
 Route::get('admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']);
 Route::get('admin/permission', ['uses'=>'PagesController@permission', 'as'=>'admin.permission.get', 'middleware'=>'auth']);
+Route::get('admin/module', ['uses'=>'PagesController@module', 'as'=>'admin.permission.get', 'middleware'=>'auth']);
 
 Route::get('admin/tes', ['uses'=>'PagesController@tes', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
@@ -76,6 +77,13 @@ Route::get('admin/permission[show]', ['uses'=>'PermissionController@show', 'as'=
 Route::get('admin/permission[show2]', ['uses'=>'PermissionController@showPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[add:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[del]', ['uses'=>'PermissionController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+
+Route::get('admin/module[edit:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::post('admin/module[edit:save]', ['uses'=>'ModuleController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[show]', ['uses'=>'ModuleController@show', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[show2]', ['uses'=>'ModuleController@showPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[add:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[del]', ['uses'=>'ModuleController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);

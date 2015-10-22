@@ -8,7 +8,7 @@
 					<option value="false" {{ $rS[0]->access=="false"?"selected":"" }}>Tidak Dapat</option>
 			</select>
 			<select name="action" id="action" class='form-control'>
-					<option value="show" {{ $rS[0]->action=="show"?"selected":"" }}>Melihat</option>
+					<option value="show" {{ $rS[0]->action=="access"?"selected":"" }}>Mengakses</option>
 					<option value="add" {{ $rS[0]->action=="add"?"selected":"" }}>Menambah</option>
 					<option value="edit" {{ $rS[0]->action=="edit"?"selected":"" }}>Merubah</option>
 					<option value="delete" {{ $rS[0]->action=="delete"?"selected":"" }}>Menghapus</option>

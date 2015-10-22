@@ -69,6 +69,12 @@
               </a>
             </li>
 
+            <li {{ $title=='Menu'?'class="active treeview"':'' }}>
+              <a href='{{ asset("admin/module") }}'>
+                <i class="fa fa-th"></i> <span> Module</span>
+              </a>
+            </li>
+
             <li {{ $title=='Image'?'class="active treeview"':'' }}>
               <a href='{{ asset("admin/gambar") }}'>
                 <i class="fa fa-file-image-o"></i> <span> Images</span>

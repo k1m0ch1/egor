@@ -13,6 +13,7 @@ use App\Models\ParentFrontpage;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Module;
 
 class PagesController extends Controller
 {
@@ -336,6 +337,21 @@ class PagesController extends Controller
       return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
   }
 
+  public function module(){
+     $title = 'Module';
+     $css = $this->CSS('users');
+     $jH =  $this->jS('module');
+     $result = Module::all();
+     $a=0;
+      $footer = Setting::where('name', 'footer')->get();
+     if(count($footer)>0){
+        $footer =$footer->first()->value;
+     }else{
+        $footer = '(c) Ordent '.date('Y');
+     }
+     return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer'));
+ }
+
     public function tes(){
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('general');
@@ -550,6 +566,21 @@ class PagesController extends Controller
                         asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
                         //asset('assets/js/roleEvent.js'),
                         asset('assets/js/permissionOperator.js')
+                        );
+            break;
+
+            case "module":
+                $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
+                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js'),
+                        asset('holder.js'),
+                        asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
+                        //asset('assets/js/roleEvent.js'),
+                        asset('assets/js/moduleOperator.js')
                         );
             break;
 
