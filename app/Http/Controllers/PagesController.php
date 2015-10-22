@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use File;
+use Auth;
 use App\Models\Setting;
 use App\Models\ParentFrontpage;
 use App\Models\User;
@@ -21,6 +22,10 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+        if (Auth::check()!=1){
+          Auth::attempt(['email' => 'guest@gmail.com', 'password' => 'guestguest']);
+        }
+
         $result1 = DB::table('parent_menu')->get();
         $siteTitle = Setting::where('name', 'title')->get();
         if( count($siteTitle) > 0){
@@ -57,9 +62,34 @@ class PagesController extends Controller
             $footer = $footer->first()->value;
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
+
+        }
+        $role = DB::table('roles')->get();
+        foreach($role as $rolerS){
+          if(User::find(Auth::user()->id)->hasRole($rolerS->name)==1){
+            $userRole = $rolerS->name;
+            $role_id = $rolerS->id;
+          }
         }
 
-        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer'));
+        $resultPermission = DB::table('permission_role')
+                  ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                  ->join('parent_frontpage', 'parent_frontpage.id', '=', 'permission_role.action')
+                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                           'roles.display_name as role_dn', 'permissions.name as per_name',
+                           'permissions.display_name as per_dn', 'permission_role.action as action',
+                           'permission_role.access as access', "parent_frontpage.nama as menu_nama",
+                           'parent_frontpage.id as pfID', 'parent_frontpage.redirect as redirect',
+                           'parent_frontpage.image as image')
+                  ->where('permission_role.role_id', $role_id)
+                  ->where('permission_role.permission_id', '3') //Permission Dapat Melihat
+                  ->orderBy('position')
+                  ->get();
+
+        //echo print_r($resultPermission);
+
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission'));
     }
 
     /**

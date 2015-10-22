@@ -15,6 +15,10 @@ Route::get('/', 'PagesController@index');
 
 Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
 Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.post']);
+Route::get('logout', function(){
+	Auth::logout();
+	return redirect('/');
+});
 
 Route::get('admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']);
@@ -35,10 +39,10 @@ Route::get('admin/form:child[add]', ['uses'=>'ChildController@addNewChild', 'mid
 Route::post('admin/form:child[add:save]', ['uses'=>'ChildController@saveNewChild', 'middleware'=>'auth']);
 Route::get('admin/form:child[edit]', ['uses'=>'ChildController@editSave', 'middleware'=>'auth']);
 Route::get('admin/form:child[delete]', ['uses'=>'ChildController@delete', 'middleware'=>'auth']);
+Route::get('admin/form:dashboard', ['uses'=>'DashboardController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 
 Route::post('admin/grid:savePosition', ['uses'=>'GridController@savePosition', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 
-Route::get('admin/form:dashboard', ['uses'=>'DashboardController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 Route::post('admin/dashboard[edit:save]', ['uses'=>'DashboardController@editSave', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 Route::get('admin/dashboard[delete]', ['uses'=>'DashboardController@delete', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 Route::get('admin/dashboard[show:app]', ['uses'=>'DashboardController@showApp', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
