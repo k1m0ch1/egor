@@ -81,7 +81,7 @@ Route::get('admin/permission[del]', ['uses'=>'PermissionController@del', 'as'=>'
 Route::get('admin/module[edit:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::post('admin/module[edit:save]', ['uses'=>'ModuleController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/module[show]', ['uses'=>'ModuleController@show', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
-Route::get('admin/module[show2]', ['uses'=>'ModuleController@showPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[show2]', ['uses'=>'ModuleController@showModules', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/module[add:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/module[del]', ['uses'=>'ModuleController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 

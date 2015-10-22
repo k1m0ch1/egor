@@ -23,7 +23,7 @@ $(document).ready(function(){
 	$('select#access').on('change', function(){
 		var access = $( "#access option:selected" ).val();
 		console.log(access);
-		var link = access=="app"?'admin/dashboard[show:app]':access=="self"?'':access=="module"?'':"";
+		var link = access=="app"?'admin/dashboard[show:app]':access=="self"?'':access=="module"?'admin/module[show2]':"";
 		$.ajax({
 			url:  host + link,
 			type: 'GET',

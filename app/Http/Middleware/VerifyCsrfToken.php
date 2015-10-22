@@ -30,6 +30,7 @@ class VerifyCsrfToken extends BaseVerifier
                             'admin/preference:footer[save]',
                             'admin/roles[edit:save]',
                             'admin/permission[edit:save]',
-                            'admin/roles[set:permission]'
+                            'admin/roles[set:permission]',
+                            'admin/module[edit:save]',
     ];
 }

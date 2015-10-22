@@ -10,6 +10,13 @@ use App\Models\Module;
 
 class ModuleController extends Controller
 {
+
+    public function showModules(Request $request){
+      $result = Module::orderBy('id')->get();
+      $access = $request->input('access');
+      return view('_layout.select-action-role', compact('result','access'));
+    }
+
     public function form(Request $request){
         $as = $request->input('as');
 
