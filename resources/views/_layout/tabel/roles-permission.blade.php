@@ -11,6 +11,19 @@
 		</tr>
 	@endforeach
 @endif
+@if(count($resultPermission)>0)
+	@foreach($resultPermission as $rS)
+		<tr>
+			<td>{{ $rS->role_dn }}</td>
+			<td>{{ $rS->per_dn }} {{ $rS->module_name }}</td>
+			<td>
+				<div class="tools" align='center'>
+					<button type="button" id="deletePermission-{{$rS->pID}}-{{$rS->rID}}-{{$rS->action}}"><i class="fa fa-trash-o"></i></button type="button">
+				</div>
+			</td>
+		</tr>
+	@endforeach
+@endif
 <input type='hidden' value="{{$role_id}}" id="role_id" />
 
 <script>

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use DB;
+use App\Models\User;
 
 class Authenticate
 {
@@ -58,6 +59,32 @@ class Authenticate
           } else {
                   return response('Unauthorized.', 401);
           }
+        }else{
+          $pathRoute = \Route::getCurrentRoute()->getPath();
+
+          $role = DB::table('roles')->get();
+          foreach($role as $rolerS){
+            if(User::find($this->auth->user()->id)->hasRole($rolerS->name)==1){
+              $userRole = $rolerS->name;
+              $role_id = $rolerS->id;
+            }
+          }
+
+          $resultPermission = DB::table('permission_role')
+                  ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                  ->join('modules', 'modules.id', '=', 'permission_role.action')
+                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                           'roles.display_name as role_dn', 'permissions.name as per_name',
+                           'permissions.display_name as per_dn', 'permission_role.action as action',
+                           'permission_role.access as access', "modules.name as module_name",
+                           'modules.id as mID')
+                  ->where('permission_role.role_id', $role_id)
+                  ->where('permission_role.permission_id', '3') //Permission Dapat Melihat
+                  ->get();
+
+        
+
         }
 
         return $next($request);

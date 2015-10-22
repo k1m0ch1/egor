@@ -84,7 +84,7 @@ class PagesController extends Controller
                            'parent_frontpage.id as pfID', 'parent_frontpage.redirect as redirect',
                            'parent_frontpage.image as image')
                   ->where('permission_role.role_id', $role_id)
-                  ->where('permission_role.permission_id', '3') //Permission Dapat Melihat
+                  ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
                   ->orderBy('position')
                   ->get();
 
