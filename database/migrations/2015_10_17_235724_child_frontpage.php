@@ -12,6 +12,7 @@ class ChildFrontpage extends Migration
      */
     public function up()
     {
+      if (!Schema::hasTable('child_frontpage')) {
         Schema::create('child_frontpage', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
@@ -21,6 +22,7 @@ class ChildFrontpage extends Migration
             $table->string('mode');
             $table->timestamps();
         });
+      }
     }
 
     /**

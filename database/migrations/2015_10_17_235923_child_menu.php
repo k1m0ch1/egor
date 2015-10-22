@@ -12,6 +12,7 @@ class ChildMenu extends Migration
      */
     public function up()
     {
+      if (!Schema::hasTable('child_menu')) {
         Schema::create('child_menu', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -19,6 +20,7 @@ class ChildMenu extends Migration
             $table->integer('parent_id');
             $table->timestamps();
         });
+      }
     }
 
     /**
