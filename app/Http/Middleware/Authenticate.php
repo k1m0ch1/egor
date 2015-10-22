@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use DB;
 
 class Authenticate
 {
@@ -34,12 +35,29 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
-            }
+        // if ($this->auth->guest()) {
+        //     if ($request->ajax()) {
+        //         return response('Unauthorized.', 401);
+        //     } else {
+        //         return redirect()->guest('index');
+        //     }
+        // }
+
+        //$this->auth->user()->name;
+
+        // $role = DB::table('roles')->get();
+        // foreach($role as $rolerS){
+        //   if(User::find($this->auth->user()->id)->hasRole($rolerS->name)==1){
+        //     $userRole = $rolerS->name;
+        //     $role_id = $rolerS->id;
+        //   }
+        // }
+        if($this->auth->user()->name=="guest"){
+          if ($request->ajax()) {
+                  return response('Unauthorized.', 401);
+          } else {
+                  return response('Unauthorized.', 401);
+          }
         }
 
         return $next($request);
