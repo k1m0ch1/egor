@@ -6,13 +6,13 @@
 				KEMENTRIAN ESDM</h2>
 				<hr/>
 				<div class="row main-url large-collapse">
-					<div class="large-3 medium-6 small-12 columns">
+					<div class="large-4 medium-6 small-12 columns">
 						<p><img src="{{ asset('assets/img/share.png') }}" alt="">Secure</p>
 					</div>
-					<div class="large-3 medium-6 small-12 columns">
+					<div class="large-4 medium-6 small-12 columns">
 						<p><img src="{{ asset('assets/img/windcatcher.png') }}" alt="">Reliable</p>
 					</div>
-					<div class="large-3 medium-6 small-12 columns">
+					<div class="large-4 medium-6 small-12 columns">
 						<p><img src="{{ asset('assets/img/flag.png') }}" alt="">Transparent</p>
 					</div>
 				</div>
