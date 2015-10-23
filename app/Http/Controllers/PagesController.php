@@ -64,13 +64,19 @@ class PagesController extends Controller
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
 
+
         }
         $role = DB::table('roles')->get();
-        foreach($role as $rolerS){
-          if(User::find(Auth::user()->id)->hasRole($rolerS->name)==1){
-            $userRole = $rolerS->name;
-            $role_id = $rolerS->id;
-          }
+        if(count($role)){
+
+            foreach($role as $rolerS){
+              if(User::find(Auth::user()->id)->hasRole($rolerS->name)==1){
+                $userRole = $rolerS->name;
+                $role_id = $rolerS->id;
+              }
+            }
+        }else{
+            $role_id = 0;
         }
 
         $resultPermission = DB::table('permission_role')

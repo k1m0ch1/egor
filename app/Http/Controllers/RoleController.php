@@ -118,12 +118,16 @@ class RoleController extends Controller
         $access = $request->input('access');
         $action = $request->input('action');
 
+        $role = Role::find($request->input('role_id'));
+        $permissions = Permission::find($request->input('permission_id'));
+        
         $result = DB::table('permission_role')->insert([
               'role_id' => $role_id,
               'permission_id' => $permission_id,
               'action' => $action,
               'access' => $access
           ]);
+
         return "success";
     }
 }

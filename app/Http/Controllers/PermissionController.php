@@ -24,7 +24,7 @@ class PermissionController extends Controller
         if($as!="add"){
             $rS = Permission::find($request->input('id'))->get();
         }
-        return view('_layout.form.permission-backend', compact('rS', 'as'));
+        return view('_layout.form.form-permission-backend', compact('rS', 'as'));
     }
 
     public function save(Request $request){

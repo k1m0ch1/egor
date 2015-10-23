@@ -15,7 +15,7 @@ class CreateModulesTable extends Migration
       if (!Schema::hasTable('modules')) {
         Schema::create('modules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 200);
+            $table->string('name');
             $table->text('route');
             $table->text('description');
             $table->timestamps();

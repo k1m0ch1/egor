@@ -70,7 +70,7 @@ class UsersController extends Controller
 				$nip = $result1->nip;
 				$roles = $result1->roles->first();
 		}
-		return view('_layout.form-input-user-backend', compact('nip', 'phone','avatar','jabatan','name','email', 'idnyah','resultRole', 'roles'));
+		return view('_layout.form.form-input-user-backend', compact('nip', 'phone','avatar','jabatan','name','email', 'idnyah','resultRole', 'roles'));
 	}
 
 	public function showAll(){
