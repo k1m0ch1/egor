@@ -3,73 +3,128 @@
 use Illuminate\Database\Seeder;
 use App\Models\Permission;
 use App\Models\Module;
+use App\Models\Role;
 
 class ModuleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $perm_1 = new Module;
-        $perm_1->name = 'Home';
-        $perm_1->route = 'index';
-        $perm_1->save();
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		$module = new Module;
+		$module->name = 'Home';
+		$module->route = "'/', 'PagesController@index'";
+		$module->save();
+		$module = new Module;
+		$module->name = 'login';
+		$module->route = "'login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/user';
+		$module->route = "'admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/role';
+		$module->route = "'admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/permission';
+		$module->route = "'admin/permission', ['uses'=>'PagesController@permission', 'as'=>'admin.permission.get']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/module';
+		$module->route = "'admin/module', ['uses'=>'PagesController@module', 'as'=>'admin.permission.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/tes';
+		$module->route = "'admin/tes', ['uses'=>'PagesController@tes', 'as'=>'admin.user.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/dashboard';
+		$module->route = "'admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/menu';
+		$module->route = "'admin/menu', ['uses'=>'PagesController@menu', 'as'=>'admin.menu.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/preference';
+		$module->route = "'admin/preference', ['uses'=>'PagesController@preference', 'as'=>'admin.preference.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/grid';
+		$module->route = "'admin/grid', ['uses'=>'PagesController@grid', 'as'=>'admin.grid.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/form:child';
+		$module->route = "'admin/form:child', ['uses'=>'ChildController@formChild', 'as'=>'admin.grid.get', 'middleware'=>'auth']";
+		$module->save();
+		$module = new Module;
+		$module->name = 'Menu Images';
+		$module->route = "any admin/gambar";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/users';
+		$module->route = "[Menu^=admin/users]";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/roles';
+		$module->route = "[Menu^=admin/roles]";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/menu:child';
+		$module->route = "admin/menu:child";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/preference:image';
+		$module->route = "admin/preference:image";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/preference:background';
+		$module->route = "admin/preference:background";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/preference:logo';
+		$module->route = "admin/preference:logo";
+		$module->save();
+		$module = new Module;
+		$module->name = 'admin/preference:footer';
+		$module->route = "admin/preference:footer";
+		$module->save();
 
-        $perm_2 = new Module;
-        $perm_2->name = 'Login';
-        $perm_2->route = 'login.get';
-        $perm_2->save();
 
-        $perm_3 = new Module;
-        $perm_3->name = 'User';
-        $perm_3->route = 'admin.user.get';
-        $perm_3->save();
+		$modules = Module::all();
+		$admin = Role::where('name', 'admin')->get()->first();
+		$tech = Role::where('name', 'tech')->get()->first();
 
-        $perm_4 = new Module;
-        $perm_4->name = 'Role';
-        $perm_4->route = 'admin.role.get';
-        $perm_4->save();
+		foreach ($modules as $key => $m) {
+			$permission = new Permission;
+			$permission->name = $m->name;
+			$permission->display_name = 'Dapat mengakses module '.$m->name;
+			$permission->access = true;
+			$permission->action = 'access';
+			$permission->type = 'module';
+			$permission->save();
 
-        $perm_5 = new Module;
-        $perm_5->name = 'Permission';
-        $perm_5->route = 'admin.permission.get';
-        $perm_5->save();
+			$result = DB::table('permission_role')->insert([
+              'role_id' => $admin->id,
+              'permission_id' => $permission->id,
+              'action' => 1,
+              'access' => 'module'
+          ]);
 
-        $perm_6 = new Module;
-        $perm_6->name = 'Module';
-        $perm_6->route = 'admin.modules.get';
-        $perm_6->save();
-
-        $perm_7 = new Module;
-        $perm_7->name = 'Dashboard';
-        $perm_7->route = 'admin.dashboard.get';
-        $perm_7->save();
-
-        $perm_8 = new Module;
-        $perm_8->name = 'Preference';
-        $perm_8->route = 'admin.preference.get';
-        $perm_8->save();
-
-        $perm_9 = new Module;
-        $perm_9->name = 'Image';
-        $perm_9->route = 'admin.images.get';
-        $perm_9->save();
-
-        $modules = Module::all();
-
-        foreach ($modules as $key => $m) {
-        	$permission = new Permission;
-        	$permission->name = $m->name;
-        	$permission->display_name = 'Dapat mengakses module '.$m->name;
-        	$permission->access = true;
-        	$permission->action = 'access';
-        	$permission->type = 'module';
-        	$permission->save();
-        }
+			$result = DB::table('permission_role')->insert([
+              'role_id' => $tech->id,
+              'permission_id' => $permission->id,
+              'action' => 1,
+              'access' => 'module'
+          ]);
 
 
-    }
+		}
+
+	}
 }
