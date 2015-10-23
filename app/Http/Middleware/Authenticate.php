@@ -60,7 +60,8 @@ class Authenticate
                   return response('Unauthorized.', 401);
           }
         }else{
-          $pathRoute = \Route::getCurrentRoute()->getPath();
+          $currentRoute = \Route::getCurrentRoute()->getPath();
+          $pass = false;
 
           $role = DB::table('roles')->get();
           foreach($role as $rolerS){
@@ -83,7 +84,19 @@ class Authenticate
                   ->where('permission_role.permission_id', '3') //Permission Dapat Melihat
                   ->get();
 
-        
+          foreach($resultPermission as $rsP){
+              if($currentRoute==$rsP->module_name){
+                $pass = true;
+              }
+          }
+
+          if($this->auth->user()->name=="admin"){
+            $pass = true;
+          }
+
+          if($pass==false){
+            return response('Unauthorized.', 401);
+          }
 
         }
 
