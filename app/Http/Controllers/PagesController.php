@@ -7,11 +7,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use File;
+use Auth;
 use App\Models\Setting;
 use App\Models\ParentFrontpage;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Module;
 
 class PagesController extends Controller
 {
@@ -21,6 +23,10 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+        if (Auth::check()!=1){
+          Auth::attempt(['email' => 'guest@gmail.com', 'password' => 'guestguest']);
+        }
+
         $result1 = DB::table('parent_menu')->get();
         $siteTitle = Setting::where('name', 'title')->get();
         if( count($siteTitle) > 0){
@@ -57,9 +63,34 @@ class PagesController extends Controller
             $footer = $footer->first()->value;
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
+
+        }
+        $role = DB::table('roles')->get();
+        foreach($role as $rolerS){
+          if(User::find(Auth::user()->id)->hasRole($rolerS->name)==1){
+            $userRole = $rolerS->name;
+            $role_id = $rolerS->id;
+          }
         }
 
-        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer'));
+        $resultPermission = DB::table('permission_role')
+                  ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                  ->join('parent_frontpage', 'parent_frontpage.id', '=', 'permission_role.action')
+                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                           'roles.display_name as role_dn', 'permissions.name as per_name',
+                           'permissions.display_name as per_dn', 'permission_role.action as action',
+                           'permission_role.access as access', "parent_frontpage.nama as menu_nama",
+                           'parent_frontpage.id as pfID', 'parent_frontpage.redirect as redirect',
+                           'parent_frontpage.image as image')
+                  ->where('permission_role.role_id', $role_id)
+                  ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
+                  ->orderBy('position')
+                  ->get();
+
+        //echo print_r($resultPermission);
+
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission'));
     }
 
     /**
@@ -306,6 +337,21 @@ class PagesController extends Controller
       return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
   }
 
+  public function module(){
+     $title = 'Module';
+     $css = $this->CSS('users');
+     $jH =  $this->jS('module');
+     $result = Module::all();
+     $a=0;
+      $footer = Setting::where('name', 'footer')->get();
+     if(count($footer)>0){
+        $footer =$footer->first()->value;
+     }else{
+        $footer = '(c) Ordent '.date('Y');
+     }
+     return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer'));
+ }
+
     public function tes(){
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('general');
@@ -520,6 +566,21 @@ class PagesController extends Controller
                         asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
                         //asset('assets/js/roleEvent.js'),
                         asset('assets/js/permissionOperator.js')
+                        );
+            break;
+
+            case "module":
+                $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
+                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js'),
+                        asset('holder.js'),
+                        asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
+                        //asset('assets/js/roleEvent.js'),
+                        asset('assets/js/moduleOperator.js')
                         );
             break;
 

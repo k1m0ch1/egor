@@ -18,9 +18,9 @@ class DashboardController extends Controller
 	 */
 
 	public function showApp(Request $request){
-			$hasil = DB::table('parent_frontpage')->get();
+			$result = DB::table('parent_frontpage')->get();
 			$access = $request->input('access');
-			return view('_layout.select-action-role', compact('hasil', 'access'));
+			return view('_layout.select-action-role', compact('result', 'access'));
 	}
 
 	public function editSave(Request $request){

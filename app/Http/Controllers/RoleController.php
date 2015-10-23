@@ -34,7 +34,7 @@ class RoleController extends Controller
         $results = new \StdClass;
 
         if($validator->passes()){
-            if($request->has('id')){
+            if($request->input('id')!='xxx'){
                 $role = Role::find($request->input('id'));
                 $role->name = $request->input('name');
                 $role->display_name = $request->input('displayname');
@@ -86,8 +86,30 @@ class RoleController extends Controller
                            'permission_role.access as access', "parent_frontpage.nama as menu_nama")
                   ->where('permission_role.role_id', $request->input('id'))
                   ->get();
-        echo print_r($result);
-        return view('_layout.tabel.roles-permission', compact('result'));
+
+        $resultPermission = DB::table('permission_role')
+                  ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                  ->join('modules', 'modules.id', '=', 'permission_role.action')
+                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                           'roles.display_name as role_dn', 'permissions.name as per_name',
+                           'permissions.display_name as per_dn', 'permission_role.action as action',
+                           'permission_role.access as access', "modules.name as module_name",
+                           'modules.id as mID')
+                  ->where('permission_role.role_id', $request->input('id'))
+                  ->get();
+
+        $role_id = $request->input('id');
+        return view('_layout.tabel.roles-permission', compact('result','role_id','resultPermission'));
+    }
+
+    public function delSetPermission(Request $request){
+      $result = DB::table('permission_role')
+                ->where('permission_id', $request->input('pID'))
+                ->where('role_id', $request->input('rID'))
+                ->where('action', $request->input('actionID'))
+                ->delete();
+      return $result==true?"success delSetPermission":"fail delSetPermission";
     }
 
     public function setPermission(Request $request){
