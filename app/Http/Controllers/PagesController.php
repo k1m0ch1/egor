@@ -66,9 +66,9 @@ class PagesController extends Controller
 
 
         }
+        if(Auth::check()){
         $role = DB::table('roles')->get();
         if(count($role)){
-
             foreach($role as $rolerS){
               if(User::find(Auth::user()->id)->hasRole($rolerS->name)==1){
                 $userRole = $rolerS->name;
@@ -77,7 +77,11 @@ class PagesController extends Controller
             }
         }else{
             $role_id = 0;
+        }   
+        }else{
+            $role_id = 0;
         }
+        
 
         $resultPermission = DB::table('permission_role')
                   ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
