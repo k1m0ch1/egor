@@ -37,7 +37,13 @@
 	</ul>
 	<!-- Right Nav Section -->
 	<ul class="right">
-	  <li ><a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li>
+	  <li >
+	  	@if(\Auth::check())
+	  	<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
+	  	@else
+	  	<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
+	  	@endif
+	  </li>
 		</ul>
 	  </li>
 	</ul>

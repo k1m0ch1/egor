@@ -79,7 +79,7 @@ class DashboardController extends Controller
                 $permission->name = $request->input('nama');
                 $permission->display_name = 'Dapat Mengakses '.$request->input('nama');
                 $permission->description = 'Dapat Mengakses '.$request->input('nama');
-                $permission->access = true;
+                $permission->access = $result->id;
                 $permission->action = 'access';
                 $permission->type = 'app';
                 $permission->save();
