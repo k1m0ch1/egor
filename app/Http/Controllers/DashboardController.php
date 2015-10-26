@@ -45,7 +45,7 @@ class DashboardController extends Controller
 					$result = ParentFrontpage::find($request->input('id'));
 					$results->info = 'menu frontpage update';
 					$results->status = 1;
-					$permission = Permission::where('name', $result->nama);
+					$permission = Permission::where('name', $result->nama)->get()->first();
 				}else{
 					$result = new ParentFrontpage;
 					$results->info = 'menu frontpage create';
@@ -73,7 +73,6 @@ class DashboardController extends Controller
 						$result->image = $filename;
 					}
 				}
-
 				$result->save();
 
                 $permission->name = $request->input('nama');
@@ -83,6 +82,7 @@ class DashboardController extends Controller
                 $permission->action = 'access';
                 $permission->type = 'app';
                 $permission->save();
+
                 $results->info = 'permission create';
 
 			}else{
