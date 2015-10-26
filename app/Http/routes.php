@@ -14,6 +14,7 @@
 Route::get('/', 'PagesController@index');
 
 Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
+Route::get('login_sso', ['uses'=>'UsersController@loginSso', 'as'=>'users.login_sso.get']);
 Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.post']);
 Route::get('logout', ['uses'=>'UsersController@logout', 'as'=>'users.logout.get']);
 
@@ -91,4 +92,7 @@ Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/setting/list', 'SettingsController@index');
 	Route::get('/grid/size', ['uses'=>'GridController@getGridSize']);
 	Route::get('/path/uploads/{id}', ['uses'=>'GambarController@uploadPath']);
+});
+Route::group(['prefix' => 'api-sso/v1'], function() {
+    Route::any('user/{id}/{mode?}', 'ApiController@getUserAttributes');
 });

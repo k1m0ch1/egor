@@ -147,6 +147,7 @@ return [
 
 		Zizaco\Entrust\EntrustServiceProvider::class,
 		Intervention\Image\ImageServiceProvider::class,
+		Xavrsl\Cas\CasServiceProvider::class,
 		//Jasekz\Laradrop\LaradropServiceProvider::class,
 
 	],
@@ -200,6 +201,7 @@ return [
 
 		'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 		'Image' => Intervention\Image\Facades\Image::class,
+		'Cas' => Xavrsl\Cas\Facades\Cas::class,
 		//'Laradrop'  => Jasekz\Laradrop\LaradropFacade::class
 
 	],

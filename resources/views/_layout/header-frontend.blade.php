@@ -37,7 +37,7 @@
 	</ul>
 	<!-- Right Nav Section -->
 	<ul class="right">
-	  <li ><a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li>
+	  <li ><a href="{{url('login_sso')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li>
 		</ul>
 	  </li>
 	</ul>

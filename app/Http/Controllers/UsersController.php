@@ -216,6 +216,23 @@ class UsersController extends Controller
 	{
 		//
 	}
+	
+	public function loginSso()
+	{
+		\Cas::authenticate();
+		$api = new ApiController;
+		$user = $api->_getUserAttributes(\Cas::getCurrentUser());
+		$_user = User::where('username',$user->username)->first();
+		if (!$_user) {
+			$_user = new User;
+			$_user->email = $user->email;
+			$_user->nip = $user->nip;
+			$_user->username = $user->username;
+			$_user->save();
+		}
+		\Auth::login($_user);
+		return redirect('/');
+	}
 
 	public function login(){
 		$result1 = DB::table('parent_menu')->get();
@@ -245,6 +262,10 @@ class UsersController extends Controller
 		if(\Auth::check()){
 			$users = \Auth::user();
 			\Auth::logout();
+			\Cas::authenticate();
+			unset($_SESSION['phpCAS']);
+			\phpCAS::logout(['url'=>url()]);
+			//\Cas::logout();
 		}
 
 		return redirect()->to('/');
