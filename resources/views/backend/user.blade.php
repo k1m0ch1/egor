@@ -47,6 +47,7 @@
                       <tr>
                         <th>Name</th>
                         <th>Role</th>
+                        <th>Jabatan</th>
                         <th>Email</th>
                         <th>Operation</th>
                       </tr>

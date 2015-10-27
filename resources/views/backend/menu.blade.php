@@ -1,6 +1,5 @@
 @include('_layout.header-backend')
 <div class="wrapper">
-
       @include('_layout.sidebar-backend')
 
       <div class="content-wrapper">

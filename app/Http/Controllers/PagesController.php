@@ -64,31 +64,40 @@ class PagesController extends Controller
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
 
+
         }
-        $role = DB::table('roles')->get();
-        foreach($role as $rolerS){
-          if(User::find(Auth::user()->id)->hasRole($rolerS->name)==1){
-            $userRole = $rolerS->name;
-            $role_id = $rolerS->id;
-          }
+        if(Auth::check()){
+           $roles = Auth::user()->roles->first();
+            $resultPermission = $roles->perms;
+
+        }else{
+            $resultPermission = array();
         }
 
-        $resultPermission = DB::table('permission_role')
-                  ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
-                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
-                  ->join('parent_frontpage', 'parent_frontpage.id', '=', 'permission_role.action')
-                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
-                           'roles.display_name as role_dn', 'permissions.name as per_name',
-                           'permissions.display_name as per_dn', 'permission_role.action as action',
-                           'permission_role.access as access', "parent_frontpage.nama as menu_nama",
-                           'parent_frontpage.id as pfID', 'parent_frontpage.redirect as redirect',
-                           'parent_frontpage.image as image')
-                  ->where('permission_role.role_id', $role_id)
-                  ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
-                  ->orderBy('position')
-                  ->get();
+        $datanyah = array();
+        foreach($resultPermission as $permissions){
+            if($permissions->type == 'app'){
+                array_push($datanyah, ParentFrontpage::find($permissions->access));
+            }
+        }
 
-        //echo print_r($resultPermission);
+        
+
+        // $resultPermission = DB::table('permission_role')
+        //           ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+        //           ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+        //           ->join('parent_frontpage', 'parent_frontpage.id', '=', 'permission_role.action')
+        //           ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+        //                    'roles.display_name as role_dn', 'permissions.name as per_name',
+        //                    'permissions.display_name as per_dn', 'permission_role.action as action',
+        //                    'permission_role.access as access', "parent_frontpage.nama as menu_nama",
+        //                    'parent_frontpage.id as pfID', 'parent_frontpage.redirect as redirect',
+        //                    'parent_frontpage.image as image')
+        //           ->where('permission_role.role_id', $role_id)
+        //           ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
+        //           ->orderBy('position')
+        //           ->get();
+
 
         return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission'));
     }

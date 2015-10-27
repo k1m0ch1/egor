@@ -113,7 +113,7 @@ $(document).ready(function(){
       var e = $("#dialog-form form input[type=radio][name=roles]:checked").val();
       var f = d=="xxx"?$('#dialog-form form input#password').val():"";
       var g = $('#dialog-form form input#phone').val();
-      var h = $('#dialog-form form input#department').val();
+      var h = $('#dialog-form form input#jabatan').val();
       var i = $('#dialog-form form input#Upassword').val();
       var j = $('#dialog-form form input#nip').val();
 
@@ -129,7 +129,7 @@ $(document).ready(function(){
       fd.append("password_confirmation", i);
       fd.append("as", "add");
       fd.append("phone", g);
-      fd.append("department", h);
+      fd.append("jabatan", h);
       fd.append("nip", j);
     	$.ajax({
 	            url: host+ 'admin/users[edit:save]',
