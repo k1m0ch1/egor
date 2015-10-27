@@ -78,19 +78,20 @@ class Authenticate
                   ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
                            'roles.display_name as role_dn', 'permissions.name as per_name',
                            'permissions.display_name as per_dn', 'permission_role.action as action',
-                           'permission_role.access as access', "modules.name as module_name",
+                           'permission_role.access as access', "modules.route as module_name",
                            'modules.id as mID')
                   ->where('permission_role.role_id', $role_id)
                   ->where('permission_role.permission_id', '3') //Permission Dapat Melihat
                   ->get();
 
           foreach($resultPermission as $rsP){
+              echo $rsP->module_name;
               if($currentRoute==$rsP->module_name){
                 $pass = true;
               }
           }
 
-          if($this->auth->user()->name=="admin"){
+          if($this->auth->user()->name=="admin"||$this->auth->user()->name=="tech"){
             $pass = true;
           }
 
