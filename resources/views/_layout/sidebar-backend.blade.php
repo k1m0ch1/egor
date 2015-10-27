@@ -50,7 +50,7 @@
                     <ul class="treeview-menu">
                       @if($sB->user)
                           <li>
-                            <a href='{{ asset("admin/user") }}'>
+                            <a href='{{ asset("admin/users") }}'>
                             <i class="fa fa-circle" href="user"></i> <span> User</span>
                             </a>
                           </li>

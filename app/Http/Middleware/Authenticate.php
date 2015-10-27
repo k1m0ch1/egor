@@ -61,6 +61,11 @@ class Authenticate
           }
         }else{
           $currentRoute = \Route::getCurrentRoute()->getPath();
+          if(strpos($currentRoute,'[')){
+            $currentRoute = preg_split('/[[]/',$currentRoute)[0];
+          }
+
+          echo $currentRoute;
           $pass = false;
 
           $role = DB::table('roles')->get();
@@ -82,7 +87,7 @@ class Authenticate
                            'modules.id as mID')
                   ->where('permission_role.role_id', $role_id)
                   ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
-                  ->get(); //->toSql();
+                  ->get(); //->toSql();;
 
           foreach($resultPermission as $rsP){
               if($currentRoute==$rsP->module_name){
@@ -92,11 +97,12 @@ class Authenticate
               }
           }
 
+
           if($this->auth->user()->name=="admin"||$this->auth->user()->name=="tech"){
             $pass = true;
           }
 
-          if($pass==false){
+          if(!$pass){
             return response('Unauthorized.', 401);
           }
 
