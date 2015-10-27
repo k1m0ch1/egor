@@ -6,7 +6,7 @@
     @endforeach
   </select>
   <select id="access" name="access" class='form-control'>
-    <option value="self">Sendiri</option>
+    <option value="self">-- Pilih --</option>
     <option value="module">Module</option>
     <option value="app">Aplikasi</option>
   </select>

@@ -81,12 +81,13 @@ class Authenticate
                            'permission_role.access as access', "modules.route as module_name",
                            'modules.id as mID')
                   ->where('permission_role.role_id', $role_id)
-                  ->where('permission_role.permission_id', '3') //Permission Dapat Melihat
-                  ->get();
+                  ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
+                  ->get(); //->toSql();
 
           foreach($resultPermission as $rsP){
-              echo $rsP->module_name;
               if($currentRoute==$rsP->module_name){
+                $pass = true;
+              }else if($rsP->module_name=="all module"){
                 $pass = true;
               }
           }

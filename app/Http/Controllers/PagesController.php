@@ -22,6 +22,34 @@ class PagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function getPermission(){
+      $id_user = Auth::User()->id;
+      $role = DB::table('roles')->get();
+      foreach($role as $rolerS){
+        if(User::find($id_user)->hasRole($rolerS->name)==1){
+          $userRole = $rolerS->name;
+          $role_id = $rolerS->id;
+        }
+      }
+
+      $resultPermission = DB::table('permission_role')
+              ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+              ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+              ->join('modules', 'modules.id', '=', 'permission_role.action')
+              ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                       'roles.display_name as role_dn', 'permissions.name as per_name',
+                       'permissions.display_name as per_dn', 'permission_role.action as action',
+                       'permission_role.access as access', "modules.name as module_name",
+                       'modules.id as mID')
+              ->where('permission_role.role_id', $role_id)
+              ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
+              ->get(); //->toSql();
+
+      return $resultPermission;
+    }
+
     public function index(){
         if (Auth::check()!=1){
           Auth::attempt(['email' => 'guest@gmail.com', 'password' => 'guestguest']);
@@ -80,24 +108,6 @@ class PagesController extends Controller
                 array_push($datanyah, ParentFrontpage::find($permissions->access));
             }
         }
-
-        
-
-        // $resultPermission = DB::table('permission_role')
-        //           ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
-        //           ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
-        //           ->join('parent_frontpage', 'parent_frontpage.id', '=', 'permission_role.action')
-        //           ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
-        //                    'roles.display_name as role_dn', 'permissions.name as per_name',
-        //                    'permissions.display_name as per_dn', 'permission_role.action as action',
-        //                    'permission_role.access as access', "parent_frontpage.nama as menu_nama",
-        //                    'parent_frontpage.id as pfID', 'parent_frontpage.redirect as redirect',
-        //                    'parent_frontpage.image as image')
-        //           ->where('permission_role.role_id', $role_id)
-        //           ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
-        //           ->orderBy('position')
-        //           ->get();
-
 
         return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission'));
     }
@@ -202,7 +212,9 @@ class PagesController extends Controller
 
         $rS = $w.'x'.$h;
 
-        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer'));
+        $resultPermission = $this->getPermission();
+
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer', 'resultPermission'));
     }
 
 
@@ -220,8 +232,9 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
+        $resultPermission = $this->getPermission();
 
-        return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer'));
+        return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer','resultPermission'));
     }
 
     public function fileList($id, Request $request){
@@ -311,7 +324,9 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
+        $resultPermission = $this->getPermission();
+
+        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','resultPermission'));
     }
 
      public function role(){
@@ -327,7 +342,8 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
+        $resultPermission = $this->getPermission();
+        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','resultPermission'));
     }
 
    public function permission(){
@@ -343,7 +359,8 @@ class PagesController extends Controller
       }else{
          $footer = '(c) Ordent '.date('Y');
       }
-      return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
+      $resultPermission = $this->getPermission();
+      return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','resultPermission'));
   }
 
   public function module(){
@@ -358,7 +375,8 @@ class PagesController extends Controller
      }else{
         $footer = '(c) Ordent '.date('Y');
      }
-     return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer'));
+     $resultPermission = $this->getPermission();
+     return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer','resultPermission'));
  }
 
     public function tes(){
@@ -384,7 +402,9 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer'));
+        $resultPermission = $this->getPermission();
+
+        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer','resultPermission'));
     }
 
     public function preference(){
@@ -407,8 +427,9 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
+        $resultPermission = $this->getPermission();
 
-        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer'));
+        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer','resultPermission'));
     }
 
     public function CSS($mode){

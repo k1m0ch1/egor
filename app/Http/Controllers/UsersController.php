@@ -93,7 +93,7 @@ class UsersController extends Controller
 		$results = new \StdClass;
 		$filename = '';
 
-		if($request->has('id') && $request->input('xxx')){
+		if(!$request->has('id')){
 			//
 			if($validator->passes()){
 			$user = new User;
