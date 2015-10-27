@@ -24,7 +24,19 @@ class PagesController extends Controller
      */
 
 
-    public function getPermission(){
+    public function getPermissionSideBar(){
+
+      $sB = new \StdClass;
+      $sB->dashboard = false;
+      $sB->menu_user = false;
+      $sB->user = false;
+      $sB->role = false;
+      $sB->permission = false;
+      $sB->menu = false;
+      $sB->module = false;
+      $sB->gambar = false;
+      $sB->preference = false;
+
       $id_user = Auth::User()->id;
       $role = DB::table('roles')->get();
       foreach($role as $rolerS){
@@ -47,7 +59,31 @@ class PagesController extends Controller
               ->where('permission_role.permission_id', '1') //Permission Dapat Melihat
               ->get(); //->toSql();
 
-      return $resultPermission;
+      foreach($resultPermission as $rsP){
+        switch($rsP->module_name){
+          case "Backend Dashboard": $sB->dashboard = true; break;
+          case "Backend User": $sB->user = true; $sB->menu_user=true; break;
+          case "Backend Role": $sB->role = true; $sB->menu_user=true;break;
+          case "Backend Permission": $sB->permission = true; $sB->menu_user=true; break;
+          case "Backend Menu": $sB->menu = true; break;
+          case "Backend Module": $sB->module = true; break;
+          case "Backend Gambar": $sB->gambar = true; break;
+          case "Backend Preference": $sB->preference = true; break;
+          case "All Module":
+            $sB->dashboard = true;
+            $sB->menu_user = true;
+            $sB->user = true;
+            $sB->role = true;
+            $sB->permission = true;
+            $sB->menu = true;
+            $sB->module = true;
+            $sB->gambar = true;
+            $sB->preference = true;
+          break;
+        }
+      }
+
+      return $sB;
     }
 
     public function index(){
@@ -212,9 +248,9 @@ class PagesController extends Controller
 
         $rS = $w.'x'.$h;
 
-        $resultPermission = $this->getPermission();
+        $sB = $this->getPermissionSideBar();
 
-        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer', 'resultPermission'));
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer', 'sB'));
     }
 
 
@@ -232,9 +268,9 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $resultPermission = $this->getPermission();
+        $sB = $this->getPermissionSideBar();
 
-        return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer','resultPermission'));
+        return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer','sB'));
     }
 
     public function fileList($id, Request $request){
@@ -324,9 +360,9 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $resultPermission = $this->getPermission();
+        $sB = $this->getPermissionSideBar();
 
-        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','resultPermission'));
+        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
     }
 
      public function role(){
@@ -342,8 +378,8 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        $resultPermission = $this->getPermission();
-        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','resultPermission'));
+        $sB = $this->getPermissionSideBar();
+        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
     }
 
    public function permission(){
@@ -359,8 +395,8 @@ class PagesController extends Controller
       }else{
          $footer = '(c) Ordent '.date('Y');
       }
-      $resultPermission = $this->getPermission();
-      return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','resultPermission'));
+      $sB = $this->getPermissionSideBar();
+      return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
   }
 
   public function module(){
@@ -375,8 +411,8 @@ class PagesController extends Controller
      }else{
         $footer = '(c) Ordent '.date('Y');
      }
-     $resultPermission = $this->getPermission();
-     return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer','resultPermission'));
+     $sB = $this->getPermissionSideBar();
+     return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer','sB'));
  }
 
     public function tes(){
@@ -402,9 +438,9 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $resultPermission = $this->getPermission();
+        $sB = $this->getPermissionSideBar();
 
-        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer','resultPermission'));
+        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer','sB'));
     }
 
     public function preference(){
@@ -427,9 +463,9 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        $resultPermission = $this->getPermission();
+        $sB = $this->getPermissionSideBar();
 
-        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer','resultPermission'));
+        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer','sB'));
     }
 
     public function CSS($mode){

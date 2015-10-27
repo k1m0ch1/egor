@@ -34,78 +34,76 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header" {{ $title=='Dashboard'?'class="active treeview"':'' }}>MAIN NAVIGATION</li>
-              @foreach($resultPermission as $mL)
-                @if($mL->module_name=="Backend Dashboard" || $mL->module_name=="All Module")
+                @if($sB->dashboard)
                   <li>
                     <a href='{{ asset("admin/dashboard") }}'>
                       <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
                     </a>
                   </li>
                 @endif
-              @endforeach
 
-              @foreach($resultPermission as $mL)
-                @if($mL->module_name=="Backend User"||$mL->module_name=="Backend Role"||$mL->module_name=="Backend Permission"|| $mL->module_name=="All Module")
+                @if($sB->menu_user)
                 <li {{ $title=='Users'?'class="active treeview"':'' }} >
                     <a href='{{ asset("admin/user") }}'>
                     <i class="fa fa-users" href="user"></i> <span> Users</span>
                     </a>
                     <ul class="treeview-menu">
-                      @foreach($resultPermission as $mL)
-                        @if($mL->module_name=="Backend User"|| $mL->module_name=="All Module")
+                      @if($sB->user)
                           <li>
                             <a href='{{ asset("admin/user") }}'>
                             <i class="fa fa-circle" href="user"></i> <span> User</span>
                             </a>
                           </li>
-                        @endif
-                      @endforeach
-                      @foreach($resultPermission as $mL)
-                        @if($mL->module_name=="Backend Role"|| $mL->module_name=="All Module")
+                      @endif
+                      @if($sB->role)
                           <li>
                             <a href='{{ asset("admin/role") }}'>
                             <i class="fa fa-circle" href="user"></i> <span> Roles</span>
                             </a>
                           </li>
-                        @endif
-                      @endforeach
-                      @foreach($resultPermission as $mL)
-                        @if($mL->module_name=="Backend Permission"|| $mL->module_name=="All Module")
+                      @endif
+                      @if($sB->permission)
                           <li>
                             <a href='{{ asset("admin/permission") }}'>
                             <i class="fa fa-circle" href="user"></i> <span> Permission</span>
                             </a>
                           </li>
-                        @endif
-                      @endforeach
+                      @endif
                     </ul>
                 </li>
                 @endif
-              @endforeach
 
-                <li {{ $title=='Menu'?'class="active treeview"':'' }}>
-                  <a href='{{ asset("admin/menu") }}'>
-                    <i class="fa fa-th"></i> <span> Menu</span>
+                @if($sB->menu)
+                  <li {{ $title=='Menu'?'class="active treeview"':'' }}>
+                    <a href='{{ asset("admin/menu") }}'>
+                      <i class="fa fa-th"></i> <span> Menu</span>
+                    </a>
+                  </li>
+                @endif
+
+                @if($sB->module)
+                  <li {{ $title=='Module'?'class="active treeview"':'' }}>
+                    <a href='{{ asset("admin/module") }}'>
+                      <i class="fa fa-th"></i> <span> Module</span>
+                    </a>
+                  </li>
+                @endif
+
+                @if($sB->gambar)
+                  <li {{ $title=='Image'?'class="active treeview"':'' }}>
+                    <a href='{{ asset("admin/gambar") }}'>
+                      <i class="fa fa-file-image-o"></i> <span> Images</span>
+                    </a>
+                  </li>
+                @endif
+
+                @if($sB->preference)
+                <li {{ $title=='Preference'?'class="active treeview"':'' }}>
+                  <a href='{{ asset("admin/preference") }}'>
+                    <i class="fa fa-gear"></i> <span> Preference</span>
                   </a>
                 </li>
-
-                <li {{ $title=='Module'?'class="active treeview"':'' }}>
-                  <a href='{{ asset("admin/module") }}'>
-                    <i class="fa fa-th"></i> <span> Module</span>
-                  </a>
-                </li>
-
-                <li {{ $title=='Image'?'class="active treeview"':'' }}>
-                  <a href='{{ asset("admin/gambar") }}'>
-                    <i class="fa fa-file-image-o"></i> <span> Images</span>
-                  </a>
-                </li>
-
-              <li {{ $title=='Preference'?'class="active treeview"':'' }}>
-                <a href='{{ asset("admin/preference") }}'>
-                  <i class="fa fa-gear"></i> <span> Preference</span>
-                </a>
-              </li>
+                @endif
 
           </ul>
         </section>
