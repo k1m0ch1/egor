@@ -13,12 +13,12 @@ class ModulePermission extends Migration
     public function up()
     {
         Schema::table('permission_role', function (Blueprint $table) {
-            $table->string('access');
-            $table->string('action');
+            $table->enum('access', ['true','false'])->default('false');
+            $table->enum('action', ['access', 'add', 'edit', 'delete'])->default('access');
         });
         Schema::table('permissions', function (Blueprint $table) {
-            $table->string('access');
-            $table->string('action');
+          $table->enum('access', ['module','app'])->default('module');
+          $table->enum('action', ['access', 'add', 'edit', 'delete'])->default('access');
         });
     }
 
