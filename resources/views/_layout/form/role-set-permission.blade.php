@@ -26,12 +26,12 @@ $.ajax({
   dataType: 'html',
   success: function(data) {
     data = jQuery.parseJSON(data);
-    for(var a=0;a<data.length;a++){
-      console.log(data[a]["action"] + "==" + $('#modID-' + a).val() + " is " + (data[a]["action"]==$('#modID-' + a).val()));
-      if(data[a]["action"]==$('#modID-' + a).val()){
-        $('#modID-' + a).prop('checked', true);
-      }else{
-        $('#modID-' + a).prop('checked', false);
+    for(var b=0;b<data.length;b++){
+      for(var a=0;a<data.length;a++){
+        //console.log(data[a]["action"] + "==" + $('#modID-' + b).val() + " is " + (data[a]["action"]==$('#modID-' + b).val()));
+        if(data[a]["action"]==$('#modID-' + b).val()){
+          $('#modID-' + b).prop('checked', true);
+        }
       }
     }
   }
@@ -44,11 +44,12 @@ $.ajax({
   dataType: 'html',
   success: function(data) {
     data = jQuery.parseJSON(data);
-    for(var a=0;a<data.length;a++){
-      if(data[a]["action"]==$('#appID-' + a).val()){
-        $('#appID-' + a).prop('checked', true);
-      }else{
-        $('#appID-' + a).prop('checked', false);
+    for(var b=0;b<data.length;b++){
+      for(var a=0;a<data.length;a++){
+        //console.log(data[a]["action"] + "==" + $('#modID-' + b).val() + " is " + (data[a]["action"]==$('#modID-' + b).val()));
+        if(data[a]["action"]==$('#appID-' + b).val()){
+          $('#appID-' + b).prop('checked', true);
+        }
       }
     }
   }
