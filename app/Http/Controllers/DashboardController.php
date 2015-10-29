@@ -28,7 +28,7 @@ class DashboardController extends Controller
 			$allowed = array('png', 'jpg', 'gif');
 			$hasil = false;
 			$image = 'holder.js/180x180';
-			
+
 			$results = new \StdClass;
 			$validator = \Validator::make($request->all(),
 				[
@@ -78,8 +78,8 @@ class DashboardController extends Controller
                 $permission->name = $request->input('nama');
                 $permission->display_name = 'Dapat Mengakses '.$request->input('nama');
                 $permission->description = 'Dapat Mengakses '.$request->input('nama');
-                $permission->access = $result->id;
-                $permission->action = 'access';
+                $permission->access = 'access';
+                $permission->action = $result->id;
                 $permission->type = 'app';
                 $permission->save();
 
@@ -123,7 +123,7 @@ class DashboardController extends Controller
 
 	public function delete(Request $request){
 		$del = ParentFrontpage::find($request->input('id'));
-		
+
 		$permission = Permission::where('name', $del->name)->get();
 		if(count($permission)>0){
 			foreach ($permission as $key => $p) {

@@ -60,8 +60,9 @@ class Authenticate
                   return response('Unauthorized.', 401);
           }
         }else{
-
-
+          if($this->auth->user()->name=="admin"||$this->auth->user()->name=="tech"){
+            $pass = true;
+          }
         }
 
         return $next($request);

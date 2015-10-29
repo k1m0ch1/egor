@@ -136,19 +136,94 @@ class RoleController extends Controller
 
     public function setPermission(Request $request){
         $role_id = $request->input('role_id');
-        $permission_id = $request->input('permission_id');
-        $access = $request->input('access');
-        $action = $request->input('action');
+
+        $modPerm = json_decode($request->input('modPerm'),true);
+        $appPerm = json_decode($request->input('appPerm'),true);
 
         $role = Role::find($request->input('role_id'));
-        $permissions = Permission::find($request->input('permission_id'));
 
-        $result = DB::table('permission_role')->insert([
-              'role_id' => $role_id,
-              'permission_id' => $permission_id,
-              'action' => $action,
-              'access' => $access
-          ]);
+        $permissionAll = DB::table('permissions')->select('id')->where('type', 'module')->get();
+
+        $modChecked = DB::table('permission_role')->select('permission_role.permission_id as id')
+                      ->join('permissions','permissions.id','=','permission_role.permission_id')
+                      ->join('roles','permission_role.role_id','=','roles.id')
+                      ->where('roles.id',$request->input('role_id'))
+                      ->where('permissions.type','module')
+                      ->get();
+
+        $appPermissionAll = DB::table('permissions')->select('id')->where('type', 'app')->get();
+
+        $appChecked = DB::table('permission_role')->select('permission_role.permission_id as id')
+                    ->join('permissions','permissions.id','=','permission_role.permission_id')
+                    ->join('roles','permission_role.role_id','=','roles.id')
+                    ->where('roles.id',$request->input('role_id'))
+                    ->where('permissions.type','app')
+                    ->get();
+
+        //module-save
+        $a=0;
+        $perm = Array();
+        foreach($permissionAll as $pa){
+          $perm[$a] = $pa->id;
+          $a++;
+        }
+
+        for($a=0;$a<count($perm);$a++){
+          if(!in_array($perm[$a], $modPerm)){
+            DB::table('permission_role')
+                      ->where('role_id', $request->input('role_id'))
+                      ->where('permission_id', $perm[$a])
+                      ->delete();
+            //echo $perm[$a] . "DELETED||";
+          }
+        }
+
+        $a=0;
+        foreach($modChecked as $pa){
+          $perm[$a] = $pa->id;
+          $a++;
+        }
+        $b=0;
+        for($a=0;$a<count($modPerm);$a++){
+          if(!in_array($modPerm[$a], $perm)){
+            $role->attachPermission($modPerm[$a]);
+            //echo $modPerm[$a] . "ADDED||";
+          }
+        }
+
+        //app-savve
+
+        $a=0;
+        $perm = Array();
+        foreach($appPermissionAll as $pa){
+          $perm[$a] = $pa->id;
+          $a++;
+        }
+
+        for($a=0;$a<count($perm);$a++){
+          if(!in_array($perm[$a], $appPerm)){
+            DB::table('permission_role')
+                      ->where('role_id', $request->input('role_id'))
+                      ->where('permission_id', $perm[$a])
+                      ->delete();
+            //echo $perm[$a] . "DELETED||";
+          }
+        }
+
+        $a=0;
+        foreach($appChecked as $pa){
+          $perm[$a] = $pa->id;
+          $a++;
+        }
+        $b=0;
+        for($a=0;$a<count($appPerm);$a++){
+          if(!in_array($appPerm[$a], $perm)){
+            $role->attachPermission($appPerm[$a]);
+            // echo $modPerm[$a] . "ADDED||";
+          }
+        }
+
+
 
         return "success";
     }
