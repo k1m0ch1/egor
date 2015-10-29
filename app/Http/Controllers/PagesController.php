@@ -78,7 +78,7 @@ class PagesController extends Controller
         $datanyah = array();
         foreach($resultPermission as $permissions){
             if($permissions->type == 'app'){
-                array_push($datanyah, ParentFrontpage::find($permissions->access));
+                array_push($datanyah, ParentFrontpage::find($permissions->action));
             }
         }
 
