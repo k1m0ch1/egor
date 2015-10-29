@@ -78,11 +78,6 @@ class ModuleSeeder extends Seeder
 		$module->name = 'Backend Preference Footer';
 		$module->route = "admin/preference:footer";
 		$module->save();
-		$module = new Module;
-		$module->name = 'All Module';
-		$module->route = "all module";
-		$module->save();
-
 
 		$modules = Module::all();
 		$admin = Role::where('name', 'admin')->get()->first();
@@ -90,28 +85,22 @@ class ModuleSeeder extends Seeder
 
 		foreach ($modules as $key => $m) {
 			$permission = new Permission;
-			$permission->name = $m->name;
-			$permission->display_name = 'Dapat mengakses module '.$m->name;
-			$permission->access = true;
-			$permission->action = 'access';
+			$permission->name = "can-access-module-" . $m->name;
+			$permission->display_name = 'Dapat mengakses ' . $m->name;
+			$permission->access = 'access';
+			$permission->action = $m->id;
 			$permission->type = 'module';
 			$permission->save();
 
 			$result = DB::table('permission_role')->insert([
               'role_id' => $admin->id,
-              'permission_id' => $permission->id,
-              'action' => 1,
-              'access' => 'module'
+              'permission_id' => $permission->id
           ]);
 
 			$result = DB::table('permission_role')->insert([
               'role_id' => $tech->id,
-              'permission_id' => $permission->id,
-              'action' => 1,
-              'access' => 'module'
+              'permission_id' => $permission->id
           ]);
-
-
 		}
 
 	}

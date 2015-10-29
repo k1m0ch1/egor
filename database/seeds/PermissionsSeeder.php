@@ -2,8 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Permission;
-use App\Models\Module;
-use App\Models\Role;
 
 class PermissionsSeeder extends Seeder
 {

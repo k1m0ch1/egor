@@ -115,7 +115,7 @@ class UsersController extends Controller
 			$user->name = $request->input('name');
 			$user->email = $request->input('email');
 			$user->phone = $request->input('phone');
-			$user->department = $request->input('department');
+			$user->jabatan = $request->input('department');
 			$user->avatar = $filename;
 			$user->save();
 

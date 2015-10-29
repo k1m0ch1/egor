@@ -185,10 +185,14 @@ class PagesController extends Controller
 
         $rS = $w.'x'.$h;
 
-        $sB = $this->getPermission('1');
-        $sBa = $this->getPermission('2');
-        $sBe = $this->getPermission('3');
-        $sBd = $this->getPermission('4');
+        // $sB = $this->getPermission('1');
+        // $sBa = $this->getPermission('2');
+        // $sBe = $this->getPermission('3');
+        // $sBd = $this->getPermission('4');
+        $sB = $this->getDefault();
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
 
         return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer', 'sB', 'sBa', 'sBe', 'sBd'));
     }
@@ -246,7 +250,12 @@ class PagesController extends Controller
         $lenImg = sizeof($img);
         $a=0;
 
-        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
+        $sB = $this->getDefault();
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
+
+        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg', 'sB', 'sBa', 'sBe', 'sBd'));
     }
 
     public function setGrid(Request $request){
@@ -300,8 +309,10 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $sB = $this->getPermission('1');
-        
+        $sB = $this->getDefault();
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
 
         return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
     }
@@ -319,7 +330,10 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        $sB = $this->getPermission('1');
+        $sB = $this->getDefault();
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
         return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
     }
 
@@ -336,7 +350,10 @@ class PagesController extends Controller
       }else{
          $footer = '(c) Ordent '.date('Y');
       }
-      $sB = $this->getPermission('1');
+      $sB = $this->getDefault();
+      $sBa = $this->getDefault();
+      $sBe = $this->getDefault();
+      $sBd = $this->getDefault();
       return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
   }
 
@@ -352,7 +369,10 @@ class PagesController extends Controller
      }else{
         $footer = '(c) Ordent '.date('Y');
      }
-     $sB = $this->getPermission('1');
+     $sB = $this->getDefault();
+     $sBa = $this->getDefault();
+     $sBe = $this->getDefault();
+     $sBd = $this->getDefault();
      return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer','sB'));
  }
 
@@ -379,7 +399,10 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $sB = $this->getPermission('1');
+        $sB = $this->getDefault();
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
 
         return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer','sB'));
     }
@@ -404,7 +427,10 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        $sB = $this->getPermission('1');
+        $sB = $this->getDefault();
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
 
         return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer','sB'));
     }
@@ -607,6 +633,21 @@ class PagesController extends Controller
             break;
         }
         return $JS;
+    }
+
+    public function getDefault(){
+      $sB = new \StdClass;
+      $sB->dashboard = true;
+      $sB->menu_user = true;
+      $sB->user = true;
+      $sB->role = true;
+      $sB->permission = true;
+      $sB->menu = true;
+      $sB->module = true;
+      $sB->gambar = true;
+      $sB->preference = true;
+
+      return $sB;
     }
 
     public function getPermission($mode){
