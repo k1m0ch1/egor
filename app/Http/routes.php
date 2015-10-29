@@ -74,6 +74,8 @@ Route::get('admin/permission[show]', ['uses'=>'PermissionController@show', 'as'=
 Route::get('admin/permission[show2]', ['uses'=>'PermissionController@showPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[add:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[del]', ['uses'=>'PermissionController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[modelChecked]', ['uses'=>'PermissionController@modChecked', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[appChecked]', ['uses'=>'PermissionController@appChecked', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 
 Route::get('admin/module[edit:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::post('admin/module[edit:save]', ['uses'=>'ModuleController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);

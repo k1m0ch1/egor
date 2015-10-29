@@ -1,8 +1,8 @@
 @if(count($result)>0)
 	@foreach($result as $rS)
 		<tr>
-			<td>{{ $rS->role_dn }}</td>
-			<td>{{ $rS->per_dn }} {{ $rS->menu_nama }}</td>
+			<td>{{ $rS->r_names }}</td>
+			<td>{{ $rS->dn }}</td>
 			<td>
 				<div class="tools" align='center'>
 					<button type="button" id="deletePermission-{{$rS->pID}}-{{$rS->rID}}-{{$rS->action}}"><i class="fa fa-trash-o"></i></button type="button">
@@ -14,8 +14,8 @@
 @if(count($resultPermission)>0)
 	@foreach($resultPermission as $rS)
 		<tr>
-			<td>{{ $rS->role_dn }}</td>
-			<td>{{ $rS->per_dn }} {{ $rS->module_name }}</td>
+			<td>{{ $rS->r_names }}</td>
+			<td>{{ $rS->dn }}</td>
 			<td>
 				<div class="tools" align='center'>
 					<button type="button" id="deletePermission-{{$rS->pID}}-{{$rS->rID}}-{{$rS->action}}"><i class="fa fa-trash-o"></i></button type="button">

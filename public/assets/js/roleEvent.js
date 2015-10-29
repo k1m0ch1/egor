@@ -58,8 +58,8 @@ $(document).ready(function(){
 
 		dialogSetPermission = $( "#dialog-form-setPermission" ).dialog({
       autoOpen: false,
-      height: 330,
-      width: 500,
+			height: 430,
+      width: 700,
       modal: true,
       draggable: false,
       buttons: [{
