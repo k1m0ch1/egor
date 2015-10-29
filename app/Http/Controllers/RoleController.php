@@ -153,8 +153,8 @@ class RoleController extends Controller
 
         $appPermissionAll = DB::table('permissions')->select('id')->where('type', 'app')->get();
 
-        $appChecked = DB::table('permission_role')->select('permission_role.permission_id as id')
-                    ->join('permissions','permissions.id','=','permission_role.permission_id')
+        $appChecked = DB::table('permissions')->select('permission_role.permission_id as id')
+                    ->join('permission_role','permission_role.permission_id','=','permissions.id')
                     ->join('roles','permission_role.role_id','=','roles.id')
                     ->where('roles.id',$request->input('role_id'))
                     ->where('permissions.type','app')
@@ -163,9 +163,13 @@ class RoleController extends Controller
         //module-save
         $a=0;
         $perm = Array();
-        foreach($permissionAll as $pa){
-          $perm[$a] = $pa->id;
-          $a++;
+        if(count($permissionAll)>0){
+          foreach($permissionAll as $pa){
+            $perm[$a] = $pa->id;
+            $a++;
+          }
+        }else{
+          $perm = Array();
         }
 
         for($a=0;$a<count($perm);$a++){
@@ -179,15 +183,22 @@ class RoleController extends Controller
         }
 
         $a=0;
-        foreach($modChecked as $pa){
-          $perm[$a] = $pa->id;
-          $a++;
+        if(count($modChecked)>0){
+          foreach($modChecked as $pa){
+            $perm[$a] = $pa->id;
+            $a++;
+          }
+        }else{
+          $perm = Array();
         }
+
         $b=0;
         for($a=0;$a<count($modPerm);$a++){
           if(!in_array($modPerm[$a], $perm)){
             $role->attachPermission($modPerm[$a]);
             //echo $modPerm[$a] . "ADDED||";
+          }else if(count($perm)==0){
+            $role->attachPermission($appPerm[$a]);
           }
         }
 
@@ -195,9 +206,13 @@ class RoleController extends Controller
 
         $a=0;
         $perm = Array();
-        foreach($appPermissionAll as $pa){
-          $perm[$a] = $pa->id;
-          $a++;
+        if(count($appPermissionAll)>0){
+          foreach($appPermissionAll as $pa){
+            $perm[$a] = $pa->id;
+            $a++;
+          }
+        }else{
+          $perm = Array();
         }
 
         for($a=0;$a<count($perm);$a++){
@@ -211,15 +226,24 @@ class RoleController extends Controller
         }
 
         $a=0;
-        foreach($appChecked as $pa){
-          $perm[$a] = $pa->id;
-          $a++;
+        if(count($appChecked)>0){
+          foreach($appChecked as $appPa){
+            $perm[$a] = $appPa->id;
+            $a++;
+          }
+        }else{
+          $perm = Array();
         }
+
+        echo count($perm);
+
         $b=0;
         for($a=0;$a<count($appPerm);$a++){
           if(!in_array($appPerm[$a], $perm)){
             $role->attachPermission($appPerm[$a]);
             // echo $modPerm[$a] . "ADDED||";
+          }else if(count($perm)==0){
+            $role->attachPermission($appPerm[$a]);
           }
         }
 

@@ -63,6 +63,7 @@ class Authenticate
           if($this->auth->user()->name=="admin"||$this->auth->user()->name=="tech"){
             $pass = true;
           }
+
         }
 
         return $next($request);
