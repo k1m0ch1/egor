@@ -53,18 +53,18 @@ class Authenticate
         //     $role_id = $rolerS->id;
         //   }
         // }
-        if($this->auth->user()->name=="guest"){
-          if ($request->ajax()) {
-                  return response('Unauthorized.', 401);
-          } else {
-                  return response('Unauthorized.', 401);
-          }
-        }else{
-          if($this->auth->user()->name=="admin"||$this->auth->user()->name=="tech"){
-            $pass = true;
-          }
-
-        }
+        // if($this->auth->user()->name=="guest"){
+        //   if ($request->ajax()) {
+        //           return response('Unauthorized.', 401);
+        //   } else {
+        //           return response('Unauthorized.', 401);
+        //   }
+        // }else{
+        //   if($this->auth->user()->name=="admin"||$this->auth->user()->name=="tech"){
+        //     $pass = true;
+        //   }
+        //
+        // }
 
         return $next($request);
     }
