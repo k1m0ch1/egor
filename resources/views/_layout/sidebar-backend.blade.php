@@ -13,13 +13,96 @@
             </div>
             <div class="pull-left info">
               @if(\Auth::check())
-                <p>{{\Auth::user()->name}}</p>
-                <a href="{{url('/logout')}}"> <i class="fa fa-circle text-sucess"></i> Online</a>
+                <p><a id='userProfile'>{{\Auth::user()->name}}</a></p>
+                <a href="{{url('/logout')}}"> <i class="fa fa-circle text-sucess"></i> Logout</a>
               @else
                 <p>Name User</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#"><i class="fa fa-circle text-success"></i> Logout</a>
               @endif
             </div>
+            <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+            <script>
+            $(document).ready(function(){
+
+              var dialog;
+              dialog = $( "#dialog-form-profile" ).dialog({
+                autoOpen: false,
+                height: 420,
+                width: 700,
+                modal: true,
+                draggable: false,
+                resizable: false,
+                buttons: {
+                  "Simpan": simpan,
+                  Cancel: function() {
+                    dialog.dialog( "close" );
+                  }
+                },
+                close: function() {
+                  form[0].reset();
+                }
+              });
+
+              form = dialog.find( "form-profile" ).on( "submit", function( event ) {
+                 event.preventDefault();
+                 simpan();
+               });
+
+              $('#userProfile').on('click', function(){
+                  var idnyah = {{\Auth::user()->id}};
+                      dialog.dialog( "open" );
+                      $.ajax({
+                        url:  host + 'admin/users[edit:show]',
+                        type: 'GET',
+                        data: { id: idnyah },
+                        dataType: 'html',
+                        success: function(data) {
+                          $('#formnyah-profile').html(data);
+                        }
+                     });
+              });
+
+              function simpan(){
+              	var a = $('#dialog-form form input#name').val();
+          	    var b = $('#dialog-form form input#email').val();
+          	    var d = $('#dialog-form form input#idnyah').val();
+                var e = $("#dialog-form form input[type=radio][name=roles]:checked").val();
+                var f = d=="xxx"?$('#dialog-form form input#password').val():"";
+                var g = $('#dialog-form form input#phone').val();
+                var h = $('#dialog-form form input#jabatan').val();
+                var i = $('#dialog-form form input#Upassword').val();
+                var j = $('#dialog-form form input#nip').val();
+
+                var fd = new FormData();
+                fd.append("name", a);
+                fd.append("email", b);
+                fd.append("avatar", $('#fileUpload').prop('files')[0]);
+                if(d != 'xxx'){
+                  fd.append("id", d);
+                }
+                fd.append("roles", e);
+                fd.append("password", f);
+                fd.append("password_confirmation", i);
+                fd.append("as", "add");
+                fd.append("phone", g);
+                fd.append("department", h);
+                fd.append("nip", j);
+              	$.ajax({
+          	            url: host+ 'admin/users[edit:save]',
+          	            type: 'POST',
+                        processData: false,
+                        contentType: false,
+          	            data: fd,
+          	            dataType: 'html',
+          	            success: function(data) {
+          	            	$.ajax({
+                          });
+          	            }
+          	         });
+              	dialog.dialog("close");
+              }
+            });
+            </script>
           </div>
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
@@ -108,4 +191,12 @@
           </ul>
         </section>
         <!-- /.sidebar -->
+        <div id="dialog-form-profile" title="Ubah User">
+          <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+          {!! csrf_field() !!}
+            <fieldset id='formnyah-profile'>
+
+            </fieldset>
+          </form>
+        </div>
       </aside>

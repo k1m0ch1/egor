@@ -277,62 +277,16 @@ class UsersController extends Controller
 	public function getPermission($mode){
 
 		$sB = new \StdClass;
-		$sB->dashboard = false;
-		$sB->menu_user = false;
-		$sB->user = false;
-		$sB->role = false;
-		$sB->permission = false;
-		$sB->menu = false;
-		$sB->module = false;
-		$sB->gambar = false;
-		$sB->preference = false;
-
-		$id_user = Auth::User()->id;
-		$role = DB::table('roles')->get();
-		foreach($role as $rolerS){
-			if(User::find($id_user)->hasRole($rolerS->name)==1){
-				$userRole = $rolerS->name;
-				$role_id = $rolerS->id;
-			}
-		}
-
-		$resultPermission = DB::table('permission_role')
-						->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
-						->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
-						->join('modules', 'modules.id', '=', 'permission_role.action')
-						->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
-										'roles.display_name as role_dn', 'permissions.name as per_name',
-										'permissions.display_name as per_dn', 'permission_role.action as action',
-										'permission_role.access as access', "modules.name as module_name",
-										'modules.id as mID')
-						->where('permission_role.role_id', $role_id)
-						->where('permission_role.permission_id', $mode) //Permission Dapat Melihat
-						->get(); //->toSql();
-
-		foreach($resultPermission as $rsP){
-			switch($rsP->module_name){
-				case "Backend Dashboard": $sB->dashboard = true; break;
-				case "Backend User": $sB->user = true; $sB->menu_user=true; break;
-				case "Backend Role": $sB->role = true; $sB->menu_user=true;break;
-				case "Backend Permission": $sB->permission = true; $sB->menu_user=true; break;
-				case "Backend Menu": $sB->menu = true; break;
-				case "Backend Module": $sB->module = true; break;
-				case "Backend Gambar": $sB->gambar = true; break;
-				case "Backend Preference": $sB->preference = true; break;
-				case "All Module":
-					$sB->dashboard = true;
-					$sB->menu_user = true;
-					$sB->user = true;
-					$sB->role = true;
-					$sB->permission = true;
-					$sB->menu = true;
-					$sB->module = true;
-					$sB->gambar = true;
-					$sB->preference = true;
-				break;
-			}
-		}
-
+		$sB->dashboard = true;
+		$sB->menu_user = true;
+		$sB->user = true;
+		$sB->role = true;
+		$sB->permission = true;
+		$sB->menu = true;
+		$sB->module = true;
+		$sB->gambar = true;
+		$sB->preference = true;
+		
 		return $sB;
 	}
 }
