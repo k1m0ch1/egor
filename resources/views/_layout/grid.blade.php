@@ -15,11 +15,15 @@
         @else
           <img id='gambar' class="img-thumbnail" src="{{ asset('assets/img') }}/addimage.png" alt="" data-src="holder.js/180x180" />
         @endif
-        
+
         <a href="{{ $img[$a][2] }}">{{ $img[$a][0] }} </a>
         <div id='minimenu' style="position: absolute">
-          <button id='editGrid-{{ $a }}' class="fa fa-edit" style='float: right; padding-top: 5px;'></button>
-          <button id='delGrid-{{ $img[$a][4] }}' class="fa fa-trash  " style='float: right; padding-top: 5px;'></button>
+          @if($sBe->dashboard)
+            <button id='editGrid-{{ $a }}' class="fa fa-edit" style='float: right; padding-top: 5px;'></button>
+          @endif
+          @if($sBd->dashboard)
+            <button id='delGrid-{{ $img[$a][4] }}' class="fa fa-trash  " style='float: right; padding-top: 5px;'></button>
+          @endif
           <!-- <button id='childGrid-{{ $a }}' class="fa fa-object-ungroup" style='float: right; padding-top: 5px; padding-right: 5px;'></button> -->
         </div>
         <input type='hidden' id='idGambar{{$a}}' value='{{ $img[$a][4] }}' />

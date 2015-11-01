@@ -58,8 +58,8 @@ $(document).ready(function(){
 
 		dialogSetPermission = $( "#dialog-form-setPermission" ).dialog({
       autoOpen: false,
-      height: 330,
-      width: 500,
+			height: 430,
+      width: 700,
       modal: true,
       draggable: false,
       buttons: [{
@@ -155,25 +155,35 @@ $(document).ready(function(){
 
 	function saveSetPermission(){
 		var role_id = $('#role_id').val();
-		var permission_id = $('select#permission_id option:selected').val();
-		var access = $('select#access option:selected').val();
-		var action = $('select#action option:selected').val();
+		var modCount = $('#modCount').val();
+		var appCount = $('#appCount').val();
+		var modPerm = Array();
+		var appPerm = Array();
+		var x = 0;
+		for(var a=0;a<modCount;a++){
+			if($('input#modID-'+a+':checked').length>0){
+				modPerm[x++] = $('input#modID-'+a+':checked').val();
+			}
+		}
+
+		modPerm = JSON.stringify(modPerm);
+
+		var x = 0;
+		for(var a=0;a<appCount;a++){
+			if($('input#appID-'+a+':checked').length>0){
+				appPerm[x++] = $('input#appID-'+a+':checked').val();
+			}
+		}
+
+		appPerm = JSON.stringify(appPerm);
+
 		$.ajax({
 			url:  host + 'admin/roles[set:permission]',
 			type: 'POST',
-			data: {role_id: role_id, permission_id: permission_id, access: access, action: action},
+			data: {role_id: role_id, modPerm: modPerm, appPerm: appPerm},
 			dataType: 'html',
 			success: function(data) {
 				dialogSetPermission.dialog('close');
-				$.ajax({
-					url:  host + 'admin/roles[permission:show]',
-					type: 'GET',
-					data : {id: role_id},
-					dataType: 'html',
-					success: function(data) {
-						$('#tbody-permission-roles').html(data);
-					}
-				});
 			}
 		});
 	}
@@ -235,16 +245,25 @@ $(document).ready(function(){
 		$('[id^=editPermission]').on('click', function(){
 				var currentID = $(this).attr('id');
 				currentID = currentID.split('-')[1];
-				dialogPermission.dialog("open");
+				dialogSetPermission.dialog("open");
 				$.ajax({
-					url:  host + 'admin/roles[permission:show]',
+					url:  host + 'admin/permission[show2]',
 					type: 'GET',
-					data: { id: currentID },
+					data : {role_id: currentID},
 					dataType: 'html',
 					success: function(data) {
-						$('#tbody-permission-roles').html(data);
+						$('#form-setPermission').html(data);
 					}
-			});
+				});
+			// 	$.ajax({
+			// 		url:  host + 'admin/roles[permission:show]',
+			// 		type: 'GET',
+			// 		data: { id: currentID },
+			// 		dataType: 'html',
+			// 		success: function(data) {
+			// 			$('#tbody-permission-roles').html(data);
+			// 		}
+			// });
 		});
 
 });

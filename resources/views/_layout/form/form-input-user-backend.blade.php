@@ -41,7 +41,6 @@
 				@endif
 			@endforeach
 
-			<input type='hidden' id='idnyah' value='{{ $idnyah }}' />
 		@endif
 
 	</div>
@@ -58,9 +57,10 @@
 				<input type="radio" id="roles" name="roles" value="{{$rS->id}}" > {{$rS->name}}
 			@endforeach
 
-			<input type='hidden' id='idnyah' value='{{ $idnyah }}' />
 		</div>
 	</div>
 @endif
+
+<input type='hidden' id='idnyah' value='{{ $idnyah }}' />
 
 <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">

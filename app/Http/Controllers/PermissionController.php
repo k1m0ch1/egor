@@ -72,9 +72,47 @@ class PermissionController extends Controller
         return view('_layout.tabel.tabel-permission', compact('result'));
     }
     public function showPermission(Request $request){
-        $result = DB::table('permissions')->get();
+
+      $result = DB::table('permissions')
+                    ->select('permissions.id as id', 'modules.name as name')
+                    ->join('modules', 'permissions.action', '=', 'modules.id')
+                    ->where('permissions.type','module')
+                    ->get();
+
+      $rSapps = DB::table('permissions')
+                  ->select('permissions.id as id', 'parent_frontpage.nama as nama')
+                  ->join('parent_frontpage', 'permissions.action', '=', 'parent_frontpage.id')
+                  ->where('permissions.type','app')
+                  ->get();
+
+        // $result = DB::table('modules')->get();
+        // $rSapps = DB::table('parent_frontpage')->get();
         $role_id = $request->input('role_id');
-        return view('_layout.form.role-set-permission', compact('result', 'role_id'));
+        return view('_layout.form.role-set-permission', compact('result','rSapps' ,'role_id','modChecked','appChecked'));
+    }
+
+    public function modChecked(Request $request){
+      $modChecked = DB::table('permission_role')
+                    ->select('permissions.id')
+                    ->join('permissions','permissions.id','=','permission_role.permission_id')
+                    ->join('roles','permission_role.role_id','=','roles.id')
+                    ->where('roles.id',$request->input('role_id'))
+                    ->where('permissions.type','module')
+                    ->get();
+
+      return json_encode($modChecked);
+    }
+
+    public function appChecked(Request $request){
+      $appChecked = DB::table('permission_role')
+                    ->select('permissions.id')
+                    ->join('permissions','permissions.id','=','permission_role.permission_id')
+                    ->join('roles','permission_role.role_id','=','roles.id')
+                    ->where('roles.id',$request->input('role_id'))
+                    ->where('permissions.type','app')
+                    ->get();
+
+      return json_encode($appChecked);
     }
 
     public function del(Request $request){

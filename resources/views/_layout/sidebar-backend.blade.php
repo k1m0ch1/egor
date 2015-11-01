@@ -34,58 +34,77 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header" {{ $title=='Dashboard'?'class="active treeview"':'' }}>MAIN NAVIGATION</li>
-            <li>
-              <a href='{{ asset("admin/dashboard") }}'>
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
-              </a>
-            </li>
-
-            <li {{ $title=='Users'?'class="active treeview"':'' }} >
-                <a href='{{ asset("admin/user") }}'>
-                <i class="fa fa-users" href="user"></i> <span> Users</span>
-                </a>
-                <ul class="treeview-menu">
+                @if($sB->dashboard)
                   <li>
+                    <a href='{{ asset("admin/dashboard") }}'>
+                      <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
+                    </a>
+                  </li>
+                @endif
+
+                @if($sB->menu_user)
+                <li {{ $title=='Users'?'class="active treeview"':'' }} >
                     <a href='{{ asset("admin/user") }}'>
-                    <i class="fa fa-circle" href="user"></i> <span> User</span>
+                    <i class="fa fa-users" href="user"></i> <span> Users</span>
+                    </a>
+                    <ul class="treeview-menu">
+                      @if($sB->user)
+                          <li>
+                            <a href='{{ asset("admin/users") }}'>
+                            <i class="fa fa-circle" href="user"></i> <span> User</span>
+                            </a>
+                          </li>
+                      @endif
+                      @if($sB->role)
+                          <li>
+                            <a href='{{ asset("admin/role") }}'>
+                            <i class="fa fa-circle" href="user"></i> <span> Roles</span>
+                            </a>
+                          </li>
+                      @endif
+                      @if($sB->permission)
+                          <li>
+                            <a href='{{ asset("admin/permission") }}'>
+                            <i class="fa fa-circle" href="user"></i> <span> Permission</span>
+                            </a>
+                          </li>
+                      @endif
+                    </ul>
+                </li>
+                @endif
+
+                @if($sB->menu)
+                  <li {{ $title=='Menu'?'class="active treeview"':'' }}>
+                    <a href='{{ asset("admin/menu") }}'>
+                      <i class="fa fa-th"></i> <span> Menu</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="{{ asset('admin/role') }}">
-                      <i class="fa fa-circle"></i> <span> Roles</span>
+                @endif
+
+                @if($sB->module)
+                  <li {{ $title=='Module'?'class="active treeview"':'' }}>
+                    <a href='{{ asset("admin/module") }}'>
+                      <i class="fa fa-th"></i> <span> Module</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="{{ asset('admin/permission') }}">
-                      <i class="fa fa-circle"></i> <span> Permission</span>
+                @endif
+
+                @if($sB->gambar)
+                  <li {{ $title=='Image'?'class="active treeview"':'' }}>
+                    <a href='{{ asset("admin/gambar") }}'>
+                      <i class="fa fa-file-image-o"></i> <span> Images</span>
                     </a>
                   </li>
-                </ul>
-            </li>
+                @endif
 
-            <li {{ $title=='Menu'?'class="active treeview"':'' }}>
-              <a href='{{ asset("admin/menu") }}'>
-                <i class="fa fa-th"></i> <span> Menu</span>
-              </a>
-            </li>
+                @if($sB->preference)
+                <li {{ $title=='Preference'?'class="active treeview"':'' }}>
+                  <a href='{{ asset("admin/preference") }}'>
+                    <i class="fa fa-gear"></i> <span> Preference</span>
+                  </a>
+                </li>
+                @endif
 
-            <li {{ $title=='Menu'?'class="active treeview"':'' }}>
-              <a href='{{ asset("admin/module") }}'>
-                <i class="fa fa-th"></i> <span> Module</span>
-              </a>
-            </li>
-
-            <li {{ $title=='Image'?'class="active treeview"':'' }}>
-              <a href='{{ asset("admin/gambar") }}'>
-                <i class="fa fa-file-image-o"></i> <span> Images</span>
-              </a>
-            </li>
-
-            <li {{ $title=='Preference'?'class="active treeview"':'' }}>
-              <a href='{{ asset("admin/preference") }}'>
-                <i class="fa fa-gear"></i> <span> Preference</span>
-              </a>
-            </li>
           </ul>
         </section>
         <!-- /.sidebar -->

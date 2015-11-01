@@ -13,7 +13,7 @@
 							@foreach($datanyah as $menu)
 								<li>
 									<a href="{{$menu->redirect or '/'}}" class="image-button">
-									<img src="{{asset('/uploads/menu/')}}/{{$menu->image}}" data-src="holder.js/150x150" alt="">
+									<img src="{{asset('/uploads/menu/')}}/{{ $menu->image }}" data-src="holder.js/150x150" alt="">
 									<p><span>{{$menu->nama}}</span></p>
 								</a>
 								</li>

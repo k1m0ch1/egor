@@ -129,7 +129,7 @@ $(document).ready(function(){
       fd.append("password_confirmation", i);
       fd.append("as", "add");
       fd.append("phone", g);
-      fd.append("jabatan", h);
+      fd.append("department", h);
       fd.append("nip", j);
     	$.ajax({
 	            url: host+ 'admin/users[edit:save]',

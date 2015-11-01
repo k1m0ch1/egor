@@ -17,7 +17,7 @@ Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
 Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.post']);
 Route::get('logout', ['uses'=>'UsersController@logout', 'as'=>'users.logout.get']);
 
-Route::get('admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
+Route::get('admin/users', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']);
 Route::get('admin/permission', ['uses'=>'PagesController@permission', 'as'=>'admin.permission.get', 'middleware'=>'auth']);
 Route::get('admin/module', ['uses'=>'PagesController@module', 'as'=>'admin.permission.get', 'middleware'=>'auth']);
@@ -74,6 +74,8 @@ Route::get('admin/permission[show]', ['uses'=>'PermissionController@show', 'as'=
 Route::get('admin/permission[show2]', ['uses'=>'PermissionController@showPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[add:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[del]', ['uses'=>'PermissionController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[modelChecked]', ['uses'=>'PermissionController@modChecked', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[appChecked]', ['uses'=>'PermissionController@appChecked', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 
 Route::get('admin/module[edit:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::post('admin/module[edit:save]', ['uses'=>'ModuleController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
