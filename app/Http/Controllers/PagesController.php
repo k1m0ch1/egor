@@ -440,8 +440,8 @@ class PagesController extends Controller
         switch($mode){
             case 'general' :
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
-                     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-                     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+                     asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                     asset('assets/vendor/ionicons/css/ionicons.min.css'),
                      asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                      asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
                      asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
@@ -451,23 +451,23 @@ class PagesController extends Controller
                      asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
                      asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
                      asset('assets/css/backend.css'),
-                     "//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                     asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                      asset('assets/css/image-picker.css')
                      );
             break;
             case 'users' :
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
-                            'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-                            'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
-                            "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                            asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                            asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                            asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                             asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.css'),
                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'));
             break;
             case 'menu' :
-                $css = Array("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
-                             "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css",
-                             "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                $css = Array(asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                             asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                             asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                              asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
@@ -476,23 +476,23 @@ class PagesController extends Controller
             break;
             case 'gridster' :
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
-                     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-                     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
-                     asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
-                     asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
-                     asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
-                     asset('assets/vendor/AdminLTE/plugins/morris/morris.css'),
-                     asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css'),
-                     asset('assets/vendor/AdminLTE/plugins/datepicker/datepicker3.css'),
-                     asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
-                     asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
-                     asset('assets/css/backend.css'),
-                     asset('assets/vendor/gridster/dist/jquery.gridster.css'));
+                             asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                             asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
+                             asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
+                             asset('assets/vendor/AdminLTE/plugins/morris/morris.css'),
+                             asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css'),
+                             asset('assets/vendor/AdminLTE/plugins/datepicker/datepicker3.css'),
+                             asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
+                             asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
+                             asset('assets/css/backend.css'),
+                             asset('assets/vendor/gridster/dist/jquery.gridster.css'));
             break;
             case 'style-upload' :
-                $css = Array("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
-                             "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css",
-                             "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                $css = Array(asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                             asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                             asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                              asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
@@ -510,16 +510,16 @@ class PagesController extends Controller
         switch($mode){
             case 'general':
             $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js",
+                        asset('assets/vendor/raphael/raphael-min.js'),
                         //asset('assets/vendor/AdminLTE/plugins/morris/morris.min.js'),
                         asset('assets/vendor/gridster/dist/jquery.gridster.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/sparkline/jquery.sparkline.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'),
                         asset('assets/vendor/AdminLTE/plugins/knob/jquery.knob.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js",
+                        asset('assets/vendor/moment/moment.js'),
                         asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/datepicker/bootstrap-datepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'),
@@ -544,16 +544,16 @@ class PagesController extends Controller
             break;
             case 'image':
             $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js",
+                        asset('assets/vendor/raphael/raphael-min.js'),
                         //asset('assets/vendor/AdminLTE/plugins/morris/morris.min.js'),
                         asset('assets/vendor/gridster/dist/jquery.gridster.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/sparkline/jquery.sparkline.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'),
                         asset('assets/vendor/AdminLTE/plugins/knob/jquery.knob.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js",
+                        asset('assets/vendor/moment/moment.js'),
                         asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/datepicker/bootstrap-datepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'),
@@ -574,7 +574,7 @@ class PagesController extends Controller
             break;
             case "roles":
                 $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
@@ -589,7 +589,7 @@ class PagesController extends Controller
 
             case "permission":
                 $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
@@ -604,7 +604,7 @@ class PagesController extends Controller
 
             case "module":
                 $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
@@ -619,7 +619,7 @@ class PagesController extends Controller
 
             case "users":
                 $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
