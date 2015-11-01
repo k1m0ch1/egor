@@ -103,4 +103,5 @@ Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/setting/list', 'SettingsController@index');
 	Route::get('/grid/size', ['uses'=>'GridController@getGridSize']);
 	Route::get('/path/uploads/{id}', ['uses'=>'GambarController@uploadPath']);
+	Route::get('/permission/show/{id}', ['uses'=>'PermissionController@view']);
 });

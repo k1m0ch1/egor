@@ -178,6 +178,13 @@ $(document).ready(function(){
 		});
 	}
 
+    $("#permission_id").on('change', function(){
+      console.log(this);
+      $.get(host + '/api/v1/permission/show/'+this.val(), function(data){
+        console.log(data);
+      })
+    });
+
    $('[id^=editRule]').on('click', function(){
                 var currentID = $(this).attr('id');
                 currentID = currentID.split('-')[1];

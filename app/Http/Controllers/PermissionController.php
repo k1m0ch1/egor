@@ -83,4 +83,10 @@ class PermissionController extends Controller
                     ->delete();
         return $result==true?"succes del":"fail del";
     }
+
+    public function view($id){
+        $result = Permission::find($id);
+
+        return response()->json($result);
+    }
 }
