@@ -265,7 +265,6 @@ class UsersController extends Controller
 			\Cas::authenticate();
 			unset($_SESSION['phpCAS']);
 			\phpCAS::logout(['url'=>url()]);
-			//\Cas::logout();
 		}
 
 		return redirect()->to('/');
