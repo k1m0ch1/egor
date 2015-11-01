@@ -28,7 +28,7 @@
   </ul>
 
   <section class="top-bar-section">
-	
+
 	<!-- Left Nav Section -->
 	<ul class="left">
 		@foreach($result1 as $rS)
@@ -44,6 +44,7 @@
 	  	<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
 	  	@endif
 	  </li>
+	  <!-- <li ><a href="{{url('login_sso')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li> -->
 		</ul>
 	  </li>
 	</ul>
