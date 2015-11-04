@@ -66,54 +66,53 @@ class Authenticate
         //
         // }
 
-        // $currentRoute = \Route::getCurrentRoute()->getPath();
-        // if(strpos($currentRoute,'[')){
-        //   $currentRoute = preg_split('/[[]/',$currentRoute)[0];
-        // }
-        // if(strpos($currentRoute,':')){
-        //   $currentRoute = preg_split('/[:]/',$currentRoute)[0];
-        // }
-        // if(substr($currentRoute,-1)=='s'){
-        //   $currentRoute = substr($currentRoute,-1);
-        // }
-        //
-        // echo $currentRoute;
-        //
-        // $pass = false;
-        //
-        // $role = DB::table('roles')->get();
-        // foreach($role as $rolerS){
-        //   if(User::find($this->auth->user()->id)->hasRole($rolerS->name)==1){
-        //     $userRole = $rolerS->name;
-        //     $role_id = $rolerS->id;
-        //   }
-        // }
-        //
-        // $resultPermission = DB::table('permissions')
-        //         ->join('permission_role', 'permission_role.permission_id' , '=' , 'permissions.id')
-        //         ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
-        //         ->join('modules', 'modules.id', '=', 'permissions.action')
-        //         ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
-        //                  'roles.display_name as role_dn', 'permissions.name as per_name',
-        //                  'permissions.display_name as per_dn', 'permissions.action as action',
-        //                  'permissions.access as access', "modules.route as module_name",
-        //                  'modules.id as mID')
-        //         ->where('permissions.type', 'module')
-        //         ->where('roles.id', $role_id) //Permission Dapat Melihat
-        //         ->get(); //->toSql();;
-        //
-        //
-        //         foreach($resultPermission as $rsP){
-        //             //echo $currentRoute . " = " . $rsP->module_name . " ||";
-        //             if($currentRoute==$rsP->module_name){
-        //               $pass = true;
-        //             }
-        //         }
-        //
-        //
-        //         if(!$pass){
-        //           return response('Unauthorized.', 401);
-        //         }
+        $currentRoute = \Route::getCurrentRoute()->getPath();
+        if(strpos($currentRoute,'[')){
+          $currentRoute = preg_split('/[[]/',$currentRoute)[0];
+        }
+        if(strpos($currentRoute,':')){
+          $currentRoute = preg_split('/[:]/',$currentRoute)[0];
+        }
+        if(substr($currentRoute,-1)=='s'){
+          $currentRoute = substr($currentRoute,0,-1);
+        }
+
+        //echo $currentRoute;
+
+        $pass = false;
+
+        $role = DB::table('roles')->get();
+        foreach($role as $rolerS){
+          if(User::find($this->auth->user()->id)->hasRole($rolerS->name)==1){
+            $userRole = $rolerS->name;
+            $role_id = $rolerS->id;
+          }
+        }
+
+        $resultPermission = DB::table('permissions')
+                ->join('permission_role', 'permission_role.permission_id' , '=' , 'permissions.id')
+                ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                ->join('modules', 'modules.id', '=', 'permissions.action')
+                ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                         'roles.display_name as role_dn', 'permissions.name as per_name',
+                         'permissions.display_name as per_dn', 'permissions.action as action',
+                         'permissions.access as access', "modules.route as module_name",
+                         'modules.id as mID')
+                ->where('permissions.type', 'module')
+                ->where('roles.id', $role_id) //Permission Dapat Melihat
+                ->get(); //->toSql();;
+
+
+                foreach($resultPermission as $rsP){
+                    //echo $currentRoute . " = " . $rsP->module_name . " is " . ($currentRoute==$rsP->module_name) ."||";
+                    if($currentRoute==$rsP->module_name){
+                      $pass = true;
+                    }
+                }
+
+                if(!$pass){
+                  return response('Unauthorized.', 401);
+                }
 
 
         return $next($request);
