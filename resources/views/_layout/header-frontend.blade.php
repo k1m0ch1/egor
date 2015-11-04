@@ -44,6 +44,11 @@
 	  	<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
 	  	@endif
 	  </li>
+		@if(\Auth::check())
+			<li>
+				<a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> LOGOUT</a>
+			</li>
+		@endif
 	  <!-- <li ><a href="{{url('login_sso')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li> -->
 		</ul>
 	  </li>
