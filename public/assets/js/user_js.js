@@ -10,6 +10,7 @@ $(document).ready(function(){
       modal: true,
       draggable: false,
 			resizable: false,
+      dialogClass: "dialogUser",
       buttons: {
         "Simpan": simpan,
         Cancel: function() {

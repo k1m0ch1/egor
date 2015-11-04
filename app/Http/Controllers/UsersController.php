@@ -276,7 +276,7 @@ class UsersController extends Controller
 		$password = $requests->input('password');
 
 		if(\Auth::attempt(['email'=>$name, 'password'=>$password])){
-			return redirect()->route('admin.dashboard.get');
+			return redirect('/');
 		}else{
 			return redirect('login')->with('errors', 'Maaf anda harus login terlebih dahulu');
 		}

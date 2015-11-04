@@ -117,6 +117,11 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header" {{ $title=='Dashboard'?'class="active treeview"':'' }}>MAIN NAVIGATION</li>
+              <li>
+                <a href='{{ asset("/") }}'>
+                  <i class="fa fa-home"></i> <span>Homepage</span></i>
+                </a>
+              </li>
                 @if($sB->dashboard)
                   <li>
                     <a href='{{ asset("admin/dashboard") }}'>
