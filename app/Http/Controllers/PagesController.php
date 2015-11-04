@@ -411,8 +411,7 @@ class PagesController extends Controller
         $css = $this->CSS('style-upload');
         $jH = $this->jS('image');
         $title = 'Preference';
-        $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
-                        INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
+      
         $a=1;
 
         $result2 = count(Setting::where('name', 'title')->get())>0?Setting::where('name', 'title')->get()->first()->value:"";

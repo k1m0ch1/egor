@@ -107,6 +107,7 @@ Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/setting/list', 'SettingsController@index');
 	Route::get('/grid/size', ['uses'=>'GridController@getGridSize']);
 	Route::get('/path/uploads/{id}', ['uses'=>'GambarController@uploadPath']);
+	Route::get('/permission/show/{id}', ['uses'=>'PermissionController@view']);
 });
 Route::group(['prefix' => 'api-sso/v1'], function() {
     Route::any('user/{id}/{mode?}', 'ApiController@getUserAttributes');
