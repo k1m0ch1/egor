@@ -79,7 +79,7 @@ class PagesController extends Controller
           foreach($resultPermission as $permissions){
               if($permissions->type == 'app'){
                 //echo ParentFrontpage::find($permissions->action)->count();
-                if(ParentFrontpage::find($permissions->action)->count()>0){
+                if(ParentFrontpage::find($permissions->action)->count()!=null){
                   array_push($datanyah, ParentFrontpage::find($permissions->action));
                 }
               }
