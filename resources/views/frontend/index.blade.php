@@ -14,7 +14,7 @@
 								<li>
 									<a href="{{$menu->redirect or '/'}}" class="image-button">
 									<img src="{{asset('/uploads/menu/')}}/{{ $menu->image or '' }}" data-src="holder.js/150x150" alt="">
-									<p><span>{{$menu->nama}}</span></p>
+									<p><span>{{$menu->nama or ''}}</span></p>
 								</a>
 								</li>
 							@endforeach
