@@ -32,6 +32,7 @@ $(document).ready(function(){
       //           zIndex: 10000,
       //           width: 700,
       //           height: dHeight,
+      position: { my: 'center center', at: 'right center' },
       modal: true,
       draggable: false,
 			resizable: false,
