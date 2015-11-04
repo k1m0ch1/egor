@@ -11,12 +11,14 @@
 					<div class="large-12 medium-12 small-12 columns">
 						<ul class="small-block-grid-1 medium-block-grid-{{$h or '3'}}">
 							@foreach($datanyah as $menu)
-								<li>
-									<a href="{{$menu->redirect or '/'}}" class="image-button">
-									<img src="{{asset('/uploads/menu/')}}/{{ $menu->image or '' }}" data-src="holder.js/150x150" alt="">
-									<p><span>{{$menu->nama or ''}}</span></p>
-								</a>
-								</li>
+                @if(!is_null($menu->redirect))
+  								<li>
+  									<a href="{{$menu->redirect or '/'}}" class="image-button">
+  									<img src="{{asset('/uploads/menu/')}}/{{ $menu->image or '' }}" data-src="holder.js/150x150" alt="">
+  									<p><span>{{$menu->nama or ''}}</span></p>
+  								</a>
+  								</li>
+                @endif
 							@endforeach
 						</ul>
 					</div>
