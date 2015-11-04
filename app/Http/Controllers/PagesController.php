@@ -212,7 +212,7 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $sB = $this->getPermission('1');
+        $sB = $this->getDefault('1');
 
         return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer','sB'));
     }
