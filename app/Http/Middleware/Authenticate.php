@@ -72,14 +72,13 @@ class Authenticate
                 ->where('roles.id', $role_id) //Permission Dapat Melihat
                 ->get(); //->toSql();;
 
-
                 foreach($resultPermission as $rsP){
                     //echo $currentRoute . " = " . $rsP->module_name . " is " . ($currentRoute==$rsP->module_name) ."||";
                     if($currentRoute==$rsP->module_name){
                       $pass = true;
                     }
 
-                    if($currentRoute=="admin/form:dashboard"){
+                    if($currentRoute=="admin/form"){
                       $pass=true;
                     }
                 }
