@@ -11,6 +11,7 @@ $(document).ready(function(){
       draggable: false,
 			resizable: false,
       dialogClass: "dialogUser",
+      position: { my: 'center center', at: 'right center' },
       buttons: {
         "Simpan": simpan,
         Cancel: function() {

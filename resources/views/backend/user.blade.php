@@ -71,7 +71,7 @@
          right: 500 !important;
       }
      </style>
-      <div id="dialog-form" title="Ubah User" style="padding-let:500px;">
+      <div id="dialog-form" title="Ubah User" >
         <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
         {!! csrf_field() !!}
           <fieldset id='formnyah'>
