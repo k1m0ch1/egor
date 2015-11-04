@@ -47,7 +47,7 @@ class Authenticate
           $currentRoute = substr($currentRoute,0,-1);
         }
 
-        echo $currentRoute;
+        //echo $currentRoute;
 
         $pass = false;
 

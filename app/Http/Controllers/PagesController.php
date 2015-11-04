@@ -390,8 +390,8 @@ class PagesController extends Controller
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('menu');
         $title = 'Menu';
-        $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
-                        INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
+        // $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
+        //                 INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $result2 = DB::table('parent_menu')->get();
         $a=1;
 
@@ -407,7 +407,7 @@ class PagesController extends Controller
         $sBe = $this->getDefault();
         $sBd = $this->getDefault();
 
-        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer','sB'));
+        return view('backend.menu', compact('css', 'jH', 'title', 'result2', 'a', 'footer','sB'));
     }
 
     public function preference(){
