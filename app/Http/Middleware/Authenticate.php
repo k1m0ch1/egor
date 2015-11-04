@@ -47,7 +47,7 @@ class Authenticate
           $currentRoute = substr($currentRoute,0,-1);
         }
 
-        //echo $currentRoute;
+        echo $currentRoute;
 
         $pass = false;
 
@@ -79,7 +79,7 @@ class Authenticate
                       $pass = true;
                     }
 
-                    if($currentRoute=="admin/form" || $currentRoute=="admin/fileList" ){
+                    if($currentRoute=="admin/form" || $currentRoute=="admin/filesList/{id}" ){
                       $pass=true;
                     }
                 }
