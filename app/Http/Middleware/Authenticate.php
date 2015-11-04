@@ -78,6 +78,10 @@ class Authenticate
                     if($currentRoute==$rsP->module_name){
                       $pass = true;
                     }
+
+                    if($currentRoute=="admin/form:dashboard"){
+                      $pass=true;
+                    }
                 }
 
                 if(!$pass){

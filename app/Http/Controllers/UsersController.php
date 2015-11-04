@@ -286,9 +286,9 @@ class UsersController extends Controller
 		if(\Auth::check()){
 			$users = \Auth::user();
 			\Auth::logout();
-			\Cas::authenticate();
+			//\Cas::authenticate();
 			//unset($_SESSION['phpCAS']);
-			\phpCAS::logout(['url'=>url()]);
+			//\phpCAS::logout(['url'=>url()]);
 		}
 
 		return redirect()->to('/');

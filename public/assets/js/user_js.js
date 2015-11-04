@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+    var dWidth = $(window).width() * 0.9;
+    var dHeight = $(window).height() * 0.9;
+
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 420,
@@ -22,6 +25,11 @@ $(document).ready(function(){
       autoOpen: false,
       height: 540,
       width: 700,
+      // closeOnEscape: true,
+      //           stack: true,
+      //           zIndex: 10000,
+      //           width: 700,
+      //           height: dHeight,
       modal: true,
       draggable: false,
 			resizable: false,
