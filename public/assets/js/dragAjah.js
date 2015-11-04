@@ -45,7 +45,12 @@
             // Set the source column's HTML to the HTML of the column we dropped on.
             dragSrcEl.innerHTML = this.innerHTML;
             this.innerHTML = e.dataTransfer.getData('text/html');
-
+            $.getScript(  dir_host + "assets/js/tesRecall.js" )
+              .done(function( script, textStatus ) {
+              })
+              .fail(function( jqxhr, settings, exception ) {
+                $( "div.log" ).text( "Triggered ajaxError handler." );
+            });
             // for(xx=0;xx<9;xx++){
             //     var aw = $('#idGambar' + xx).parent();
             //     console.log($('tr td').index(aw));
@@ -55,10 +60,10 @@
             //     var cell = cells[i];
             //     // Track with onclick
             //     cell.onclick = function(){
-            //         var cellIndex  = this.cellIndex + 1;  
+            //         var cellIndex  = this.cellIndex + 1;
 
             //         var rowIndex = this.parentNode.rowIndex + 1;
-                    
+
             //         alert("cell: " + cellIndex + " / row: " + rowIndex );
             //     }
             // }
