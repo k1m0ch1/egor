@@ -51,7 +51,7 @@
                       </tr>
                     </thead>
                     <tbody id="tbody-roles">
-                      
+
                     </tbody>
                   </table>
                 </div>
@@ -63,11 +63,39 @@
       </div><!-- /.content-wrapper -->
       @include('_layout.main-footer')
 
-      <div id="dialog-form" title="Ubah User">     
+      <div id="dialog-form" title="Role">
         <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
         {!! csrf_field() !!}
           <fieldset id='formnyah'>
 
+          </fieldset>
+        </form>
+      </div>
+
+      <div id="dialog-form-setPermission" title="Set Permission">
+        <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+        {!! csrf_field() !!}
+          <fieldset id='form-setPermission'>
+
+          </fieldset>
+        </form>
+      </div>
+
+      <div id="dialog-form-permission" title="List Permission">
+        <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+        {!! csrf_field() !!}
+          <fieldset id='form-permission'>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Display Name</th>
+                  <th>Operation</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-permission-roles">
+              </tbody>
+            </table>
           </fieldset>
         </form>
       </div>

@@ -28,7 +28,7 @@
   </ul>
 
   <section class="top-bar-section">
-	
+
 	<!-- Left Nav Section -->
 	<ul class="left">
 		@foreach($result1 as $rS)
@@ -37,7 +37,19 @@
 	</ul>
 	<!-- Right Nav Section -->
 	<ul class="right">
-	  <li ><a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li>
+	  <li >
+	  	@if(\Auth::check())
+	  	<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
+	  	@else
+	  	<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
+	  	@endif
+	  </li>
+		@if(\Auth::check())
+			<li>
+				<a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> LOGOUT</a>
+			</li>
+		@endif
+	  <!-- <li ><a href="{{url('login_sso')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li> -->
 		</ul>
 	  </li>
 	</ul>

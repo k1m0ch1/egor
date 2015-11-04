@@ -19,6 +19,22 @@
 	<label for="href">Private Key</label>
 	<input type="text" name="prKey" id="prKey" value="" class="form-control">
 </div>
+<div class="form-group">
+	<label for="href">Query</label>
+	<input type="text" name="prKey" id="query" value="" class="form-control">
+</div>
+<div class="form-group">
+	<label for="href">HOST DB</label>
+	<input type="text" name="prKey" id="dbhost" value="" class="form-control">
+</div>
+<div class="form-group">
+	<label for="href">User DB</label>
+	<input type="text" name="prKey" id="dbuser" value="" class="form-control">
+</div>
+<div class="form-group">
+	<label for="href">Pass DB</label>
+	<input type="text" name="prKey" id="dbpass" value="" class="form-control">
+</div>
 
 <div class="form-group">
 	<label for="href">Image</label>

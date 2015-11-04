@@ -31,10 +31,6 @@
         <section class="content">
           <!-- Small boxes (Stat box) -->
           <!-- Main row -->
-            <div class="box-footer clearfix no-border">
-                  <button class="btn btn-default pull-left" id='tambah'><i class="fa fa-plus"></i> Add item</button>
-            </div>
-
             <div class="row">
               <div class="col-xs-12">
                 <div class="box">
@@ -47,7 +43,6 @@
                       <tr>
                         <th>Name</th>
                         <th>Display Name</th>
-                        <th>Operation</th>
                       </tr>
                     </thead>
                     <tbody id="tbody-permission">
@@ -63,7 +58,7 @@
       </div><!-- /.content-wrapper -->
       @include('_layout.main-footer')
 
-      <div id="dialog-form" title="Ubah Permission">
+      <div id="dialog-form" title="Permission">
         <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
         {!! csrf_field() !!}
           <fieldset id='formnyah'>

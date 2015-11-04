@@ -66,18 +66,18 @@ class ChildController extends Controller
                 $mode = $rS->mode;
                 $parent_id = $rS->parent_id;
         }
-        return view('_layout.form-input-dashboard-backend', compact('parent_id','nama', 'redirect', 'image','files','id','mode'));
+        return view('_layout.form.form-input-dashboard-backend', compact('parent_id','nama', 'redirect', 'image','files','id','mode'));
     }
 
     public function formChild(Request $request){
         $datanya = DB::table('child_frontpage')->where('parent_id', $request->input('id'))->get();
         $parent_id = $request->input('id');
-        return view('_layout.form-child-backend', compact('datanya', 'parent_id'));
+        return view('_layout.form.form-child-backend', compact('datanya', 'parent_id'));
     }
 
     public function addNewChild(Request $request){
         $parent_id = $request->input('parent_id');
-        return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
+        return view('_layout.form.form-new-input-dashboard-backend', compact('parent_id'));
     }
 
     public function delete(Request $request){

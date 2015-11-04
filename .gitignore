@@ -6,3 +6,6 @@ Homestead.yaml
 Homestead.json
 .env
 .composer.lock
+backup.composer.lock
+config/image.php
+config/tracker.php

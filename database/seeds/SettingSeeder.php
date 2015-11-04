@@ -24,7 +24,7 @@ class SettingSeeder extends Seeder
 
     	$result_3 = new Setting;
     	$result_3->name = 'background';
-    	$result_3->value = '';
+    	$result_3->value = 'assets/img/bg.jpg';
     	$result_3->save();
 
     	$result_4 = new Setting;
@@ -34,12 +34,12 @@ class SettingSeeder extends Seeder
 
     	$result_5 = new Setting;
     	$result_5->name = 'title';
-    	$result_5->value = '';
+    	$result_5->value = 'Website.com';
     	$result_5->save();
 
     	$result_6 = new Setting;
     	$result_6->name = 'footer';
-    	$result_6->value = '';
+    	$result_6->value = '(C) 2015 All Right Reserved';
     	$result_6->save();
     }
 }

@@ -33,9 +33,66 @@ $(document).ready(function(){
                 }}]
     });
 
+		dialogPermission = $( "#dialog-form-permission" ).dialog({
+      autoOpen: false,
+      height: 430,
+      width: 700,
+      modal: true,
+      draggable: false,
+      buttons: [{
+                  id:"btn-simpan", text: "Tambah",
+                  click: function() {
+                      setPermission();
+                }},
+                {
+                  id:"btn-cancel", text: "Cancel",
+                  click: function() {
+                      $(':input','#child-form')
+                         .not(':button, :submit, :reset, :hidden')
+                         .val('')
+                         .removeAttr('checked')
+                         .removeAttr('selected');
+                      $(this).dialog("close");
+                }}]
+    });
+
+		dialogSetPermission = $( "#dialog-form-setPermission" ).dialog({
+      autoOpen: false,
+			height: 430,
+      width: 700,
+      modal: true,
+      draggable: false,
+      buttons: [{
+                  id:"btn-simpan", text: "Simpan",
+                  click: function() {
+										saveSetPermission();
+                }},
+                {
+                  id:"btn-cancel", text: "Cancel",
+                  click: function() {
+                      $(':input','#child-form')
+                         .not(':button, :submit, :reset, :hidden')
+                         .val('')
+                         .removeAttr('checked')
+                         .removeAttr('selected');
+                      $(this).dialog("close");
+                }}]
+    });
+
+
    form = dialog.find( "form" ).on( "submit", function( event ) {
       event.preventDefault();
       simpanRoles();
+    });
+
+		formPermission = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      setPermission();
+    });
+
+		formSetPermission = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      saveSetPermission();
     });
 
    $('#tambah').on('click', function(){
@@ -57,7 +114,7 @@ $(document).ready(function(){
       var name = $('input#name').val();
       var displayname = $('input#displayName').val();
       var description = $('textarea#description').val();
-      console.log(description);
+      console.log(name);
       $.ajax({
            url:  host + 'admin/roles[edit:save]',
            type: 'POST',
@@ -78,10 +135,65 @@ $(document).ready(function(){
 						$( "div.log" ).text( "Triggered ajaxError handler." );
 					});
                  }
-              }); 
+              });
            }
         });
    }
+
+	function setPermission(){
+		dialogSetPermission.dialog("open");
+		$.ajax({
+			url:  host + 'admin/permission[show2]',
+			type: 'GET',
+			data : {role_id: $('#role_id').val()},
+			dataType: 'html',
+			success: function(data) {
+				$('#form-setPermission').html(data);
+			}
+		});
+	}
+
+	function saveSetPermission(){
+		var role_id = $('#role_id').val();
+		var modCount = $('#modCount').val();
+		var appCount = $('#appCount').val();
+		var modPerm = Array();
+		var appPerm = Array();
+		var x = 0;
+		for(var a=0;a<modCount;a++){
+			if($('input#modID-'+a+':checked').length>0){
+				modPerm[x++] = $('input#modID-'+a+':checked').val();
+			}
+		}
+
+		modPerm = JSON.stringify(modPerm);
+
+		var x = 0;
+		for(var a=0;a<appCount;a++){
+			if($('input#appID-'+a+':checked').length>0){
+				appPerm[x++] = $('input#appID-'+a+':checked').val();
+			}
+		}
+
+		appPerm = JSON.stringify(appPerm);
+
+		$.ajax({
+			url:  host + 'admin/roles[set:permission]',
+			type: 'POST',
+			data: {role_id: role_id, modPerm: modPerm, appPerm: appPerm},
+			dataType: 'html',
+			success: function(data) {
+				dialogSetPermission.dialog('close');
+			}
+		});
+	}
+
+    $("#permission_id").on('change', function(){
+      console.log(this);
+      $.get(host + '/api/v1/permission/show/'+this.val(), function(data){
+        console.log(data);
+      })
+    });
 
    $('[id^=editRule]').on('click', function(){
                 var currentID = $(this).attr('id');
@@ -124,9 +236,34 @@ $(document).ready(function(){
 									$( "div.log" ).text( "Triggered ajaxError handler." );
 								});
 			                 }
-			              }); 
+			              });
                       }
                    });
         }
     });
+
+		$('[id^=editPermission]').on('click', function(){
+				var currentID = $(this).attr('id');
+				currentID = currentID.split('-')[1];
+				dialogSetPermission.dialog("open");
+				$.ajax({
+					url:  host + 'admin/permission[show2]',
+					type: 'GET',
+					data : {role_id: currentID},
+					dataType: 'html',
+					success: function(data) {
+						$('#form-setPermission').html(data);
+					}
+				});
+			// 	$.ajax({
+			// 		url:  host + 'admin/roles[permission:show]',
+			// 		type: 'GET',
+			// 		data: { id: currentID },
+			// 		dataType: 'html',
+			// 		success: function(data) {
+			// 			$('#tbody-permission-roles').html(data);
+			// 		}
+			// });
+		});
+
 });

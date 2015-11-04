@@ -28,7 +28,8 @@ class PreferenceController extends Controller
     public function preferenceSave(Request $request){
         $name = $request->input('name');
         $value = $request->input('value');
-        $value = preg_replace('/\s+/','',$request->input('value'));
+        //$value = preg_replace('/\s+/','',$request->input('value'));
+        $value = ltrim($request->input('value'));
 
         $result = Setting::where('name', $name)->get();
 
@@ -68,7 +69,7 @@ class PreferenceController extends Controller
     public function title(){
     	$name = $request->input('name');
         $value = $request->input('value');
-       
+
         $result = Setting::where('name', $name)->get();
 
         $trigger = count($result)>0?true:false;

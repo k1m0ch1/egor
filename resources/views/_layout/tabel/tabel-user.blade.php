@@ -6,11 +6,16 @@
 				{{$role->name}}
 			@endforeach
 		</td>
+		<td>{{$rS->jabatan}}</td>
 		<td>{{$rS->email}}</td>
 		<td>
 			<div class="tools" align='center'>
-				<a class="fa fa-edit" id="editUser-{{ $rS->id }}"></a>&nbsp;
-				<a class="fa fa-trash-o" id="delUser-{{ $rS->id }}"></a>
+				@if($sBe->user)
+					<a class="fa fa-edit" id="editUser-{{ $rS->id }}"></a>&nbsp;
+				@endif
+				@if($sBd->user)
+					<a class="fa fa-trash-o" id="delUser-{{ $rS->id }}"></a>
+				@endif
 			</div>
 		</td>
 	</tr>

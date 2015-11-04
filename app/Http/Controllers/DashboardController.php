@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\ParentFrontpage;
+use App\Models\Permission;
 
 class DashboardController extends Controller
 {
@@ -16,6 +17,13 @@ class DashboardController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
+
+	public function showApp(Request $request){
+			$result = DB::table('parent_frontpage')->get();
+			$access = $request->input('access');
+			return view('_layout.select-action-role', compact('result', 'access'));
+	}
+
 	public function editSave(Request $request){
 			$allowed = array('png', 'jpg', 'gif');
 			$hasil = false;
@@ -33,23 +41,28 @@ class DashboardController extends Controller
 			$result = '';
 
 			if($validator->passes()){
-
 				if($request->has('id') && $request->input('id') != 'xxx'){
 					$result = ParentFrontpage::find($request->input('id'));
 					$results->info = 'menu frontpage update';
 					$results->status = 1;
+					$permission = Permission::where('name', $result->nama)->get()->first();
 				}else{
 					$result = new ParentFrontpage;
 					$results->info = 'menu frontpage create';
 					$results->status = 1;
+					$permission = new Permission;
 				}
 				$results->message = 'Proses Pengubahan Menu Sukses!';
 
 				$result->nama = $request->input('nama');
 				$result->mode = $request->input('mode');
 				$result->redirect = $request->input('redirect');
-				$result->publicKey = $request->input('puKey');
-				$result->privateKey = $request->input('prKey');
+				$result->public_key = $request->input('puKey');
+				$result->private_key = $request->input('prKey');
+				$result->query = $request->input('query');
+				$result->db_host = $request->input('dbhost');
+				$result->db_user = $request->input('dbuser');
+				$result->db_pass = $request->input('dbpass');
 
 				if($request->hasFile('image')){
 					if($request->file('image')->isValid()){
@@ -60,8 +73,17 @@ class DashboardController extends Controller
 						$result->image = $filename;
 					}
 				}
-
 				$result->save();
+
+                $permission->name = $request->input('nama');
+                $permission->display_name = 'Dapat Mengakses '.$request->input('nama');
+                $permission->description = 'Dapat Mengakses '.$request->input('nama');
+                $permission->access = 'access';
+                $permission->action = $result->id;
+                $permission->type = 'app';
+                $permission->save();
+
+                $results->info = 'permission create';
 
 			}else{
 				$results->info = 'menu frontpage';
@@ -83,18 +105,33 @@ class DashboardController extends Controller
 					$image = $rS->image;
 					$id = $rS->id;
 					$mode = $rS->mode;
-					$puKey = $rS->publicKey;
-					$prKey = $rS->privateKey;
+					$puKey = $rS->public_key;
+					$prKey = $rS->private_key;
+					$query = $rS->query;
+					$dbhost = $rS->db_host;
+					$dbuser = $rS->db_user;
+					$dbpass = $rS->db_pass;
+					$avatar = $rS->image;
+
 				}
 				$files = File::files(public_path() . '/uploads/menu/');
-				return view('_layout.form-input-dashboard-backend', compact('puKey','prKey','nama', 'redirect', 'image','files','id','mode','parent_id'));
+				return view('_layout.form.form-input-dashboard-backend', compact('puKey','prKey','nama', 'redirect', 'image','files','id','mode','parent_id', 'query', 'dbhost', 'dbuser', 'dbpass', 'avatar'));
 			}else{
-				return view('_layout.form-new-input-dashboard-backend', compact('parent_id'));
+				return view('_layout.form.form-new-input-dashboard-backend', compact('parent_id'));
 			}
 		}
 
 	public function delete(Request $request){
-		$del = DB::table('parent_frontpage')->where('id', $request->input('id'))->delete();
+		$del = ParentFrontpage::find($request->input('id'));
+
+		$permission = Permission::where('name', $del->name)->get();
+		if(count($permission)>0){
+			foreach ($permission as $key => $p) {
+				$p->delete();
+			}
+		}
+
+		$del->delete();
 		return $del==true?'success':'fail';
 	}
 }
