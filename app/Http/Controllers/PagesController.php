@@ -189,7 +189,7 @@ class PagesController extends Controller
         // $sBa = $this->getPermission('2');
         // $sBe = $this->getPermission('3');
         // $sBd = $this->getPermission('4');
-        $sB = $this->getDefault();
+        $sB = $this->getPermission('1');
         $sBa = $this->getDefault();
         $sBe = $this->getDefault();
         $sBd = $this->getDefault();
@@ -250,7 +250,7 @@ class PagesController extends Controller
         $lenImg = sizeof($img);
         $a=0;
 
-        $sB = $this->getDefault();
+        $sB = $this->getPermission('1');
         $sBa = $this->getDefault();
         $sBe = $this->getDefault();
         $sBd = $this->getDefault();
@@ -309,7 +309,7 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $sB = $this->getDefault();
+        $sB = $this->getPermission('1');
         $sBa = $this->getDefault();
         $sBe = $this->getDefault();
         $sBd = $this->getDefault();
@@ -330,7 +330,7 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        $sB = $this->getDefault();
+        $sB = $this->getPermission('1');
         $sBa = $this->getDefault();
         $sBe = $this->getDefault();
         $sBd = $this->getDefault();
@@ -350,7 +350,7 @@ class PagesController extends Controller
       }else{
          $footer = '(c) Ordent '.date('Y');
       }
-      $sB = $this->getDefault();
+      $sB = $this->getPermission('1');
       $sBa = $this->getDefault();
       $sBe = $this->getDefault();
       $sBd = $this->getDefault();
@@ -369,7 +369,7 @@ class PagesController extends Controller
      }else{
         $footer = '(c) Ordent '.date('Y');
      }
-     $sB = $this->getDefault();
+     $sB = $this->getPermission('1');
      $sBa = $this->getDefault();
      $sBe = $this->getDefault();
      $sBd = $this->getDefault();
@@ -399,7 +399,7 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        $sB = $this->getDefault();
+        $sB = $this->getPermission('1');
         $sBa = $this->getDefault();
         $sBe = $this->getDefault();
         $sBd = $this->getDefault();
@@ -411,7 +411,7 @@ class PagesController extends Controller
         $css = $this->CSS('style-upload');
         $jH = $this->jS('image');
         $title = 'Preference';
-      
+
         $a=1;
 
         $result2 = count(Setting::where('name', 'title')->get())>0?Setting::where('name', 'title')->get()->first()->value:"";
@@ -426,7 +426,7 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        $sB = $this->getDefault();
+        $sB = $this->getPermission('1');
         $sBa = $this->getDefault();
         $sBe = $this->getDefault();
         $sBd = $this->getDefault();
@@ -671,18 +671,18 @@ class PagesController extends Controller
         }
       }
 
-      $resultPermission = DB::table('permission_role')
-              ->join('permissions', 'permissions.id' , '=' , 'permission_role.permission_id')
+      $resultPermission = DB::table('permissions')
+              ->join('permission_role', 'permission_role.permission_id' , '=' , 'permissions.id')
               ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
-              ->join('modules', 'modules.id', '=', 'permission_role.action')
+              ->join('modules', 'modules.id', '=', 'permissions.action')
               ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
                        'roles.display_name as role_dn', 'permissions.name as per_name',
-                       'permissions.display_name as per_dn', 'permission_role.action as action',
-                       'permission_role.access as access', "modules.name as module_name",
+                       'permissions.display_name as per_dn', 'permissions.action as action',
+                       'permissions.access as access', "modules.name as module_name",
                        'modules.id as mID')
-              ->where('permission_role.role_id', $role_id)
-              ->where('permission_role.permission_id', $mode) //Permission Dapat Melihat
-              ->get(); //->toSql();
+              ->where('permissions.type', 'module')
+              ->where('roles.id', $role_id) //Permission Dapat Melihat
+              ->get(); //->toSql();;
 
       foreach($resultPermission as $rsP){
         switch($rsP->module_name){
