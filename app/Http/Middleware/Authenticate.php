@@ -74,7 +74,7 @@ class Authenticate
 
 
                 foreach($resultPermission as $rsP){
-                    echo $currentRoute . " = " . $rsP->module_name . " is " . ($currentRoute==$rsP->module_name) ."||";
+                    //echo $currentRoute . " = " . $rsP->module_name . " is " . ($currentRoute==$rsP->module_name) ."||";
                     if($currentRoute==$rsP->module_name){
                       $pass = true;
                     }
