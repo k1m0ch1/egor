@@ -79,7 +79,7 @@ class Authenticate
                       $pass = true;
                     }
 
-                    if($currentRoute=="admin/form"){
+                    if($currentRoute=="admin/form" || $currentRoute=="admin/fileList" || ){
                       $pass=true;
                     }
                 }
