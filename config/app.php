@@ -148,6 +148,8 @@ return [
 		Zizaco\Entrust\EntrustServiceProvider::class,
 		Intervention\Image\ImageServiceProvider::class,
 		Xavrsl\Cas\CasServiceProvider::class,
+		Way\Generators\GeneratorsServiceProvider::class,
+		Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class
 		//Jasekz\Laradrop\LaradropServiceProvider::class,
 
 	],
