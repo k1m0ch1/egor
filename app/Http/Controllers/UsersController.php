@@ -222,7 +222,7 @@ class UsersController extends Controller
 	{
 		//
 	}
-	
+
 	public function loginSso()
 	{
 		\Cas::authenticate();
@@ -287,7 +287,7 @@ class UsersController extends Controller
 			$users = \Auth::user();
 			\Auth::logout();
 			\Cas::authenticate();
-			unset($_SESSION['phpCAS']);
+			//unset($_SESSION['phpCAS']);
 			\phpCAS::logout(['url'=>url()]);
 		}
 
@@ -306,7 +306,7 @@ class UsersController extends Controller
 		$sB->module = true;
 		$sB->gambar = true;
 		$sB->preference = true;
-		
+
 		return $sB;
 	}
 }
