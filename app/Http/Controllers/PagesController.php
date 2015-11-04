@@ -76,13 +76,13 @@ class PagesController extends Controller
         }
 
         $datanyah = array();
-        if(ParentFrontpage::find($permissions->action)->get()>0){
           foreach($resultPermission as $permissions){
               if($permissions->type == 'app'){
+                if(ParentFrontpage::find($permissions->action)->get()>0){
                   array_push($datanyah, ParentFrontpage::find($permissions->action));
+                }
               }
           }
-        }
 
         return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission'));
     }
