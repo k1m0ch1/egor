@@ -1,7 +1,7 @@
 <script>
 // var host = "{{ Config::get('app.url') }}";
 // var dir_host = "{{ Config::get('app.url') }}";
-var host = "{{asset('')}}/index.php/";
+var host = "{{asset('')}}";
 var dir_host = "{{asset("")}}";
 </script>
 
