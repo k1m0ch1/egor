@@ -86,7 +86,7 @@ $(document).ready(function(){
               data: { name : "footer", value : text },
               dataType: 'json',
               success: function(data) {
-                
+
                 $("#message-body").hide();
                 var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.message);
                 var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);

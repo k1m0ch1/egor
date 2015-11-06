@@ -21,7 +21,7 @@ class PreferenceController extends Controller
     }
 
     public function store(Request $request){
-        
+
         return redirect()->to('http://egor.app/admin/preference');
     }
 
