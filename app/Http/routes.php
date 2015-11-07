@@ -103,6 +103,7 @@ Route::post('admin/preference:logo[save]', ['uses'=>'PreferenceController@prefer
 Route::post('admin/preference:footer[save]', ['uses'=>'PreferenceController@preferenceSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preferences/save', ['uses'=>'PreferenceController@store','as'=>'preferences.setting.save']);
 Route::post('admin/preference:background[delete]', ['uses'=>'PreferenceController@backgroundDelete','as'=>'preferences.setting.save']);
+Route::post('admin/preference:logo[delete]', ['uses'=>'PreferenceController@logoDelete','as'=>'preferences.setting.save']);
 
 Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);

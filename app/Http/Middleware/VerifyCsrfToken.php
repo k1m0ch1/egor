@@ -32,6 +32,7 @@ class VerifyCsrfToken extends BaseVerifier
                             'admin/permission[edit:save]',
                             'admin/roles[set:permission]',
                             'admin/module[edit:save]',
-                            'admin/preference:background[delete]'
+                            'admin/preference:background[delete]',
+                            'admin/preference:logo[delete]'
     ];
 }

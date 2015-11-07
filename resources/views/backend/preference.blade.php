@@ -66,6 +66,7 @@
 				                  </div>
 				                  <div class="box-footer">
 				                    <button type="submit" class="btn btn-info pull-right" id="simpan">Simpan</button>
+                            <a class="btn btn-info pull-right" id="hapusLogo">Hapus</a>
 				                  </div>
 							</form>
 							</div>
@@ -106,7 +107,7 @@
 					                  </div>
 					                  <div class="box-footer">
 					                    <button type="submit" class="btn btn-info pull-right" id="simpanBackground">Simpan</button>
-                              <button class="btn btn-info pull-right" id="hapusBackground">Hapus</button>
+                              <a class="btn btn-info pull-right" id="hapusBackground">Hapus</a>
 					                  </div>
 								</form>
 							</div>
@@ -124,7 +125,7 @@
       							                  </div>
       					                  </div>
       					                  <div class="box-footer">
-      					                    <button type="submit" class="btn btn-info pull-right" id="simpanBackground">Simpan</button>
+      					                    <button type="submit" class="btn btn-info pull-right" id="simpanLogo">Simpan</button>
       					                  </div>
       								</form>
       							</div>
