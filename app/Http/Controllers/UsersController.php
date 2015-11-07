@@ -256,6 +256,15 @@ class UsersController extends Controller
         }else{
             $bg = 'assets/img/bg.jpg';
         }
+				
+				$logo = Setting::where('name', 'logo')->get();
+				if( count($logo) > 0){
+						$logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+						$logo = preg_replace('/\s+/', '', $logo);
+				}else{
+						$logo = '#';
+				}
+
         $siteTitle = Setting::where('name', 'title')->get();
         if( count($siteTitle) > 0){
             $bah = $siteTitle->first()->value;
@@ -268,7 +277,7 @@ class UsersController extends Controller
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
         }
-		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer'));
+		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer', 'logo'));
 	}
 
 	public function postLogin(Request $requests){

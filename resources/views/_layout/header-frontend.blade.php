@@ -12,9 +12,18 @@
 		<!-- Place favicon.ico in the root directory -->
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
+		<style>
+		html {
+			background: url('{{$bg}}') no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			}
+		</style>
 	</head>
 @if(isset($bg))
-<body class="index" style="background-image: url('{{$bg}}');">
+<body class="index">
 @else
 <body class="index">
 @endif
