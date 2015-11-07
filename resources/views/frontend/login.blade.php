@@ -2,7 +2,7 @@
 	<div class="divider main">
 		<div class="row">
 			<div class="large-8 medium-8 small-12 columns">
-				<h2>PORTAL LOGIN SINGLE SIGN ON 
+				<h2>PORTAL LOGIN SINGLE SIGN ON
 				KEMENTRIAN ESDM</h2>
 				<hr/>
 				<div class="row main-url large-collapse">
@@ -29,9 +29,6 @@
 						<div class="form-footer">
 							<div class="row">
 								<div class="large-6 medium-12 small-6 columns">
-									<input type="checkbox"> <small>Remember Me</small>
-								</div>
-								<div class="large-6 medium-12 small-6 columns">
 									<button class="tiny">Log In</button>
 								</div>
 							</div>
@@ -42,4 +39,4 @@
 		</div>
 	</div>
 
-@include('_layout.footer-frontend') 
+@include('_layout.footer-frontend')
