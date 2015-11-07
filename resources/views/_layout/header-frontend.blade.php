@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
 	<head>
+		<link rel="icon" href="{{ $logo or '' }}">
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<title>{{$bah or 'Title'}}</title>
@@ -19,6 +20,7 @@
 @endif
 <div class="contain-to-grid">
 	<nav class="top-bar" data-topbar role="navigation">
+	<img src="{{ $logo or '' }}" style="float: left; height: 50px; width: 50px; margin-top: 5px; margin-right: -15px;"/>
   <ul class="title-area">
 	<li class="name">
 	  <h1><a href="{{url('/')}}">{{$bah or 'Title'}}</a></h1>

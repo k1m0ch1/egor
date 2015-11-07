@@ -59,6 +59,14 @@ class PagesController extends Controller
             $bg = 'assets/img/bg.jpg';
         }
 
+        $logo = Setting::where('name', 'logo')->get();
+        if( count($logo) > 0){
+            $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+            $logo = preg_replace('/\s+/', '', $logo);
+        }else{
+            $logo = '#';
+        }
+
         $footer = Setting::where('name', 'footer')->get();
         if( count($footer) > 0){
             $footer = $footer->first()->value;
@@ -85,7 +93,7 @@ class PagesController extends Controller
               }
           }
 
-        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission'));
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission', 'logo'));
     }
 
     /**

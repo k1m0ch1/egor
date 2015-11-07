@@ -70,7 +70,7 @@ class GambarController extends Controller
             if($request->file('upl-Logo')->isValid()){
                 $filename = 'logo-'.date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('upl-Logo')->guessExtension();
                 $destination = Setting::LOGO_UPLOAD_PATH;
-                $result = \Image::make($request->file('upl-Logo'))->save($destination.$filename);
+                $result = \Image::make($request->file('upl-Logo'))->fit(196, 196)->save($destination.$filename);
                 $results->message = 'Data Upload has been completed.';
                 $results->status = 1;
                 $results->result = $filename;
@@ -84,7 +84,7 @@ class GambarController extends Controller
         $results = new \StdClass;
         $results->success = 1;
         $results->info = 'upload path get';
-        
+
         if($id == 'background'){
             $results->result = Setting::BG_UPLOAD_PATH;
         }elseif($id == 'logo'){
