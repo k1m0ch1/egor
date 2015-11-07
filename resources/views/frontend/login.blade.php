@@ -17,6 +17,9 @@
 					</div>
 				</div>
 			</div>
+			<p align="center">
+				Hati Hati penggunaan Username dan password menggunakan case sensitive
+			</p>
 			<div class="large-4 medium-4 small-12 columns">
 				<div class="form-group form-egor">
 					<div class="form-header">
