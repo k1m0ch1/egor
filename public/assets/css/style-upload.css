@@ -151,6 +151,10 @@ section, footer, header, aside{
     position: absolute;
 }
 
+.chart svg, .chart canvas{
+  width: 5% !important;
+}
+
  #uploadLogo ul li span{
     width: 15px;
     height: 12px;

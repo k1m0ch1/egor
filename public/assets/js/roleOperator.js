@@ -32,9 +32,9 @@ $(document).ready(function(){
                    });
     });
 
-   $('[id^=delRule]').on('click', function(){
-      var konfirm = confirm("Yakin Hapus Data?");
-      if(konfirm){
+    $('[id^=delRule]').on('click', function(){
+    	var konfirm = confirm("Yakin Hapus Data?");
+      	if(konfirm){
                 var currentID = $(this).attr('id');
                 currentID = currentID.split('-')[1];
                 var idnyah = currentID;
@@ -44,24 +44,48 @@ $(document).ready(function(){
                       data: { id: currentID},
                       dataType: 'html',
                       success: function(data) {
-                          $.ajax({
-                            url:  host + 'admin/roles[show]',
-                            type: 'GET',
-                            dataType: 'html',
-                            success: function(data){
-                               $('#tbody-roles').html(data);
-                              $.getScript(  dir_host + "assets/js/roleOperator.js" )
-                                  .done(function( script, textStatus ) {
-                                })
-                                .fail(function( jqxhr, settings, exception ) {
-                                  $( "div.log" ).text( "Triggered ajaxError handler." );
-                                });
-                            }
-                          });
+                        	$.ajax({
+			                  url:  host + 'admin/roles[show]',
+			                  type: 'GET',
+			                  dataType: 'html',
+			                  success: function(data){
+			                    $('#tbody-roles').html(data);
+			                    $.getScript(  dir_host + "assets/js/roleOperator.js" )
+									.done(function( script, textStatus ) {
+								})
+								.fail(function( jqxhr, settings, exception ) {
+									$( "div.log" ).text( "Triggered ajaxError handler." );
+								});
+			                 }
+			              });
                       }
                    });
-      }
+        }
     });
+
+		$('[id^=editPermission]').on('click', function(){
+				var currentID = $(this).attr('id');
+				currentID = currentID.split('-')[1];
+				dialogSetPermission.dialog("open");
+				$.ajax({
+					url:  host + 'admin/permission[show2]',
+					type: 'GET',
+					data : {role_id: currentID},
+					dataType: 'html',
+					success: function(data) {
+						$('#form-setPermission').html(data);
+					}
+				});
+			// 	$.ajax({
+			// 		url:  host + 'admin/roles[permission:show]',
+			// 		type: 'GET',
+			// 		data: { id: currentID },
+			// 		dataType: 'html',
+			// 		success: function(data) {
+			// 			$('#tbody-permission-roles').html(data);
+			// 		}
+			// });
+		});
 
    $("select#permission_id").on('change', function(){
       console.log(this);

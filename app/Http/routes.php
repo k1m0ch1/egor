@@ -10,7 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
+Route::get('/', 'PagesController@index');
+Route::get('admin', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
 Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
+Route::get('login_sso', ['uses'=>'UsersController@loginSso', 'as'=>'users.login_sso.get']);
 Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.post']);
 Route::get('logout', ['uses'=>'UsersController@logout', 'as'=>'users.logout.get']);
 Route::get('/', ['uses'=>'\App\Http\Controllers\PagesController@index', 'as'=>'index.get']);
@@ -44,7 +48,7 @@ Route::get('admin/dashboard[show:app]', ['uses'=>'DashboardController@showApp', 
 
 Route::post('admin/gambar[upload]', ['uses'=>'GambarController@upload', 'as'=>'gambar[upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[Bg:upload]', ['uses'=>'GambarController@bgUpload', 'as'=>'gambar[Bg:upload]', 'middleware'=>'auth']);
-Route::post('admin/gambar[Logo:upload]', ['uses'=>'GambarController@logoUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
+Route::post('admin/gambar[Logo:upload]', ['uses'=>'GambarController@LogoUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[Logo:save]', ['uses'=>'GambarController@logoSave', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[Bg:save]', ['uses'=>'GambarController@BgSave', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[BG:upload]', ['uses'=>'GambarController@BgUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
@@ -104,6 +108,10 @@ Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/path/uploads/{id}', ['uses'=>'GambarController@uploadPath']);
 	Route::get('/permission/show/{id}', ['uses'=>'PermissionController@view']);
 });
+
 Route::resource('admin/news', 'NewsController');
 Route::get('news', ['uses'=>'NewsController@frontendIndex', 'as'=>'news.index']);
 Route::get('news/{id}', ['uses'=>'NewsController@frontendShow', 'as'=>'news.show']);
+Route::group(['prefix' => 'api-sso/v1'], function() {
+    Route::any('user/{id}/{mode?}', 'ApiController@getUserAttributes');
+});

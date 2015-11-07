@@ -3,8 +3,8 @@ $(function(){
     $("select").imagepicker();
 
     var ul = $('#upload ul');
-    var ul = $('#uploadLogo ul');
-    var ul = $('#uploadBg ul');
+    var ulLogo = $('#uploadLogo ul');
+    var ulBg = $('#uploadBg ul');
 
     $('#drop a').click(function(){
         // Simulate a click on the file input button
@@ -35,7 +35,7 @@ $(function(){
         // either via the browse button, or via drag/drop:
         add: function (e, data) {
 
-            var tpl = $('<li class="working"><input type="text" value="0" data-width="48" data-height="48"'+
+            var tpl = $('<li class="working" id="logo"><input type="text" value="0" data-width="48" data-height="48"'+
                 ' data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p><span></span></li>');
 
             // Append the file name and file size
@@ -43,7 +43,7 @@ $(function(){
                          .append('<i>' + formatFileSize(data.files[0].size) + '</i>');
 
             // Add the HTML to the UL element
-            data.context = tpl.appendTo(ul);
+            data.context = tpl.appendTo(ulLogo);
 
             // Initialize the knob plugin
             tpl.find('input').knob();
@@ -76,9 +76,19 @@ $(function(){
 
             if(progress == 100){
                 data.context.removeClass('working');
-                location.reload();
+                //location.reload();
 
             }
+        },
+
+        done:function(e, data){
+          // console.log(data.result.info);
+          // console.log(data.result.message);
+          $("#message-body").hide();
+          var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.result.message);
+          var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+          $("#message-body").html(el);
+          $("#message-body").fadeIn('slow');
         },
 
         fail:function(e, data){
@@ -97,7 +107,7 @@ $(function(){
         // either via the browse button, or via drag/drop:
         add: function (e, data) {
 
-            var tpl = $('<li class="working"><input type="text" value="0" data-width="48" data-height="48"'+
+            var tpl = $('<li class="working" id="background"><input type="text" value="0" data-width="48" data-height="48"'+
                 ' data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p><span></span></li>');
 
             // Append the file name and file size
@@ -105,7 +115,7 @@ $(function(){
                          .append('<i>' + formatFileSize(data.files[0].size) + '</i>');
 
             // Add the HTML to the UL element
-            data.context = tpl.appendTo(ul);
+            data.context = tpl.appendTo(ulBg);
 
             // Initialize the knob plugin
             tpl.find('input').knob();
@@ -127,7 +137,7 @@ $(function(){
             var jqXHR = data.submit();
         },
 
-        progress: function(e, data){
+        progress: function(e, data, response){
 
             // Calculate the completion percentage of the upload
             var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -137,11 +147,21 @@ $(function(){
             data.context.find('input').val(progress).change();
 
             if(progress == 100){
-                
+
                 data.context.removeClass('working');
-                location.reload();
-                
+                //location.reload();
+
             }
+        },
+
+        done:function(e, data){
+          // console.log(data.result.info);
+          // console.log(data.result.message);
+          $("#message-body").hide();
+          var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text(data.result.message);
+          var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+          $("#message-body").html(el);
+          $("#message-body").fadeIn('slow');
         },
 
         fail:function(e, data){

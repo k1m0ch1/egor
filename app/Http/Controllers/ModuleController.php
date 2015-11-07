@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Module;
+use App\Models\Permission;
 
 class ModuleController extends Controller
 {
@@ -35,6 +36,7 @@ class ModuleController extends Controller
     public function save(Request $request){
         $as = $request->input('as');
         $module = new Module;
+        $permission = new Permission;
         $validator = \Validator::make($request->all(), $module->getRules());
         $results = new \StdClass;
 
@@ -48,10 +50,13 @@ class ModuleController extends Controller
                 $results->info = 'module create';
             }else{
                 $module = new Module;
+                $permission = new Permission;
                 $module->name = $request->input('name');
                 $module->route = $request->input('route');
                 $module->description = $request->input('description');
                 $module->save();
+                $permission->name = "can-access-" . $request->input('name');
+                $permission->display_name = "Dapat Mengakses " . $request->input('name');
                 $results->info = 'module edit';
             }
             $results->status = 1;

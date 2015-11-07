@@ -53,7 +53,7 @@
                       </tr>
                     </thead>
                     <tbody id="tbody-user">
-                      
+
                     </tbody>
                   </table>
                 </div>
@@ -64,8 +64,14 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
      @include('_layout.main-footer')
-
-      <div id="dialog-form" title="Ubah User">     
+     <style>
+     .dialogUser{
+         margin-left: 500;
+         left: 500 !important;
+         right: 500 !important;
+      }
+     </style>
+      <div id="dialog-form" title="Ubah User" >
         <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
         {!! csrf_field() !!}
           <fieldset id='formnyah'>

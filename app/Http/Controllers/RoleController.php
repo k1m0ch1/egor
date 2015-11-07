@@ -226,6 +226,7 @@ class RoleController extends Controller
         }
 
         $a=0;
+        $perm = Array();
         if(count($appChecked)>0){
           foreach($appChecked as $appPa){
             $perm[$a] = $appPa->id;
@@ -235,13 +236,14 @@ class RoleController extends Controller
           $perm = Array();
         }
 
-        echo count($perm);
+        echo var_dump($perm);
+        //echo var_dump($appPerm);
 
         $b=0;
         for($a=0;$a<count($appPerm);$a++){
           if(!in_array($appPerm[$a], $perm)){
             $role->attachPermission($appPerm[$a]);
-            // echo $modPerm[$a] . "ADDED||";
+            echo $modPerm[$a] . "ADDED||";
           }else if(count($perm)==0){
             $role->attachPermission($appPerm[$a]);
           }
