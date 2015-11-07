@@ -143,39 +143,43 @@ $(document).ready(function(){
     }
 
 		$('#hapusBackground').on('click', function(){
-			var fileName=$("#selector-BG option:selected").text();
-			$.ajax({
-								url:  host + 'admin/preference:background[delete]',
-								type: 'POST',
-								data: { name: "background" ,value : fileName },
-								dataType: 'html',
-								success: function(data) {
-									$("#message-body").hide();
-									var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text("File terhapus");
-									var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
-									$("#message-body").html(el);
-									$("#message-body").fadeIn('slow');
-									reLoadBG();
-								}
-				 });
+			if(confirm("Yakin Hapus Data?")){
+				var fileName=$("#selector-BG option:selected").text();
+				$.ajax({
+									url:  host + 'admin/preference:background[delete]',
+									type: 'POST',
+									data: { name: "background" ,value : fileName },
+									dataType: 'html',
+									success: function(data) {
+										$("#message-body").hide();
+										var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text("File terhapus");
+										var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+										$("#message-body").html(el);
+										$("#message-body").fadeIn('slow');
+										reLoadBG();
+									}
+					 });
+			}
 		});
 
 		$('#hapusLogo').on('click', function(){
-			var fileName=$("#selector-Logo option:selected").text();
-			$.ajax({
-								url:  host + 'admin/preference:logo[delete]',
-								type: 'POST',
-								data: { name: "background" ,value : fileName },
-								dataType: 'html',
-								success: function(data) {
-									$("#message-body").hide();
-									var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text("File terhapus");
-									var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
-									$("#message-body").html(el);
-									$("#message-body").fadeIn('slow');
-									reLoadLogo();
-								}
-				 });
+			if(confirm("Yakin Hapus Data?")){
+				var fileName=$("#selector-Logo option:selected").text();
+				$.ajax({
+									url:  host + 'admin/preference:logo[delete]',
+									type: 'POST',
+									data: { name: "background" ,value : fileName },
+									dataType: 'html',
+									success: function(data) {
+										$("#message-body").hide();
+										var el = $('<div />').attr('class', 'alert alert-success alert-dismissable').text("File terhapus");
+										var close = $('<button />').attr('type', 'button').attr('class', 'close').attr('data-dismiss', 'alert').text('x').appendTo(el);
+										$("#message-body").html(el);
+										$("#message-body").fadeIn('slow');
+										reLoadLogo();
+									}
+					 });
+			}
 		});
 
 });

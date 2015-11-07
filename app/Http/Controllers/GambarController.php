@@ -84,13 +84,19 @@ class GambarController extends Controller
         $results = new \StdClass;
         $results->success = 1;
         $results->info = 'upload path get';
-
+        
         if($id == 'background'){
             $results->result = Setting::BG_UPLOAD_PATH;
         }elseif($id == 'logo'){
             $results->result = Setting::LOGO_UPLOAD_PATH;
         }
 
+        $hasil = DB::table('settings')->select('name', 'value')->where('name', 'background')
+                            ->orWhere('name', 'logo')
+                            ->get();
+
+        $results->background =  $hasil[0]->value;
+        $results->logo = $hasil[1]->value;
 
         return response()->json($results);
     }
