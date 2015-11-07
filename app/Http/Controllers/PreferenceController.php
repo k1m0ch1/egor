@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use DB;
+use Storage;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -60,6 +61,15 @@ class PreferenceController extends Controller
 
     	return 'success';
     }
+
+    public function backgroundDelete(Request $request){
+      $string = preg_replace('/\s+/', '', $request->input('value'));
+    	if(Storage::delete("/" . public_path() . "/uploads/background/" . $string)){
+        echo "GOBLOG";
+      }
+    	return "success";
+    }
+
     public function logoSave(Request $request){
     	DB::table('preference')->where('id', '1')->update(['logo' => $request->input('namaFile')]);
 

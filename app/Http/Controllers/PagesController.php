@@ -532,7 +532,7 @@ class PagesController extends Controller
                         asset('assets/js/dialog-config.js'),
                         //asset('assets/vendor/AdminLTE/dist/js/pages/dashboard.js'),
                         asset('assets/vendor/AdminLTE/dist/js/demo.js'),
-                        asset('assets/js/dashboard.min.js'),
+                        asset('assets/js/dashboard.js'),
                         asset('assets/vendor/foundation/js/foundation.min.js'),
                         asset('assets/js/general.js'),
                         asset('holder.js'),

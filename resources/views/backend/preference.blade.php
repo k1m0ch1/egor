@@ -106,6 +106,7 @@
 					                  </div>
 					                  <div class="box-footer">
 					                    <button type="submit" class="btn btn-info pull-right" id="simpanBackground">Simpan</button>
+                              <button class="btn btn-info pull-right" id="hapusBackground">Hapus</button>
 					                  </div>
 								</form>
 							</div>
