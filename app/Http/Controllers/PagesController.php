@@ -648,6 +648,7 @@ class PagesController extends Controller
       $sB->module = true;
       $sB->gambar = true;
       $sB->preference = true;
+      $sB->news = true;
 
       return $sB;
     }
