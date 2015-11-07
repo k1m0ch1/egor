@@ -79,7 +79,7 @@ class Authenticate
                         $pass = true;
                       }
 
-                      if($currentRoute=="admin/form" || $currentRoute=="admin/filesList/{id}" ){
+                      if($currentRoute=="admin/form" || $currentRoute=="admin/filesList/{id}" || $currentRoute=="admin/setGrid" ){
                         $pass=true;
                       }
                   }
