@@ -1,7 +1,9 @@
 		<div class="footer">
 			   <div class="row">
 				   <div class="col-lg-12">
+						 @if($logo=="")
 						  <center><img src="{{ $logo or '' }}" style="align: center; height: 100px; width: 100px; margin-top:-40px;"/></center>
+						 @endif
 					   <p class="text-center">
 						   {{$footer or '-'}} - <a href="{{url('/')}}">{{ $bah or 'Title' }}</a>
 					   </p>

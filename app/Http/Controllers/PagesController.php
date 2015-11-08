@@ -78,17 +78,15 @@ class PagesController extends Controller
         if(Auth::check()){
            $roles = Auth::user()->roles->first();
             $resultPermission = $roles->perms;
-
         }else{
             $resultPermission = array();
         }
-
         $datanyah = array();
           foreach($resultPermission as $permissions){
               if($permissions->type == 'app'){
                 //echo count(ParentFrontpage::find($permissions->action));
                 if(count(ParentFrontpage::find($permissions->action))>0){
-                  array_push($datanyah, ParentFrontpage::find($permissions->action));
+                  array_push($datanyah, ParentFrontpage::find($permissions->action)->ordeBy('id', 'asc'));
                 }
               }
           }

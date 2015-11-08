@@ -1,14 +1,14 @@
 <!doctype html>
 <html class="no-js" lang="">
 	<head>
-		<link rel="icon" href="{{ $logo or '' }}">
+		@if($logo=="")
+			<link rel="icon" href="{{ $logo or '' }}">
+		@endif
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<title>{{$bah or 'Title'}}</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<link rel="apple-touch-icon" href="apple-touch-icon.png">
 		<!-- Place favicon.ico in the root directory -->
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
@@ -29,7 +29,9 @@
 @endif
 <div class="contain-to-grid">
 	<nav class="top-bar" data-topbar role="navigation">
-	<img src="{{ $logo or '' }}" style="float: left; height: 50px; width: 50px; margin-top: 5px; margin-right: -15px;"/>
+	@if($logo=="")
+		<img src="{{ $logo or '' }}" style="float: left; height: 50px; width: 50px; margin-top: 5px; margin-right: -15px;"/>
+	@endif
   <ul class="title-area">
 	<li class="name">
 	  <h1><a href="{{url('/')}}">{{$bah or 'Title'}}</a></h1>
