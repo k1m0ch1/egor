@@ -23,6 +23,10 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function unauthorized(){
+      return view('errors.unauthorized');
+    }
+
     public function index(){
         if (Auth::check()!=1){
           Auth::attempt(['email' => 'guest@gmail.com', 'password' => 'guestguest']);

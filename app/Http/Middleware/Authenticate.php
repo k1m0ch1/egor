@@ -87,7 +87,7 @@ class Authenticate
 
 
                 if(!$pass){
-                  return redirect('login')->with('errors', 'Maaf anda harus login terlebih dahulu');
+                  return redirect('unauthorized')->with('errors', 'Maaf anda harus login terlebih dahulu');
                 }
 
 

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::get('unauthorized', 'PagesController@unauthorized');
 Route::get('admin', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
 Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
 Route::get('login_sso', ['uses'=>'UsersController@loginSso', 'as'=>'users.login_sso.get']);

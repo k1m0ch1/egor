@@ -104,7 +104,7 @@
             });
             </script>
           </div>
-          
+
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header" {{ $title=='Dashboard'?'class="active treeview"':'' }}>MAIN NAVIGATION</li>
@@ -168,13 +168,13 @@
                   </li>
                 @endif
 
-                @if($sB->gambar)
+                <!-- @if($sB->gambar)
                   <li {{ $title=='Image'?'class="active treeview"':'' }}>
                     <a href='{{ asset("admin/gambar") }}'>
                       <i class="fa fa-file-image-o"></i> <span> Images</span>
                     </a>
                   </li>
-                @endif
+                @endif -->
 
                 @if($sB->preference)
                 <li {{ $title=='Preference'?'class="active treeview"':'' }}>
