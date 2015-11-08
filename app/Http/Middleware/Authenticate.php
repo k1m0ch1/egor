@@ -48,6 +48,7 @@ class Authenticate
         if(substr($currentRoute,-1)=='s'){
           $currentRoute = substr($currentRoute,0,-1);
         }
+        $currentRoute = \Route::getCurrentRoute()->getPath()=="admin/users[edit:show]"?"admin/users[edit:show]":$currentRoute;
 
         //echo $currentRoute;
         if($pass){
