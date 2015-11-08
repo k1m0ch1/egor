@@ -10,7 +10,6 @@
 				<div class="row">
 					<div class="large-12 medium-12 small-12 columns">
 						<ul class="small-block-grid-1 medium-block-grid-{{$h or '3'}}">
-						<!-- {{var_dump($datanyah)}} -->
 							@foreach($datanyah as $menu)
   								<li>
   									<a href="{{$menu->redirect or '/'}}" class="image-button">
@@ -26,4 +25,13 @@
 		</div>
 		<div class="divider"></div>
 
+
 @include('_layout.footer-frontend')
+<div id="dialog-form-profile" title="Rubah Pengaturan Profile">
+	<form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+	{!! csrf_field() !!}
+		<fieldset id='formnyah-profile'>
+
+		</fieldset>
+	</form>
+</div>
