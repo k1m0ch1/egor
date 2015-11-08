@@ -2,23 +2,24 @@
 	<div class="divider main">
 		<div class="row">
 			<div class="large-8 medium-8 small-12 columns">
-				<h1>Halaman Login</h1>
+				<h2>PORTAL LOGIN SINGLE SIGN ON
+				KEMENTRIAN ESDM</h2>
 				<hr/>
 				<div class="row main-url large-collapse">
-					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/share.png') }}" alt="">Excepteur</p>
+					<div class="large-4 medium-6 small-12 columns">
+						<p><img src="{{ asset('assets/img/share.png') }}" alt="">Secure</p>
 					</div>
-					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/windcatcher.png') }}" alt="">Somos Libre</p>
+					<div class="large-4 medium-6 small-12 columns">
+						<p><img src="{{ asset('assets/img/windcatcher.png') }}" alt="">Reliable</p>
 					</div>
-					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/flag.png') }}" alt="">Anno Domini</p>
-					</div>
-					<div class="large-3 medium-6 small-12 columns">
-						<p><img src="{{ asset('assets/img/flame.png') }}" alt="">Tala</p>
+					<div class="large-4 medium-6 small-12 columns">
+						<p><img src="{{ asset('assets/img/flag.png') }}" alt="">Transparent</p>
 					</div>
 				</div>
 			</div>
+			<p align="center">
+				Hati Hati penggunaan Username dan password menggunakan case sensitive
+			</p>
 			<div class="large-4 medium-4 small-12 columns">
 				<div class="form-group form-egor">
 					<div class="form-header">
@@ -31,9 +32,6 @@
 						<div class="form-footer">
 							<div class="row">
 								<div class="large-6 medium-12 small-6 columns">
-									<input type="checkbox"> <small>Remember Me</small>
-								</div>
-								<div class="large-6 medium-12 small-6 columns">
 									<button class="tiny">Log In</button>
 								</div>
 							</div>
@@ -43,9 +41,5 @@
 			</div>
 		</div>
 	</div>
-				<!--[if lt IE 8]>
-						<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-				<![endif]-->
 
-				<!-- Add your site or application content here -->
-@include('_layout.footer-frontend') 
+@include('_layout.footer-frontend')

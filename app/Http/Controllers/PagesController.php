@@ -7,11 +7,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use File;
+use Auth;
 use App\Models\Setting;
 use App\Models\ParentFrontpage;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Module;
 
 class PagesController extends Controller
 {
@@ -20,7 +22,16 @@ class PagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function unauthorized(){
+      return view('errors.unauthorized');
+    }
+
     public function index(){
+        if (Auth::check()!=1){
+          Auth::attempt(['email' => 'guest@gmail.com', 'password' => 'guestguest']);
+        }
+
         $result1 = DB::table('parent_menu')->get();
         $siteTitle = Setting::where('name', 'title')->get();
         if( count($siteTitle) > 0){
@@ -52,14 +63,45 @@ class PagesController extends Controller
             $bg = 'assets/img/bg.jpg';
         }
 
+        $logo = Setting::where('name', 'logo')->get();
+        if( count($logo) > 0){
+            $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+            $logo = preg_replace('/\s+/', '', $logo);
+        }else{
+            $logo = '#';
+        }
+
         $footer = Setting::where('name', 'footer')->get();
         if( count($footer) > 0){
             $footer = $footer->first()->value;
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
+
+
+        }
+        if(Auth::check()){
+           $roles = Auth::user()->roles->first();
+            $resultPermission = $roles->perms;
+        }else{
+            $resultPermission = array();
         }
 
-        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer'));
+        //ParentFrontpage::find($permissions->action)
+        //DB::table('parent_frontpage')->where('id', $permissions->action)->orderBy('position', 'asc')->get()
+
+        $datanyah = array();
+          foreach($resultPermission as $permissions){
+              if($permissions->type == 'app'){
+                //echo count(ParentFrontpage::find($permissions->action));
+                if(count(ParentFrontpage::find($permissions->action))>0){
+                  array_push($datanyah, ParentFrontpage::find($permissions->action));
+                }
+              }
+          }
+
+          $datanyah = $this->array_msort($datanyah, array('position'=>SORT_ASC));
+
+        return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission', 'logo'));
     }
 
     /**
@@ -162,8 +204,19 @@ class PagesController extends Controller
 
         $rS = $w.'x'.$h;
 
-        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer'));
+        // $sB = $this->getPermission('1');
+        // $sBa = $this->getPermission('2');
+        // $sBe = $this->getPermission('3');
+        // $sBd = $this->getPermission('4');
+        $sB = $this->getPermission('1');
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
+
+        return view('backend.dashboard', compact('css', 'jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer', 'sB', 'sBa', 'sBe', 'sBd'));
     }
+
+
 
     public function indexGambar(){
         $css = $this->CSS('style-upload');
@@ -178,8 +231,9 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
+        $sB = $this->getDefault('1');
 
-        return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer'));
+        return view('backend.gambar', compact('css', 'jH', 'title','files', 'footer','sB'));
     }
 
     public function fileList($id, Request $request){
@@ -215,7 +269,12 @@ class PagesController extends Controller
         $lenImg = sizeof($img);
         $a=0;
 
-        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg'));
+        $sB = $this->getPermission('1');
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
+
+        return view('_layout.grid', compact('a','w','h', 'img', 'lenImg', 'sB', 'sBa', 'sBe', 'sBd'));
     }
 
     public function setGrid(Request $request){
@@ -269,7 +328,12 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
+        $sB = $this->getPermission('1');
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
+
+        return view('backend.user', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
     }
 
      public function role(){
@@ -285,7 +349,11 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
-        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
+        $sB = $this->getPermission('1');
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
+        return view('backend.role', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
     }
 
    public function permission(){
@@ -301,8 +369,31 @@ class PagesController extends Controller
       }else{
          $footer = '(c) Ordent '.date('Y');
       }
-      return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer'));
+      $sB = $this->getPermission('1');
+      $sBa = $this->getDefault();
+      $sBe = $this->getDefault();
+      $sBd = $this->getDefault();
+      return view('backend.permission', compact('css', 'jH', 'title', 'result', 'a', 'breadcrumb', 'footer','sB'));
   }
+
+  public function module(){
+     $title = 'Module';
+     $css = $this->CSS('users');
+     $jH =  $this->jS('module');
+     $result = Module::all();
+     $a=0;
+      $footer = Setting::where('name', 'footer')->get();
+     if(count($footer)>0){
+        $footer =$footer->first()->value;
+     }else{
+        $footer = '(c) Ordent '.date('Y');
+     }
+     $sB = $this->getPermission('1');
+     $sBa = $this->getDefault();
+     $sBe = $this->getDefault();
+     $sBd = $this->getDefault();
+     return view('backend.module', compact('css', 'jH', 'title', 'result', 'a', 'footer','sB'));
+ }
 
     public function tes(){
         $jH = Array( asset('holder.js') );
@@ -315,8 +406,8 @@ class PagesController extends Controller
         $jH = Array( asset('holder.js') );
         $css = $this->CSS('menu');
         $title = 'Menu';
-        $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
-                        INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
+        // $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
+        //                 INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
         $result2 = DB::table('parent_menu')->get();
         $a=1;
 
@@ -327,15 +418,19 @@ class PagesController extends Controller
            $footer = '(c) Ordent '.date('Y');
         }
 
-        return view('backend.menu', compact('css', 'jH', 'title', 'result1', 'result2', 'a', 'footer'));
+        $sB = $this->getPermission('1');
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
+
+        return view('backend.menu', compact('css', 'jH', 'title', 'result2', 'a', 'footer','sB'));
     }
 
     public function preference(){
         $css = $this->CSS('style-upload');
         $jH = $this->jS('image');
         $title = 'Preference';
-        $result1 = DB::select('SELECT child_menu.name as "ch_name" FROM parent_menu
-                        INNER JOIN child_menu ON child_menu.parent_id = parent_menu.id');
+
         $a=1;
 
         $result2 = count(Setting::where('name', 'title')->get())>0?Setting::where('name', 'title')->get()->first()->value:"";
@@ -350,8 +445,12 @@ class PagesController extends Controller
         }else{
            $footer = '(c) Ordent '.date('Y');
         }
+        $sB = $this->getPermission('1');
+        $sBa = $this->getDefault();
+        $sBe = $this->getDefault();
+        $sBd = $this->getDefault();
 
-        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer'));
+        return view('backend.preference', compact( 'css', 'jH', 'title','result2','result3','filesLogo','filesBg', 'footer','sB'));
     }
 
     public function CSS($mode){
@@ -359,8 +458,8 @@ class PagesController extends Controller
         switch($mode){
             case 'general' :
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
-                     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-                     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+                     asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                     asset('assets/vendor/ionicons/css/ionicons.min.css'),
                      asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                      asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
                      asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
@@ -370,23 +469,23 @@ class PagesController extends Controller
                      asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
                      asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
                      asset('assets/css/backend.css'),
-                     "//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                     asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                      asset('assets/css/image-picker.css')
                      );
             break;
             case 'users' :
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
-                            'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-                            'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
-                            "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                            asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                            asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                            asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                             asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.css'),
                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'));
             break;
             case 'menu' :
-                $css = Array("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
-                             "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css",
-                             "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                $css = Array(asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                             asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                             asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                              asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
@@ -395,23 +494,23 @@ class PagesController extends Controller
             break;
             case 'gridster' :
                 $css = Array(asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
-                     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-                     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
-                     asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
-                     asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
-                     asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
-                     asset('assets/vendor/AdminLTE/plugins/morris/morris.css'),
-                     asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css'),
-                     asset('assets/vendor/AdminLTE/plugins/datepicker/datepicker3.css'),
-                     asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
-                     asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
-                     asset('assets/css/backend.css'),
-                     asset('assets/vendor/gridster/dist/jquery.gridster.css'));
+                             asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                             asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
+                             asset('assets/vendor/AdminLTE/plugins/iCheck/flat/blue.css'),
+                             asset('assets/vendor/AdminLTE/plugins/morris/morris.css'),
+                             asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css'),
+                             asset('assets/vendor/AdminLTE/plugins/datepicker/datepicker3.css'),
+                             asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css'),
+                             asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'),
+                             asset('assets/css/backend.css'),
+                             asset('assets/vendor/gridster/dist/jquery.gridster.css'));
             break;
             case 'style-upload' :
-                $css = Array("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css",
-                             "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css",
-                             "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css",
+                $css = Array(asset('assets/vendor/font-awesome/css/font-awesome.min.css'),
+                             asset('assets/vendor/ionicons/css/ionicons.min.css'),
+                             asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                              asset('assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
@@ -429,16 +528,16 @@ class PagesController extends Controller
         switch($mode){
             case 'general':
             $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js",
+                        asset('assets/vendor/raphael/raphael-min.js'),
                         //asset('assets/vendor/AdminLTE/plugins/morris/morris.min.js'),
                         asset('assets/vendor/gridster/dist/jquery.gridster.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/sparkline/jquery.sparkline.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'),
                         asset('assets/vendor/AdminLTE/plugins/knob/jquery.knob.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js",
+                        asset('assets/vendor/moment/moment.js'),
                         asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/datepicker/bootstrap-datepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'),
@@ -463,16 +562,16 @@ class PagesController extends Controller
             break;
             case 'image':
             $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js",
+                        asset('assets/vendor/raphael/raphael-min.js'),
                         //asset('assets/vendor/AdminLTE/plugins/morris/morris.min.js'),
                         asset('assets/vendor/gridster/dist/jquery.gridster.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/sparkline/jquery.sparkline.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'),
                         asset('assets/vendor/AdminLTE/plugins/knob/jquery.knob.js'),
-                        "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js",
+                        asset('assets/vendor/moment/moment.js'),
                         asset('assets/vendor/AdminLTE/plugins/daterangepicker/daterangepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/datepicker/bootstrap-datepicker.js'),
                         asset('assets/vendor/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'),
@@ -493,7 +592,7 @@ class PagesController extends Controller
             break;
             case "roles":
                 $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
@@ -508,7 +607,7 @@ class PagesController extends Controller
 
             case "permission":
                 $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
@@ -521,9 +620,24 @@ class PagesController extends Controller
                         );
             break;
 
+            case "module":
+                $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
+                        asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
+                        asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
+                        asset('assets/vendor/foundation/js/foundation.min.js'),
+                        asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js'),
+                        asset('holder.js'),
+                        asset('assets/vendor/AdminLTE/plugins/fastclick/fastclick.min.js'),
+                        //asset('assets/js/roleEvent.js'),
+                        asset('assets/js/moduleOperator.js')
+                        );
+            break;
+
             case "users":
                 $JS = Array(asset('assets/vendor/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'),
-                        "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js",
+                        asset('assets/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.min.js'),
                         asset('assets/vendor/AdminLTE/bootstrap/js/bootstrap.min.js'),
                         asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js'),
                         asset('assets/vendor/AdminLTE/dist/js/app.min.js'),
@@ -538,4 +652,106 @@ class PagesController extends Controller
         }
         return $JS;
     }
+
+    public function getDefault(){
+      $sB = new \StdClass;
+      $sB->dashboard = true;
+      $sB->menu_user = true;
+      $sB->user = true;
+      $sB->role = true;
+      $sB->permission = true;
+      $sB->menu = true;
+      $sB->module = true;
+      $sB->gambar = true;
+      $sB->preference = true;
+      $sB->news = true;
+
+      return $sB;
+    }
+
+    public function getPermission($mode){
+
+      $sB = new \StdClass;
+      $sB->dashboard = false;
+      $sB->menu_user = false;
+      $sB->user = false;
+      $sB->role = false;
+      $sB->permission = false;
+      $sB->menu = false;
+      $sB->module = false;
+      $sB->gambar = false;
+      $sB->preference = false;
+
+      $id_user = Auth::User()->id;
+      $role = DB::table('roles')->get();
+      foreach($role as $rolerS){
+        if(User::find($id_user)->hasRole($rolerS->name)==1){
+          $userRole = $rolerS->name;
+          $role_id = $rolerS->id;
+        }
+      }
+
+      $resultPermission = DB::table('permissions')
+              ->join('permission_role', 'permission_role.permission_id' , '=' , 'permissions.id')
+              ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+              ->join('modules', 'modules.id', '=', 'permissions.action')
+              ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                       'roles.display_name as role_dn', 'permissions.name as per_name',
+                       'permissions.display_name as per_dn', 'permissions.action as action',
+                       'permissions.access as access', "modules.name as module_name",
+                       'modules.id as mID')
+              ->where('permissions.type', 'module')
+              ->where('roles.id', $role_id) //Permission Dapat Melihat
+              ->get(); //->toSql();;
+
+      foreach($resultPermission as $rsP){
+        switch($rsP->module_name){
+          case "Backend Dashboard": $sB->dashboard = true; break;
+          case "Backend User": $sB->user = true; $sB->menu_user=true; break;
+          case "Backend Role": $sB->role = true; $sB->menu_user=true;break;
+          case "Backend Permission": $sB->permission = true; $sB->menu_user=true; break;
+          case "Backend Menu": $sB->menu = true; break;
+          case "Backend Module": $sB->module = true; break;
+          case "Backend Gambar": $sB->gambar = true; break;
+          case "Backend Preference": $sB->preference = true; break;
+          case "All Module":
+            $sB->dashboard = true;
+            $sB->menu_user = true;
+            $sB->user = true;
+            $sB->role = true;
+            $sB->permission = true;
+            $sB->menu = true;
+            $sB->module = true;
+            $sB->gambar = true;
+            $sB->preference = true;
+          break;
+        }
+      }
+
+      return $sB;
+    }
+
+    public function array_msort($array, $cols){
+      $colarr = array();
+      foreach ($cols as $col => $order) {
+          $colarr[$col] = array();
+          foreach ($array as $k => $row) { $colarr[$col]['_'.$k] = strtolower($row[$col]); }
+      }
+      $eval = 'array_multisort(';
+      foreach ($cols as $col => $order) {
+          $eval .= '$colarr[\''.$col.'\'],'.$order.',';
+      }
+      $eval = substr($eval,0,-1).');';
+      eval($eval);
+      $ret = array();
+      foreach ($colarr as $col => $arr) {
+          foreach ($arr as $k => $v) {
+              $k = substr($k,1);
+              if (!isset($ret[$k])) $ret[$k] = $array[$k];
+              $ret[$k][$col] = $array[$k][$col];
+          }
+      }
+      return $ret;
+
+  }
 }

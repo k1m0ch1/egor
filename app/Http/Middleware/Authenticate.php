@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use DB;
+use App\Models\User;
 
 class Authenticate
 {
@@ -34,14 +36,62 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
-            }
+        $pass = $this->auth->check()?true: false;
+
+        $currentRoute = \Route::getCurrentRoute()->getPath();
+        if(strpos($currentRoute,'[')){
+          $currentRoute = preg_split('/[[]/',$currentRoute)[0];
         }
+        if(strpos($currentRoute,':')){
+          $currentRoute = preg_split('/[:]/',$currentRoute)[0];
+        }
+        if(substr($currentRoute,-1)=='s'){
+          $currentRoute = substr($currentRoute,0,-1);
+        }
+
+        //echo $currentRoute;
+        if($pass){
+          $pass = false;
+          $role = DB::table('roles')->get();
+          foreach($role as $rolerS){
+            if(User::find($this->auth->user()->id)->hasRole($rolerS->name)==1){
+              $userRole = $rolerS->name;
+              $role_id = $rolerS->id;
+            }
+          }
+
+          $resultPermission = DB::table('permissions')
+                  ->join('permission_role', 'permission_role.permission_id' , '=' , 'permissions.id')
+                  ->join('roles', 'roles.id' , '=' , 'permission_role.role_id')
+                  ->join('modules', 'modules.id', '=', 'permissions.action')
+                  ->select('permission_role.permission_id as pID', 'permission_role.role_id as rID',
+                           'roles.display_name as role_dn', 'permissions.name as per_name',
+                           'permissions.display_name as per_dn', 'permissions.action as action',
+                           'permissions.access as access', "modules.route as module_name",
+                           'modules.id as mID')
+                  ->where('permissions.type', 'module')
+                  ->where('roles.id', $role_id) //Permission Dapat Melihat
+                  ->get(); //->toSql();;
+
+                  foreach($resultPermission as $rsP){
+                      //echo $currentRoute . " = " . $rsP->module_name . " is " . ($currentRoute==$rsP->module_name) ."||";
+                      if($currentRoute==$rsP->module_name){
+                        $pass = true;
+                      }
+
+                      if($currentRoute=="admin/form" || $currentRoute=="admin/filesList/{id}" || $currentRoute=="admin/setGrid" ){
+                        $pass=true;
+                      }
+                  }
+        }
+
+
+                if(!$pass){
+                  return redirect('unauthorized')->with('errors', 'Maaf anda harus login terlebih dahulu');
+                }
+
 
         return $next($request);
     }
+
 }

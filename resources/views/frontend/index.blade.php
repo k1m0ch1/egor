@@ -10,13 +10,14 @@
 				<div class="row">
 					<div class="large-12 medium-12 small-12 columns">
 						<ul class="small-block-grid-1 medium-block-grid-{{$h or '3'}}">
+						<!-- {{var_dump($datanyah)}} -->
 							@foreach($datanyah as $menu)
-								<li>
-									<a href="{{$menu->redirect or '/'}}" class="image-button">
-									<img src="{{asset('/uploads/menu/')}}/{{$menu->image}}" data-src="holder.js/150x150" alt="">
-									<p><span>{{$menu->nama}}</span></p>
-								</a>
-								</li>
+  								<li>
+  									<a href="{{$menu->redirect or '/'}}" class="image-button">
+  									<img src="{{asset('/uploads/menu/')}}/{{ $menu->image or '' }}" data-src="holder.js/150x150" alt="">
+  									<p><span>{{$menu->nama or ''}}</span></p>
+  								</a>
+  								</li>
 							@endforeach
 						</ul>
 					</div>

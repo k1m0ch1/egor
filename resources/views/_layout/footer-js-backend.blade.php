@@ -1,8 +1,8 @@
 <script>
-var host = "{{ Config::get('app.url') }}";
-var dir_host = "{{ Config::get('app.url') }}";
-//var host = "{{asset('')}}/index.php/";
-//var dir_host = "{{asset("")}}";
+// var host = "{{ Config::get('app.url') }}";
+// var dir_host = "{{ Config::get('app.url') }}";
+var host = "{{asset('')}}";
+var dir_host = "{{asset("")}}";
 </script>
 
     @foreach($jH as $jsHeader)

@@ -12,13 +12,17 @@
 */
 
 Route::get('/', 'PagesController@index');
-
+Route::get('unauthorized', 'PagesController@unauthorized');
+Route::get('admin', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
 Route::get('login', ['uses'=>'UsersController@login', 'as'=>'users.login.get']);
+Route::get('login_sso', ['uses'=>'UsersController@loginSso', 'as'=>'users.login_sso.get']);
 Route::post('login', ['uses'=>'UsersController@postLogin', 'as'=>'users.login.post']);
-
-Route::get('admin/user', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
+Route::get('logout', ['uses'=>'UsersController@logout', 'as'=>'users.logout.get']);
+Route::get('/', ['uses'=>'\App\Http\Controllers\PagesController@index', 'as'=>'index.get']);
+Route::get('admin/users', ['uses'=>'PagesController@user', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/role', ['uses'=>'PagesController@role', 'as'=>'admin.role.get', 'middleware'=>'auth']);
 Route::get('admin/permission', ['uses'=>'PagesController@permission', 'as'=>'admin.permission.get', 'middleware'=>'auth']);
+Route::get('admin/module', ['uses'=>'PagesController@module', 'as'=>'admin.permission.get', 'middleware'=>'auth']);
 
 Route::get('admin/tes', ['uses'=>'PagesController@tes', 'as'=>'admin.user.get', 'middleware'=>'auth']);
 Route::get('admin/dashboard', ['uses'=>'PagesController@dashboard', 'as'=>'admin.dashboard.get', 'middleware'=>'auth']);
@@ -35,16 +39,17 @@ Route::get('admin/form:child[add]', ['uses'=>'ChildController@addNewChild', 'mid
 Route::post('admin/form:child[add:save]', ['uses'=>'ChildController@saveNewChild', 'middleware'=>'auth']);
 Route::get('admin/form:child[edit]', ['uses'=>'ChildController@editSave', 'middleware'=>'auth']);
 Route::get('admin/form:child[delete]', ['uses'=>'ChildController@delete', 'middleware'=>'auth']);
+Route::get('admin/form:dashboard', ['uses'=>'DashboardController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 
 Route::post('admin/grid:savePosition', ['uses'=>'GridController@savePosition', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 
-Route::get('admin/form:dashboard', ['uses'=>'DashboardController@formDashboard', 'as'=>'admin.grid.post', 'middleware'=>'auth']);
 Route::post('admin/dashboard[edit:save]', ['uses'=>'DashboardController@editSave', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 Route::get('admin/dashboard[delete]', ['uses'=>'DashboardController@delete', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
+Route::get('admin/dashboard[show:app]', ['uses'=>'DashboardController@showApp', 'as'=>'dashboard[edit:save]', 'middleware'=>'auth']);
 
 Route::post('admin/gambar[upload]', ['uses'=>'GambarController@upload', 'as'=>'gambar[upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[Bg:upload]', ['uses'=>'GambarController@bgUpload', 'as'=>'gambar[Bg:upload]', 'middleware'=>'auth']);
-Route::post('admin/gambar[Logo:upload]', ['uses'=>'GambarController@logoUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
+Route::post('admin/gambar[Logo:upload]', ['uses'=>'GambarController@LogoUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[Logo:save]', ['uses'=>'GambarController@logoSave', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[Bg:save]', ['uses'=>'GambarController@BgSave', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
 Route::post('admin/gambar[BG:upload]', ['uses'=>'GambarController@BgUpload', 'as'=>'gambar[Logo:upload]', 'middleware'=>'auth']);
@@ -61,12 +66,25 @@ Route::post('admin/roles[edit:save]', ['uses'=>'RoleController@save', 'as'=>'rol
 Route::get('admin/roles[show]', ['uses'=>'RoleController@show', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/roles[add:show]', ['uses'=>'RoleController@form', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/roles[del]', ['uses'=>'RoleController@del', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[permission:show]', ['uses'=>'RoleController@showPermission', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
+Route::post('admin/roles[set:permission]', ['uses'=>'RoleController@setPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/roles[permission:delete]', ['uses'=>'RoleController@delSetPermission', 'as'=>'roles[edit:show]', 'middleware'=>'auth']);
 
 Route::get('admin/permission[edit:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::post('admin/permission[edit:save]', ['uses'=>'PermissionController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[show]', ['uses'=>'PermissionController@show', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[show2]', ['uses'=>'PermissionController@showPermission', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[add:show]', ['uses'=>'PermissionController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 Route::get('admin/permission[del]', ['uses'=>'PermissionController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[modelChecked]', ['uses'=>'PermissionController@modChecked', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/permission[appChecked]', ['uses'=>'PermissionController@appChecked', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+
+Route::get('admin/module[edit:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::post('admin/module[edit:save]', ['uses'=>'ModuleController@save', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[show]', ['uses'=>'ModuleController@show', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[show2]', ['uses'=>'ModuleController@showModules', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[add:show]', ['uses'=>'ModuleController@form', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
+Route::get('admin/module[del]', ['uses'=>'ModuleController@del', 'as'=>'permission[edit:show]', 'middleware'=>'auth']);
 
 Route::post('admin/menu[edit:save]', ['uses'=>'MenusController@editSave', 'middleware'=>'auth']);
 Route::get('admin/menu[select]', ['uses'=>'MenusController@select2', 'middleware'=>'auth']);
@@ -84,9 +102,20 @@ Route::post('admin/preference:background[save]', ['uses'=>'PreferenceController@
 Route::post('admin/preference:logo[save]', ['uses'=>'PreferenceController@preferenceSave', 'as'=>'logo.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preference:footer[save]', ['uses'=>'PreferenceController@preferenceSave', 'as'=>'title.preference.get', 'middleware'=>'auth']);
 Route::post('admin/preferences/save', ['uses'=>'PreferenceController@store','as'=>'preferences.setting.save']);
+Route::post('admin/preference:background[delete]', ['uses'=>'PreferenceController@backgroundDelete','as'=>'preferences.setting.save']);
+Route::post('admin/preference:logo[delete]', ['uses'=>'PreferenceController@logoDelete','as'=>'preferences.setting.save']);
+
 Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/menu/list', ['uses'=>'MenusController@index', 'as'=>'menus.list.get']);
 	Route::get('/setting/list', 'SettingsController@index');
 	Route::get('/grid/size', ['uses'=>'GridController@getGridSize']);
 	Route::get('/path/uploads/{id}', ['uses'=>'GambarController@uploadPath']);
+	Route::get('/permission/show/{id}', ['uses'=>'PermissionController@view']);
+});
+
+Route::resource('admin/news', 'NewsController');
+Route::get('news', ['uses'=>'NewsController@frontendIndex', 'as'=>'news.index']);
+Route::get('news/{id}', ['uses'=>'NewsController@frontendShow', 'as'=>'news.show']);
+Route::group(['prefix' => 'api-sso/v1'], function() {
+    Route::any('user/{id}/{mode?}', 'ApiController@getUserAttributes');
 });

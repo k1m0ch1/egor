@@ -8656,7 +8656,8 @@ a.image-button {
 
 body.index {
   min-height: 300px;
-  background: #000 no-repeat;
+  /*background: #000 no-repeat;*/
+  background : transparent;
   background-size: cover; }
 
 .main-menu {

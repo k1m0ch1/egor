@@ -68,9 +68,9 @@ class GambarController extends Controller
 
          if($request->hasFile('upl-Logo')){
             if($request->file('upl-Logo')->isValid()){
-                $filename = 'bg-'.date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('upl-Logo')->guessExtension();
+                $filename = 'logo-'.date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('upl-Logo')->guessExtension();
                 $destination = Setting::LOGO_UPLOAD_PATH;
-                $result = \Image::make($request->file('upl-Logo'))->fit(1920, 1080)->save($destination.$filename);
+                $result = \Image::make($request->file('upl-Logo'))->fit(196, 196)->save($destination.$filename);
                 $results->message = 'Data Upload has been completed.';
                 $results->status = 1;
                 $results->result = $filename;
@@ -90,7 +90,13 @@ class GambarController extends Controller
         }elseif($id == 'logo'){
             $results->result = Setting::LOGO_UPLOAD_PATH;
         }
-        
+
+        $hasil = DB::table('settings')->select('name', 'value')->where('name', 'background')
+                            ->orWhere('name', 'logo')
+                            ->get();
+
+        $results->background =  $hasil[0]->value;
+        $results->logo = $hasil[1]->value;
 
         return response()->json($results);
     }

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Controllers\PagesController;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -60,22 +62,26 @@ class UsersController extends Controller
 		$idnyah = "xxx";
 		$resultRole = Role::All();
 		if($request->input('as')!="add"){
-			$result1 = DB::table('users')->where('id', $request->input('id'))->get();
-			foreach($result1 as $rS){
-				$name = $rS->name;
-				$email = $rS->email;
-				$idnyah = $rS->id;
-				$phone = $rS->phone;
-				$department = $rS->department;
-				$nip = $rS->nip;
-			}
+			$result1 = User::find($request->input('id'));
+				$name = $result1->name;
+				$email = $result1->email;
+				$avatar = $result1->avatar;
+				$idnyah = $result1->id;
+				$phone = $result1->phone;
+				$jabatan = $result1->jabatan;
+				$nip = $result1->nip;
+				$roles = $result1->roles->first();
 		}
-		return view('_layout.form-input-user-backend', compact('nip', 'phone','department','name','email', 'idnyah','resultRole'));
+		return view('_layout.form.form-input-user-backend', compact('nip', 'phone','avatar','jabatan','name','email', 'idnyah','resultRole', 'roles'));
 	}
 
 	public function showAll(){
 		$result = User::All();
-		return view('_layout.tabel-user', compact('result'));
+		$sBa = $this->getPermission('2');
+		$sBe = $this->getPermission('3');
+		$sBd = $this->getPermission('4');
+
+		return view('_layout.tabel.tabel-user', compact('result','sBa','sBe','sBd'));
 	}
 
 	public function delete(Request $request){
@@ -92,8 +98,44 @@ class UsersController extends Controller
 		$validator = \Validator::make($request->all(), $users->getRules());
 		$results = new \StdClass;
 		$filename = '';
-		if($request->has('id')){
-			$user = User::find($request->input('id'));
+
+		if(!$request->has('id')){
+			//
+			if($validator->passes()){
+			$user = new User;
+			$user->password = \Hash::make($request->input('password'));
+			$results->info = 'users create';
+			if($request->hasFile('avatar')){
+				if($request->file('avatar')->isValid()){
+					$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('avatar')->guessExtension();
+					$img = \Image::make($request->file('avatar'))->fit(200, 200)->save($destination.'/'.$filename);
+				}
+			}
+
+			$user->name = $request->input('name');
+			$user->email = $request->input('email');
+			$user->phone = $request->input('phone');
+			$user->jabatan = $request->input('department');
+			$user->avatar = $filename;
+			$user->save();
+
+			$rsRole = Role::find($request->input('roles'));
+			$rsUser = User::find($user->id)->attachRole($rsRole);
+
+			$results->status = 1;
+
+		   }else{
+				$results->status = 0;
+				$results->info = 'users management';
+				$message = array();
+
+				foreach($validator->errors()->all() as $m){
+					array_push($message, $m);
+				}
+				$results->message = $message;
+			}
+		}else{
+		   $user = User::find($request->input('id'));
 			if($request->input('email') == $user->email){
 				$valid = \Validator::make($request->all(), [
 					'name' => 'required',
@@ -114,19 +156,23 @@ class UsersController extends Controller
 				if($request->hasFile('avatar')){
 					if($request->file('avatar')->isValid()){
 						$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('avatar')->guessExtension();
-						$img = \Image::make($request->file('avatar'))->fit(200, 200)->save($destination.$filename);
+						$img = \Image::make($request->file('avatar'))->fit(200, 200)->save($destination.'/'.$filename);
 					}
 				}
-
 				$user->name = $request->input('name');
 				$user->email = $request->input('email');
 				$user->phone = $request->input('phone');
-				$user->phone = $request->input('nip');
-				$user->department = $request->input('department');
+				$user->nip = $request->input('nip');
+				$user->jabatan = $request->input('jabatan');
 				$user->avatar = $filename;
 				$user->save();
+
 				$rsRole = Role::find($request->input('roles'));
-				$rsUser = User::find($user->id)->attachRole($rsRole);
+
+				if(!$user->hasRole($rsRole->name)){
+					$user->detachRoles($user->roles);
+					$user = User::find($user->id)->attachRole($rsRole);
+				}
 				$results->status = 1;
 			}else{
 				$results->status = 0;
@@ -134,39 +180,6 @@ class UsersController extends Controller
 				$message = array();
 
 				foreach($valid->errors()->all() as $m){
-					array_push($message, $m);
-				}
-				$results->message = $message;
-			}
-		}else{
-		   if($validator->passes()){
-			$user = new User;
-			$user->password = \Hash::make($request->input('password'));
-			$results->info = 'users create';
-			if($request->hasFile('avatar')){
-				if($request->file('avatar')->isValid()){
-					$filename = date('YmdHis').str_pad(rand(0, 1000), 4, 0, STR_PAD_LEFT).'.'.$request->file('avatar')->guessExtension();
-					$img = \Image::make($request->file('avatar'))->fit(200, 200)->save($destination.$filename);
-				}
-			}
-
-			$user->name = $request->input('name');
-			$user->email = $request->input('email');
-			$user->phone = $request->input('phone');
-			$user->department = $request->input('department');
-			$user->avatar = $filename;
-			$user->save();
-
-			$rsRole = Role::find($request->input('roles'));
-			$rsUser = User::find($user->id)->attachRole($rsRole);
-			$results->status = 1;
-
-		   }else{
-				$results->status = 0;
-				$results->info = 'users management';
-				$message = array();
-
-				foreach($validator->errors()->all() as $m){
 					array_push($message, $m);
 				}
 				$results->message = $message;
@@ -210,17 +223,61 @@ class UsersController extends Controller
 		//
 	}
 
+	public function loginSso()
+	{
+		\Cas::authenticate();
+		$api = new ApiController;
+		$user = $api->_getUserAttributes(\Cas::getCurrentUser());
+		$_user = User::where('username',$user->username)->first();
+		if (!$_user) {
+			$_user = new User;
+			$_user->email = $user->email;
+			$_user->nip = $user->nip;
+			$_user->username = $user->username;
+			$_user->save();
+		}
+		\Auth::login($_user);
+		return redirect('/');
+	}
+
 	public function login(){
 		$result1 = DB::table('parent_menu')->get();
 
 		$datanyah = DB::table('parent_frontpage')->get();
-		$siteTitle = Setting::where('name', 'title')->get();
-		if( count($siteTitle) > 0){
-			$bah = $siteTitle->first()->value;
+		$title = Setting::where('name', 'title')->get();
+		if( count($title) > 0){
+			$title = $title->first()->value;
 		}else{
-			$bah = 'Website';
+			$title = 'Login Page';
 		}
-		return view('frontend.login', compact('result1', 'bah', 'datanyah'));
+		$bg = Setting::where('name', 'background')->get();
+        if( count($bg) > 0){
+            $bg = asset('/uploads/background/') . '/' .$bg->first()->value;
+        }else{
+            $bg = 'assets/img/bg.jpg';
+        }
+				
+				$logo = Setting::where('name', 'logo')->get();
+				if( count($logo) > 0){
+						$logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+						$logo = preg_replace('/\s+/', '', $logo);
+				}else{
+						$logo = '#';
+				}
+
+        $siteTitle = Setting::where('name', 'title')->get();
+        if( count($siteTitle) > 0){
+            $bah = $siteTitle->first()->value;
+        }else{
+            $bah = 'Website';
+        }
+        $footer = Setting::where('name', 'footer')->get();
+        if( count($footer) > 0){
+            $footer = $footer->first()->value;
+        }else{
+            $footer = '(c) 2015, Ordent, All Right Reserved.';
+        }
+		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer', 'logo'));
 	}
 
 	public function postLogin(Request $requests){
@@ -228,9 +285,37 @@ class UsersController extends Controller
 		$password = $requests->input('password');
 
 		if(\Auth::attempt(['email'=>$name, 'password'=>$password])){
-			return redirect()->route('admin.dashboard.get');
+			return redirect('/');
 		}else{
-			return redirect()->route('users.login.get');
+			return redirect('login')->with('errors', 'Maaf anda harus login terlebih dahulu');
 		}
+	}
+
+	public function logout(){
+		if(\Auth::check()){
+			$users = \Auth::user();
+			\Auth::logout();
+			//\Cas::authenticate();
+			//unset($_SESSION['phpCAS']);
+			//\phpCAS::logout(['url'=>url()]);
+		}
+
+		return redirect()->to('/');
+	}
+
+	public function getPermission($mode){
+
+		$sB = new \StdClass;
+		$sB->dashboard = true;
+		$sB->menu_user = true;
+		$sB->user = true;
+		$sB->role = true;
+		$sB->permission = true;
+		$sB->menu = true;
+		$sB->module = true;
+		$sB->gambar = true;
+		$sB->preference = true;
+
+		return $sB;
 	}
 }

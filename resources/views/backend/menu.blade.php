@@ -1,6 +1,5 @@
 @include('_layout.header-backend')
 <div class="wrapper">
-
       @include('_layout.sidebar-backend')
 
       <div class="content-wrapper">
@@ -32,7 +31,7 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Parent</th>
-                      
+
                       <th>Redirect to</th>
                       <th style="width: 40px">Operation</th>
                     </tr>
@@ -44,16 +43,16 @@
                           <button class="btn btn-primary" id="simpanName-{{ $r2->id }}" style="margin-left: 3px;"><i class="fa fa-save"></i></button>
                           <button class="btn btn-danger" id="cancelName-{{ $r2->id }}" style="margin-left: 1px;"><i class="fa fa-close"></i></button>
                       </td>
-                      
+
                       <td>
                           <label id="lblHref-{{ $r2->id }}">{{ $r2->redirect }}</label>
                           <input type='text' id='txtHref-{{ $r2->id }}' value='{{ $r2->redirect }}' style="width: 150px; float: left;" size=1 class='form-control'/>
                           <button class="btn btn-primary" id="simpanHref-{{ $r2->id }}" style="margin-left: 3px;"><i class="fa fa-save"></i></button>
                           <button class="btn btn-danger" id="cancelHref-{{ $r2->id }}" style="margin-left: 1px;"><i class="fa fa-close"></i></button>
-                      
+
                       </td>
                       <td><div class="tools" align='center'>
-                      		  <a class="fa fa-object-ungroup" id='childMenu-{{$r2->id}}'>&nbsp;</a>
+                      		  <!-- <a class="fa fa-object-ungroup" id='childMenu-{{$r2->id}}'>&nbsp;</a> -->
                               <a class="fa fa-edit" id='editMenu-{{$r2->id}}'></a>&nbsp;
                               <a class="fa fa-trash-o" id='delMenu-{{$r2->id}}'></a>
                             </div></td>
@@ -68,20 +67,20 @@
         </section><!-- /.content -->
          </div><!-- /.content-wrapper -->
 
-      <div id="child-form" title="Pengaturan Child Dialog">     
+      <div id="child-form" title="Pengaturan Child Dialog">
       <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
       {!! csrf_field() !!}
         <fieldset id='form-child'>
-          
+
         </fieldset>
       </form>
     </div>
 
-    <div id="add_child-form" title="Tambah Child">     
+    <div id="add_child-form" title="Tambah Child">
       <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
       {!! csrf_field() !!}
         <fieldset id='add_form-child'>
-          
+
         </fieldset>
       </form>
     </div>

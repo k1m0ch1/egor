@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use DB;
+use Storage;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,14 +22,15 @@ class PreferenceController extends Controller
     }
 
     public function store(Request $request){
-        
+
         return redirect()->to('http://egor.app/admin/preference');
     }
 
     public function preferenceSave(Request $request){
         $name = $request->input('name');
         $value = $request->input('value');
-        $value = preg_replace('/\s+/','',$request->input('value'));
+        //$value = preg_replace('/\s+/','',$request->input('value'));
+        $value = ltrim($request->input('value'));
 
         $result = Setting::where('name', $name)->get();
 
@@ -59,6 +61,19 @@ class PreferenceController extends Controller
 
     	return 'success';
     }
+
+    public function backgroundDelete(Request $request){
+      $string = preg_replace('/\s+/', '', $request->input('value'));
+    	unlink("/" . public_path() . "/uploads/background/" . $string);
+    	return "success";
+    }
+
+    public function logoDelete(Request $request){
+      $string = preg_replace('/\s+/', '', $request->input('value'));
+    	unlink("/" . public_path() . "/uploads/logo/" . $string);
+    	return "success";
+    }
+
     public function logoSave(Request $request){
     	DB::table('preference')->where('id', '1')->update(['logo' => $request->input('namaFile')]);
 
@@ -68,7 +83,7 @@ class PreferenceController extends Controller
     public function title(){
     	$name = $request->input('name');
         $value = $request->input('value');
-       
+
         $result = Setting::where('name', $name)->get();
 
         $trigger = count($result)>0?true:false;

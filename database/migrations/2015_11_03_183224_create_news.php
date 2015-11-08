@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSetting extends Migration
+class CreateNews extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,14 @@ class CreateSetting extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('value');
+            $table->string('title');
+            $table->text('slug');
+            $table->integer('author');
+            $table->text('content');
+            $table->text('image');
+            $table->string('category');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateSetting extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::drop('news');
     }
 }
