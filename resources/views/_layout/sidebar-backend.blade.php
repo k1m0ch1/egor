@@ -13,8 +13,9 @@
             </div>
             <div class="pull-left info">
               @if(\Auth::check())
-                <p><a id='userProfile'>{{\Auth::user()->name}}</a></p>
-                <a href="{{url('/logout')}}"> <i class="fa fa-circle text-sucess"></i> Logout</a>
+                <p>{{\Auth::user()->name}}</p>
+                <a href="#profile" id='userProfile' style="margin-bottom: 13px;"> <i class="fa fa-circle text-sucess"></i> User Profile</a><br/>
+                <a href="{{url('/logout')}}" style="margin-bottom: 3px;"> <i class="fa fa-circle text-sucess"></i> Logout</a>
               @else
                 <p>Name User</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Logout</a>
@@ -187,7 +188,7 @@
           </ul>
         </section>
         <!-- /.sidebar -->
-        <div id="dialog-form-profile" title="Ubah User">
+        <div id="dialog-form-profile" title="Rubah Pengaturan Profile">
           <form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
           {!! csrf_field() !!}
             <fieldset id='formnyah-profile'>
