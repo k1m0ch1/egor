@@ -81,15 +81,21 @@ class PagesController extends Controller
         }else{
             $resultPermission = array();
         }
+
+        //ParentFrontpage::find($permissions->action)
+        //DB::table('parent_frontpage')->where('id', $permissions->action)->orderBy('position', 'asc')->get()
+
         $datanyah = array();
           foreach($resultPermission as $permissions){
               if($permissions->type == 'app'){
                 //echo count(ParentFrontpage::find($permissions->action));
                 if(count(ParentFrontpage::find($permissions->action))>0){
-                  array_push($datanyah, ParentFrontpage::find($permissions->action)->ordeBy('id', 'asc'));
+                  array_push($datanyah, ParentFrontpage::find($permissions->action));
                 }
               }
           }
+
+          $datanyah = $this->array_msort($datanyah, array('position'=>SORT_ASC));
 
         return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission', 'logo'));
     }
@@ -720,4 +726,28 @@ class PagesController extends Controller
 
       return $sB;
     }
+
+    public function array_msort($array, $cols){
+      $colarr = array();
+      foreach ($cols as $col => $order) {
+          $colarr[$col] = array();
+          foreach ($array as $k => $row) { $colarr[$col]['_'.$k] = strtolower($row[$col]); }
+      }
+      $eval = 'array_multisort(';
+      foreach ($cols as $col => $order) {
+          $eval .= '$colarr[\''.$col.'\'],'.$order.',';
+      }
+      $eval = substr($eval,0,-1).');';
+      eval($eval);
+      $ret = array();
+      foreach ($colarr as $col => $arr) {
+          foreach ($arr as $k => $v) {
+              $k = substr($k,1);
+              if (!isset($ret[$k])) $ret[$k] = $array[$k];
+              $ret[$k][$col] = $array[$k][$col];
+          }
+      }
+      return $ret;
+
+  }
 }

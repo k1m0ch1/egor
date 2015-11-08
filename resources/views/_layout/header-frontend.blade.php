@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
 	<head>
-		@if($logo=="")
+		@if($logo!="")
 			<link rel="icon" href="{{ $logo or '' }}">
 		@endif
 		<meta charset="utf-8">
@@ -29,7 +29,7 @@
 @endif
 <div class="contain-to-grid">
 	<nav class="top-bar" data-topbar role="navigation">
-	@if($logo=="")
+	@if($logo!="")
 		<img src="{{ $logo or '' }}" style="float: left; height: 50px; width: 50px; margin-top: 5px; margin-right: -15px;"/>
 	@endif
   <ul class="title-area">
