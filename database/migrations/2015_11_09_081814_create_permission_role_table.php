@@ -16,6 +16,8 @@ class CreatePermissionRoleTable extends Migration {
 		{
 			$table->integer('permission_id')->unsigned();
 			$table->integer('role_id')->unsigned();
+			$table->string('access');
+			$table->string('action');
 			$table->primary(['permission_id','role_id']);
 		});
 	}

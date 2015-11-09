@@ -49,12 +49,18 @@ class NewsController extends Controller
             $footer = $footer->first()->value;
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
+        }
 
-
+        $logo = Setting::where('name', 'logo')->get();
+        if( count($logo) > 0){
+            $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+            $logo = preg_replace('/\s+/', '', $logo);
+        }else{
+            $logo = '#';
         }
 
         $count = ceil(count(News::all())/20);
-        return view('frontend.news-index', compact('result', 'title', 'result1', 'footer', 'count'));
+        return view('frontend.news-index', compact('result', 'title', 'result1', 'footer', 'count','logo'));
     }
     /**
      * Show the form for creating a new resource.
