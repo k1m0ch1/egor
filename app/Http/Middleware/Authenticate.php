@@ -80,7 +80,8 @@ class Authenticate
                         $pass = true;
                       }
 
-                      if($currentRoute=="admin/form" || $currentRoute=="admin/filesList/{id}" || $currentRoute=="admin/setGrid" ){
+                      if($currentRoute=="admin/form" || $currentRoute=="admin/filesList/{id}" || $currentRoute=="admin/setGrid" ||
+                        $currentRoute=="admin/users[edit:show]" || $currentRoute=="admin/users[edit:save]" ){
                         $pass=true;
                       }
                   }

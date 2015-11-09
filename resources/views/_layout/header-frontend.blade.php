@@ -12,6 +12,11 @@
 		<!-- Place favicon.ico in the root directory -->
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css')}}">
+		<link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="http://egor.app/assets/vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="http://egor.app/assets/vendor/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/dist/css/AdminLTE.min.css">
 		<style>
 		html {
 			background: url('{{$bg}}') no-repeat center center fixed;

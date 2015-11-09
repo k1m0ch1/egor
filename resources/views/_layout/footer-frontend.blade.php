@@ -58,7 +58,7 @@
 						var idnyah = {{ \Auth::user()->id }};
 								dialog.dialog( "open" );
 								$.ajax({
-									url:  host + 'admin/users[edit:show]',
+									url: '{{asset('')}}/admin/users[edit:show]',
 									type: 'GET',
 									data: { id: idnyah },
 									dataType: 'html',
@@ -94,7 +94,7 @@
 					fd.append("department", h);
 					fd.append("nip", j);
 					$.ajax({
-									url: host+ 'admin/users[edit:save]',
+									url: '{{asset('')}}/admin/users[edit:save]',
 									type: 'POST',
 									processData: false,
 									contentType: false,
