@@ -24,6 +24,12 @@
 		  });
 		</script>
 
+		<script>
+		$(document).ready(function(){
+			$('#dialog-form-profile').hide();
+		});
+		</script>
+
 		@if(\Auth::check())
 			<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
 			<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -49,7 +55,7 @@
 					}
 				});
 
-				form = dialog.find( "form-profile" ).on( "submit", function( event ) {
+				form = dialog.find( "dialog-form-profile" ).on( "submit", function( event ) {
 					 event.preventDefault();
 					 simpan();
 				 });
@@ -69,15 +75,16 @@
 				});
 
 				function simpan(){
-					var a = $('#dialog-form form input#name').val();
-					var b = $('#dialog-form form input#email').val();
-					var d = $('#dialog-form form input#idnyah').val();
-					var e = $("#dialog-form form input[type=radio][name=roles]:checked").val();
-					var f = d=="xxx"?$('#dialog-form form input#password').val():"";
-					var g = $('#dialog-form form input#phone').val();
-					var h = $('#dialog-form form input#jabatan').val();
-					var i = $('#dialog-form form input#Upassword').val();
-					var j = $('#dialog-form form input#nip').val();
+					var a = $('#dialog-form-profile form input#name').val();
+					console.log(a);
+					var b = $('#dialog-form-profile form input#email').val();
+					var d = $('#dialog-form-profile form input#idnyah').val();
+					var e = $("#dialog-form-profile form input[type=radio][name=roles]:checked").val();
+					var f = d=="xxx"?$('#dialog-form-profile form input#password').val():"";
+					var g = $('#dialog-form-profile form input#phone').val();
+					var h = $('#dialog-form-profile form input#jabatan').val();
+					var i = $('#dialog-form-profile form input#Upassword').val();
+					var j = $('#dialog-form-profile form input#nip').val();
 
 					var fd = new FormData();
 					fd.append("name", a);
@@ -89,7 +96,7 @@
 					fd.append("roles", e);
 					fd.append("password", f);
 					fd.append("password_confirmation", i);
-					fd.append("as", "add");
+					fd.append("as", "edit");
 					fd.append("phone", g);
 					fd.append("department", h);
 					fd.append("nip", j);
