@@ -66,7 +66,8 @@ class NewsController extends Controller
             $logo = '#';
         }
 
-        $count = ceil(count(News::all())/20);
+        $count = ceil(count(News::all())/3);
+
         return view('frontend.news-index', compact('bah', 'result', 'title', 'result1', 'footer', 'count','logo','bg'));
     }
     /**
