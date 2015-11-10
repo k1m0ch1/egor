@@ -1,3 +1,4 @@
+<div class="modal"><!-- Place at bottom of page --></div>
 <script>
  // var host = "{{ Config::get('app.url') }}";
  // var dir_host = "{{ Config::get('app.url') }}";
@@ -41,6 +42,12 @@
           "info": true,
           "autoWidth": false
         });
+        $body = $("body");
+
+      });
+      $(document).on({
+          ajaxStart: function() { $body.addClass("loading");    },
+           ajaxStop: function() { $body.removeClass("loading"); }
       });
     </script>
   </body>

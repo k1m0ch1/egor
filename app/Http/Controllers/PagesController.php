@@ -480,6 +480,7 @@ class PagesController extends Controller
                             asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                             asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.css'),
                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                            asset('assets/css/backend.css'),
                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'));
             break;
             case 'menu' :
@@ -490,6 +491,7 @@ class PagesController extends Controller
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                             asset('assets/css/backend.css'),
                              asset('assets/css/image-picker.css'));
             break;
             case 'gridster' :
@@ -517,6 +519,7 @@ class PagesController extends Controller
                              asset('assets/css/style-upload.css'),
                              asset('assets/css/another-style-upload.css'),
                              asset('assets/css/another-another-style-upload.css'),
+                             asset('assets/css/backend.css'),
                              asset('assets/css/image-picker.css'));
             break;
         }
