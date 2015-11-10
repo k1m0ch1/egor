@@ -681,6 +681,7 @@ class PagesController extends Controller
       $sB->module = false;
       $sB->gambar = false;
       $sB->preference = false;
+      $sB->news = false;
 
       $id_user = Auth::User()->id;
       $role = DB::table('roles')->get();
@@ -714,6 +715,7 @@ class PagesController extends Controller
           case "Backend Module": $sB->module = true; break;
           case "Backend Gambar": $sB->gambar = true; break;
           case "Backend Preference": $sB->preference = true; break;
+          case "Backend News Control": $sB->news = true; break;
           case "All Module":
             $sB->dashboard = true;
             $sB->menu_user = true;
@@ -724,6 +726,7 @@ class PagesController extends Controller
             $sB->module = true;
             $sB->gambar = true;
             $sB->preference = true;
+            $sB->nes = true;
           break;
         }
       }

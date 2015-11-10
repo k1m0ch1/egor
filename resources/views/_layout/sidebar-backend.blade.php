@@ -161,6 +161,14 @@
                   </li>
                 @endif
 
+                @if($sB->news)
+                  <li {{ $title=='News'?'class="active treeview"':'' }}>
+                    <a href='{{ asset("admin/news") }}'>
+                      <i class="fa fa-newspaper-o"></i> <span> News</span>
+                    </a>
+                  </li>
+                @endif
+
                 @if($sB->module)
                   <li {{ $title=='Module'?'class="active treeview"':'' }}>
                     <a href='{{ asset("admin/module") }}'>

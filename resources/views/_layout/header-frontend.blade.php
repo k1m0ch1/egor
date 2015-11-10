@@ -52,6 +52,9 @@
 	</ul>
 	<!-- Right Nav Section -->
 	<ul class="right">
+		<li>
+			<a href="{{url('news')}}"><i class="fa fa-newspaper-o"></i> NEWS</a>
+		</li>
 	  <li >
 	  	@if(\Auth::check())
 	  		<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>

@@ -11,6 +11,7 @@
 		<!-- Place favicon.ico in the root directory -->
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/dist/css/AdminLTE.min.css">
 	</head>
 <body>
 <div class="contain-to-grid">
@@ -24,7 +25,7 @@
   </ul>
 
   <section class="top-bar-section">
-	
+
 	<!-- Left Nav Section -->
 	<ul class="left">
 		@foreach($result1 as $rS)
@@ -33,17 +34,42 @@
 	</ul>
 	<!-- Right Nav Section -->
 	<ul class="right">
-	  <li >
-	  	@if(\Auth::check())
-	  	<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
-	  	@else
-	  	<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
-	  	@endif
-	  </li>
-		</ul>
+		<li class="parent">
+			<ul class="child menu" style="overflow: hidden;">
+				<li>
+					<a href="{{url('news')}}"><i class="fa fa-newspaper-o"></i> NEWS</a>
+				</li>
+				<li >
+					@if(\Auth::check())
+						<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
+					@else
+						<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
+					@endif
+				</li>
+				@if(\Auth::check())
+				<li>
+					<a href="#profile" id='userProfile'><i class="fa fa-user"></i> USER PROFILE</a>
+				</li>
+					<li>
+						<a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> LOGOUT</a>
+					</li>
+				@endif
+			</ul>
+		</li>
+	  <!-- <li ><a href="{{url('login_sso')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li> -->
+	</ul>
 	  </li>
 	</ul>
-
+	<!-- <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+	<script>
+		$(document).ready(function(){
+			$('ul.child').hide();
+			$('li.parent').click(function() {
+			$('ul.child').slideUp();
+				$(this).find('ul.child').slideToggle();
+			});
+		});
+	</script> -->
   </section>
 </nav>
 </div>
