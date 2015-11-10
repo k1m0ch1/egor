@@ -24,7 +24,7 @@ class SettingSeeder extends Seeder
 
     	$result_3 = new Setting;
     	$result_3->name = 'background';
-    	$result_3->value = 'assets/img/bg.jpg';
+    	$result_3->value = 'bg.jpg';
     	$result_3->save();
 
     	$result_4 = new Setting;
