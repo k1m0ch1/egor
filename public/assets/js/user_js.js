@@ -11,7 +11,7 @@ $(document).ready(function(){
       draggable: false,
 			resizable: false,
       dialogClass: "dialogUser",
-      position: { my: 'right center', at: 'right center' },
+      position: { my: 'center bottom', at: 'center bottom', of : $( ".box" ) },
       buttons: {
         "Simpan": simpan,
         Cancel: function() {
@@ -32,7 +32,7 @@ $(document).ready(function(){
       //           zIndex: 10000,
       //           width: 700,
       //           height: dHeight,
-      position: { my: 'right center', at: 'right center' },
+      position: { my: 'center bottom', at: 'center bottom', of : $( ".box" ) },
       modal: true,
       draggable: false,
 			resizable: false,
