@@ -72,7 +72,9 @@ class UsersController extends Controller
 				$nip = $result1->nip;
 				$roles = $result1->roles->first();
 		}
-		return view('_layout.form.form-input-user-backend', compact('nip', 'phone','avatar','jabatan','name','email', 'idnyah','resultRole', 'roles'));
+		$on = $request->input('on');
+		
+		return view('_layout.form.form-input-user-backend', compact('on', 'nip', 'phone','avatar','jabatan','name','email', 'idnyah','resultRole', 'roles'));
 	}
 
 	public function showAll(){
@@ -256,7 +258,7 @@ class UsersController extends Controller
         }else{
             $bg = 'assets/img/bg.jpg';
         }
-				
+
 				$logo = Setting::where('name', 'logo')->get();
 				if( count($logo) > 0){
 						$logo = asset('/uploads/logo/') . '/' .$logo->first()->value;

@@ -60,7 +60,7 @@
 								$.ajax({
 									url: '{{asset('')}}/admin/users[edit:show]',
 									type: 'GET',
-									data: { id: idnyah },
+									data: { id: idnyah, role : "true" },
 									dataType: 'html',
 									success: function(data) {
 										$('#formnyah-profile').html(data);
