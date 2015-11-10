@@ -16,6 +16,7 @@
 		<script src="{{ asset('assets/vendor/foundation/js/foundation.min.js') }}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/holderjs/holder.min.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('assets/vendor/SmoothScrollWheel/dist/jquery.SmoothScrollWheel.min.js') }}"></script>
+		<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
 		<script type="text/javascript">
 			$(document).foundation();
 		  $(document).SmoothScrollWheel({
@@ -31,8 +32,6 @@
 		</script>
 
 		@if(\Auth::check())
-			<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
-			<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
 			<script>
 			$(document).ready(function(){
 				$('#dialog-form-profile').hide();
@@ -51,11 +50,12 @@
 						}
 					},
 					close: function() {
-						form[0].reset();
+						console.log(dialog.find( "form-profile" ));
+						//form[0].reset();
 					}
 				});
 
-				form = dialog.find( "dialog-form-profile" ).on( "submit", function( event ) {
+				form = dialog.find( "form-profile" ).on( "submit", function( event ) {
 					 event.preventDefault();
 					 simpan();
 				 });
@@ -96,7 +96,7 @@
 					fd.append("roles", e);
 					fd.append("password", f);
 					fd.append("password_confirmation", i);
-					fd.append("as", "edit");
+					fd.append("as", "profile");
 					fd.append("phone", g);
 					fd.append("department", h);
 					fd.append("nip", j);
