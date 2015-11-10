@@ -34,7 +34,7 @@
                 <a href="{{route('admin.news.create')}}" class="btn btn-default"><i class="fa fa-plus"></i> Create News</a>
     						<div class="row">
     							<div class="col-lg-12 columns" >
-                    
+
                      <div class='box-body'>
                          <table id="results-table" class="table table-bordered table-hover">
                     <thead>
@@ -50,8 +50,8 @@
                       @foreach($results as $result)
                         <tr><td><a href="{{route('admin.news.show', $result->id)}}">{{$result->title or "-"}}</a></a></td><td>{{$result->getAuthor()}}</td><td>{{$result->category or "-"}}</td><td>{{$result->created_at or "-"}}</td>
                         <td>
-                          
-                          <form action="{{route('admin.news.destroy', $result->id)}}" method="POST">
+
+                          <form onsubmit="return confirm('Yakin Hapus Data?');" action="{{route('admin.news.destroy', $result->id)}}" method="POST">
                           <a href="{{route('admin.news.edit', $result->id)}}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
                           {!! method_field('DELETE') !!}
                           <button class="btn btn-danger"><i class="fa fa-times"></i> DELETE</button>
@@ -66,7 +66,7 @@
     							</div>
     						</div>
                 </div>
-                  
+
               </div>
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
           </div><!-- /.row (main row) -->
@@ -80,11 +80,11 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    <div id="dialog-form" title="Ubah Gambar">     
+    <div id="dialog-form" title="Ubah Gambar">
       <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
       {!! csrf_field() !!}
         <fieldset id='formnyah'>
-          
+
         </fieldset>
       </form>
     </div>
