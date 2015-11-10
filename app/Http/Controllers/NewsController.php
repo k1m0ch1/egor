@@ -32,7 +32,7 @@ class NewsController extends Controller
 
     public function frontendIndex(Request $request){
         $page = $request->input('page', 1);
-        $limit = 20;
+        $limit = 3;
         $offset = (($page-1) * ($limit));
         $result = News::offset($offset)->take($limit)->get();
 
