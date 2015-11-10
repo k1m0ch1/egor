@@ -50,7 +50,7 @@
 						}
 					},
 					close: function() {
-						console.log(dialog.find( "form-profile" ));
+						document.getElementById("form-profile").reset();
 						//form[0].reset();
 					}
 				});
