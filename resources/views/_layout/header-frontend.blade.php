@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
 	<head>
-		@if($logo!="")
+		@if(substr($logo,-1)!="/")
 			<link rel="icon" href="{{ $logo or '' }}">
 		@endif
 		<meta charset="utf-8">
@@ -13,9 +13,6 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css')}}">
-		<link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/bootstrap/css/bootstrap.min.css">
-  	<link rel="stylesheet" href="http://egor.app/assets/vendor/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="http://egor.app/assets/vendor/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/dist/css/AdminLTE.min.css">
 		<style>
 		html {
@@ -34,7 +31,7 @@
 @endif
 <div class="contain-to-grid">
 	<nav class="top-bar" data-topbar role="navigation">
-	@if($logo!="")
+	@if(substr($logo,-1)!="/")
 		<img src="{{ $logo or '' }}" style="float: left; height: 50px; width: 50px; margin-top: 5px; margin-right: -15px;"/>
 	@endif
   <ul class="title-area">
