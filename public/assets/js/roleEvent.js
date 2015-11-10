@@ -211,7 +211,7 @@ $(document).ready(function(){
                    });
     });
 
-    $('[id^=delRule]').on('click', function(){
+    $('[id^=deleteRule]').on('click', function(){
     	var konfirm = confirm("Yakin Hapus Data?");
       	if(konfirm){
                 var currentID = $(this).attr('id');
