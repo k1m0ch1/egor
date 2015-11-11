@@ -112,8 +112,13 @@ Route::group(['prefix'=>'/api/v1'], function(){
 	Route::get('/path/uploads/{id}', ['uses'=>'GambarController@uploadPath']);
 	Route::get('/permission/show/{id}', ['uses'=>'PermissionController@view']);
 });
-
-Route::resource('admin/news', 'NewsController');
+Route::get('admin/news', ['uses'=>'NewsController@index', 'as'=>'admin.news.index', 'middleware'=>'auth']);
+Route::get('admin/news/create', ['uses'=>'NewsController@create', 'as'=>'admin.news.create', 'middleware'=>'auth']);
+Route::post('admin/news', ['uses'=>'NewsController@store', 'as'=>'admin.news.store', 'middleware'=>'auth']);
+Route::get('admin/news/{id}/edit', ['uses'=>'NewsController@edit', 'as'=>'admin.news.edit', 'middleware'=>'auth']);
+Route::put('admin/news/{id}', ['uses'=>'NewsController@update', 'as'=>'admin.news.update', 'middleware'=>'auth']);
+Route::delete('admin/news/{id}', ['uses'=>'NewsController@destroy', 'as'=>'admin.news.destroy', 'middleware'=>'auth']);
+//Route::resource('admin/news', 'NewsController');
 Route::get('news', ['uses'=>'NewsController@frontendIndex', 'as'=>'news.index']);
 Route::get('news/{id}', ['uses'=>'NewsController@frontendShow', 'as'=>'news.show']);
 Route::group(['prefix' => 'api-sso/v1'], function() {

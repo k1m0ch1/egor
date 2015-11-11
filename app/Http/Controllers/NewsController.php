@@ -28,6 +28,13 @@ class NewsController extends Controller
         $sBd = $pages->getDefault();
         $results = News::all();
         return view('backend.news', compact('css', 'jS','jH', 'title', 'a', 'rS', 'h', 'w', 'breadcrumb', 'footer', 'sB', 'sBa', 'sBe', 'sBd', 'results'));
+        $logo = Setting::where('name', 'logo')->get();
+        if( count($logo) > 0){
+            $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+            $logo = preg_replace('/\s+/', '', $logo);
+        }else{
+            $logo = '#';
+        }
     }
 
     public function frontendIndex(Request $request){
@@ -140,6 +147,14 @@ class NewsController extends Controller
 
 
         }
+
+        $logo = Setting::where('name', 'logo')->get();
+        if( count($logo) > 0){
+            $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+            $logo = preg_replace('/\s+/', '', $logo);
+        }else{
+            $logo = '#';
+        }
         return view('frontend.news-show', compact('result', 'title', 'result1', 'footer'));
     }
 
@@ -166,6 +181,14 @@ class NewsController extends Controller
             $footer = '(c) 2015, Ordent, All Right Reserved.';
 
 
+        }
+
+        $logo = Setting::where('name', 'logo')->get();
+        if( count($logo) > 0){
+            $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
+            $logo = preg_replace('/\s+/', '', $logo);
+        }else{
+            $logo = '#';
         }
         return view('frontend.news-show', compact('result', 'title', 'result1', 'footer'));
     }
