@@ -31,15 +31,18 @@
 			@endif
 			<input type='file' name='avatar' id='fileUpload' class="form-control"/>
 			<p class="help-block">Kosongkan jika tidak ingin merubah</p>
-
+			
+			@if($on)
 			<label for="role">Role</label><br/>
-			@foreach($resultRole as $rS)
-				@if($rS->id == $roles->id)
-				<input type="radio" id="roles" name="roles" value="{{$rS->id}}" checked> {{$rS->name}}
-				@else
-				<input type="radio" id="roles" name="roles" value="{{$rS->id}}" > {{$rS->name}}
-				@endif
-			@endforeach
+
+				@foreach($resultRole as $rS)
+					@if($rS->id == $roles->id)
+					<input type="radio" id="roles" name="roles" value="{{$rS->id}}" checked> {{$rS->name}}
+					@else
+					<input type="radio" id="roles" name="roles" value="{{$rS->id}}" > {{$rS->name}}
+					@endif
+				@endforeach
+			@endif
 
 		@endif
 

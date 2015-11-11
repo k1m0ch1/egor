@@ -27,6 +27,7 @@
     "moment": "~2.10.6",
     "raphael": "~2.1.4",
     "font-awesome-css": "~4.0.3",
-    "ionicons": "~2.0.1"
+    "ionicons": "~2.0.1",
+    "tinymce": "~4.2.7"
   }
 }

@@ -72,7 +72,9 @@ class UsersController extends Controller
 				$nip = $result1->nip;
 				$roles = $result1->roles->first();
 		}
-		return view('_layout.form.form-input-user-backend', compact('nip', 'phone','avatar','jabatan','name','email', 'idnyah','resultRole', 'roles'));
+		$on = $request->input('on');
+
+		return view('_layout.form.form-input-user-backend', compact('on', 'nip', 'phone','avatar','jabatan','name','email', 'idnyah','resultRole', 'roles'));
 	}
 
 	public function showAll(){
@@ -163,15 +165,17 @@ class UsersController extends Controller
 				$user->email = $request->input('email');
 				$user->phone = $request->input('phone');
 				$user->nip = $request->input('nip');
-				$user->jabatan = $request->input('jabatan');
+				$user->jabatan = $request->input('department');
 				$user->avatar = $filename;
 				$user->save();
 
 				$rsRole = Role::find($request->input('roles'));
 
-				if(!$user->hasRole($rsRole->name)){
-					$user->detachRoles($user->roles);
-					$user = User::find($user->id)->attachRole($rsRole);
+				if($request->input('as')!="profile"){
+					if(!$user->hasRole($rsRole->name)){
+						$user->detachRoles($user->roles);
+						$user = User::find($user->id)->attachRole($rsRole);
+					}
 				}
 				$results->status = 1;
 			}else{
@@ -256,7 +260,7 @@ class UsersController extends Controller
         }else{
             $bg = 'assets/img/bg.jpg';
         }
-				
+
 				$logo = Setting::where('name', 'logo')->get();
 				if( count($logo) > 0){
 						$logo = asset('/uploads/logo/') . '/' .$logo->first()->value;

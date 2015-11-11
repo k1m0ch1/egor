@@ -28,7 +28,7 @@
 
 @include('_layout.footer-frontend')
 <div id="dialog-form-profile" title="Rubah Pengaturan Profile">
-	<form enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+	<form id='form-profile' enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
 	{!! csrf_field() !!}
 		<fieldset id='formnyah-profile'>
 

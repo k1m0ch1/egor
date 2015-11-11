@@ -480,6 +480,7 @@ class PagesController extends Controller
                             asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css'),
                             asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.css'),
                             asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                            asset('assets/css/backend.css'),
                             asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'));
             break;
             case 'menu' :
@@ -490,6 +491,7 @@ class PagesController extends Controller
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/skins/_all-skins.min.css'),
                              asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css'),
+                             asset('assets/css/backend.css'),
                              asset('assets/css/image-picker.css'));
             break;
             case 'gridster' :
@@ -517,6 +519,7 @@ class PagesController extends Controller
                              asset('assets/css/style-upload.css'),
                              asset('assets/css/another-style-upload.css'),
                              asset('assets/css/another-another-style-upload.css'),
+                             asset('assets/css/backend.css'),
                              asset('assets/css/image-picker.css'));
             break;
         }
@@ -681,6 +684,7 @@ class PagesController extends Controller
       $sB->module = false;
       $sB->gambar = false;
       $sB->preference = false;
+      $sB->news = false;
 
       $id_user = Auth::User()->id;
       $role = DB::table('roles')->get();
@@ -714,6 +718,7 @@ class PagesController extends Controller
           case "Backend Module": $sB->module = true; break;
           case "Backend Gambar": $sB->gambar = true; break;
           case "Backend Preference": $sB->preference = true; break;
+          case "Backend News Control": $sB->news = true; break;
           case "All Module":
             $sB->dashboard = true;
             $sB->menu_user = true;
@@ -724,6 +729,7 @@ class PagesController extends Controller
             $sB->module = true;
             $sB->gambar = true;
             $sB->preference = true;
+            $sB->nes = true;
           break;
         }
       }

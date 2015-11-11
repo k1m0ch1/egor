@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
 	<head>
-		@if($logo!="")
+		@if(substr($logo,-1)!="/")
 			<link rel="icon" href="{{ $logo or '' }}">
 		@endif
 		<meta charset="utf-8">
@@ -12,6 +12,8 @@
 		<!-- Place favicon.ico in the root directory -->
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/dist/css/AdminLTE.min.css">
 		<style>
 		html {
 			background: url('{{$bg}}') no-repeat center center fixed;
@@ -29,7 +31,7 @@
 @endif
 <div class="contain-to-grid">
 	<nav class="top-bar" data-topbar role="navigation">
-	@if($logo!="")
+	@if(substr($logo,-1)!="/")
 		<img src="{{ $logo or '' }}" style="float: left; height: 50px; width: 50px; margin-top: 5px; margin-right: -15px;"/>
 	@endif
   <ul class="title-area">
@@ -50,14 +52,20 @@
 	</ul>
 	<!-- Right Nav Section -->
 	<ul class="right">
+		<li>
+			<a href="{{url('news')}}"><i class="fa fa-newspaper-o"></i> NEWS</a>
+		</li>
 	  <li >
 	  	@if(\Auth::check())
-	  	<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
+	  		<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
 	  	@else
-	  	<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
+	  		<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
 	  	@endif
 	  </li>
 		@if(\Auth::check())
+		<li>
+			<a href="#profile" id='userProfile'><i class="fa fa-user"></i> USER PROFILE</a>
+		</li>
 			<li>
 				<a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> LOGOUT</a>
 			</li>
@@ -67,6 +75,6 @@
 	  </li>
 	</ul>
 
-  </section>
+	</section>
 </nav>
 </div>

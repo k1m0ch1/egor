@@ -39,7 +39,7 @@ class NewsController extends Controller
 
     public function frontendIndex(Request $request){
         $page = $request->input('page', 1);
-        $limit = 20;
+        $limit = 3;
         $offset = (($page-1) * ($limit));
         $result = News::offset($offset)->take($limit)->get();
 
@@ -58,6 +58,13 @@ class NewsController extends Controller
             $footer = '(c) 2015, Ordent, All Right Reserved.';
         }
 
+        $bg = Setting::where('name', 'background')->get();
+        if( count($bg) > 0){
+            $bg = asset('/uploads/background/') . '/' .$bg->first()->value;
+        }else{
+            $bg = 'assets/img/bg.jpg';
+        }
+
         $logo = Setting::where('name', 'logo')->get();
         if( count($logo) > 0){
             $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
@@ -66,8 +73,9 @@ class NewsController extends Controller
             $logo = '#';
         }
 
-        $count = ceil(count(News::all())/20);
-        return view('frontend.news-index', compact('result', 'title', 'result1', 'footer', 'count','logo'));
+        $count = ceil(count(News::all())/3);
+
+        return view('frontend.news-index', compact('bah', 'result', 'title', 'result1', 'footer', 'count','logo','bg'));
     }
     /**
      * Show the form for creating a new resource.
@@ -148,6 +156,14 @@ class NewsController extends Controller
 
         }
 
+
+        $bg = Setting::where('name', 'background')->get();
+        if( count($bg) > 0){
+            $bg = asset('/uploads/background/') . '/' .$bg->first()->value;
+        }else{
+            $bg = 'assets/img/bg.jpg';
+        }
+
         $logo = Setting::where('name', 'logo')->get();
         if( count($logo) > 0){
             $logo = asset('/uploads/logo/') . '/' .$logo->first()->value;
@@ -155,7 +171,7 @@ class NewsController extends Controller
         }else{
             $logo = '#';
         }
-        return view('frontend.news-show', compact('result', 'title', 'result1', 'footer'));
+        return view('frontend.news-show', compact('bah', 'result', 'title', 'result1', 'footer','bg','logo'));
     }
 
      public function frontendShow($id)
@@ -179,8 +195,12 @@ class NewsController extends Controller
             $footer = $footer->first()->value;
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
-
-
+        }
+        $bg = Setting::where('name', 'background')->get();
+        if( count($bg) > 0){
+            $bg = asset('/uploads/background/') . '/' .$bg->first()->value;
+        }else{
+            $bg = 'assets/img/bg.jpg';
         }
 
         $logo = Setting::where('name', 'logo')->get();
@@ -190,7 +210,8 @@ class NewsController extends Controller
         }else{
             $logo = '#';
         }
-        return view('frontend.news-show', compact('result', 'title', 'result1', 'footer'));
+
+        return view('frontend.news-show', compact('bah', 'result', 'title', 'result1', 'footer', 'bg', 'logo'));
     }
 
 

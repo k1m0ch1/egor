@@ -57,6 +57,10 @@ class ModuleController extends Controller
                 $module->save();
                 $permission->name = "can-access-" . $request->input('name');
                 $permission->display_name = "Dapat Mengakses " . $request->input('name');
+                $permission->access = "access";
+                $permission->action = $module->id;
+                $permission->type = "module";
+                $permission->save();
                 $results->info = 'module edit';
             }
             $results->status = 1;
@@ -79,9 +83,15 @@ class ModuleController extends Controller
     }
 
     public function del(Request $request){
+        $getId = DB::table('module')->select('action')->where('id', $request->input('id'))->get();
         $result= DB::table('modules')
                     ->where('id', $request->input('id'))
                     ->delete();
+
+        $result= DB::table('permission')
+                  ->where('id', $getId->action)
+                  ->delete();
+
         return $result==true?"succes del":"fail del";
     }
 }

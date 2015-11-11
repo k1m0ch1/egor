@@ -78,6 +78,10 @@ class ModuleSeeder extends Seeder
 		$module->name = 'Backend Preference Footer';
 		$module->route = "admin/preference:footer";
 		$module->save();
+		$module = new Module;
+		$module->name = 'Backend News Control';
+		$module->route = "admin/news";
+		$module->save();
 
 		$modules = Module::all();
 		$admin = Role::where('name', 'admin')->get()->first();
