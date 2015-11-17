@@ -4,7 +4,7 @@
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
-	
+
 	<div class="row" style="margin-top: 30px;">
 		<div class="large-4 columns">
 			<a href="{{route('news.index')}}" class="button tiny alert"><i class="fa fa-arrow-left"></i></a>
@@ -25,9 +25,17 @@
 		</div>
 	</div>
 	<div class="row" style="margin-bottom: 40px;">
-		<div class="large-8 columns large-offset-4">
+		<div class="large-8 columns large-offset-3">
 			{!!$result->content or "-"!!}
 		</div>
+	</div>
+	<div id="dialog-form-profile" title="Rubah Pengaturan Profile">
+		<form id='form-profile' enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+		{!! csrf_field() !!}
+			<fieldset id='formnyah-profile'>
+
+			</fieldset>
+		</form>
 	</div>
 
 @include('_layout.footer-frontend')

@@ -32,6 +32,14 @@
 	</div>
 		</div>
 	</div>
+	<div id="dialog-form-profile" title="Rubah Pengaturan Profile">
+		<form id='form-profile' enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
+		{!! csrf_field() !!}
+			<fieldset id='formnyah-profile'>
+
+			</fieldset>
+		</form>
+	</div>
 
 @include('frontend.news-pagination')
 
