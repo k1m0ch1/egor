@@ -99,7 +99,7 @@ class PagesController extends Controller
               }
           }
 
-          echo var_dump($datanyah);
+          dd($datanyah);
 
           //$datanyah = $this->array_msort($datanyah, array('position'=>SORT_ASC));
 
