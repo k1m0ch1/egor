@@ -36,6 +36,9 @@
 	<!-- Right Nav Section -->
 	<ul class="right">
 			<li>
+				<a href="{{url('/')}}"><i class="fa fa-home"></i> HOME</a>
+			</li>
+			<li>
 				<a href="{{url('news')}}"><i class="fa fa-newspaper-o"></i> NEWS</a>
 			</li>
 			<li class="has-dropdown">
