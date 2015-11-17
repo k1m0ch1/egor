@@ -101,7 +101,7 @@ class PagesController extends Controller
 
           //dd($datanyah);
 
-          //$datanyah = $this->array_msort($datanyah, array('position'=>SORT_ASC));
+          $datanyah = $this->array_msort($datanyah, array('position'=>SORT_ASC));
 
         return view('frontend.index', compact('result1', 'bah', 'datanyah', 'h', 'w', 'bg', 'footer', 'resultPermission', 'logo'));
     }

@@ -12,7 +12,7 @@
 			<article id="article-{{$res->id}}" style="margin-bottom: 60px;border-bottom: 5px #EEE solid;">
 				<div class="row">
 					<a href="{{asset('news')}}/{{$res->id}}"><div class="large-12 columns">
-						<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" data-src="holder.js/480x240" alt="">
+						<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" data-src="holder.js/800x350" alt="">
 						<span class="label success" style="position: absolute;top:300px;left:40px">{{$res->category}}</span>
 					</div>
 				</a>
