@@ -16,6 +16,7 @@
 		<script src="{{ asset('assets/vendor/foundation/js/foundation.min.js') }}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/holderjs/holder.min.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('assets/vendor/SmoothScrollWheel/dist/jquery.SmoothScrollWheel.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.js') }}"></script>
 		<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
 		<script type="text/javascript">
 			$(document).foundation();
@@ -28,7 +29,18 @@
 		<script>
 		$(document).ready(function(){
 			$('#dialog-form-profile').hide();
+			$('.myMenu > li').bind('mouseover', openSubMenu);
+			$('.myMenu > li').bind('mouseout', closeSubMenu);
+			
+			function openSubMenu() {
+				$(this).find('ul').css('visibility', 'visible');
+			};
+
+			function closeSubMenu() {
+				$(this).find('ul').css('visibility', 'hidden');
+			};
 		});
+
 		</script>
 
 		@if(\Auth::check())

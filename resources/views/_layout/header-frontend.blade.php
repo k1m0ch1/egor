@@ -52,29 +52,30 @@
 	</ul>
 	<!-- Right Nav Section -->
 	<ul class="right">
-		<li>
-			<ul>
-				<li>
-					<a href="{{url('news')}}"><i class="fa fa-newspaper-o"></i> NEWS</a>
-				</li>
-			  <li >
-			  	@if(\Auth::check())
-			  		<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
-			  	@else
-			  		<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
-			  	@endif
-			  </li>
-				@if(\Auth::check())
-				<li>
-					<a href="#profile" id='userProfile'><i class="fa fa-user"></i> USER PROFILE</a>
-				</li>
+			<li>
+				<a href="{{url('news')}}"><i class="fa fa-newspaper-o"></i> NEWS</a>
+			</li>
+			<li class="has-dropdown">
+				<a href="#" ><i class="fa fa-user"></i> USER CONTROL</a>
+				<ul class="dropdown">
 					<li>
-						<a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> LOGOUT</a>
+						@if(\Auth::check())
+							<a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> DASHBOARD</a>
+						@else
+							<a href="{{url('login')}}"><i class="fa fa-sign-in"></i> SIGN IN</a>
+						@endif
 					</li>
-				@endif
-			</ul>
-		</li>
-	  <!-- <li ><a href="{{url('login_sso')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li> -->
+					@if(\Auth::check())
+					<li>
+						<a href="#profile" id='userProfile'><i class="fa fa-user"></i> USER PROFILE</a>
+					</li>
+						<li>
+							<a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> LOGOUT</a>
+						</li>
+					@endif
+				</ul>
+			</li>
+			<!-- <li ><a href="{{url('login_sso')}}"><i class="fa fa-sign-in"></i> SIGN IN</a></li> -->
 	</ul>
 
 	</section>
