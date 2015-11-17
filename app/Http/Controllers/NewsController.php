@@ -41,7 +41,7 @@ class NewsController extends Controller
         $page = $request->input('page', 1);
         $limit = 3;
         $offset = (($page-1) * ($limit));
-        $result = News::offset($offset)->take($limit)->get();
+        $result = News::offset($offset)->take($limit)->orderBy('id', 'DESC')->get();
 
         $result1 = DB::table('parent_menu')->get();
         $siteTitle = Setting::where('name', 'title')->get();
@@ -75,7 +75,7 @@ class NewsController extends Controller
 
         $count = ceil(count(News::all())/3);
 
-        return view('frontend.news-index', compact('bah', 'result', 'title', 'result1', 'footer', 'count','logo','bg'));
+        return view('frontend.news-index', compact('bah', 'result', 'title', 'result1', 'footer', 'count','logo','bg', 'page'));
     }
     /**
      * Show the form for creating a new resource.
