@@ -7,7 +7,7 @@
 
 	<div class="row" style="margin-top: 30px;">
 		<div class="large-4 columns">
-			<a href="{{route('news.index')}}" class="button tiny alert"><i class="fa fa-arrow-left"></i></a>
+			<a href="{{--route('news.index')--}}" class="button tiny alert" onclick="window.history.back();"><i class="fa fa-arrow-left" ></i></a>
 			<span class="label success right" style="padding:10px; font-size:1.5em;">{{$result->category or "-"}}</span>
 			<div class="row">
 				<div class="large-7 large-offset-5 columns">

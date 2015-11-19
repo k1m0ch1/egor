@@ -1,5 +1,4 @@
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"><\/script>')</script>
 		<script src="{{asset('assets/js/main.js')}}"></script>
 
@@ -11,6 +10,11 @@
 			e.src='https://www.google-analytics.com/analytics.js';
 			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 			ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+
+			$(document).on({
+          ajaxStart: function() { $body.addClass("loading");    },
+           ajaxStop: function() { $body.removeClass("loading"); }
+      });
 		</script>
 	</body>
 </html>

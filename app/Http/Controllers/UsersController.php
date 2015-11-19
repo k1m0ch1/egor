@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Http\Controllers\PagesController;
 use Auth;
+use App\Models\News;
 
 class UsersController extends Controller
 {
@@ -244,7 +245,12 @@ class UsersController extends Controller
 		return redirect('/');
 	}
 
-	public function login(){
+	public function login(Request $request){
+		$page = $request->input('page', 1);
+		$limit = 3;
+		$offset = (($page-1) * ($limit));
+		$result = News::offset($offset)->take($limit)->orderBy('id', 'DESC')->get();
+
 		$result1 = DB::table('parent_menu')->get();
 
 		$datanyah = DB::table('parent_frontpage')->get();
@@ -281,7 +287,8 @@ class UsersController extends Controller
         }else{
             $footer = '(c) 2015, Ordent, All Right Reserved.';
         }
-		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer', 'logo'));
+				$count = ceil(count(News::all())/3);
+		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer', 'logo', 'result'));
 	}
 
 	public function postLogin(Request $requests){
