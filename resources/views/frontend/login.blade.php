@@ -6,13 +6,13 @@
 				<hr/>
 				<div class="row large-collapse">
 					@foreach($result as $res)
-						<div class="large-4 medium-6 small-12 row" style="border-style: ridge; ">
-							<div class="large-3 medium-4 small-10 column" style="margin-top:10px;">
-								<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" class="right" alt="" style="border-radius: 50%; width: 120px; height: 120px;" data-src="holder.js/70x50">
+						<div class="large-4 medium-6 small-12 row" style="border-style: ridge; background-color: white;">
+							<div class="large-3 medium-4 small-10 column" style="margin-top:20px;">
+								<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" class="left" alt="" style="border-radius: 50%; width: 120px; height: 120px;" data-src="holder.js/70x50">
 							</div>
 							<div class="large-9 medium-3 small-10 column" style="margin-top:10px;">
-								<p><h4>{{$res->title or "-"}}</h4></p>
-								<p>{{str_limit(strip_tags($res->content), 250)}}</p>
+								<p style="color: black;"><h4 style="color: black;">{{$res->title or "-"}}</h4></p>
+								<p style="color: black;">{{str_limit(strip_tags($res->content), 250)}}</p>
 								<a href="{{asset('news')}}/{{$res->id}}" class="button tiny right"><i class="fa fa-arrow-right"></i> Read More</a>
 							</div>
 						</div>
