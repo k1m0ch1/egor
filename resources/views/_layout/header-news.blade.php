@@ -1,6 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="">
 	<head>
+		@if(substr($logo,-1)!="/")
+			<link rel="icon" href="{{ $logo or '' }}">
+		@endif
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<title>{{$bah or 'Title'}}</title>

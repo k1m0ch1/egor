@@ -3,12 +3,12 @@
       @include('_layout.sidebar-backend')
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" style="background-color: #222d32;">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
+        <section class="content-header" style="background-color: #222d32;">
+          <h1 style="color: #ffffff;">
             Dashboard
-            <small>Control panel</small>
+            <small style="color: #ffffff;">Control panel</small>
           </h1>
           @if(isset($breadcrumb))
             <ol class="breadcrumb">
@@ -35,7 +35,7 @@
 
             <!-- Left col -->
               <!-- TO DO List -->
-              <div class="box box-info">
+              <div class="box box-info" style="border-top-color: #fffc08">
               	<div class="box-header">
                   <i class="fa fa-dashboard"></i>
                   <h3 class="box-title">Dashboard Menu Management System</h3>

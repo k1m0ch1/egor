@@ -288,7 +288,7 @@ class UsersController extends Controller
             $footer = '(c) 2015, Ordent, All Right Reserved.';
         }
 				$count = ceil(count(News::all())/3);
-		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer', 'logo', 'result'));
+		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer', 'logo', 'result', 'count' , 'page'));
 	}
 
 	public function postLogin(Request $requests){

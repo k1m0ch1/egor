@@ -1,3 +1,13 @@
+
+.content-header{
+  background-color: #222d32 !important;
+  height: 50px;
+}
+
+.hidernyah{
+  color : #ffffff !important;
+}
+
 ul#menu-wrapper {
   list-style-type: none;
 }

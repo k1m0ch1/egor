@@ -7,13 +7,13 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
+          <h1 class="hidernyah">
             Dashboard
-            <small>Control panel</small>
+            <small class="hidernyah">Control panel</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li class="hidernyah"><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active hidernyah">Dashboard</li>
           </ol>
         </section>
 
