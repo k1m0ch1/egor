@@ -1,4 +1,6 @@
-
+.box .box-info{
+  border-top-color: #fffc08;
+}
 .content-header{
   background-color: #222d32 !important;
   height: 50px;
