@@ -30,7 +30,7 @@
                   <i class="fa fa-newspaper-o"></i>
                   <h3 class="box-title">News Control</h3>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="min-height: 550px;">
                 <a href="{{route('admin.news.create')}}" class="btn btn-default"><i class="fa fa-plus"></i> Create News</a>
     						<div class="row">
     							<div class="col-lg-12 columns" >

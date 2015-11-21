@@ -41,7 +41,7 @@
                   <div class="box-header">
                     <p>User Management Control Level</p>
                   </div>
-                  <div class="box-body">
+                  <div class="box-body" style="min-height: 550px;">
                   <table id="example1" class="table table-bordered table-hover">
                     <thead>
                       <tr>

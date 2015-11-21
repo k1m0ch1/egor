@@ -30,7 +30,7 @@
                   <i class="fa fa-envelope"></i>
                   <h3 class="box-title">Image Control</h3>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="min-height: 550px;">
 						<div class="row">
 							<div class="large-12 columns" >
                 </div>

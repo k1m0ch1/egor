@@ -26,7 +26,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <div class="box">
-                <div class="box-body">
+                <div class="box-body" style="min-height: 550px;">
                   <table class="table table-striped">
                     <tr>
                       <th style="width: 10px">#</th>

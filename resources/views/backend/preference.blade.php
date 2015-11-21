@@ -23,7 +23,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <div class="box">
-                <div class="box-body">
+                <div class="box-body" style="min-height: 550px;">
                 <div id="message-body">
 
 					</div>
@@ -47,7 +47,7 @@
 	                <div class="tab-content no-padding">
 	                  <!-- Morris chart - Sales -->
 	                  <div class="chart tab-pane active" id="logo-site" style="position: relative; height: 1000px;">
-	                  		<div class="box-body">
+	                  		<div class="box-body" style="min-height: 550px;">
 	                  		<form id="uploadLogo" method="post" action="gambar[Logo:upload]" enctype="multipart/form-data">
 								      {!! csrf_field() !!}
 		            			<div id="drop-Logo">
@@ -73,7 +73,7 @@
 	                  </div>
 	                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
 	                  		<form method="POST" class="form-horizontal" id="FormTitle">
-	                  			<div class="box-body">
+	                  			<div class="box-body" style="min-height: 550px;">
 								 {!! csrf_field() !!}
 								  <div class="form-group">
 				                      <label for="inputTitle" class="col-sm-2 control-label">Title Website</label>
@@ -88,7 +88,7 @@
 							</form>
 	                  </div>
 	                  <div class="chart tab-pane" id="background-site" style="position: relative; height: 1000px;">
-	                  		<div class="box-body">
+	                  		<div class="box-body" style="min-height: 550px;">
 	                  			<form id="uploadBg" method="post" action="gambar[BG:upload]" enctype="multipart/form-data">
 								      {!! csrf_field() !!}
 			            			<div id="drop-Bg">
@@ -113,7 +113,7 @@
 							</div>
 	                  </div>
 	                  <div class="chart tab-pane" id="footer-site" style="position: relative; height: 1000px;">
-	                  		<div class="box-body">
+	                  		<div class="box-body" style="min-height: 550px;">
       								<form method="POST" class="form-horizontal" id="FormFooter">
       										{!! csrf_field() !!}
       									  <div class="form-group" align='center'>

@@ -40,7 +40,7 @@
                   <i class="fa fa-dashboard"></i>
                   <h3 class="box-title">Dashboard Menu Management System</h3>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="min-height: 550px;">
 
                 <div id="message-body">
 
