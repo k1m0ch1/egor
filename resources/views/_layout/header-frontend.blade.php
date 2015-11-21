@@ -13,7 +13,13 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{asset('assets/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css')}}">
-    <link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/dist/css/AdminLTE.min.css">
+    	<link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/dist/css/AdminLTE.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<style type="text/css">
+	.article{
+		font-family: 'Roboto', sans-serif;
+	}
+</style>
 		<style>
 		html {
 			background: url('{{$bg}}') no-repeat center center fixed;
