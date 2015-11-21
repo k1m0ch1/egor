@@ -7,7 +7,7 @@
 					@foreach($result as $res)
 						<div class="large-4 medium-6 small-12 row article" style="border:3px #B0B7D8 solid; background-color: white;">
 							<div class="large-2 medium-4 small-10 column" >
-								<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" class="center" alt="" style="margin-left: 15px; border-radius: 50%; width: 100px; height: 90px;" data-src="holder.js/70x50">
+								<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" class="right" alt="" style=" margin-top: 7px; border-radius: 50%; width: 70px; height: 70px;" data-src="holder.js/70x50">
 							</div>
 							<div class="large-10 medium-3 small-10 column" style="margin-top:10px;">
 								<p style='color: black; font-size: 15px; font-family: "Quicksand", "Helvetica Neue", "Helvetica", sans-serif;'>
