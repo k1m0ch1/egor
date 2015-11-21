@@ -291,6 +291,10 @@ class UsersController extends Controller
 		return view('frontend.login', compact('result1', 'title', 'datanyah', 'bg', 'bah', 'footer', 'logo', 'result', 'count' , 'page'));
 	}
 
+	public function login123(Request $request){
+		return view('frontend.login2');
+	}
+
 	public function postLogin(Request $requests){
 		$name = $requests->input('username');
 		$password = $requests->input('password');

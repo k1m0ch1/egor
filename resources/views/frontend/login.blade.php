@@ -34,7 +34,7 @@
 				<div class="wrapper-button show-for-small-only" style="margin-top:50px;"></div>
 
 					<div class="large-10 medium-10 small-10 columns large-offset-1">
-						<a href="" style="background: #333;border: #F1EC7A 3px solid; border-radius:5px;display: block;padding: 20px;">
+						<a href="{{asset('login2')}}" style="background: #333;border: #F1EC7A 3px solid; border-radius:5px;display: block;padding: 20px;">
 						<h3 class="text-center">
 							<i class="fa fa-lock" style="font-size: 120px;"></i>
 							<span style="display: block;color:#F1EC7A;">GO TO <br/>LOGIN PAGE</span>
