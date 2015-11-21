@@ -1,4 +1,4 @@
-		<div class="footer" style="padding: 10px 0 0 0; margin-top: -20px; position: absolute; overflow:auto; width: 100%; bottom: 0;" >
+		<div class="footer" style="padding: 10px 0 0 0;bottom:0;position: absolute;width: 100%;" >
 			   <div class="row" style="margin-bottom:5px; padding:0;">
 				   <div class="col-lg-12">
 						 <!-- @if(substr($logo,-1)!="/")
@@ -10,7 +10,7 @@
 				   </div>
 		   </div>
 	   </div>
-
+</div>
 		<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
 		<script src="{{ asset('assets/vendor/foundation/js/foundation.min.js') }}"></script>
