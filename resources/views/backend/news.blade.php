@@ -25,7 +25,7 @@
 
             <!-- Left col -->
               <!-- TO DO List -->
-              <div class="box box-info">
+              <div class="box box-info" style="border-top-color: #fffc08">
               	<div class="box-header">
                   <i class="fa fa-newspaper-o"></i>
                   <h3 class="box-title">News Control</h3>

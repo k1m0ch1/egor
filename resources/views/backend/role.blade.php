@@ -31,7 +31,7 @@
         <section class="content">
           <!-- Small boxes (Stat box) -->
           <!-- Main row -->
-            <div class="box-footer clearfix no-border">
+            <div class="box box-info" style="border-top-color: #fffc08">
                   <button class="btn btn-default pull-left" id='tambah'><i class="fa fa-plus"></i> Add item</button>
             </div>
 

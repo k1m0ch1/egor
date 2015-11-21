@@ -25,7 +25,7 @@
 
             <!-- Left col -->
               <!-- TO DO List -->
-              <div class="box box-info">
+              <div class="box box-info" style="border-top-color: #fffc08">
               	<div class="box-header">
                   <i class="fa fa-envelope"></i>
                   <h3 class="box-title">Image Control</h3>
@@ -64,7 +64,7 @@
 							</div>
 						</div>
                 </div>
-                <div class="box-footer clearfix no-border"></div>
+                <div class="box box-info" style="border-top-color: #fffc08"></div>
               </div>
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
           </div><!-- /.row (main row) -->
@@ -78,11 +78,11 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    <div id="dialog-form" title="Ubah Gambar">     
+    <div id="dialog-form" title="Ubah Gambar">
       <form enctype="multipart/form-data" method='post' action='{{route("dashboard[edit:save]")}}'>
       {!! csrf_field() !!}
         <fieldset id='formnyah'>
-          
+
         </fieldset>
       </form>
     </div>

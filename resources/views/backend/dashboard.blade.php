@@ -76,7 +76,7 @@
               </div>
 						</div>
                 </div>
-                <div class="box-footer clearfix no-border"></div>
+                <div class="box box-info" style="border-top-color: #fffc08"></div>
               </div>
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
           </div><!-- /.row (main row) -->
