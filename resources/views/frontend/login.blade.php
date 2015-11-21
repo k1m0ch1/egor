@@ -10,8 +10,8 @@
 								<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" class="right" alt="" style=" margin-top: 7px; border-radius: 50%; width: 70px; height: 70px;" data-src="holder.js/70x50">
 							</div>
 							<div class="large-10 medium-3 small-10 column" style="margin-top:10px;">
-								<p style='color: black; font-size: 15px; font-family: "Quicksand", "Helvetica Neue", "Helvetica", sans-serif;'>
-									<b>{{$res->title or "-"}}</b> <br/> {{str_limit(strip_tags($res->content), 60)}}
+								<p style='color: black; font-size: 15px; font-family: "WeblySleek UI", "Helvetica Neue", "Helvetica", sans-serif; '>
+									<b style='font-family: "WeblySleek UI Bold", "Helvetica Neue", "Helvetica", sans-serif; '>{{$res->title or "-"}}</b> <br/> {{str_limit(strip_tags($res->content), 60)}}
 								<a href="{{asset('news')}}/{{$res->id}}" class="button tiny right" ><i class="fa fa-arrow-right"></i> Read More</a></p>
 
 							</div>

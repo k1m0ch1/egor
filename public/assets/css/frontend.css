@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "WeblySleek UI";
+    src: url("../fonts/weblysleekuil.ttf");
+    font-family: "WeblySleek UI Bold";
+    src: url("../fonts/weblysleekuisb.ttf");
+}
+
 @charset "UTF-8";
 meta.foundation-version {
   font-family: "/5.5.3/"; }
