@@ -8,7 +8,7 @@
 					@foreach($result as $res)
 						<div class="large-4 medium-6 small-12 row article" style="border:3px #B0B7D8 solid; background-color: white;">
 							<div class="large-3 medium-4 small-10 column" style="margin-top:20px;">
-								<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" class="left" alt="" style="border-radius: 50%; width: 120px; height: 120px;" data-src="holder.js/70x50">
+								<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$res->image or "-"}}" class="left" alt="" style="border-radius: 50%; width: 180px; height: 160px;" data-src="holder.js/70x50">
 							</div>
 							<div class="large-9 medium-3 small-10 column" style="margin-top:10px;">
 								<p style="color: black;"><h4 style="color: black;">{{$res->title or "-"}}</h4></p>
@@ -34,7 +34,7 @@
 				Hati Hati penggunaan Username dan password menggunakan case sensitive
 			</p> -->
 			<div class="large-4 medium-4 small-12 columns" style="position:relative">
-			
+
 						<button class="button split no-pip" style="position: fixed; top: 50%;  margin-left: 20px; width: 320px;padding:20px 0;background: #ED8C02;border-bottom:#E04C07 3px solid">Login SSO <span><i class="fa fa-caret-right"></i></button>
 					<!-- <form action="{{route('users.login.post')}}" method="POST">
 						{!! csrf_field() !!}
@@ -54,4 +54,3 @@
 	</div>
 
 @include('_layout.footer-frontend')
-
