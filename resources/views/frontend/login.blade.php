@@ -1,6 +1,6 @@
 @include('_layout.header-frontend')
 	<div class="divider main" style='margin: 50px 0; padding: 0 0;'>
-		<div class="row">
+		<div class="row" style="min-height: 445px;">
 			<div class="large-8 medium-8 small-9 columns">
 				<h3 style='font-family: "Quicksand", "Helvetica Neue", "Helvetica", sans-serif;'>BERITA TERBARU</h3>
 				<div class="row large-collapse">
