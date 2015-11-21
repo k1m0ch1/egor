@@ -2,12 +2,12 @@
 <div class="wrapper">
       @include('_layout.sidebar-backend')
 
-      <div class="content-wrapper">
-
-        <section class="content-header">
-          <h1>
+      <div class="content-wrapper" style="background-color: #222d32;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header" style="background-color: #222d32;">
+          <h1 style="color: #ffffff;">
             Dashboard
-            <small>Control panel</small>
+            <small style="color: #ffffff;">Control panel</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

@@ -4,12 +4,12 @@
       @include('_layout.sidebar-backend')
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" style="background-color: #222d32;">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1 class="hidernyah">
+        <section class="content-header" style="background-color: #222d32;">
+          <h1 style="color: #ffffff;">
             Dashboard
-            <small class="hidernyah">Control panel</small>
+            <small style="color: #ffffff;">Control panel</small>
           </h1>
           <ol class="breadcrumb">
             <li class="hidernyah"><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>

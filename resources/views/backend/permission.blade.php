@@ -3,12 +3,12 @@
 
       @include('_layout.sidebar-backend')
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" style="background-color: #222d32;">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Permission
-            <small>Control panel</small>
+        <section class="content-header" style="background-color: #222d32;">
+          <h1 style="color: #ffffff;">
+            Dashboard
+            <small style="color: #ffffff;">Control panel</small>
           </h1>
           @if(isset($breadcrumb))
             <ol class="breadcrumb">
