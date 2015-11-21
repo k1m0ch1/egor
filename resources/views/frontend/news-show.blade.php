@@ -24,7 +24,7 @@
 			<img src="{{asset(\App\Models\News::UPLOAD_PATH)}}/{{$result->image}}" data-src="holder.js/960x480?theme=sky" alt="" style="margin:40px 0;">
 		</div>
 	</div>
-	<div class="row" style="margin-bottom: 40px;">
+	<div class="row" style="margin-bottom: 100px;">
 		<div class="large-8 columns large-offset-3">
 			{!!$result->content or "-"!!}
 		</div>

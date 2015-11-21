@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="http://egor.app/assets/vendor/AdminLTE/dist/css/AdminLTE.min.css">
 	</head>
 <body>
+<div class="wrapper-all" style="position: relative;min-height: 100%;overflow: scroll;">
 <div class="contain-to-grid">
 	<nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
