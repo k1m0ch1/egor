@@ -1,4 +1,4 @@
-		<div class="footer">
+		<div class="footer" style="padding: 30px 0 0 0;">
 			   <div class="row">
 				   <div class="col-lg-12">
 						 @if(substr($logo,-1)!="/")
