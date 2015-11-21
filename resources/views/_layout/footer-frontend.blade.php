@@ -1,10 +1,10 @@
-		<div class="footer" style="padding: 10px 0 0 0; margin-top: -20px; position: absolute; overflow:auto; width: 100%; bottom: 0;" >
+		<div class="footer" style="padding: 30px 0 0 0; margin-top: -20px; overflow:auto; width: 100%; bottom: 0;" >
 			   <div class="row" style="margin-bottom:5px; padding:0;">
 				   <div class="col-lg-12">
 						 <!-- @if(substr($logo,-1)!="/")
 						  <center><img src="{{ $logo or '' }}" style="align: center; height: 100px; width: 100px; margin-top:-40px;"/></center>
 						 @endif -->
-					   <p class="text-center">
+					   <p class="text-center" style="font-size: 14px; margin-bottom: 8px">
 						   Copyright © 2015 - <a href="{{url('/')}}">{!!$footer or '-'!!}</a>
 					   </p>
 				   </div>
