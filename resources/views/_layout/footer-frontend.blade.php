@@ -1,4 +1,4 @@
-		<div class="footer" style="padding: 10px 0 0 0; margin-top: -20px; position: absolute; width: 100%;">
+		<div class="footer" style="padding: 10px 0 0 0; margin-top: -20px; position: absolute; overflow:auto; width: 100%; bottom: 0;" >
 			   <div class="row" style="margin-bottom:5px; padding:0;">
 				   <div class="col-lg-12">
 						 <!-- @if(substr($logo,-1)!="/")
