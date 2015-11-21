@@ -17,6 +17,10 @@
           <!-- Small boxes (Stat box) -->
           <!-- Main row -->
             <div class="box box-info" style="border-top-color: #fffc08">
+              <div class="box-header">
+                <i class="fa fa-envelope"></i>
+                <h3 class="box-title"></h3>
+              </div>
                   <button class="btn btn-default pull-left" id='tambah'><i class="fa fa-plus"></i> Add item</button>
             </div>
 
