@@ -6,7 +6,7 @@
 		@endif
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>{{$bah or 'Title'}}</title>
+		<title>{{strip_tags($bah)}}</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +22,16 @@
 	<nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
 	<li class="name">
-	  <h1><a href="{{url('/')}}">{{$bah or 'Title'}}</a></h1>
+		<h1><a class="navbar-brand" href="{{url('/')}}">
+			@if(strpos($bah, " "))
+				<span>{{ explode(" ", $bah)[0] }}</span>
+					@for($a=1;$a < count(explode(" ", $bah));$a++)
+						{{ explode(" ", $bah)[$a] }}
+					@endfor
+			@else
+				{{ $bah or 'TITLE' }}
+			@endif
+		</a></h1>
 	</li>
 	 <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 	<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
