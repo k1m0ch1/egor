@@ -34,6 +34,7 @@
 @else
 <body class="index">
 @endif
+<div class="page-wrapper">
 <div class="contain-to-grid">
 	<nav class="top-bar" data-topbar role="navigation">
 	@if(substr($logo,-1)!="/")

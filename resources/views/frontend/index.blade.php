@@ -4,7 +4,9 @@
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
-		<div class="divider"></div>
+		@if(count($datanyah)!=0)
+			<div class="divider"></div>
+		@endif
 		<div id="main-content">
 			<div class="main-menu">
 				<div class="row">
@@ -23,9 +25,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="divider"></div>
+		@if(count($datanyah)!=0)
+			<div class="divider"></div>
+		@endif
 
-
+</div>
 @include('_layout.footer-frontend')
 <div id="dialog-form-profile" title="Rubah Pengaturan Profile">
 	<form id='form-profile' enctype="multipart/form-data" method='post' action='{{route("users[edit:save]")}}'>
